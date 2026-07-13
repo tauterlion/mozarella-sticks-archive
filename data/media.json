@@ -1002,6 +1002,645 @@
       "people": [],
       "order": 66,
       "path": "assets/media/zach&libby.jpg"
+    },
+    {
+      "id": "dining-hall-washington",
+      "file": "dining-hall-washington.jpeg",
+      "type": "image",
+      "caption": "A selfie taken at a dining hall in Washington D.C., featuring almost everyone.",
+      "eventId": "closeup-photo-archive",
+      "people": [],
+      "order": 67
+    },
+    {
+      "id": "group-photo-tower",
+      "file": "group-photo-tower.jpeg",
+      "type": "image",
+      "caption": "A group photo, and Libby, on an observation tower.",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 68
+    },
+    {
+      "id": "cheddar-quick-pet",
+      "file": "cheddar-quick-pet.mp4",
+      "type": "video",
+      "caption": "Cheddar being pet but sped up. Originally a GIF.",
+      "eventId": "cheddar-becomes-mascot",
+      "people": [],
+      "order": 69
+    },
+    {
+      "id": "average-breakfast-morning",
+      "file": "average-breakfast-morning.mp4",
+      "type": "video",
+      "caption": "Not the same day as when everyone came together for the first time, but this was breakfast.",
+      "eventId": "dining-hall-unification",
+      "people": [],
+      "order": 70
+    },
+    {
+      "id": "bash-posing",
+      "file": "bash-posing.jpeg",
+      "type": "image",
+      "caption": "Bash Posing",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 71
+    },
+    {
+      "id": "cheddar-sleeping",
+      "file": "cheddar-sleeping.jpeg",
+      "type": "image",
+      "caption": "Cheddar sleeping after being punished",
+      "eventId": "cheddar-restricted",
+      "people": [],
+      "order": 72
+    },
+    {
+      "id": "gage-posing",
+      "file": "gage-posing.jpeg",
+      "type": "image",
+      "caption": "Gage Posing",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 73
+    },
+    {
+      "id": "jeidenne-posing",
+      "file": "jeidenne-posing.jpeg",
+      "type": "image",
+      "caption": "Jeidenne posing",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 74
+    },
+    {
+      "id": "kate-posing",
+      "file": "kate-posing.jpeg",
+      "type": "image",
+      "caption": "Kateryna posing",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 75
+    },
+    {
+      "id": "libby-posing",
+      "file": "libby-posing.jpeg",
+      "type": "image",
+      "caption": "Libby posing",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 76
+    },
+    {
+      "id": "lorena-posing",
+      "file": "lorena-posing.jpeg",
+      "type": "image",
+      "caption": "Lorena posing",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 77
+    },
+    {
+      "id": "statue-groupphoto",
+      "file": "statue-groupphoto.jpeg",
+      "type": "image",
+      "caption": "A group photo taken at the Statue of Liberty, taken by Alejandro Valentin.",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 78
+    },
+    {
+      "id": "ale-flex",
+      "file": "ale-flex.jpeg",
+      "type": "image",
+      "caption": "Alejandro flexing his new outfit",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 79
+    },
+    {
+      "id": "josie-aurafarm",
+      "file": "josie-aurafarm.jpeg",
+      "type": "image",
+      "caption": "Josie casually aurafarm, kudos to whoeever took that picture",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 80
+    },
+    {
+      "id": "lucas-posing",
+      "file": "lucas-posing.jpeg",
+      "type": "image",
+      "caption": "Lucas ready to fight, re-enacting the Johnny Cage after being told that he reminds Alejandro of that character.",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 81
+    },
+    {
+      "id": "marife-gulp",
+      "file": "marife-gulp.jpeg",
+      "type": "image",
+      "caption": "Marife taking a bite out of a burnt marshmellow",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 82
+    },
+    {
+      "id": "nico-afraid",
+      "file": "nico-afraid.jpeg",
+      "type": "image",
+      "caption": "Nico making a face",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 83
+    },
+    {
+      "id": "super-old-todd",
+      "file": "super-old-todd.jpeg",
+      "type": "image",
+      "caption": "Todd wearing an old man's costume",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 84
+    },
+    {
+      "id": "kate-lorena-victory",
+      "file": "kate-lorena-victory.jpeg",
+      "type": "image",
+      "caption": "Kateryna and Lorena celebrating their victory in Model U.N.. Congratulaions!",
+      "eventId": "model-un-winners",
+      "people": [],
+      "order": 85
+    },
+    {
+      "id": "kate-and-alejandro-selfie",
+      "file": "kate-and-alejandro-selfie.jpeg",
+      "type": "image",
+      "caption": "Awww such a cute photo",
+      "eventId": "brava",
+      "people": [],
+      "order": 86
+    },
+    {
+      "id": "aedan-and-lydia-hugging",
+      "file": "aedan-and-lydia-hugging.jpeg",
+      "type": "image",
+      "caption": "Awww another cute photo",
+      "eventId": "brava",
+      "people": [],
+      "order": 87
+    },
+    {
+      "id": "group-female-photo",
+      "file": "group-female-photo.jpeg",
+      "type": "image",
+      "caption": "And another another cute photo awww so cute",
+      "eventId": "brava",
+      "people": [],
+      "order": 88
+    },
+    {
+      "id": "fin-ale-and-bumblee",
+      "file": "fin-ale-and-bumblee.jpeg",
+      "type": "image",
+      "caption": "Serafina, Alejandro, and Bumblee selfie",
+      "eventId": "tyler-concert",
+      "people": [],
+      "order": 89
+    },
+    {
+      "id": "tyler-aurafarm",
+      "file": "tyler-aurafarm.jpeg",
+      "type": "image",
+      "caption": "Tyler, The Creator aurafarming",
+      "eventId": "tyler-concert",
+      "people": [],
+      "order": 90
+    },
+    {
+      "id": "tyler-performing",
+      "file": "tyler-performing.mp4",
+      "type": "video",
+      "caption": "Tyler, The Creator performing on stage",
+      "eventId": "tyler-concert",
+      "people": [],
+      "order": 91
+    },
+    {
+      "id": "everyone-dancing",
+      "file": "everyone-dancing.mp4",
+      "type": "video",
+      "caption": "Everyone dancing on stage with the group!",
+      "eventId": "tuna-segreles",
+      "people": [],
+      "order": 92
+    },
+    {
+      "id": "leo-piano",
+      "file": "leo-piano.mp4",
+      "type": "video",
+      "caption": "Leo performing on stage with his piano",
+      "eventId": "tuna-segreles",
+      "people": [],
+      "order": 93
+    },
+    {
+      "id": "lucas-speaking",
+      "file": "lucas-speaking.jpeg",
+      "type": "image",
+      "caption": "Lucas speaking through the microphone while Kateryna and Lorena stand aside.",
+      "eventId": "tuna-segreles",
+      "people": [],
+      "order": 94
+    },
+    {
+      "id": "ale-selfie-prom",
+      "file": "ale-selfie-prom.jpeg",
+      "type": "image",
+      "caption": "Alejandro taking a selfie, Jeidenne pops up.",
+      "eventId": "prom",
+      "people": [],
+      "order": 95
+    },
+    {
+      "id": "salute-chain",
+      "file": "salute-chain.jpeg",
+      "type": "image",
+      "caption": "A salute chain, performed while everyone left the airport.",
+      "eventId": "return-flight-salute",
+      "people": [],
+      "order": 96
+    },
+    {
+      "id": "new-group-chat",
+      "file": "new-group-chat.jpeg",
+      "type": "image",
+      "caption": "The newest GC containing the Mozarella Sticks",
+      "eventId": "updated-gc",
+      "people": [],
+      "order": 97
+    },
+    {
+      "id": "shane-speech-modelun",
+      "file": "shane-speech-modelun.mp4",
+      "type": "video",
+      "caption": "Shane presenting in a classroom during Model U.N.",
+      "eventId": "saint-johns-model-un-2024",
+      "people": [],
+      "order": 98
+    },
+    {
+      "id": "saint-johns-group-photo",
+      "file": "saint-johns-group-photo.jpeg",
+      "type": "image",
+      "caption": "A group photo taken on a bus on their way back to school after their first Model UN day.",
+      "eventId": "saint-johns-model-un-2024",
+      "people": [],
+      "order": 99
+    },
+    {
+      "id": "party-bus-bebito",
+      "file": "party-bus-bebito.mp4",
+      "type": "video",
+      "caption": "The party bus in action",
+      "eventId": "party-bus-adventure",
+      "people": [],
+      "order": 100
+    },
+    {
+      "id": "sunset-party-area",
+      "file": "sunset-party-area.jpeg",
+      "type": "image",
+      "caption": "A sunset that occurred the same day as the party bus",
+      "eventId": "party-bus-adventure",
+      "people": [],
+      "order": 101
+    },
+    {
+      "id": "swinging-ferris-wheel",
+      "file": "swinging-ferris-wheel.mp4",
+      "type": "video",
+      "caption": "Swinging ferris wheel, everyone points their cameras everywhere",
+      "eventId": "party-bus-adventure",
+      "people": [],
+      "order": 102
+    },
+    {
+      "id": "baldwin-stage",
+      "file": "baldwin-stage.jpeg",
+      "type": "image",
+      "caption": "A picture of the Baldwin stage during a Model UN competition",
+      "eventId": "baldwin-model-un-2025",
+      "people": [],
+      "order": 103
+    },
+    {
+      "id": "model-un-selfie-alejandro",
+      "file": "model-un-selfie-alejandro.jpeg",
+      "type": "image",
+      "caption": "A selfie taken by Alejandro during a Model U.N. session",
+      "eventId": "baldwin-model-un-2025",
+      "people": [],
+      "order": 104
+    },
+    {
+      "id": "kevin-zipline",
+      "file": "kevin-zipline.mp4",
+      "type": "video",
+      "caption": "Kevin riding a zipline over at Lorena's house",
+      "eventId": "spirit-week-2025",
+      "people": [],
+      "order": 105
+    },
+    {
+      "id": "todd-shane-sunset",
+      "file": "todd-shane-sunset.jpeg",
+      "type": "image",
+      "caption": "Todd and Shane sitting on the roof, watching the sunset and talking",
+      "eventId": "spirit-week-2025",
+      "people": [],
+      "order": 106
+    },
+    {
+      "id": "graduation-video-interview",
+      "file": "graduation-video-interview.mp4",
+      "type": "video",
+      "caption": "Alejandro recording everyone at the Graduation set-up.",
+      "eventId": "graduation",
+      "people": [],
+      "order": 107
+    },
+    {
+      "id": "gathering-at-gages",
+      "file": "gathering-at-gages.jpeg",
+      "type": "image",
+      "caption": "A selfie taken over at Gage's, when he returned to Puerto Rico for the first time.",
+      "eventId": "gage-return-hangout",
+      "people": [],
+      "order": 108
+    },
+    {
+      "id": "whiteboard-speculation",
+      "file": "whiteboard-speculation.jpeg",
+      "type": "image",
+      "caption": "A whiteboard filled with speculation, attempting to figure out the motive behind the Halloween split.",
+      "eventId": "halloween-split",
+      "people": [],
+      "order": 109
+    },
+    {
+      "id": "ale-and-maria",
+      "file": "ale-and-maria.jpeg",
+      "type": "image",
+      "caption": "Alejandro and Maria taking a selfie, their first \"date\".",
+      "eventId": "ale-maria-date",
+      "people": [],
+      "order": 110
+    },
+    {
+      "id": "group-photo-selfie-cafeteria",
+      "file": "group-photo-selfie-cafeteria.jpeg",
+      "type": "image",
+      "caption": "A group selfie taken in front of the cafeteria, somehow Dash wasn't aware.",
+      "eventId": "exploration-week",
+      "people": [],
+      "order": 111
+    },
+    {
+      "id": "group-photo-building",
+      "file": "group-photo-building.jpeg",
+      "type": "image",
+      "caption": "A group photo of Marco, Nico, and a senior building a home.",
+      "eventId": "exploration-week",
+      "people": [],
+      "order": 112
+    },
+    {
+      "id": "circle-selfie-guys",
+      "file": "circle-selfie-guys.jpeg",
+      "type": "image",
+      "caption": "A selfie of some guys forming a circle. Trippyyyyy",
+      "eventId": "exploration-week",
+      "people": [],
+      "order": 113
+    },
+    {
+      "id": "selfie-fin-maria-alejandro",
+      "file": "selfie-fin-maria-alejandro.jpeg",
+      "type": "image",
+      "caption": "Alejandro took a selfie at Chili's, including Serafina and Maria in the pictures.",
+      "eventId": "chilis",
+      "people": [],
+      "order": 114
+    },
+    {
+      "id": "todd-sus-chilis",
+      "file": "todd-sus-chilis.jpeg",
+      "type": "image",
+      "caption": "Todd.",
+      "eventId": "chilis",
+      "people": [],
+      "order": 115
+    },
+    {
+      "id": "dash-congratulating",
+      "file": "dash-congratulating.mp4",
+      "type": "video",
+      "caption": "Dash being happy over Maria and Alejandro",
+      "eventId": "ale-maria-reveal",
+      "people": [],
+      "order": 116
+    },
+    {
+      "id": "lydia-finds-cat",
+      "file": "lydia-finds-cat.jpeg",
+      "type": "image",
+      "caption": "Lydia found a cat, offered its adoption in the GC",
+      "eventId": "lydia-cat",
+      "people": [],
+      "order": 117
+    },
+    {
+      "id": "zach-sword",
+      "file": "zach-sword.jpeg",
+      "type": "image",
+      "caption": "Zach was given a sword by Libby for Valentine's, screenshot of Instagram story.",
+      "eventId": "sword-gift",
+      "people": [],
+      "order": 118
+    },
+    {
+      "id": "marco-posing",
+      "file": "marco-posing.jpeg",
+      "type": "image",
+      "caption": "Marco posing while on stage, somehow found the camera.",
+      "eventId": "battle-of-bands",
+      "people": [],
+      "order": 119
+    },
+    {
+      "id": "leo-laughing-bass",
+      "file": "leo-laughing-bass.jpeg",
+      "type": "image",
+      "caption": "Leo laughs while he holds the keytar",
+      "eventId": "battle-of-bands",
+      "people": [],
+      "order": 120
+    },
+    {
+      "id": "jeidenne-selfie-blue",
+      "file": "jeidenne-selfie-blue.jpeg",
+      "type": "image",
+      "caption": "Jeidenne taking a selfie with Kamilo and Josie, clearly having a good time",
+      "eventId": "battle-of-bands",
+      "people": [],
+      "order": 121
+    },
+    {
+      "id": "your-hairline-is-good-today",
+      "file": "your-hairline-is-good-today.jpeg",
+      "type": "image",
+      "caption": "\"your hairline looKS Good today (not balding yet)\" written on a piece of paper, attached to Lucas's wheels.",
+      "eventId": "todd-mystery-notes",
+      "people": [],
+      "order": 122
+    },
+    {
+      "id": "im-always-watching",
+      "file": "im-always-watching.jpeg",
+      "type": "image",
+      "caption": "\"IM Always WatchIng\" written on a piece of paper, attached to Lucas's wheels.",
+      "eventId": "todd-mystery-notes",
+      "people": [],
+      "order": 123
+    },
+    {
+      "id": "serafina-schedule-leak",
+      "file": "serafina-schedule-leak.jpeg",
+      "type": "image",
+      "caption": "Serafina leaks a possible new schedule change to the GC",
+      "eventId": "schedule-leak",
+      "people": [],
+      "order": 124
+    },
+    {
+      "id": "happy-birthday-maria-parada",
+      "file": "happy-birthday-maria-parada.mp4",
+      "type": "video",
+      "caption": "Everyone singing happy birthday to Maria, playing their instruments in the school hallway",
+      "eventId": "maria-birthday-song",
+      "people": [],
+      "order": 125
+    },
+    {
+      "id": "someone-statue-poppins",
+      "file": "someone-statue-poppins.jpeg",
+      "type": "image",
+      "caption": "A picture of someone as a statue, with Kateryna cropped on the left.",
+      "eventId": "mary-poppins",
+      "people": [],
+      "order": 126
+    },
+    {
+      "id": "resurrection-poppins",
+      "file": "resurrection-poppins.mp4",
+      "type": "video",
+      "caption": "Someone getting resurrected...",
+      "eventId": "mary-poppins",
+      "people": [],
+      "order": 127
+    },
+    {
+      "id": "mary-poppins-floating",
+      "file": "mary-poppins-floating.jpeg",
+      "type": "image",
+      "caption": "Mary Poppins floating on stage, one of the few moments where the budget actually went to the performance.",
+      "eventId": "mary-poppins",
+      "people": [],
+      "order": 128
+    },
+    {
+      "id": "lorena-statue-poppins",
+      "file": "lorena-statue-poppins.jpeg",
+      "type": "image",
+      "caption": "Lorena as a stature, far left side of the stage.",
+      "eventId": "mary-poppins",
+      "people": [],
+      "order": 129
+    },
+    {
+      "id": "reunion-project-hailmary",
+      "file": "reunion-project-hailmary.jpeg",
+      "type": "image",
+      "caption": "A reunion photo, containing all the participants.",
+      "eventId": "project-hail-mary",
+      "people": [],
+      "order": 130
+    },
+    {
+      "id": "someone-speaking-modelun",
+      "file": "someone-speaking-modelun.jpeg",
+      "type": "image",
+      "caption": "Someone speaking at Model UN",
+      "eventId": "school-model-un-2026",
+      "people": [],
+      "order": 131
+    },
+    {
+      "id": "keivan-peace-sign",
+      "file": "keivan-peace-sign.jpeg",
+      "type": "image",
+      "caption": "Keivan holding up the peace sign, posing for an expected photo",
+      "eventId": "school-model-un-2026",
+      "people": [],
+      "order": 132
+    },
+    {
+      "id": "josie-objection",
+      "file": "josie-objection.jpeg",
+      "type": "image",
+      "caption": "Josie holding up a placard during a Model U.N. session",
+      "eventId": "school-model-un-2026",
+      "people": [],
+      "order": 133
+    },
+    {
+      "id": "tomodachi-splashscreen-lydia",
+      "file": "tomodachi-splashscreen-lydia.jpeg",
+      "type": "image",
+      "caption": "Lydia behind the Tomodachi Life logo",
+      "eventId": "tomodachi-island",
+      "people": [],
+      "order": 134
+    },
+    {
+      "id": "maria-tripping-tomodachi",
+      "file": "maria-tripping-tomodachi.jpeg",
+      "type": "image",
+      "caption": "Alejandro casually posing while Maria trips in Tomodachi Life",
+      "eventId": "tomodachi-island",
+      "people": [],
+      "order": 135
+    },
+    {
+      "id": "dash-smiling-tomodachi",
+      "file": "dash-smiling-tomodachi.jpeg",
+      "type": "image",
+      "caption": "Dash eagerly smiling in Tomodachi Life",
+      "eventId": "tomodachi-island",
+      "people": [],
+      "order": 136
+    },
+    {
+      "id": "last-day-zachlibby",
+      "file": "last-day-zachlibby.jpeg",
+      "type": "image",
+      "caption": "The last picture taken together, the day before he moved away.",
+      "eventId": "zach-moves",
+      "people": [],
+      "order": 137
     }
   ]
 }
