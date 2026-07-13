@@ -720,6 +720,222 @@
         "dash"
       ],
       "order": 42
+    },
+    {
+      "id": "flowers",
+      "file": "flowers.jpg",
+      "type": "image",
+      "caption": "Flowers that Alejandro gave to Lorena",
+      "eventId": "prom",
+      "people": [],
+      "order": 43
+    },
+    {
+      "id": "katerynapromposal",
+      "file": "katerynapromposal.mp4",
+      "type": "video",
+      "caption": "Shane's Promposal",
+      "eventId": "promposals",
+      "people": [],
+      "order": 44
+    },
+    {
+      "id": "lucas-leah",
+      "file": "lucas&leah.jpg",
+      "type": "image",
+      "caption": "Lucas and Leah at the arcades",
+      "eventId": "lucas-leah",
+      "people": [],
+      "order": 45
+    },
+    {
+      "id": "lydiapromposal",
+      "file": "lydiapromposal.mp4",
+      "type": "video",
+      "caption": "Lucas's Promposal",
+      "eventId": "promposals",
+      "people": [],
+      "order": 46
+    },
+    {
+      "id": "toddinferria",
+      "file": "toddinferria.mp4",
+      "type": "video",
+      "caption": "Todd in Feria",
+      "eventId": "todd-aedan-integrate",
+      "people": [],
+      "order": 47
+    },
+    {
+      "id": "wemadeit",
+      "file": "wemadeit.mp4",
+      "type": "video",
+      "caption": "Lucas's End of Speech",
+      "eventId": "graduation",
+      "people": [],
+      "order": 48
+    },
+    {
+      "id": "breakupmoment",
+      "file": "breakupmoment.mp4",
+      "type": "video",
+      "caption": "A clip of the the boys' reaction towards Lucas's breakup",
+      "eventId": "breakup",
+      "people": [],
+      "order": 49
+    },
+    {
+      "id": "chedder-next-to-dunkin",
+      "file": "Chedder next to Dunkin.jpg",
+      "type": "image",
+      "caption": "Cheddar next to Dunkin",
+      "eventId": "cheddar-becomes-mascot",
+      "people": [],
+      "order": 50
+    },
+    {
+      "id": "chickfila",
+      "file": "chickfila.png",
+      "type": "image",
+      "caption": "Group's reaction towards the image",
+      "eventId": "chickfila",
+      "people": [],
+      "order": 51
+    },
+    {
+      "id": "dominiqueallysamachi",
+      "file": "dominiqueallysamachi.png",
+      "type": "image",
+      "caption": "Dominique, Allysa, and Machi's original appearance",
+      "eventId": "original-gc-created",
+      "people": [],
+      "order": 52
+    },
+    {
+      "id": "everyoneatgraduation",
+      "file": "everyoneatgraduation.jpg",
+      "type": "image",
+      "caption": "Everyone at Graduation",
+      "eventId": "graduation",
+      "people": [],
+      "order": 53
+    },
+    {
+      "id": "francepicture",
+      "file": "francepicture.jpg",
+      "type": "image",
+      "caption": "Lucas in France with his mother",
+      "eventId": "france-departure",
+      "people": [],
+      "order": 54
+    },
+    {
+      "id": "gage-ec",
+      "file": "gage&ec.jpg",
+      "type": "image",
+      "caption": "Gage and his (now ex) girlfriend",
+      "eventId": "gage-beach",
+      "people": [],
+      "order": 55
+    },
+    {
+      "id": "libbyassistance",
+      "file": "libbyassistance.png",
+      "type": "image",
+      "caption": "Libby and Alejandro talking about Zach",
+      "eventId": "libby-zach",
+      "people": [],
+      "order": 56
+    },
+    {
+      "id": "libbyintroduction",
+      "file": "libbyintroduction.png",
+      "type": "image",
+      "caption": "Libby is added to the GC",
+      "eventId": "libby-added",
+      "people": [],
+      "order": 57
+    },
+    {
+      "id": "lorenapromposal",
+      "file": "lorenapromposal.mp4",
+      "type": "video",
+      "caption": "Alejandro's Promposal",
+      "eventId": "promposals",
+      "people": [],
+      "order": 58
+    },
+    {
+      "id": "lucas-lydia",
+      "file": "lucas&lydia.jpg",
+      "type": "image",
+      "caption": "Lucas and Lydia at Prom",
+      "eventId": "prom",
+      "people": [],
+      "order": 59
+    },
+    {
+      "id": "mozarellastickgc",
+      "file": "MozarellaStickGC.png",
+      "type": "image",
+      "caption": "Original Mozarella Sticks GC",
+      "eventId": "original-gc-created",
+      "people": [],
+      "order": 60
+    },
+    {
+      "id": "picturesexample",
+      "file": "picturesexample.jpg",
+      "type": "image",
+      "caption": "Mega Chicks on a tower in Close-Up",
+      "eventId": "closeup-observation-photos",
+      "people": [],
+      "order": 61
+    },
+    {
+      "id": "postpracticeexample",
+      "file": "postpracticeexample.jpg",
+      "type": "image",
+      "caption": "Post-Practice hangout example",
+      "eventId": "spirit-week-2025",
+      "people": [],
+      "order": 62
+    },
+    {
+      "id": "spirit-week-dance-video-enhanced",
+      "file": "Spirit Week Dance Video (Enhanced).mp4",
+      "type": "video",
+      "caption": "Spirit Week Dance (2025)",
+      "eventId": "spirit-week-2025",
+      "people": [],
+      "order": 63
+    },
+    {
+      "id": "watchme",
+      "file": "Watchme.png",
+      "type": "image",
+      "caption": "\"Watch Me\" and the crowd shits themselves",
+      "eventId": "original-gc-created",
+      "people": [],
+      "order": 65
+    },
+    {
+      "id": "theoggang",
+      "file": "theoggang.jpg",
+      "type": "image",
+      "caption": "Group photo taken at Washington D.C.",
+      "eventId": "closeup-photo-archive",
+      "people": [],
+      "order": 65
+    },
+    {
+      "id": "zach-libby",
+      "file": "zach&libby.jpg",
+      "type": "image",
+      "caption": "Zach & Libby at Prom",
+      "eventId": "prom",
+      "people": [],
+      "order": 66
     }
   ]
 }
