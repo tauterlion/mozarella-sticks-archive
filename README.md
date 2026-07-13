@@ -1,4 +1,4 @@
-# Mozarella Sticks Archive — Version B.1
+# Mozarella Sticks Archive — VERSION 1.01
 
 A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
 
@@ -12,23 +12,7 @@ A GitHub Pages–ready static archive with a timeline, gallery, and reusable eve
 - `data/people.json` — canonical names, aliases, and Member/Connected Person tags
 - `data/media.json` — approved filename placeholders
 
-No raw WhatsApp exports, phone numbers, screenshots, or private evidence are included.
-
-## Preview locally
-
-Because the site loads JSON files, opening `index.html` directly with `file://` may be blocked by browser security.
-
-From the project folder, run:
-
-```bash
-python -m http.server 8000
-```
-
-Then open:
-
-```text
-http://localhost:8000/
-```
+No raw WhatsApp exports, phone numbers, or private evidence are included.
 
 ## Publish with GitHub Pages
 
@@ -76,7 +60,6 @@ Use lowercase letters, hyphens, two-digit numbering, and no punctuation or emoji
 ## Future expansion
 
 The data structure is ready for later People and Dictionary sections. Those pages can reference the same stable event and person IDs without duplicating timeline content.
-
 
 ## Interface revision 1.1
 
