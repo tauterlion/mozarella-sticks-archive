@@ -1,0 +1,725 @@
+{
+  "media": [
+    {
+      "id": "close-up-departure-01",
+      "file": "close-up-departure-01.jpg",
+      "caption": "Departure day for the Close-Up trip.",
+      "eventId": "closeup-departure",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "order": 1
+    },
+    {
+      "id": "close-up-dining-hall-01",
+      "file": "close-up-dining-hall-01.jpg",
+      "caption": "The group during the early Close-Up dining-hall era.",
+      "eventId": "dining-hall-unification",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "order": 2
+    },
+    {
+      "id": "close-up-breakfast-01",
+      "file": "close-up-breakfast-01.jpg",
+      "caption": "Breakfast during Close-Up.",
+      "eventId": "valentin-breakfast",
+      "era": "Close-Up",
+      "people": [
+        "kateryna",
+        "gage",
+        "valentin"
+      ],
+      "order": 3
+    },
+    {
+      "id": "close-up-original-chat-01",
+      "file": "close-up-original-chat-01.jpg",
+      "caption": "The original Mozarella Sticks group chat.",
+      "eventId": "original-gc-created",
+      "era": "Close-Up",
+      "people": [
+        "jeidenne",
+        "lucas",
+        "alejandro",
+        "lydia",
+        "gage",
+        "shane",
+        "dash",
+        "marco",
+        "lorena",
+        "dominique",
+        "allysa",
+        "sebastian",
+        "alexander"
+      ],
+      "order": 4
+    },
+    {
+      "id": "close-up-cheddar-01",
+      "file": "close-up-cheddar-01.jpg",
+      "caption": "Cheddar during Close-Up.",
+      "eventId": "cheddar-becomes-mascot",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lucas",
+        "gage",
+        "jeidenne",
+        "marco",
+        "lydia",
+        "libby"
+      ],
+      "order": 5
+    },
+    {
+      "id": "close-up-gartic-01",
+      "file": "close-up-gartic-01.jpg",
+      "caption": "A Close-Up Gartic Phone session.",
+      "eventId": "closeup-online-games",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "dash",
+        "lucas",
+        "jeidenne",
+        "sebastian",
+        "marco",
+        "lydia"
+      ],
+      "order": 6
+    },
+    {
+      "id": "cheddar-chaos-01",
+      "file": "cheddar-chaos-01.jpg",
+      "caption": "Cheddar around the Italian-restaurant incident.",
+      "eventId": "cheddar-restricted",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "bash",
+        "cynthia",
+        "jeidenne",
+        "lucas",
+        "libby"
+      ],
+      "order": 7
+    },
+    {
+      "id": "close-up-statue-liberty-01",
+      "file": "close-up-statue-liberty-01.jpg",
+      "caption": "The group near the Statue of Liberty.",
+      "eventId": "statue-liberty-photos",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lydia",
+        "lucas",
+        "gage",
+        "marco",
+        "jeidenne"
+      ],
+      "order": 8
+    },
+    {
+      "id": "close-up-ferry-01",
+      "file": "close-up-ferry-01.jpg",
+      "caption": "The group on the ferry during Close-Up.",
+      "eventId": "statue-liberty-photos",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lydia",
+        "lucas",
+        "gage",
+        "marco",
+        "jeidenne"
+      ],
+      "order": 9
+    },
+    {
+      "id": "close-up-tower-01",
+      "file": "close-up-tower-01.jpg",
+      "caption": "The group at the unnamed New York observation tower.",
+      "eventId": "closeup-observation-photos",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "order": 10
+    },
+    {
+      "id": "close-up-tower-02",
+      "file": "close-up-tower-02.jpg",
+      "caption": "A second view from the New York observation tower.",
+      "eventId": "closeup-observation-photos",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "order": 11
+    },
+    {
+      "id": "close-up-salute-01",
+      "file": "close-up-salute-01.jpg",
+      "caption": "The return-flight salute.",
+      "eventId": "return-flight-salute",
+      "era": "Close-Up",
+      "people": [
+        "lucas",
+        "gage",
+        "lydia",
+        "shane",
+        "alejandro",
+        "valentin",
+        "jeidenne",
+        "alexander"
+      ],
+      "order": 12
+    },
+    {
+      "id": "close-up-edit-01",
+      "file": "close-up-edit-01.jpg",
+      "caption": "An edit created from the Close-Up photo archive.",
+      "eventId": "closeup-photo-archive",
+      "era": "Close-Up",
+      "people": [
+        "alejandro",
+        "dash",
+        "lucas",
+        "jeidenne",
+        "marco"
+      ],
+      "order": 13
+    },
+    {
+      "id": "june-five-hangout-01",
+      "file": "june-five-hangout-01.jpg",
+      "caption": "The June 5 post–Close-Up hangout.",
+      "eventId": "june5-hangout",
+      "era": "Summer 2024",
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "order": 14
+    },
+    {
+      "id": "crushing-playlist-01",
+      "file": "crushing-playlist-01.jpg",
+      "caption": "The community playlist that appeared during the Spotify incident.",
+      "eventId": "crushing-playlist",
+      "era": "Summer 2024",
+      "people": [
+        "lydia",
+        "lucas",
+        "alejandro",
+        "kateryna",
+        "lorena",
+        "marco"
+      ],
+      "order": 15
+    },
+    {
+      "id": "model-un-saint-johns-01",
+      "file": "model-un-saint-johns-01.jpg",
+      "caption": "The Saint Johns Model UN competition.",
+      "eventId": "saint-johns-model-un-2024",
+      "era": "8th Grade – Fall 2024",
+      "people": [],
+      "order": 16
+    },
+    {
+      "id": "party-bus-01",
+      "file": "party-bus-01.jpg",
+      "caption": "The grade-wide party bus adventure.",
+      "eventId": "party-bus-adventure",
+      "era": "8th Grade – Fall 2024",
+      "people": [],
+      "order": 17
+    },
+    {
+      "id": "party-bus-ferris-wheel-01",
+      "file": "party-bus-ferris-wheel-01.jpg",
+      "caption": "The sunset Ferris-wheel portion of the party bus adventure.",
+      "eventId": "party-bus-adventure",
+      "era": "8th Grade – Fall 2024",
+      "people": [],
+      "order": 18
+    },
+    {
+      "id": "model-un-baldwin-01",
+      "file": "model-un-baldwin-01.jpg",
+      "caption": "The Baldwin Model UN competition.",
+      "eventId": "baldwin-model-un-2025",
+      "era": "8th Grade – Winter 2025",
+      "people": [],
+      "order": 19
+    },
+    {
+      "id": "spirit-week-2025-01",
+      "file": "spirit-week-2025-01.jpg",
+      "caption": "The eighth-grade Spirit Week dance era.",
+      "eventId": "spirit-week-2025",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "todd",
+        "aedan",
+        "shane",
+        "libby",
+        "jeidenne",
+        "kateryna",
+        "marco"
+      ],
+      "order": 20
+    },
+    {
+      "id": "promposal-ale-lorena-01",
+      "file": "promposal-ale-lorena-01.jpg",
+      "caption": "Alejandro’s promposal to Lorena.",
+      "eventId": "promposals",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "shane",
+        "kateryna"
+      ],
+      "order": 21
+    },
+    {
+      "id": "promposal-lucas-lydia-01",
+      "file": "promposal-lucas-lydia-01.jpg",
+      "caption": "Lucas’s promposal to Lydia.",
+      "eventId": "promposals",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "shane",
+        "kateryna"
+      ],
+      "order": 22
+    },
+    {
+      "id": "promposal-shane-kateryna-01",
+      "file": "promposal-shane-kateryna-01.jpg",
+      "caption": "Shane’s promposal to Kateryna.",
+      "eventId": "promposals",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "shane",
+        "kateryna"
+      ],
+      "order": 23
+    },
+    {
+      "id": "prom-2025-01",
+      "file": "prom-2025-01.jpg",
+      "caption": "The group at eighth-grade prom.",
+      "eventId": "prom",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "libby",
+        "zach",
+        "gage",
+        "kateryna",
+        "shane",
+        "todd",
+        "aedan",
+        "jeidenne",
+        "marco"
+      ],
+      "order": 24
+    },
+    {
+      "id": "prom-2025-02",
+      "file": "prom-2025-02.jpg",
+      "caption": "A second eighth-grade prom photo.",
+      "eventId": "prom",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "libby",
+        "zach",
+        "gage",
+        "kateryna",
+        "shane",
+        "todd",
+        "aedan",
+        "jeidenne",
+        "marco"
+      ],
+      "order": 25
+    },
+    {
+      "id": "graduation-2025-01",
+      "file": "graduation-2025-01.jpg",
+      "caption": "The eighth-grade graduation.",
+      "eventId": "graduation",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "lucas",
+        "kateryna",
+        "lorena",
+        "gage",
+        "alejandro",
+        "lydia",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "todd",
+        "aedan"
+      ],
+      "order": 26
+    },
+    {
+      "id": "gage-sleepover-01",
+      "file": "gage-sleepover-01.jpg",
+      "caption": "Gage’s final boys’ sleepover.",
+      "eventId": "final-boys-sleepover",
+      "era": "8th Grade – Spring 2025",
+      "people": [
+        "gage",
+        "alejandro",
+        "lucas",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "todd"
+      ],
+      "order": 27
+    },
+    {
+      "id": "trampoline-park-01",
+      "file": "trampoline-park-01.jpg",
+      "caption": "The Core Four trampoline-park outing.",
+      "eventId": "trampoline",
+      "era": "Summer 2025",
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "order": 28
+    },
+    {
+      "id": "gage-return-01",
+      "file": "gage-return-01.jpg",
+      "caption": "The August gathering at Gage’s former Puerto Rico home.",
+      "eventId": "gage-return-hangout",
+      "era": "Summer 2025",
+      "people": [
+        "gage",
+        "samantha",
+        "alejandro",
+        "lucas",
+        "aedan",
+        "nicholas"
+      ],
+      "order": 29
+    },
+    {
+      "id": "brava-party-01",
+      "file": "brava-party-01.jpg",
+      "caption": "The BRAVA grade party.",
+      "eventId": "brava",
+      "era": "9th Grade – Fall 2025",
+      "people": [
+        "lucas",
+        "kateryna",
+        "lorena",
+        "alejandro",
+        "maria",
+        "samantha",
+        "aedan",
+        "libby",
+        "dash",
+        "jeidenne",
+        "marco",
+        "nicholas"
+      ],
+      "order": 30
+    },
+    {
+      "id": "spirit-week-practice-2026-01",
+      "file": "spirit-week-practice-2026-01.jpg",
+      "caption": "The first ninth-grade Spirit Week practice.",
+      "eventId": "first-practice",
+      "era": "9th Grade – Fall 2025",
+      "people": [
+        "alejandro",
+        "sebastian",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "order": 31
+    },
+    {
+      "id": "chilis-2026-01",
+      "file": "chilis-2026-01.jpg",
+      "caption": "The January Chili’s gathering.",
+      "eventId": "chilis",
+      "era": "9th Grade – Winter 2026",
+      "people": [
+        "alejandro",
+        "maria",
+        "aedan",
+        "samantha",
+        "lucas",
+        "nicholas",
+        "jeidenne",
+        "libby"
+      ],
+      "order": 32
+    },
+    {
+      "id": "model-un-winners-01",
+      "file": "model-un-winners-01.jpg",
+      "caption": "Kateryna and Lorena after their Model UN victory.",
+      "eventId": "model-un-winners",
+      "era": "9th Grade – Winter 2026",
+      "people": [
+        "kateryna",
+        "lorena"
+      ],
+      "order": 33
+    },
+    {
+      "id": "spirit-week-dance-01",
+      "file": "spirit-week-dance-01.jpg",
+      "caption": "The ninth-grade Spirit Week dance outfits.",
+      "eventId": "spirit-dance",
+      "era": "9th Grade – Winter 2026",
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena",
+        "samantha",
+        "aedan",
+        "nicholas",
+        "josie",
+        "serafina",
+        "sebastian"
+      ],
+      "order": 34
+    },
+    {
+      "id": "battle-bands-01",
+      "file": "battle-bands-01.jpg",
+      "caption": "Battle of the Bands.",
+      "eventId": "battle-of-bands",
+      "era": "9th Grade – Winter 2026",
+      "people": [
+        "marco",
+        "leo",
+        "jeidenne",
+        "kamilo",
+        "josie",
+        "leah"
+      ],
+      "order": 35
+    },
+    {
+      "id": "josie-birthday-01",
+      "file": "josie-birthday-01.jpg",
+      "caption": "Josie’s themed birthday party.",
+      "eventId": "josie-birthday",
+      "era": "9th Grade – Spring 2026",
+      "people": [
+        "josie",
+        "marife",
+        "samantha",
+        "kateryna",
+        "libby",
+        "lorena",
+        "serafina",
+        "lydia",
+        "gage",
+        "lucas",
+        "alejandro",
+        "todd",
+        "nicholas",
+        "sienna",
+        "jeidenne",
+        "dash"
+      ],
+      "order": 36
+    },
+    {
+      "id": "josie-birthday-02",
+      "file": "josie-birthday-02.jpg",
+      "caption": "A second photo from Josie’s themed birthday party.",
+      "eventId": "josie-birthday",
+      "era": "9th Grade – Spring 2026",
+      "people": [
+        "josie",
+        "marife",
+        "samantha",
+        "kateryna",
+        "libby",
+        "lorena",
+        "serafina",
+        "lydia",
+        "gage",
+        "lucas",
+        "alejandro",
+        "todd",
+        "nicholas",
+        "sienna",
+        "jeidenne",
+        "dash"
+      ],
+      "order": 37
+    },
+    {
+      "id": "mary-poppins-01",
+      "file": "mary-poppins-01.jpg",
+      "caption": "The school production of Mary Poppins.",
+      "eventId": "mary-poppins",
+      "era": "9th Grade – Spring 2026",
+      "people": [
+        "kateryna",
+        "serafina",
+        "lorena",
+        "lydia"
+      ],
+      "order": 38
+    },
+    {
+      "id": "project-hail-mary-01",
+      "file": "project-hail-mary-01.jpg",
+      "caption": "The Project Hail Mary movie reunion.",
+      "eventId": "project-hail-mary",
+      "era": "9th Grade – Spring 2026",
+      "people": [
+        "sebastian",
+        "lucas",
+        "kateryna",
+        "lydia",
+        "serafina",
+        "nicholas",
+        "jeidenne",
+        "alejandro",
+        "todd",
+        "maria",
+        "samantha",
+        "kamilo",
+        "leah"
+      ],
+      "order": 39
+    },
+    {
+      "id": "tyler-concert-01",
+      "file": "tyler-concert-01.jpg",
+      "caption": "The Tyler, The Creator concert.",
+      "eventId": "tyler-concert",
+      "era": "9th Grade – Spring 2026",
+      "people": [
+        "nicholas",
+        "kateryna",
+        "alejandro",
+        "dash",
+        "marife",
+        "serafina"
+      ],
+      "order": 40
+    },
+    {
+      "id": "model-un-school-2026-01",
+      "file": "model-un-school-2026-01.jpg",
+      "caption": "The school-hosted Model UN competition.",
+      "eventId": "school-model-un-2026",
+      "era": "9th Grade – Spring 2026",
+      "people": [],
+      "order": 41
+    },
+    {
+      "id": "physics-wendys-01",
+      "file": "physics-wendys-01.jpg",
+      "caption": "The final assignment and Wendy’s lunch in the physics classroom.",
+      "eventId": "physics-final-wendys",
+      "era": "9th Grade – Spring 2026",
+      "people": [
+        "dash"
+      ],
+      "order": 42
+    }
+  ]
+}

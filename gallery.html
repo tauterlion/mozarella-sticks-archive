@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mozarella Sticks interactive archive">
+  <title>Gallery · Mozarella Sticks Archive</title>
+  <link rel="stylesheet" href="styles/shared.css">
+  <link rel="stylesheet" href="styles/gallery.css">
+</head>
+<body data-page="gallery">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="Mozarella Sticks Archive home">
+    <span class="brand-mark" aria-hidden="true">MS</span>
+    <span><strong>Mozarella Sticks</strong><small>Archive</small></span>
+  </a>
+  <nav class="primary-nav" aria-label="Primary navigation">
+    <a data-nav="timeline" href="timeline.html">Timeline</a>
+    <a data-nav="gallery" href="gallery.html">Gallery</a>
+  </nav>
+  <button class="icon-button theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+    <span class="theme-icon" aria-hidden="true">◐</span>
+  </button>
+</header>
+
+  <main id="main-content">
+<section class="gallery-hero shell">
+  <div>
+    <p class="eyebrow">Event-linked media</p>
+    <h1>Gallery</h1>
+    <p>Images appear only when an approved file matches a filename listed in the media data.</p>
+  </div>
+  <div class="timeline-summary"><strong id="gallery-count">—</strong><span>images available</span></div>
+</section>
+<section class="gallery-controls shell" aria-label="Gallery filters">
+  <div class="search-field wide-field"><label for="gallery-search">Search</label><input id="gallery-search" type="search" placeholder="Search captions, events, or people" autocomplete="off"></div>
+  <div class="filter-field"><label for="gallery-era">Era</label><select id="gallery-era"><option value="">All eras</option></select></div>
+  <div class="filter-field"><label for="gallery-person">Person</label><select id="gallery-person"><option value="">All people</option></select></div>
+  <div class="filter-field"><label for="gallery-event">Event</label><select id="gallery-event"><option value="">All events</option></select></div>
+  <button id="gallery-reset" class="button ghost" type="button">Reset</button>
+</section>
+<section id="gallery-root" class="gallery-grid shell" aria-live="polite"><div class="loading-state">Checking image files…</div></section>
+<div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" type="button" aria-label="Close image viewer">×</button>
+  <button class="lightbox-prev" type="button" aria-label="Previous image">‹</button>
+  <figure><img id="lightbox-image" alt=""><figcaption><p id="lightbox-caption"></p><a id="lightbox-event-link" href="#">Open related event</a></figcaption></figure>
+  <button class="lightbox-next" type="button" aria-label="Next image">›</button>
+</div>
+</main>
+  
+<footer class="site-footer">
+  <p>A cleaned, community-approved archive. Raw chats and private evidence are not included.</p>
+  <p class="footer-future">People and Dictionary sections are planned for a later version.</p>
+</footer>
+
+  <script src="scripts/shared.js" defer></script>
+  <script src="scripts/gallery.js" defer></script>
+</body>
+</html>

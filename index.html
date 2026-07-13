@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mozarella Sticks interactive archive">
+  <title>Mozarella Sticks Archive</title>
+  <link rel="stylesheet" href="styles/shared.css">
+  <link rel="stylesheet" href="styles/home.css">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="Mozarella Sticks Archive home">
+    <span class="brand-mark" aria-hidden="true">MS</span>
+    <span><strong>Mozarella Sticks</strong><small>Archive</small></span>
+  </a>
+  <nav class="primary-nav" aria-label="Primary navigation">
+    <a data-nav="timeline" href="timeline.html">Timeline</a>
+    <a data-nav="gallery" href="gallery.html">Gallery</a>
+  </nav>
+  <button class="icon-button theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+    <span class="theme-icon" aria-hidden="true">◐</span>
+  </button>
+</header>
+
+  <main id="main-content">
+<section class="home-hero shell">
+  <div class="hero-copy">
+    <p class="eyebrow">Version B · First Release</p>
+    <h1>An evolving archive of the Mozarella Sticks.</h1>
+    <p class="hero-lede">Explore the group’s history through a searchable timeline and an event-linked photo gallery.</p>
+    <div class="hero-actions">
+      <a class="button primary" href="timeline.html">Explore the timeline</a>
+      <a class="button secondary" href="gallery.html">Open the gallery</a>
+    </div>
+  </div>
+  <aside class="archive-card" aria-label="Archive statistics">
+    <p class="archive-card-label">Current archive</p>
+    <div class="stat-grid">
+      <div><strong id="event-stat">—</strong><span>events</span></div>
+      <div><strong id="era-stat">—</strong><span>eras</span></div>
+      <div><strong id="people-stat">—</strong><span>people indexed</span></div>
+      <div><strong id="media-stat">—</strong><span>media slots</span></div>
+    </div>
+    <p id="archive-range" class="archive-range">Loading archive range…</p>
+  </aside>
+</section>
+<section class="home-sections shell" aria-label="Archive sections">
+  <article class="section-card timeline-card">
+    <span class="card-index">01</span>
+    <p class="eyebrow">Chronology</p>
+    <h2>Timeline</h2>
+    <p>Filter events by era, person, category, importance, or date confidence. Open any event for a dedicated detail page.</p>
+    <a class="text-link" href="timeline.html">Browse all events <span aria-hidden="true">→</span></a>
+  </article>
+  <article class="section-card gallery-card">
+    <span class="card-index">02</span>
+    <p class="eyebrow">Media</p>
+    <h2>Gallery</h2>
+    <p>Approved images appear automatically when their matching files are added to the repository.</p>
+    <a class="text-link" href="gallery.html">Browse available images <span aria-hidden="true">→</span></a>
+  </article>
+</section>
+<section class="home-latest shell">
+  <div class="section-heading">
+    <div><p class="eyebrow">Latest entry</p><h2>Where the archive currently ends</h2></div>
+  </div>
+  <div id="latest-event" class="latest-event skeleton">Loading latest event…</div>
+</section>
+</main>
+  
+<footer class="site-footer">
+  <p>A cleaned, community-approved archive. Raw chats and private evidence are not included.</p>
+  <p class="footer-future">People and Dictionary sections are planned for a later version.</p>
+</footer>
+
+  <script src="scripts/shared.js" defer></script>
+  <script src="scripts/home.js" defer></script>
+</body>
+</html>

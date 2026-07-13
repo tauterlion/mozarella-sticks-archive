@@ -1,0 +1,78 @@
+# Mozarella Sticks Archive — Version B.1
+
+A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
+
+## Included
+
+- `index.html` — archive landing page
+- `timeline.html` — searchable and filterable timeline
+- `gallery.html` — event-linked gallery that only shows files that exist
+- `event.html?id=EVENT_ID` — reusable full event page
+- `data/timeline.json` — 98 cleaned timeline events
+- `data/people.json` — canonical names, aliases, and Member/Connected Person tags
+- `data/media.json` — approved filename placeholders
+
+No raw WhatsApp exports, phone numbers, screenshots, or private evidence are included.
+
+## Preview locally
+
+Because the site loads JSON files, opening `index.html` directly with `file://` may be blocked by browser security.
+
+From the project folder, run:
+
+```bash
+python -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000/
+```
+
+## Publish with GitHub Pages
+
+1. Create a GitHub repository.
+2. Upload the entire project, preserving the folders.
+3. Open **Settings → Pages**.
+4. Under **Build and deployment**, choose **Deploy from a branch**.
+5. Select the `main` branch and `/ (root)` folder.
+6. Save and wait for the public URL.
+
+## Add an event
+
+Add a new object to `data/timeline.json` inside `events`. Preserve the existing field names and use a unique, permanent `id`.
+
+Date certainty values:
+
+- `confirmed`
+- `approximate`
+- `range`
+
+Importance values:
+
+- `major`
+- `supporting`
+- `minor`
+
+## Add images
+
+1. Check `data/media.json` for the filename linked to an event.
+2. Rename the approved image to match the `file` value.
+3. Place it in `assets/images/`.
+4. Refresh the website.
+
+Missing files remain invisible. Images automatically appear in the matching expanded timeline card, event page, and gallery.
+
+Recommended filename format:
+
+```text
+event-name-01.jpg
+event-name-02.jpg
+```
+
+Use lowercase letters, hyphens, two-digit numbering, and no punctuation or emoji.
+
+## Future expansion
+
+The data structure is ready for later People and Dictionary sections. Those pages can reference the same stable event and person IDs without duplicating timeline content.

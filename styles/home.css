@@ -1,0 +1,25 @@
+
+.home-hero { padding: clamp(68px, 10vw, 120px) 0 60px; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .7fr); align-items: end; gap: clamp(35px, 8vw, 100px); }
+.hero-copy h1 { max-width: 850px; margin-bottom: 22px; }
+.hero-lede { max-width: 650px; color: var(--muted); font-size: clamp(1.05rem, 2.3vw, 1.3rem); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.archive-card { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(150deg, color-mix(in srgb, var(--surface) 92%, var(--gold) 8%), var(--surface)); box-shadow: var(--shadow); }
+.archive-card-label { margin: 0 0 20px; color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 900; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.stat-grid div { padding: 16px; border-radius: 15px; background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.stat-grid strong, .stat-grid span { display: block; }
+.stat-grid strong { font-size: 2rem; color: var(--gold); }
+.stat-grid span { color: var(--muted); font-size: .76rem; }
+.archive-range { color: var(--muted); margin: 20px 0 0; font-size: .86rem; }
+.home-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.section-card { position: relative; min-height: 300px; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.section-card::after { content: ""; position: absolute; inset: auto -70px -90px auto; width: 220px; height: 220px; border-radius: 50%; background: color-mix(in srgb, var(--gold) 12%, transparent); }
+.section-card h2 { margin-bottom: 14px; }
+.section-card p:not(.eyebrow) { color: var(--muted); max-width: 520px; }
+.card-index { position: absolute; right: 24px; top: 20px; color: var(--line); font-size: 4rem; font-weight: 1000; line-height: 1; }
+.section-card .text-link { position: absolute; left: 32px; bottom: 30px; z-index: 2; }
+.home-latest { padding-top: 70px; }
+.latest-event { display: grid; grid-template-columns: 180px 1fr auto; gap: 24px; align-items: center; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.latest-date { color: var(--gold); font-weight: 850; }
+.latest-event p { color: var(--muted); margin: 6px 0 0; }
+@media (max-width: 850px) { .home-hero, .home-sections { grid-template-columns: 1fr; } .latest-event { grid-template-columns: 1fr; } }

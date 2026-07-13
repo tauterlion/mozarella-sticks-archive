@@ -1,0 +1,2556 @@
+{
+  "eraOrder": [
+    "Close-Up",
+    "Summer 2024",
+    "8th Grade – Fall 2024",
+    "8th Grade – Winter 2025",
+    "8th Grade – Spring 2025",
+    "Summer 2025",
+    "9th Grade – Fall 2025",
+    "9th Grade – Winter 2026",
+    "9th Grade – Spring 2026",
+    "Summer 2026"
+  ],
+  "categoryOrder": [
+    "Relationship",
+    "Friend-Group Development",
+    "Conflict",
+    "School Event",
+    "Competition",
+    "Performance",
+    "Party",
+    "Hangout",
+    "Birthday",
+    "Travel",
+    "Arrival or Departure",
+    "Creative Project",
+    "Digital History",
+    "Academic Planning",
+    "Achievement",
+    "Minor Memory",
+    "Life Event"
+  ],
+  "events": [
+    {
+      "id": "closeup-departure",
+      "date": "2024-05-12",
+      "dateLabel": "May 12, 2024",
+      "sort": "2024-05-12T08:00:00",
+      "title": "Close-Up Trip Begins",
+      "summary": "The group leaves Puerto Rico for the Close-Up trip to Washington, D.C., and New York.",
+      "details": "At the beginning of the trip, the boys and girls still largely operate as separate social circles. Over the next several days, shared travel, meals, calls, and activities begin turning them into one unified friend group.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Travel"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "dining-hall-unification",
+      "date": "2024-05-13",
+      "dateLabel": "Early in the Close-Up trip",
+      "sort": "2024-05-13T18:00:00",
+      "title": "Dining-Hall Unification",
+      "summary": "The boys choose to sit with the girls in a large dining hall, creating the first clear unification of the two sides.",
+      "details": "The exact day is not locked, but the event occurred before the breakfast conversation involving Valentin and Kateryna. From this point forward, the group increasingly traveled, ate, and socialized together.",
+      "era": "Close-Up",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "valentin-breakfast",
+      "date": "2024-05-14",
+      "dateLabel": "Morning after the dining-hall unification",
+      "sort": "2024-05-14T08:00:00",
+      "title": "Valentin Questions Kateryna About Gage",
+      "summary": "During breakfast, Valentin asks Kateryna whether she likes Gage.",
+      "details": "The question creates a brief awkward moment and foreshadows Gage’s later confession near the end of the trip.",
+      "era": "Close-Up",
+      "certainty": "approximate",
+      "importance": "minor",
+      "categories": [
+        "Relationship",
+        "Minor Memory"
+      ],
+      "people": [
+        "kateryna",
+        "gage",
+        "valentin"
+      ],
+      "storylines": [
+        "Gage and Kateryna"
+      ]
+    },
+    {
+      "id": "original-gc-created",
+      "date": "2024-05-14",
+      "dateLabel": "May 14, 2024 • 6:44 PM",
+      "sort": "2024-05-14T18:44:00",
+      "title": "Original Mozarella Sticks Group Chat Created",
+      "summary": "Jeidenne creates the first Mozarella Sticks WhatsApp chat while the Close-Up trip is still underway.",
+      "details": "The chat is initially created as “Mozzorella Sticks.” Its icon and description are set within minutes, and Lucas corrects the name to “Mozzarella Sticks” at 7:36 PM. The early membership is still fluid: several peripheral classmates are included, while Kateryna cannot yet be added because she does not have a phone. The chat gives the newly merging group a shared space across separate hotel rooms.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "jeidenne",
+        "lucas",
+        "alejandro",
+        "lydia",
+        "gage",
+        "shane",
+        "dash",
+        "marco",
+        "lorena",
+        "dominique",
+        "allysa",
+        "sebastian",
+        "alexander"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "cheddar-becomes-mascot",
+      "date": "2024-05-14",
+      "dateLabel": "By the evening of May 14, 2024",
+      "sort": "2024-05-14T21:39:00",
+      "title": "Cheddar Becomes the Group’s Shared Mascot",
+      "summary": "Alejandro’s Minecraft pufferfish plush is already being treated as a shared member of the group.",
+      "details": "Cheddar had been purchased earlier during Close-Up. By May 14, members were asking for updates about him, calling him their boy, and saying goodnight to him alongside the rest of the group. His presence became one of the trip’s clearest symbols of the new shared identity.",
+      "era": "Close-Up",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "gage",
+        "jeidenne",
+        "marco",
+        "lydia",
+        "libby"
+      ],
+      "storylines": [
+        "Formation of the MS",
+        "Cheddar"
+      ]
+    },
+    {
+      "id": "hotel-room-chat-bonding",
+      "date": "2024-05-14",
+      "dateLabel": "May 14–17, 2024",
+      "sort": "2024-05-14T22:00:00",
+      "title": "Hotel-Room Chats Deepen the Group Bond",
+      "summary": "The new chat becomes active every morning and late at night while members are separated across hotel rooms.",
+      "details": "Members use the chat to locate one another, coordinate downstairs meetings, share media from the day, ask who is still awake, and exchange repeated morning and goodnight messages. Lucas and Gage watch horror videos together, the girls continue conversations from their room, and the group remains socially connected even after the day’s organized activities end.",
+      "era": "Close-Up",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "gage",
+        "libby",
+        "kateryna",
+        "lorena",
+        "jeidenne",
+        "dash",
+        "shane",
+        "marco",
+        "sebastian"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "closeup-online-games",
+      "date": "2024-05-15",
+      "dateLabel": "May 15–16, 2024",
+      "sort": "2024-05-15T08:43:00",
+      "title": "Morning Gartic Phone Sessions",
+      "summary": "The group repeatedly plays Gartic Phone and other browser games during the hotel mornings.",
+      "details": "Gartic Phone links are shared on May 15 and multiple times early on May 16, followed by a Skribbl.io session. The games give the group another shared activity outside the official Close-Up schedule and generate several memories that continue being referenced after the trip.",
+      "era": "Close-Up",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro",
+        "dash",
+        "lucas",
+        "jeidenne",
+        "sebastian",
+        "marco",
+        "lydia"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "cheddar-restricted",
+      "date": "2024-05-16",
+      "dateLabel": "May 16, 2024",
+      "sort": "2024-05-16T22:37:00",
+      "title": "Cheddar Is Restricted to the Hotel Room",
+      "summary": "A teacher says Cheddar can no longer be carried around after Bash repeatedly throws him during lunch at an Italian restaurant.",
+      "details": "During lunch at an Italian restaurant, Bash repeatedly throws Cheddar around until Cynthia takes the plush away. That night, Alejandro tells the chat that Cheddar must remain in the hotel room. The restriction turns the plush from a simple souvenir into a shared subject of concern for the group.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro",
+        "bash",
+        "cynthia",
+        "jeidenne",
+        "lucas",
+        "libby"
+      ],
+      "storylines": [
+        "Cheddar"
+      ]
+    },
+    {
+      "id": "statue-liberty-photos",
+      "date": "2024-05-17",
+      "dateLabel": "May 17, 2024",
+      "sort": "2024-05-17T10:35:00",
+      "title": "Statue of Liberty Group Photos",
+      "summary": "Members coordinate a group picture in front of the Statue of Liberty and continue taking photos from the ferry.",
+      "details": "Lydia calls for a group picture at 10:35 AM while Alejandro shares his location near the monument. The chat is used to gather people who have split toward the cafeteria or other areas, and Lucas later asks whether everyone should meet again on top of the boat. The exchange captures how the newly formed group was still learning to move as one unit.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Travel"
+      ],
+      "people": [
+        "alejandro",
+        "lydia",
+        "lucas",
+        "gage",
+        "marco",
+        "jeidenne"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "closeup-observation-photos",
+      "date": "2024-05-17",
+      "dateLabel": "During the New York portion of Close-Up",
+      "sort": "2024-05-17T18:30:00",
+      "title": "Observation-Tower Photos After Sunset",
+      "summary": "The group takes a set of memorable photographs from the top of an unnamed New York observation tower after sunset.",
+      "details": "The group reaches the tower by elevator and enters an observation area with glass walls, public telescopes, and wide views of New York. The location was not the Empire State Building, but its exact name and calendar time remain unknown. The photographs became some of the most recognizable images from the trip and were heavily shared after everyone returned home.",
+      "era": "Close-Up",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Travel"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "dash-leaves-closeup",
+      "date": "2024-05-17",
+      "dateLabel": "Evening of May 17, 2024",
+      "sort": "2024-05-17T20:37:00",
+      "title": "Dash Leaves Close-Up Early",
+      "summary": "Dash leaves the trip before the rest of the group so he can return for his birthday.",
+      "details": "Shortly before separating from the group, Dash tells everyone that he will miss them and says he will see them again in August. The following morning, members tell him that they already miss him while the chat celebrates his birthday. His early departure creates the first goodbye of the newly unified group before Close-Up officially ends on May 18.",
+      "era": "Close-Up",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "dash",
+        "alejandro",
+        "jeidenne",
+        "alexander",
+        "marco"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "gage-confession",
+      "date": "2024-05-17",
+      "dateLabel": "May 17, 2024",
+      "sort": "2024-05-17T21:00:00",
+      "title": "Gage Confesses to Kateryna",
+      "summary": "After the group watches The Wiz, Gage stops Kateryna in the hotel hallway and confesses his feelings.",
+      "details": "During the late-afternoon performance, Gage switches seats with Sebastian Machicote so he can sit beside Kateryna. After the show ends and the group returns to the Marriott after sunset, he stops Kateryna as she walks toward her room. She rejects him with “You’re a great guy, but…”. A few hours later, they speak over FaceTime from their rooms and resolve the awkwardness.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "Conflict"
+      ],
+      "people": [
+        "gage",
+        "kateryna",
+        "sebastian"
+      ],
+      "storylines": [
+        "Gage and Kateryna"
+      ]
+    },
+    {
+      "id": "return-flight-salute",
+      "date": "2024-05-18",
+      "dateLabel": "May 18, 2024 • 3:43–3:59 PM",
+      "sort": "2024-05-18T15:43:00",
+      "title": "The Return-Flight Salute",
+      "summary": "As the group returns to Puerto Rico, members post a chain of salute emojis in the original chat.",
+      "details": "Lucas begins the documented sequence at 3:43 PM, followed by Gage, Lydia, Shane, Alejandro, Valentin, Jeidenne, and Alexander. The exchange becomes a clear written record of the salute tradition at the end of the trip.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "lucas",
+        "gage",
+        "lydia",
+        "shane",
+        "alejandro",
+        "valentin",
+        "jeidenne",
+        "alexander"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "first-lore-description",
+      "date": "2024-05-18",
+      "dateLabel": "Evening of May 18, 2024",
+      "sort": "2024-05-18T17:40:00",
+      "title": "The Group Begins Recording Its Own Lore",
+      "summary": "Within hours of returning home, members repeatedly expand the chat description with references to the trip and one another.",
+      "details": "The group description is changed several times during the evening, with Dash noting that he added material and Lydia asking why she was being called out. Although the exported chat does not preserve the old description text, the edits show the group beginning to document its shared identity immediately after Close-Up.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "alejandro",
+        "dash",
+        "lydia",
+        "jeidenne",
+        "lucas"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "closeup-ends",
+      "date": "2024-05-18",
+      "dateLabel": "May 18, 2024",
+      "sort": "2024-05-18T18:00:00",
+      "title": "Close-Up Ends",
+      "summary": "The group returns to Puerto Rico with the new friendship intact and continues communicating immediately.",
+      "details": "On the final morning, members coordinate packing and exchange messages before the flight. As the plane returns to Puerto Rico, the chat fills with a chain of salute emojis between 3:43 and 3:59 PM. Instead of returning to the earlier boys-versus-girls separation, the group remains active online and begins preserving the trip through photos, descriptions, and edits.",
+      "era": "Close-Up",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Travel"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "closeup-photo-archive",
+      "date": "2024-05-19",
+      "dateLabel": "May 19–20, 2024",
+      "sort": "2024-05-19T10:21:00",
+      "title": "The Group Archives Close-Up",
+      "summary": "Members exchange hundreds of photographs and create edits celebrating the trip immediately after returning home.",
+      "details": "Alejandro uploads a large photo collection on May 19, followed by another extensive archive from Dash. Dash tells the group that they made the trip amazing. On May 20, Alejandro shares a trip edit that Lucas says represents the experience perfectly, and Dash begins producing another edit while changing the group icon to a trip image. This immediate preservation effort helps turn Close-Up into the group’s founding story.",
+      "era": "Close-Up",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Creative Project",
+        "Digital History"
+      ],
+      "people": [
+        "alejandro",
+        "dash",
+        "lucas",
+        "jeidenne",
+        "marco"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "june5-hangout",
+      "date": "2024-06-05",
+      "dateLabel": "June 5, 2024",
+      "sort": "2024-06-05T15:00:00",
+      "title": "First Post–Close-Up Group Hangout",
+      "summary": "The group meets at the mall and Dave & Buster’s for its first major hangout after the trip.",
+      "details": "The group is still somewhat divided during parts of the arcade visit, but everyone becomes noticeably closer by the end of the day.",
+      "era": "Summer 2024",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "original-chat-narrows",
+      "date": "2024-06-08",
+      "dateLabel": "June 8, 2024",
+      "sort": "2024-06-08T14:42:00",
+      "title": "The Original Chat Narrows Its Membership",
+      "summary": "Several peripheral members are removed as the group’s active boundaries become clearer.",
+      "details": "Dominique and two other early participants are removed from the original Close-Up chat. The change reflects the difference between people included during the trip’s early excitement and the smaller group that remained consistently active afterward.",
+      "era": "Summer 2024",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "jeidenne",
+        "dominique"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "updated-gc",
+      "date": "2024-06-14",
+      "dateLabel": "June 14, 2024",
+      "sort": "2024-06-14T20:11:00",
+      "title": "Updated WhatsApp Group Created",
+      "summary": "A newer, more current Mozarella Sticks WhatsApp group is created alongside the original Close-Up chat.",
+      "details": "The June 14 chat becomes the more up-to-date group space, but it does not fully replace the May 14 chat. The original remains intermittently active through June 2026, meaning the two chats coexist for much of the group’s history.",
+      "era": "Summer 2024",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "alejandro"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "crushing-playlist",
+      "date": "2024-06-20",
+      "dateLabel": "Summer 2024",
+      "sort": "2024-06-20T20:00:00",
+      "title": "“Crushing Too Hard” Playlist Incident",
+      "summary": "A community Spotify playlist titled “Crushing too hard” appears on Lydia’s television during a hangout.",
+      "details": "Lydia did not create the playlist; she searched for and opened a community-made playlist. Nobody confirmed that it was connected to Lucas, although the group found that interpretation easy to make because Lucas and Lydia were growing closer at the time.",
+      "era": "Summer 2024",
+      "certainty": "approximate",
+      "importance": "minor",
+      "categories": [
+        "Relationship",
+        "Minor Memory"
+      ],
+      "people": [
+        "lydia",
+        "lucas",
+        "alejandro",
+        "kateryna",
+        "lorena",
+        "marco"
+      ],
+      "storylines": [
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "ale-kat-arrangement",
+      "date": "2024-07-11",
+      "dateLabel": "July 11, 2024",
+      "sort": "2024-07-11T21:00:00",
+      "title": "Alejandro and Kateryna Admit Their Feelings",
+      "summary": "Alejandro and Kateryna agree to an unofficial arrangement after admitting they like each other.",
+      "details": "Because Kateryna is not allowed to date, they decide they are not officially together despite mutually acknowledging their feelings. The arrangement quickly becomes awkward and unstable.",
+      "era": "Summer 2024",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "alejandro",
+        "kateryna"
+      ],
+      "storylines": [
+        "Alejandro and Kateryna"
+      ]
+    },
+    {
+      "id": "lucas-lydia-arrangement",
+      "date": "2024-07-13",
+      "dateLabel": "Approximately July 12–13, 2024",
+      "sort": "2024-07-13T20:00:00",
+      "title": "Lucas and Lydia Begin an Unofficial Arrangement",
+      "summary": "Lucas and Lydia begin a similar undefined relationship approximately one or two days after Alejandro and Kateryna.",
+      "details": "The exact date is not confirmed. Like the other pairing, the relationship lacks a clear formal label and becomes increasingly awkward.",
+      "era": "Summer 2024",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "lucas",
+        "lydia"
+      ],
+      "storylines": [
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "summer-arrangements-end",
+      "date": "2024-08-05",
+      "dateLabel": "Early August 2024",
+      "sort": "2024-08-05T18:00:00",
+      "title": "Both Summer Arrangements End",
+      "summary": "Kateryna ends her arrangement with Alejandro, and Lydia ends hers with Lucas.",
+      "details": "The endings occur close together. Alejandro and Lucas support each other afterward, while both former pairings enter eighth grade with lingering awkwardness.",
+      "era": "Summer 2024",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Relationship",
+        "Conflict"
+      ],
+      "people": [
+        "alejandro",
+        "kateryna",
+        "lucas",
+        "lydia"
+      ],
+      "storylines": [
+        "Alejandro and Kateryna",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "reset-hangout",
+      "date": "2024-09-08",
+      "dateLabel": "September 2024",
+      "sort": "2024-09-08T18:00:00",
+      "title": "September Reset",
+      "summary": "A group hangout helps ease the awkwardness left by the summer relationships.",
+      "details": "The group becomes more comfortable functioning together again. Around this period, Libby receives her own phone and becomes more active in group communication.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Conflict",
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "kateryna",
+        "lucas",
+        "lydia",
+        "libby"
+      ],
+      "storylines": [
+        "Formation of the MS",
+        "Alejandro and Kateryna",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "libby-added",
+      "date": "2024-09-09",
+      "dateLabel": "September 9, 2024",
+      "sort": "2024-09-09T12:00:00",
+      "title": "Libby Joins the Updated WhatsApp Group",
+      "summary": "Libby is added to the newer Mozarella Sticks WhatsApp chat.",
+      "details": "This supports the broader shift in which she becomes more active in group communication after receiving her own phone.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "libby"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "lucas-leah",
+      "date": "2024-09-15",
+      "dateLabel": "Mid-September to mid-November 2024",
+      "sort": "2024-09-15T12:00:00",
+      "title": "Lucas and Leah Date",
+      "summary": "Lucas begins a relationship with Leah that lasts approximately two months.",
+      "details": "Their first kiss occurs on October 25, around the middle-to-later portion of the relationship. The relationship ends around mid-November. The supporting December evidence is not treated as a separate timeline event.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "lucas",
+        "leah"
+      ],
+      "storylines": [
+        "Lucas and Leah",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "todd-aedan-integrate",
+      "date": "2024-10-15",
+      "dateLabel": "Fall 2024",
+      "sort": "2024-10-15T12:00:00",
+      "title": "Todd and Aedan Integrate",
+      "summary": "Todd and Aedan become increasingly involved in the Mozarella Sticks’ social orbit.",
+      "details": "Todd’s integration is reinforced by a smaller carnival outing with Alejandro and Kateryna. By January 2025, both Todd and Aedan are fully comfortable within the group.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Hangout"
+      ],
+      "people": [
+        "todd",
+        "aedan",
+        "alejandro",
+        "kateryna"
+      ],
+      "storylines": [
+        "Group expansion"
+      ]
+    },
+    {
+      "id": "saint-johns-model-un-2024",
+      "date": "2024-11-08",
+      "dateLabel": "November 8–9, 2024",
+      "sort": "2024-11-08T08:00:00",
+      "title": "Model UN Competition at Saint Johns",
+      "summary": "Students participate in a two-day Model UN competition at Saint Johns.",
+      "details": "The competition runs from November 8 through November 9. The available timeline does not yet identify the winning delegation, highest-placing group, or individual awards.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Competition"
+      ],
+      "people": [],
+      "storylines": [
+        "Model UN"
+      ]
+    },
+    {
+      "id": "libby-zach",
+      "date": "2024-12-10",
+      "dateLabel": "December 2024",
+      "sort": "2024-12-10T12:00:00",
+      "title": "Libby and Zach Begin Dating",
+      "summary": "Libby begins dating Zach, an athletic boy outside the core friend group.",
+      "details": "The relationship is well received by the Mozarella Sticks and remains stable through the end of eighth grade and into ninth grade.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "libby",
+        "zach",
+        "alejandro",
+        "sienna"
+      ],
+      "storylines": [
+        "Libby and Zach"
+      ]
+    },
+    {
+      "id": "party-bus-adventure",
+      "date": "2024-12-15",
+      "dateLabel": "December 15, 2024",
+      "sort": "2024-12-15T15:00:00",
+      "title": "Grade-Wide Party Bus Adventure",
+      "summary": "The grade spends the day together on a party bus and at several recreational stops.",
+      "details": "The outing includes dancing on the bus, drawing in the beach sand, eating ice cream, and watching the sunset from a Ferris wheel. No major conflict occurs; it becomes a broad shared grade memory that includes the Mozarella Sticks.",
+      "era": "8th Grade – Fall 2024",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Party",
+        "Hangout"
+      ],
+      "people": [],
+      "storylines": []
+    },
+    {
+      "id": "calm-january",
+      "date": "2025-01-15",
+      "dateLabel": "January 2025",
+      "sort": "2025-01-15T12:00:00",
+      "title": "A Stable Period",
+      "summary": "The group enters a calmer period after the social awkwardness of early eighth grade.",
+      "details": "Todd and Aedan are fully integrated. Gage is in a steady relationship outside the group, and the friend group’s internal dynamics are comparatively stable.",
+      "era": "8th Grade – Winter 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development"
+      ],
+      "people": [
+        "todd",
+        "aedan",
+        "gage"
+      ],
+      "storylines": [
+        "Group expansion"
+      ]
+    },
+    {
+      "id": "chickfila",
+      "date": "2025-02-07",
+      "dateLabel": "February 2025",
+      "sort": "2025-02-07T18:00:00",
+      "title": "Chick-fil-A Photo Incident",
+      "summary": "A photograph makes it look as though Kateryna is feeding Alejandro, leading to teasing.",
+      "details": "In reality, Alejandro and Kateryna had intertwined their arms and were feeding themselves. The event is minor but shows that they were comfortable interacting playfully again.",
+      "era": "8th Grade – Winter 2025",
+      "certainty": "approximate",
+      "importance": "minor",
+      "categories": [
+        "Hangout",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro",
+        "kateryna",
+        "lucas",
+        "marco",
+        "jeidenne"
+      ],
+      "storylines": [
+        "Alejandro and Kateryna"
+      ]
+    },
+    {
+      "id": "lucas-lydia-official",
+      "date": "2025-02-14",
+      "dateLabel": "February 14, 2025",
+      "sort": "2025-02-14T12:00:00",
+      "title": "Lucas and Lydia Begin Dating",
+      "summary": "Lucas and Lydia officially become a couple on Valentine’s Day.",
+      "details": "The relationship begins publicly without a separate timeline section about a secret reconnection. Alejandro also gives teddy bears to group members that day.",
+      "era": "8th Grade – Winter 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "lucas",
+        "lydia",
+        "alejandro"
+      ],
+      "storylines": [
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "baldwin-model-un-2025",
+      "date": "2025-02-21",
+      "dateLabel": "February 21–22, 2025",
+      "sort": "2025-02-21T08:00:00",
+      "title": "Model UN Competition at Baldwin",
+      "summary": "Students participate in a two-day Model UN competition at Baldwin.",
+      "details": "The competition runs from February 21 through February 22. The available timeline does not yet identify the winning delegation, highest-placing group, or individual awards.",
+      "era": "8th Grade – Winter 2025",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Competition"
+      ],
+      "people": [],
+      "storylines": [
+        "Model UN"
+      ]
+    },
+    {
+      "id": "spirit-week-2025",
+      "date": "2025-03-15",
+      "dateLabel": "Spring 2025",
+      "sort": "2025-03-15T12:00:00",
+      "title": "Spirit Week Dance Era",
+      "summary": "Practices and post-practice outings become a major bonding period for the group.",
+      "details": "Temporary dance pairings and repeated rehearsals create some of the group’s strongest eighth-grade memories.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "School Event"
+      ],
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "todd",
+        "aedan",
+        "shane",
+        "libby",
+        "jeidenne",
+        "kateryna",
+        "marco"
+      ],
+      "storylines": [
+        "Spirit Week 2025"
+      ]
+    },
+    {
+      "id": "promposals",
+      "date": "2025-05-05",
+      "dateLabel": "Before May 17, 2025",
+      "sort": "2025-05-05T12:00:00",
+      "title": "Promposals",
+      "summary": "Alejandro asks Lorena, Lucas asks Lydia, and Shane asks Kateryna to prom.",
+      "details": "Lorena and Lydia accept their invitations. Kateryna rejects Shane, which hurts him. The exact order and dates of the three promposals remain unknown.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "School Event",
+        "Party"
+      ],
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "shane",
+        "kateryna"
+      ],
+      "storylines": [
+        "Prom 2025"
+      ]
+    },
+    {
+      "id": "gage-beach",
+      "date": "2025-05-14",
+      "dateLabel": "Several days before prom",
+      "sort": "2025-05-14T18:00:00",
+      "title": "Gage’s Beach Moment",
+      "summary": "Gage shares a romantic beach moment with his girlfriend shortly before prom.",
+      "details": "The event becomes much more relevant around prom day, when the group is discussing everyone’s romantic moments and plans.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "approximate",
+      "importance": "minor",
+      "categories": [
+        "Relationship",
+        "Minor Memory"
+      ],
+      "people": [
+        "gage"
+      ],
+      "storylines": [
+        "Prom 2025"
+      ]
+    },
+    {
+      "id": "prom",
+      "date": "2025-05-17",
+      "dateLabel": "May 17–18, 2025",
+      "sort": "2025-05-17T19:00:00",
+      "title": "Eighth-Grade Prom",
+      "summary": "The group attends prom, dances, takes photographs, and continues to an after-party into the next morning.",
+      "details": "Alejandro brings Lorena white tulips and a sunflower with Lydia’s help. Libby has a romantic moment with Zach at the school bell tower. The after-party continues into the early hours of May 18.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "School Event",
+        "Party",
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "lorena",
+        "lucas",
+        "lydia",
+        "libby",
+        "zach",
+        "gage",
+        "kateryna",
+        "shane",
+        "todd",
+        "aedan",
+        "jeidenne",
+        "marco"
+      ],
+      "storylines": [
+        "Prom 2025"
+      ]
+    },
+    {
+      "id": "graduation",
+      "date": "2025-05-22",
+      "dateLabel": "May 22, 2025",
+      "sort": "2025-05-22T10:00:00",
+      "title": "Eighth-Grade Graduation",
+      "summary": "The grade graduates, Student Council members give speeches, and the group begins saying goodbye to Gage.",
+      "details": "The date is confirmed by the WhatsApp discussion surrounding the ceremony. Gage becomes emotional knowing he will soon leave Puerto Rico.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "School Event",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "lucas",
+        "kateryna",
+        "lorena",
+        "gage",
+        "alejandro",
+        "lydia",
+        "libby",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "todd",
+        "aedan"
+      ],
+      "storylines": [
+        "Gage’s departure"
+      ]
+    },
+    {
+      "id": "first-real-date",
+      "date": "2025-05-29",
+      "dateLabel": "May 29, 2025",
+      "sort": "2025-05-29T14:00:00",
+      "title": "Lucas and Lydia’s First Proper Date",
+      "summary": "The group stages a fake hangout so Lucas and Lydia can spend the day alone together.",
+      "details": "Lucas tells everyone to act as though they are going to his house. Lydia believes it is a normal group gathering and tells her parents the group will be there. The others intentionally stay away, giving Lucas and Lydia their first full day together without friends present.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "Friend-Group Development"
+      ],
+      "people": [
+        "lucas",
+        "lydia",
+        "alejandro"
+      ],
+      "storylines": [
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "final-boys-sleepover",
+      "date": "2025-05-30",
+      "dateLabel": "May 30, 2025",
+      "sort": "2025-05-30T20:00:00",
+      "title": "Gage’s Final Boys’ Sleepover",
+      "summary": "Gage hosts one final sleepover with the boys before moving to Connecticut.",
+      "details": "The sleepover follows graduation and serves as Gage’s last major boys-only gathering before leaving Puerto Rico. His exact moving date remains unknown.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Hangout",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "gage",
+        "alejandro",
+        "lucas",
+        "dash",
+        "shane",
+        "jeidenne",
+        "marco",
+        "todd"
+      ],
+      "storylines": [
+        "Gage’s departure"
+      ]
+    },
+    {
+      "id": "france-departure",
+      "date": "2025-06-01",
+      "dateLabel": "June 1, 2025",
+      "sort": "2025-06-01T20:37:00",
+      "title": "Lucas Leaves for France",
+      "summary": "Lucas begins his Summer 2025 trip to Europe.",
+      "details": "The WhatsApp export captures Lucas discussing the plane’s movement and later traveling through Madrid toward Barcelona.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Travel"
+      ],
+      "people": [
+        "lucas"
+      ],
+      "storylines": [
+        "France incident"
+      ]
+    },
+    {
+      "id": "france-incident",
+      "date": "2025-06-06",
+      "dateLabel": "June 6, 2025",
+      "sort": "2025-06-06T18:00:00",
+      "title": "The France Incident",
+      "summary": "While in France, Lucas holds hands with another girl who reminds him of Lydia.",
+      "details": "Lucas later feels guilty about the interaction. The event becomes the central cause of the collapse of his relationship with Lydia.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship",
+        "Conflict",
+        "Travel"
+      ],
+      "people": [
+        "lucas",
+        "lydia"
+      ],
+      "storylines": [
+        "France incident",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "lucas-return",
+      "date": "2025-06-11",
+      "dateLabel": "June 11, 2025",
+      "sort": "2025-06-11T18:00:00",
+      "title": "Lucas Returns to Puerto Rico",
+      "summary": "Lucas returns from France one day before confessing the incident to Lydia.",
+      "details": "His return fixes the chronology of the confession and the later in-person flower apology.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Travel"
+      ],
+      "people": [
+        "lucas"
+      ],
+      "storylines": [
+        "France incident"
+      ]
+    },
+    {
+      "id": "confession-ghosting",
+      "date": "2025-06-12",
+      "dateLabel": "June 12, 2025",
+      "sort": "2025-06-12T20:00:00",
+      "title": "Lucas Confesses and Lydia Ghosts Him",
+      "summary": "Lucas tells Lydia what happened in France, and she immediately stops responding normally to him in private.",
+      "details": "Lydia continues participating in the wider Mozarella Sticks chat and remains socially active with others. Her withdrawal is directed specifically toward Lucas, often through silence or extremely vague private messages.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship",
+        "Conflict"
+      ],
+      "people": [
+        "lucas",
+        "lydia"
+      ],
+      "storylines": [
+        "France incident",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "core-four",
+      "date": "2025-06-18",
+      "dateLabel": "Mid-June 2025",
+      "sort": "2025-06-18T12:00:00",
+      "title": "The Core Four Forms",
+      "summary": "Alejandro, Lucas, Kateryna, and Lorena begin spending significant time together as a four-person subgroup.",
+      "details": "The subgroup forms during the tension following the France confession and becomes especially associated with movie outings and smaller summer plans.",
+      "era": "Summer 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "storylines": [
+        "Core Four",
+        "France incident"
+      ]
+    },
+    {
+      "id": "trampoline",
+      "date": "2025-06-25",
+      "dateLabel": "June 25, 2025",
+      "sort": "2025-06-25T14:00:00",
+      "title": "Core Four Trampoline Park Outing",
+      "summary": "The Core Four visits a trampoline park and then goes to the mall.",
+      "details": "The outing becomes one of the clearest shared memories of the subgroup’s Summer 2025 period.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "storylines": [
+        "Core Four"
+      ]
+    },
+    {
+      "id": "flower-apology",
+      "date": "2025-06-26",
+      "dateLabel": "Approximately two weeks after June 12",
+      "sort": "2025-06-26T16:00:00",
+      "title": "Lucas Attempts a Flower Apology",
+      "summary": "Lucas and Jeidenne visit Lydia’s house with flowers, but Lydia does not open the door.",
+      "details": "Lucas leaves the flowers at the front entrance for Lydia to collect. She continues ghosting him and responding vaguely afterward. The date is approximate rather than confirmed as June 26.",
+      "era": "Summer 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "Conflict"
+      ],
+      "people": [
+        "lucas",
+        "lydia",
+        "jeidenne"
+      ],
+      "storylines": [
+        "France incident",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "breakup",
+      "date": "2025-07-02",
+      "dateLabel": "July 2, 2025 — 12:30 AM",
+      "sort": "2025-07-02T00:30:00",
+      "title": "Lucas and Lydia Break Up",
+      "summary": "Lydia officially ends the relationship while Lucas is playing REMATCH with friends.",
+      "details": "Lucas shows the breakup message to his friends at 12:30 AM. A later-rendered video supports the REMATCH context, but its 12:42 filename timestamp is not the breakup time.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship",
+        "Conflict"
+      ],
+      "people": [
+        "lucas",
+        "lydia"
+      ],
+      "storylines": [
+        "France incident",
+        "Lucas and Lydia"
+      ]
+    },
+    {
+      "id": "josie-alexander-official",
+      "date": "2025-08-15",
+      "dateLabel": "Mid-August 2025",
+      "sort": "2025-08-15T12:00:00",
+      "title": "Josie and Alexander Begin Dating",
+      "summary": "After nearly a year of gradual buildup, Josie and Alexander officially begin a relationship around the start of ninth grade.",
+      "details": "Their relationship is remembered as one of the friend circle’s least controversial and most stable romantic developments. The exact date remains unknown, so the event is placed approximately in mid-August.",
+      "era": "Summer 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "josie",
+        "alexander"
+      ],
+      "storylines": [
+        "Josie and Alexander"
+      ]
+    },
+    {
+      "id": "samantha-added",
+      "date": "2025-08-23",
+      "dateLabel": "August 23–29, 2025",
+      "sort": "2025-08-23T12:00:00",
+      "title": "Samantha Rapidly Integrates",
+      "summary": "Samantha joins the current WhatsApp group and quickly adapts to the Mozarella Sticks’ humor and conversations.",
+      "details": "Her integration begins through the chat from August 23 onward. The August 29 gathering at Gage’s former Puerto Rico home becomes a major in-person bonding moment rather than her absolute first interaction.",
+      "era": "Summer 2025",
+      "certainty": "range",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "samantha",
+        "aedan",
+        "gage",
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "chat-expansion",
+      "date": "2025-08-26",
+      "dateLabel": "August 23–29, 2025",
+      "sort": "2025-08-26T12:00:00",
+      "title": "Ninth-Grade Chat Expansion",
+      "summary": "Several people are added to the current WhatsApp chat as ninth grade begins.",
+      "details": "Samantha is added August 23, Marife August 26, Dash August 27, and Nicholas August 29. These dates represent chat membership, not necessarily the beginning of each friendship.",
+      "era": "Summer 2025",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "samantha",
+        "marife",
+        "dash",
+        "nicholas"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "gage-return-hangout",
+      "date": "2025-08-29",
+      "dateLabel": "August 29, 2025",
+      "sort": "2025-08-29T16:00:00",
+      "title": "Gathering at Gage’s Former Puerto Rico Home",
+      "summary": "Part of the group gathers at Gage’s former house while he is visiting Puerto Rico.",
+      "details": "Gage stays at the same home where he lived before moving. Samantha’s growing closeness with the group is reinforced during the gathering.",
+      "era": "Summer 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Hangout",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "gage",
+        "samantha",
+        "alejandro",
+        "lucas",
+        "aedan",
+        "nicholas"
+      ],
+      "storylines": [
+        "Ninth-grade expansion",
+        "Gage’s departure"
+      ]
+    },
+    {
+      "id": "maria-integration",
+      "date": "2025-09-01",
+      "dateLabel": "Beginning of ninth grade",
+      "sort": "2025-09-01T12:00:00",
+      "title": "Maria Becomes Closely Integrated",
+      "summary": "Maria becomes especially close with the girls and increasingly present in the wider group’s daily life.",
+      "details": "She regularly talks with the girls, sits with them at lunch, and spends time with the group. Her later addition to the WhatsApp chat does not mark the beginning of her friendship with everyone.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development"
+      ],
+      "people": [
+        "maria",
+        "lorena",
+        "lydia",
+        "kateryna",
+        "libby",
+        "samantha",
+        "aedan"
+      ],
+      "storylines": [
+        "Ninth-grade expansion",
+        "Alejandro and Maria"
+      ]
+    },
+    {
+      "id": "shower-leak",
+      "date": "2025-10-27",
+      "dateLabel": "Late October 2025",
+      "sort": "2025-10-27T20:00:00",
+      "title": "Private Screenshots Spread",
+      "summary": "Screenshots involving Jeidenne and Aedan begin circulating and indirectly affect Samantha.",
+      "details": "Jeidenne had flirted with both Aedan and Samantha in different ways. He shared screenshots with selected people, including Jaime, who was most likely the point through which they spread to the wider group. Samantha and Aedan briefly distance themselves from Jeidenne. The conflict receives no clear apology or proper resolution.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "approximate",
+      "importance": "major",
+      "categories": [
+        "Conflict"
+      ],
+      "people": [
+        "jeidenne",
+        "aedan",
+        "samantha",
+        "jaime"
+      ],
+      "storylines": [
+        "Screenshot leak"
+      ]
+    },
+    {
+      "id": "ale-maria-no",
+      "date": "2025-10-28",
+      "dateLabel": "Around October 28, 2025",
+      "sort": "2025-10-28T20:00:00",
+      "title": "Alejandro and Maria Decide Against Dating",
+      "summary": "Alejandro and Maria discuss a possible relationship but agree not to begin one.",
+      "details": "During the discussion, Alejandro says Maria is “not my type at all,” leaving a brief negative mark on her. Their feelings later change without this becoming a major dramatic reversal.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "alejandro",
+        "maria"
+      ],
+      "storylines": [
+        "Alejandro and Maria"
+      ]
+    },
+    {
+      "id": "halloween-split",
+      "date": "2025-10-31",
+      "dateLabel": "October 31, 2025",
+      "sort": "2025-10-31T22:00:00",
+      "title": "Halloween Split",
+      "summary": "Part of the boys secretly leaves Dash’s house to meet the girls, leaving another group behind.",
+      "details": "Bash, Lucas, Shane, Todd, and Jeidenne leave. Alejandro, Nicholas, Marco, Alexander, and Dash remain at Dash’s house and feel hurt after realizing what happened. Alejandro calls Maria and asks her to come over. Maria later speaks with him privately in Dash’s second living room while the others can see them through the windows.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Conflict",
+        "Hangout"
+      ],
+      "people": [
+        "bash",
+        "lucas",
+        "shane",
+        "todd",
+        "jeidenne",
+        "alejandro",
+        "nicholas",
+        "marco",
+        "alexander",
+        "dash",
+        "maria"
+      ],
+      "storylines": [
+        "Halloween split",
+        "Alejandro and Maria"
+      ]
+    },
+    {
+      "id": "serafina-added",
+      "date": "2025-11-07",
+      "dateLabel": "November 7, 2025",
+      "sort": "2025-11-07T12:00:00",
+      "title": "Serafina Joins the Current Group Chat",
+      "summary": "Serafina is added to the Mozarella Sticks WhatsApp group.",
+      "details": "She is initially one of the newer members but plays a larger role later in ninth grade.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "serafina"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "brava",
+      "date": "2025-11-08",
+      "dateLabel": "November 8, 2025",
+      "sort": "2025-11-08T20:00:00",
+      "title": "BRAVA Grade Party",
+      "summary": "Student Council hosts a formal grade party at BRAVA.",
+      "details": "Students are invited to dress nicely and dance at the luxurious club venue. No major conflict occurs; the event becomes another shared social memory for the Mozarella Sticks and the wider grade.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Party",
+        "Hangout"
+      ],
+      "people": [
+        "lucas",
+        "kateryna",
+        "lorena",
+        "alejandro",
+        "maria",
+        "samantha",
+        "aedan",
+        "libby",
+        "dash",
+        "jeidenne",
+        "marco",
+        "nicholas"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "dash-music",
+      "date": "2025-11-26",
+      "dateLabel": "Late November 2025",
+      "sort": "2025-11-26T12:00:00",
+      "title": "Dash Takes Music Production More Seriously",
+      "summary": "Dash begins sharing original beats and songs more regularly with the boys.",
+      "details": "He had already shown music during school hours before the dated chat evidence. By late November, the boys’ encouragement helps turn production into a serious hobby. His work later reaches the full Mozarella Sticks chat.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Creative Project"
+      ],
+      "people": [
+        "dash",
+        "alejandro",
+        "lucas",
+        "nicholas",
+        "marco",
+        "jeidenne",
+        "todd",
+        "shane"
+      ],
+      "storylines": [
+        "Dash’s music"
+      ]
+    },
+    {
+      "id": "ale-maria-date",
+      "date": "2025-12-02",
+      "dateLabel": "December 2, 2025 — around 10:00 PM",
+      "sort": "2025-12-02T22:00:00",
+      "title": "Alejandro and Maria Begin Dating",
+      "summary": "After their feelings gradually change, Alejandro and Maria privately begin a relationship.",
+      "details": "During a late-night conversation, they compare their standards for relationships and reflect on their past time together. Alejandro confesses, Maria reciprocates, and they agree to keep the relationship secret temporarily. Lucas suspects them almost immediately, while Libby figures it out around mid-December.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "alejandro",
+        "maria",
+        "lucas",
+        "libby",
+        "jeidenne"
+      ],
+      "storylines": [
+        "Alejandro and Maria"
+      ]
+    },
+    {
+      "id": "spirit-conflict-start",
+      "date": "2025-12-08",
+      "dateLabel": "December 8, 2025",
+      "sort": "2025-12-08T12:00:00",
+      "title": "Spirit Week Mix Conflict Begins",
+      "summary": "A dedicated dance chat is created, and several dancers object to the original no-theme production.",
+      "details": "The organizers explain that suggestions had been requested in September and that Alejandro’s original mix was already prepared. Opponents argue that the grade needs a clear theme and that the dedicated planning chat was created too late. A compromise allows the original production to continue temporarily while another group creates an alternative.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Conflict",
+        "School Event",
+        "Creative Project"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena",
+        "lorena-rodriguez",
+        "bianca",
+        "isabel",
+        "nicholas",
+        "josie",
+        "serafina"
+      ],
+      "storylines": [
+        "Spirit Week 2026"
+      ]
+    },
+    {
+      "id": "first-practice",
+      "date": "2025-12-11",
+      "dateLabel": "December 11, 2025",
+      "sort": "2025-12-11T16:00:00",
+      "title": "First Spirit Week Practice",
+      "summary": "The first documented dance practice takes place at Sebastian Machicote’s house using Alejandro’s original mix.",
+      "details": "The practice establishes that the first production had reached a usable rehearsal stage before the replacement was selected.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Creative Project"
+      ],
+      "people": [
+        "alejandro",
+        "sebastian",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "storylines": [
+        "Spirit Week 2026"
+      ]
+    },
+    {
+      "id": "mix-two-presented",
+      "date": "2025-12-14",
+      "dateLabel": "December 14, 2025",
+      "sort": "2025-12-14T18:00:00",
+      "title": "Careers Mix Presented",
+      "summary": "The alternative group presents a careers-and-occupations concept and opens a vote against the original mix.",
+      "details": "The new concept is creatively stronger but remains an unfinished draft that exceeds the five-minute limit and requires improved transitions. The debate becomes personal, with insults toward the original mix and defensive sarcasm from Alejandro.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Conflict",
+        "School Event",
+        "Creative Project"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena",
+        "lorena-rodriguez",
+        "bianca",
+        "isabel",
+        "nicholas",
+        "josie",
+        "serafina"
+      ],
+      "storylines": [
+        "Spirit Week 2026"
+      ]
+    },
+    {
+      "id": "mix-two-wins",
+      "date": "2025-12-15",
+      "dateLabel": "December 15, 2025",
+      "sort": "2025-12-15T12:00:00",
+      "title": "Mix Two Wins the Vote",
+      "summary": "The careers production wins and replaces Alejandro’s original mix.",
+      "details": "Alejandro stops developing the first production. The decision resolves the immediate vote but leads into delayed choreography, inconsistent attendance, and repeated rehearsal difficulties.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Conflict",
+        "School Event",
+        "Creative Project"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena"
+      ],
+      "storylines": [
+        "Spirit Week 2026"
+      ]
+    },
+    {
+      "id": "zach-move-news",
+      "date": "2025-12-20",
+      "dateLabel": "December 2025 or January 2026",
+      "sort": "2025-12-20T12:00:00",
+      "title": "Libby Learns Zach Will Move",
+      "summary": "Libby is informed that Zach is expected to move away during Summer 2026.",
+      "details": "She is devastated. They agree that they will break up when he leaves, not because of anger or lost feelings, but because of the separation. The exact date when she receives the news remains unknown.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "libby",
+        "zach"
+      ],
+      "storylines": [
+        "Libby and Zach"
+      ]
+    },
+    {
+      "id": "exploration-week",
+      "date": "2026-01-14",
+      "dateLabel": "January 14–16, 2026",
+      "sort": "2026-01-14T08:00:00",
+      "title": "Exploration Week",
+      "summary": "The school holds a three-day event built around students’ preferred classes and activities.",
+      "details": "The event is confirmed, but the individual activities and major memories have not yet been fully collected.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "School Event"
+      ],
+      "people": [],
+      "storylines": []
+    },
+    {
+      "id": "chilis",
+      "date": "2026-01-23",
+      "dateLabel": "January 23, 2026",
+      "sort": "2026-01-23T18:00:00",
+      "title": "Chili’s Gathering",
+      "summary": "A sizable portion of the Mozarella Sticks meets at Chili’s.",
+      "details": "The outing is a smaller ninth-grade social memory rather than a major turning point. Maria is also added to the current WhatsApp group on this date.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Hangout",
+        "Digital History"
+      ],
+      "people": [
+        "alejandro",
+        "maria",
+        "aedan",
+        "samantha",
+        "lucas",
+        "nicholas",
+        "jeidenne",
+        "libby"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "beef-start",
+      "date": "2026-01-24",
+      "dateLabel": "January 24, 2026",
+      "sort": "2026-01-24T16:00:00",
+      "title": "Alejandro and Aedan’s Joke Rivalry Begins",
+      "summary": "Aedan confronts Alejandro over a joke video involving Samantha, beginning their pretend “beef.”",
+      "details": "Nicholas jokes that they are going to start fighting. February 4 is the first explicit chat confirmation that Alejandro and Aedan call the rivalry “beefing.” The joke repeatedly ends and restarts over later minor disagreements.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro",
+        "aedan",
+        "samantha",
+        "nicholas"
+      ],
+      "storylines": [
+        "Alejandro and Aedan beef"
+      ]
+    },
+    {
+      "id": "tuna-segreles",
+      "date": "2026-01-25",
+      "dateLabel": "January 25, 2026",
+      "sort": "2026-01-25T10:00:00",
+      "title": "Tuna de Segreles School Event",
+      "summary": "A large portion of the social circle participates in a school event, with several members working assigned shifts.",
+      "details": "Shift workers included Lucas, Jeidenne, Dash, Kamilo, Sebastian Machicote, Todd, Leo, Kateryna, Lorena Viñuela, and Lydia. Leo appears in the event but is not a Mozarella Sticks member.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "School Event"
+      ],
+      "people": [
+        "lucas",
+        "jeidenne",
+        "dash",
+        "kamilo",
+        "sebastian",
+        "todd",
+        "leo",
+        "kateryna",
+        "lorena",
+        "lydia"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "ale-maria-reveal",
+      "date": "2026-01-27",
+      "dateLabel": "January 27, 2026",
+      "sort": "2026-01-27T12:00:00",
+      "title": "Alejandro and Maria Reveal Their Relationship",
+      "summary": "The couple publicly reveals that they have been dating since December 2.",
+      "details": "Most of the girls are shocked, while many of the boys are unsurprised because they had already suspected it. Serafina and Dash are especially enthusiastic and supportive.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "Friend-Group Development"
+      ],
+      "people": [
+        "alejandro",
+        "maria",
+        "serafina",
+        "dash",
+        "lucas",
+        "libby"
+      ],
+      "storylines": [
+        "Alejandro and Maria"
+      ]
+    },
+    {
+      "id": "lucas-sam-talk",
+      "date": "2026-01-29",
+      "dateLabel": "Late January 2026",
+      "sort": "2026-01-29T12:00:00",
+      "title": "Lucas and Samantha Begin Growing Closer",
+      "summary": "Lucas and Samantha begin talking more frequently, creating the earliest romantic speculation.",
+      "details": "Only a small number of people notice or speculate at this stage.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "lucas",
+        "samantha"
+      ],
+      "storylines": [
+        "Lucas and Samantha"
+      ]
+    },
+    {
+      "id": "model-un-winners",
+      "date": "2026-01-30",
+      "dateLabel": "January 30–31, 2026",
+      "sort": "2026-01-30T09:00:00",
+      "title": "Kateryna and Lorena Win Model UN",
+      "summary": "Kateryna and Lorena Viñuela place first in a Model UN competition.",
+      "details": "The competition runs from January 30 through January 31. After winning, they share a selfie captioned “Winner winner chicken dinner.”",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Competition",
+        "Achievement"
+      ],
+      "people": [
+        "kateryna",
+        "lorena"
+      ],
+      "storylines": [
+        "Student leadership"
+      ]
+    },
+    {
+      "id": "lydia-cat",
+      "date": "2026-02-04",
+      "dateLabel": "February 4, 2026",
+      "sort": "2026-02-04T16:00:00",
+      "title": "Lydia Finds a Cat",
+      "summary": "Lydia asks the group whether anyone wants to adopt a cat she found.",
+      "details": "Marco expresses interest but never adopts it. The exchange remains a minor group-chat memory.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Minor Memory"
+      ],
+      "people": [
+        "lydia",
+        "marco",
+        "jeidenne"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "lucas-sam-date",
+      "date": "2026-02-14",
+      "dateLabel": "February 14, 2026",
+      "sort": "2026-02-14T20:00:00",
+      "title": "Lucas and Samantha Begin Dating",
+      "summary": "Lucas asks Samantha to begin dating, and she accepts.",
+      "details": "The relationship is initially kept highly private. Alejandro, Maria, and Aedan are among the small number of people who know.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "lucas",
+        "samantha",
+        "alejandro",
+        "maria",
+        "aedan"
+      ],
+      "storylines": [
+        "Lucas and Samantha"
+      ]
+    },
+    {
+      "id": "sword-gift",
+      "date": "2026-02-15",
+      "dateLabel": "Around February 14–15, 2026",
+      "sort": "2026-02-15T12:00:00",
+      "title": "Libby Gives Zach a Sword",
+      "summary": "Libby gives Zach a sword for Valentine’s Day after hearing that swords are the male equivalent of flowers.",
+      "details": "Zach posts it the next day with “Best gift ever.” Alejandro shares the post in the group chat, and the group congratulates Libby.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "approximate",
+      "importance": "minor",
+      "categories": [
+        "Relationship",
+        "Minor Memory"
+      ],
+      "people": [
+        "libby",
+        "zach",
+        "alejandro"
+      ],
+      "storylines": [
+        "Libby and Zach"
+      ]
+    },
+    {
+      "id": "spirit-dance",
+      "date": "2026-02-20",
+      "dateLabel": "February 20, 2026",
+      "sort": "2026-02-20T14:00:00",
+      "title": "Spirit Week Dance",
+      "summary": "The ninth-grade dance places second to last, dropping the grade from third to fifth overall.",
+      "details": "Before the dance, ninth grade was ranked third overall, largely because it had won the skit competition. The careers-themed Mix Two production placed second to last among the competing grades. The result briefly reignited the mix controversy. Both sides generally agreed that the late replacement and lost rehearsal time hurt the grade’s chances, although it cannot be proven that Mix One would have placed better.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Conflict",
+        "School Event",
+        "Creative Project"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "kateryna",
+        "lorena",
+        "samantha",
+        "aedan",
+        "nicholas",
+        "josie",
+        "serafina",
+        "sebastian"
+      ],
+      "storylines": [
+        "Spirit Week 2026"
+      ]
+    },
+    {
+      "id": "dc-trip",
+      "date": "2026-02-25",
+      "dateLabel": "February 25–March 2, 2026",
+      "sort": "2026-02-25T12:00:00",
+      "title": "Lucas Visits Washington, D.C.",
+      "summary": "Lucas travels to Washington, D.C., revisiting at least one location associated with the Close-Up trip.",
+      "details": "He arrives on February 25 and returns to Puerto Rico on March 2, his birthday.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "Travel"
+      ],
+      "people": [
+        "lucas"
+      ],
+      "storylines": [
+        "Formation of the MS"
+      ]
+    },
+    {
+      "id": "battle-of-bands",
+      "date": "2026-02-27",
+      "dateLabel": "February 27, 2026",
+      "sort": "2026-02-27T21:00:00",
+      "title": "Battle of the Bands",
+      "summary": "The school performs at a late-night Battle of the Bands hosted by another school.",
+      "details": "Marco and Leo performed on stage, while Jeidenne, Kamilo, Josie, and Leah watched from the audience. The event is remembered positively for the bands’ performances, without a clear placement being recorded in the timeline. Leah and Leo are connected students, not Mozarella Sticks members.",
+      "era": "9th Grade – Winter 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Performance",
+        "Creative Project"
+      ],
+      "people": [
+        "marco",
+        "leo",
+        "jeidenne",
+        "kamilo",
+        "josie",
+        "leah"
+      ],
+      "storylines": [
+        "School performances"
+      ]
+    },
+    {
+      "id": "todd-mystery-notes",
+      "date": "2026-03-03",
+      "dateLabel": "March 3, 2026",
+      "sort": "2026-03-03T12:00:00",
+      "title": "Mysterious Notes Appear on Lucas’s Golf Cart",
+      "summary": "Lucas finds two anonymous notes on his golf cart, leading Jeidenne to suspect a secret admirer.",
+      "details": "The notes read “IM Always Watching” and “your hairline looks Good today (not balding yet).” The sender is eventually revealed to be Todd.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Minor Memory"
+      ],
+      "people": [
+        "lucas",
+        "jeidenne",
+        "todd"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "schedule-leak",
+      "date": "2026-03-05",
+      "dateLabel": "March 5, 2026",
+      "sort": "2026-03-05T14:00:00",
+      "title": "Serafina Shares a Possible Future Schedule",
+      "summary": "Serafina leaks a potential school schedule for the following year, initially confusing and shocking the group.",
+      "details": "As the conversation continues, many members become more interested in and positive about the possible changes. The schedule is treated as preliminary rather than officially confirmed.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "School Event",
+        "Digital History"
+      ],
+      "people": [
+        "serafina"
+      ],
+      "storylines": [
+        "Academic planning"
+      ]
+    },
+    {
+      "id": "josie-birthday",
+      "date": "2026-03-07",
+      "dateLabel": "March 7, 2026",
+      "sort": "2026-03-07T15:00:00",
+      "title": "Josie’s Themed Birthday Party",
+      "summary": "Josie hosts a princess-and-character-themed birthday party attended by a large portion of the expanded group.",
+      "details": "Picture timestamps confirm the party occurred on March 7. Attendees included Marife, Samantha, Josie, Kateryna, Libby, Lorena Viñuela, Serafina, Lydia, Gage, Lucas, Alejandro, Todd, Nicholas, Sienna, and Jeidenne, with Dash arriving later. The party reflects Josie’s increased prominence and brings together established and newer members.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Party",
+        "Hangout",
+        "Birthday"
+      ],
+      "people": [
+        "josie",
+        "marife",
+        "samantha",
+        "kateryna",
+        "libby",
+        "lorena",
+        "serafina",
+        "lydia",
+        "gage",
+        "lucas",
+        "alejandro",
+        "todd",
+        "nicholas",
+        "sienna",
+        "jeidenne",
+        "dash"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "lucas-sam-reveal",
+      "date": "2026-03-07",
+      "dateLabel": "March 7, 2026",
+      "sort": "2026-03-07T18:00:00",
+      "title": "Lucas and Samantha Reveal Their Relationship",
+      "summary": "Lucas and Samantha publicly reveal their relationship during Josie’s themed birthday party.",
+      "details": "They had been dating privately since Valentine’s Day. The reveal ends the relationship’s highly limited secrecy.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Relationship",
+        "Birthday"
+      ],
+      "people": [
+        "lucas",
+        "samantha",
+        "josie",
+        "alejandro",
+        "maria",
+        "aedan"
+      ],
+      "storylines": [
+        "Lucas and Samantha"
+      ]
+    },
+    {
+      "id": "sienna-added",
+      "date": "2026-03-08",
+      "dateLabel": "March 8, 2026",
+      "sort": "2026-03-08T12:00:00",
+      "title": "Sienna Joins the Current Group Chat",
+      "summary": "Sienna is added to the current Mozarella Sticks chat after speaking with Alejandro about joining.",
+      "details": "Her addition follows her attendance at Josie’s birthday party the previous day and marks her formal entry into the group’s main communication space.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Digital History"
+      ],
+      "people": [
+        "sienna",
+        "alejandro"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "future-class-meetings",
+      "date": "2026-03-09",
+      "dateLabel": "Early March 2026",
+      "sort": "2026-03-09T12:00:00",
+      "title": "Planning Future Classes",
+      "summary": "Students begin visiting Laura’s office to discuss course selections for the next school year.",
+      "details": "Many members discussed ambitious schedules containing several Advanced Placement classes. The exact students, meetings, and individual course selections remain incomplete.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "approximate",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Academic Planning"
+      ],
+      "people": [],
+      "storylines": [
+        "Academic planning"
+      ]
+    },
+    {
+      "id": "maria-birthday-song",
+      "date": "2026-03-11",
+      "dateLabel": "March 11, 2026",
+      "sort": "2026-03-11T10:00:00",
+      "title": "Hallway Birthday Performance for Maria",
+      "summary": "The boys gather with instruments and sing “Happy Birthday” to Maria in the school hallway.",
+      "details": "A group of boys brought instruments and performed “Happy Birthday” for Maria in the school hallway. The exact performers have not yet been identified.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Performance",
+        "Birthday"
+      ],
+      "people": [
+        "maria"
+      ],
+      "storylines": [
+        "Alejandro and Maria"
+      ]
+    },
+    {
+      "id": "alejandro-moves-home",
+      "date": "2026-03-15",
+      "dateLabel": "March 15, 2026",
+      "sort": "2026-03-15T09:00:00",
+      "title": "Alejandro Moves Homes",
+      "summary": "Alejandro moves to a different home while remaining in the same town.",
+      "details": "The move changes his home base without removing him from the group’s local social environment.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Life Event"
+      ],
+      "people": [
+        "alejandro"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "samantha-phone-missing",
+      "date": "2026-03-15",
+      "dateLabel": "March 15, 2026",
+      "sort": "2026-03-15T15:00:00",
+      "title": "Samantha’s Phone Disappears and Returns",
+      "summary": "Samantha’s phone appears to be stolen, causing panic as Find My shows it moving around Puerto Rico.",
+      "details": "The phone is mysteriously returned later the same day. The group never learns who took it or how it was returned.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Conflict",
+        "Minor Memory"
+      ],
+      "people": [
+        "samantha"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "mary-poppins",
+      "date": "2026-03-17",
+      "dateLabel": "March 17, 2026",
+      "sort": "2026-03-17T19:00:00",
+      "title": "School Production of Mary Poppins",
+      "summary": "The school presents Mary Poppins with several Mozarella Sticks members and relatives performing on stage.",
+      "details": "Kateryna, Serafina, Lorena Viñuela, and Lydia perform, alongside Alejandro’s sister and Lorena’s sister.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Performance"
+      ],
+      "people": [
+        "kateryna",
+        "serafina",
+        "lorena",
+        "lydia"
+      ],
+      "storylines": [
+        "School performances"
+      ]
+    },
+    {
+      "id": "leak-grade-wide",
+      "date": "2026-03-25",
+      "dateLabel": "March 25, 2026",
+      "sort": "2026-03-25T12:00:00",
+      "title": "The Screenshot Story Spreads Beyond the Group",
+      "summary": "The private situation has become widely known throughout the grade.",
+      "details": "Aedan and Jeidenne have resumed interacting, but direct jokes about the incident can still cause discomfort. The friendships recover socially without a clear apology or formal resolution.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Conflict"
+      ],
+      "people": [
+        "aedan",
+        "jeidenne",
+        "samantha"
+      ],
+      "storylines": [
+        "Screenshot leak"
+      ]
+    },
+    {
+      "id": "project-hail-mary",
+      "date": "2026-03-27",
+      "dateLabel": "March 27, 2026",
+      "sort": "2026-03-27T19:00:00",
+      "title": "Project Hail Mary Movie Reunion",
+      "summary": "About half of the group reunites at the movies to watch Project Hail Mary.",
+      "details": "Attendees include Sebastian Machicote, Lucas, Kateryna, Lydia, Serafina, Nicholas, Jeidenne, Alejandro, Todd, Maria, Samantha, Kamilo, and Leah. Leah attends as a connected friend but is not a Mozarella Sticks member.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Hangout"
+      ],
+      "people": [
+        "sebastian",
+        "lucas",
+        "kateryna",
+        "lydia",
+        "serafina",
+        "nicholas",
+        "jeidenne",
+        "alejandro",
+        "todd",
+        "maria",
+        "samantha",
+        "kamilo",
+        "leah"
+      ],
+      "storylines": [
+        "Ninth-grade expansion"
+      ]
+    },
+    {
+      "id": "tyler-concert",
+      "date": "2026-03-31",
+      "dateLabel": "March 31, 2026",
+      "sort": "2026-03-31T20:00:00",
+      "title": "Tyler, The Creator Concert",
+      "summary": "Several members attend a Tyler, The Creator concert.",
+      "details": "Nicholas, Kateryna, Alejandro, and Dash attend together, while Marife and Serafina attend separately.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Performance",
+        "Hangout"
+      ],
+      "people": [
+        "nicholas",
+        "kateryna",
+        "alejandro",
+        "dash",
+        "marife",
+        "serafina"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "school-model-un-2026",
+      "date": "2026-04-10",
+      "dateLabel": "April 10–12, 2026",
+      "sort": "2026-04-10T08:00:00",
+      "title": "School-Hosted Model UN Competition",
+      "summary": "The school hosts a three-day Model UN competition.",
+      "details": "The competition runs from April 10 through April 12. The available timeline does not yet identify the winning delegation, highest-placing group, or individual awards.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Competition"
+      ],
+      "people": [],
+      "storylines": [
+        "Model UN"
+      ]
+    },
+    {
+      "id": "tomodachi-island",
+      "date": "2026-04-14",
+      "dateLabel": "April 14, 2026",
+      "sort": "2026-04-14T17:00:00",
+      "title": "Alejandro Creates a Tomodachi Life Island",
+      "summary": "Alejandro starts a Tomodachi Life: Living the Dream island featuring versions of most group members.",
+      "details": "He rarely presents the island publicly, but members occasionally ask how their Miis are doing. It becomes a small digital representation of the friend group.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Creative Project",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "vaqueros-indios-feud",
+      "date": "2026-04-22",
+      "dateLabel": "April 22, 2026",
+      "sort": "2026-04-22T09:00:00",
+      "title": "Vaqueros vs. Indios Feud Begins",
+      "summary": "Jeidenne and Sebastian begin a playful rivalry centered on the Vaqueros and Indios.",
+      "details": "The joking feud begins specifically between Jeidenne, supporting the Vaqueros, and Sebastian, supporting the Indios. Its later development can be expanded as more events are documented.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Friend-Group Development",
+        "Minor Memory"
+      ],
+      "people": [
+        "jeidenne",
+        "sebastian"
+      ],
+      "storylines": [
+        "Vaqueros vs. Indios"
+      ]
+    },
+    {
+      "id": "student-council-election",
+      "date": "2026-04-22",
+      "dateLabel": "April 22–23, 2026",
+      "sort": "2026-04-22T12:00:00",
+      "title": "Student Council Campaigns and Election",
+      "summary": "Several Mozarella Sticks members run, but Lucas is the only one who wins.",
+      "details": "Campaigns are heavily discussed on April 22, and voting occurs April 23. Lucas becomes Vice President. Every other Mozarella Sticks candidate loses, while the remaining positions go to students outside the current group chat. The Spirit Week conflict affected the social atmosphere around the election, but the exact influence remains unclear.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "range",
+      "importance": "major",
+      "categories": [
+        "School Event"
+      ],
+      "people": [
+        "lucas",
+        "lorena",
+        "maria",
+        "serafina"
+      ],
+      "storylines": [
+        "Student Council 2026",
+        "Spirit Week 2026"
+      ]
+    },
+    {
+      "id": "physics-final-wendys",
+      "date": "2026-05-12",
+      "dateLabel": "May 12, 2026",
+      "sort": "2026-05-12T12:00:00",
+      "title": "Final Assignment and Wendy’s in the Physics Classroom",
+      "summary": "A sizable portion of the group stays in the physics classroom to finish a final assignment and spend lunch together.",
+      "details": "After working, the group talks, laughs, and shares Wendy’s for lunch. Dash arranges the food order, turning an ordinary final-assignment session into a relaxed shared memory.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Hangout"
+      ],
+      "people": [
+        "dash"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "zach-moves",
+      "date": "2026-06-20",
+      "dateLabel": "June 20, 2026",
+      "sort": "2026-06-20T12:00:00",
+      "title": "Zach Moves Away",
+      "summary": "Zach leaves Puerto Rico on June 20.",
+      "details": "Libby had known for months that the move was coming. The exact timing and circumstances of their planned breakup have not yet been confirmed.",
+      "era": "Summer 2026",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "libby",
+        "zach"
+      ],
+      "storylines": [
+        "Libby and Zach"
+      ]
+    }
+  ]
+}

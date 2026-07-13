@@ -1,0 +1,333 @@
+{
+  "people": [
+    {
+      "id": "aedan",
+      "displayName": "Aedan",
+      "aliases": [
+        "Aeds",
+        "Aids",
+        "Aegg",
+        "Berryl",
+        "Kirkpatrick",
+        "Kirby",
+        "Egg",
+        "Barrel",
+        "Lucent",
+        "Lil' Sis"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "alejandro",
+      "displayName": "Alejandro",
+      "aliases": [
+        "Rosado",
+        "Ale",
+        "Natrolite",
+        "Natwolite"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "alexander",
+      "displayName": "Alexander",
+      "aliases": [
+        "Flachowsky",
+        "Alex",
+        "Analyst"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "dash",
+      "displayName": "Dash",
+      "aliases": [
+        "Dashel",
+        "Reid",
+        "Greenburg",
+        "Yankee"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "gage",
+      "displayName": "Gage",
+      "aliases": [
+        "Weber",
+        "Monarch"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "jeidenne",
+      "displayName": "Jeidenne",
+      "aliases": [
+        "Jei",
+        "Nieves",
+        "Jeipenny",
+        "Nimbus",
+        "Jei Jei bai bai"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "josie",
+      "displayName": "Josie",
+      "aliases": [
+        "Toro",
+        "Jose",
+        "Joseph"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "kamilo",
+      "displayName": "Kamilo",
+      "aliases": [],
+      "status": "Member"
+    },
+    {
+      "id": "kateryna",
+      "displayName": "Kateryna",
+      "aliases": [
+        "Alvarez",
+        "Kate",
+        "Kat",
+        "Specter"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "libby",
+      "displayName": "Libby",
+      "aliases": [
+        "Libs",
+        "Kay",
+        "Elizabeth",
+        "Macbeth",
+        "Libeth",
+        "Frost",
+        "5:00 Twin"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "lorena",
+      "displayName": "Lorena",
+      "aliases": [
+        "Viñuela",
+        "Vinuela",
+        "Lore",
+        "Artemis"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "lucas",
+      "displayName": "Lucas",
+      "aliases": [
+        "Ramirez",
+        "Gabriel",
+        "Lukey",
+        "Calculator",
+        "Doakes"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "lydia",
+      "displayName": "Lydia",
+      "aliases": [
+        "Corsino",
+        "Dragon Warrior",
+        "Panda",
+        "Recon"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "marco",
+      "displayName": "Marco",
+      "aliases": [
+        "Wizard",
+        "Valiente",
+        "Marcos",
+        "Cruise",
+        "The Weird Wizerd"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "maria",
+      "displayName": "Maria",
+      "aliases": [
+        "Trebilcock",
+        "Mamommy",
+        "Inkwraith",
+        "Marigga"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "marife",
+      "displayName": "Marife",
+      "aliases": [
+        "Mafe"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "nicholas",
+      "displayName": "Nicholas",
+      "aliases": [
+        "Nico",
+        "Nicho",
+        "Fuell",
+        "King Frog"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "samantha",
+      "displayName": "Samantha",
+      "aliases": [
+        "Sam",
+        "Pancake",
+        "Samurai",
+        "Samommy",
+        "Whistle",
+        "Thistle",
+        "Ref",
+        "The Korean"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "sebastian",
+      "displayName": "Sebastian",
+      "aliases": [
+        "Seba",
+        "Machi",
+        "Machicote",
+        "Sebastian Machicote"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "serafina",
+      "displayName": "Serafina",
+      "aliases": [
+        "Seraphina",
+        "Fin",
+        "Phin",
+        "Fina",
+        "Fifi"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "shane",
+      "displayName": "Shane",
+      "aliases": [
+        "Smater",
+        "Siphon",
+        "Elsa"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "sienna",
+      "displayName": "Sienna",
+      "aliases": [
+        "Seyneyney"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "todd",
+      "displayName": "Todd",
+      "aliases": [
+        "Toddnado",
+        "Toddtastic",
+        "Tod",
+        "Anderson",
+        "Torpedo"
+      ],
+      "status": "Member"
+    },
+    {
+      "id": "allysa",
+      "displayName": "Allysa",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "bash",
+      "displayName": "Bash",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "bianca",
+      "displayName": "Bianca",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "cynthia",
+      "displayName": "Cynthia",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "dominique",
+      "displayName": "Dominique",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "isabel",
+      "displayName": "Isabel",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "jaime",
+      "displayName": "Jaime",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "leah",
+      "displayName": "Leah",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "leo",
+      "displayName": "Leo",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "lorena-rodriguez",
+      "displayName": "Lorena Rodríguez",
+      "aliases": [
+        "Lorena Rodriguez"
+      ],
+      "status": "Connected Person"
+    },
+    {
+      "id": "valentin",
+      "displayName": "Valentin",
+      "aliases": [],
+      "status": "Connected Person"
+    },
+    {
+      "id": "zach",
+      "displayName": "Zach",
+      "aliases": [],
+      "status": "Connected Person"
+    }
+  ]
+}
