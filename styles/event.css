@@ -26,3 +26,24 @@
 .event-pagination strong { display: block; color: var(--text); margin-top: 4px; }
 @media (max-width: 850px) { .event-article { grid-template-columns: 1fr; } .event-sidebar { position: static; } .related-grid { grid-template-columns: 1fr; } }
 @media (max-width: 620px) { .event-gallery, .event-pagination { grid-template-columns: 1fr; } .event-pagination a:last-child { text-align: left; } }
+
+.event-back:hover {
+  color: var(--gold);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--gold) 42%, transparent);
+  transform: translateX(-2px);
+}
+.related-card,
+.event-pagination a {
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease;
+}
+.related-card:hover,
+.event-pagination a:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--gold) 45%, var(--line));
+  box-shadow: 0 0 20px color-mix(in srgb, var(--gold) 10%, transparent);
+}
+.related-card:hover h3,
+.event-pagination a:hover strong {
+  color: var(--gold);
+  text-shadow: 0 0 13px color-mix(in srgb, var(--gold) 34%, transparent);
+}

@@ -28,3 +28,30 @@
 .lightbox-next { right: 20px; top: 50%; }
 @media (max-width: 950px) { .gallery-controls { grid-template-columns: 1fr 1fr; } .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .gallery-hero { flex-direction: column; align-items: stretch; } .timeline-summary { text-align: left; } .gallery-controls { grid-template-columns: 1fr; } .gallery-grid { grid-template-columns: 1fr; } .lightbox { padding: 70px 12px 20px; } .lightbox-prev, .lightbox-next { top: auto; bottom: 18px; z-index: 2; } .lightbox figcaption { display: grid; padding-bottom: 70px; } }
+
+.media-card {
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.media-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--gold) 42%, var(--line));
+  box-shadow: 0 16px 36px rgba(0,0,0,.15);
+}
+.media-button img {
+  transition: transform .25s ease, filter .25s ease;
+}
+.media-button:hover img {
+  transform: scale(1.025);
+  filter: brightness(1.06);
+}
+.media-event:hover,
+.lightbox figcaption a:hover {
+  color: var(--text);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--gold) 50%, transparent);
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: color-mix(in srgb, var(--gold) 35%, rgba(255,255,255,.12));
+  box-shadow: 0 0 20px color-mix(in srgb, var(--gold) 22%, transparent);
+}

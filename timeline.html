@@ -10,7 +10,7 @@
 </head>
 <body data-page="timeline">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  
+
 <header class="site-header">
   <a class="brand" href="index.html" aria-label="Mozarella Sticks Archive home">
     <span class="brand-mark" aria-hidden="true">MS</span>
@@ -30,41 +30,69 @@
   <div>
     <p class="eyebrow">Interactive chronology</p>
     <h1>Timeline</h1>
-    <p>Search the complete archive or narrow it to a person, era, category, importance level, or date confidence.</p>
+    <p>Search the complete archive or narrow it by era, person, category, importance, or date confidence.</p>
   </div>
   <div class="timeline-summary"><strong id="visible-count">—</strong><span>events shown</span></div>
 </section>
-<section class="controls-shell shell" aria-label="Timeline filters">
-  <div class="search-field wide-field">
-    <label for="timeline-search">Search</label>
-    <input id="timeline-search" type="search" placeholder="Try “Close-Up”, “Lucas”, or “Model UN”" autocomplete="off">
+
+<section class="timeline-toolbar shell" aria-label="Timeline search and filters">
+  <div class="toolbar-row">
+    <div class="search-oval">
+      <label class="sr-only" for="timeline-search">Search timeline</label>
+      <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24">
+        <path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"></path>
+      </svg>
+      <input id="timeline-search" type="search" autocomplete="off" aria-label="Search timeline">
+      <span id="search-suggestion" class="search-suggestion" aria-hidden="true">Try “Close-Up”</span>
+    </div>
+    <button id="filter-toggle" class="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-drawer">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M4 6h16M7 12h10m-7 6h4"></path>
+      </svg>
+      <span>Filters</span>
+      <span id="active-filter-count" class="filter-count" hidden>0</span>
+    </button>
   </div>
-  <div class="filter-field"><label for="era-filter">Era</label><select id="era-filter"><option value="">All eras</option></select></div>
-  <div class="filter-field"><label for="person-filter">Person</label><select id="person-filter"><option value="">All people</option></select></div>
-  <div class="filter-field"><label for="category-filter">Category</label><select id="category-filter"><option value="">All categories</option></select></div>
-  <fieldset class="segmented-field importance-field">
-    <legend>Importance</legend>
-    <label><input type="checkbox" name="importance" value="major" checked><span>Major</span></label>
-    <label><input type="checkbox" name="importance" value="supporting" checked><span>Supporting</span></label>
-    <label><input type="checkbox" name="importance" value="minor" checked><span>Minor</span></label>
-  </fieldset>
-  <fieldset class="segmented-field certainty-field">
-    <legend>Date</legend>
-    <label><input type="checkbox" name="certainty" value="confirmed" checked><span>Confirmed</span></label>
-    <label><input type="checkbox" name="certainty" value="approximate" checked><span>Approximate</span></label>
-    <label><input type="checkbox" name="certainty" value="range" checked><span>Range</span></label>
-  </fieldset>
-  <div class="control-actions">
-    <button id="reset-filters" class="button ghost" type="button">Reset</button>
-    <button id="expand-all" class="button ghost" type="button">Expand all</button>
+
+  <div id="filter-drawer" class="filter-drawer" data-open="false" aria-hidden="true" inert>
+    <div class="filter-drawer-inner">
+      <div class="filter-field"><label for="era-filter">Era</label><select id="era-filter"><option value="">All eras</option></select></div>
+      <div class="filter-field"><label for="person-filter">Person</label><select id="person-filter"><option value="">All people</option></select></div>
+      <div class="filter-field"><label for="category-filter">Category</label><select id="category-filter"><option value="">All categories</option></select></div>
+
+      <fieldset class="segmented-field importance-field">
+        <legend>Importance</legend>
+        <label><input type="checkbox" name="importance" value="major" checked><span>Major</span></label>
+        <label><input type="checkbox" name="importance" value="supporting" checked><span>Supporting</span></label>
+        <label><input type="checkbox" name="importance" value="minor" checked><span>Minor</span></label>
+      </fieldset>
+
+      <fieldset class="segmented-field certainty-field">
+        <legend>Date</legend>
+        <label><input type="checkbox" name="certainty" value="confirmed" checked><span>Confirmed</span></label>
+        <label><input type="checkbox" name="certainty" value="approximate" checked><span>Approximate</span></label>
+        <label><input type="checkbox" name="certainty" value="range" checked><span>Range</span></label>
+      </fieldset>
+
+      <div class="control-actions">
+        <button id="reset-filters" class="button ghost" type="button">Reset filters</button>
+        <button id="expand-all" class="button ghost" type="button">Expand all</button>
+      </div>
+    </div>
   </div>
 </section>
+
 <div class="timeline-layout shell">
-  <aside class="era-jump" aria-label="Jump to era"><p class="eyebrow">Jump to era</p><nav id="era-nav"></nav></aside>
-  <section id="timeline-root" class="timeline-root" aria-live="polite"><div class="loading-state">Loading timeline…</div></section>
+  <aside class="era-jump" aria-label="Jump to era">
+    <p class="eyebrow">Jump to era</p>
+    <nav id="era-nav"></nav>
+  </aside>
+  <section id="timeline-root" class="timeline-root" aria-live="polite">
+    <div class="loading-state">Loading timeline…</div>
+  </section>
 </div>
 </main>
-  
+
 <footer class="site-footer">
   <p>A cleaned, community-approved archive. Raw chats and private evidence are not included.</p>
   <p class="footer-future">People and Dictionary sections are planned for a later version.</p>

@@ -76,3 +76,14 @@ Use lowercase letters, hyphens, two-digit numbering, and no punctuation or emoji
 ## Future expansion
 
 The data structure is ready for later People and Dictionary sections. Those pages can reference the same stable event and person IDs without duplicating timeline content.
+
+
+## Interface revision 1.1
+
+- Restored the vertical timeline line and event dots from Version A.
+- Event cards keep people and category tags behind **View more**.
+- Added animated event expansion.
+- Rebuilt timeline search as a sticky oval search bar with rotating prompts.
+- Consolidated Era, Person, Category, Importance, and Date controls inside one Filters drawer.
+- Added hover highlights and glow states across navigation, links, buttons, tags, and event controls.
+- Increased event date and title sizes.

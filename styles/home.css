@@ -23,3 +23,19 @@
 .latest-date { color: var(--gold); font-weight: 850; }
 .latest-event p { color: var(--muted); margin: 6px 0 0; }
 @media (max-width: 850px) { .home-hero, .home-sections { grid-template-columns: 1fr; } .latest-event { grid-template-columns: 1fr; } }
+
+.section-card {
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.section-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--gold) 36%, var(--line));
+  box-shadow: 0 18px 42px rgba(0,0,0,.16);
+}
+.section-card:hover .text-link {
+  color: var(--text);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--gold) 55%, transparent);
+}
+.latest-event .button:hover {
+  color: #17120a;
+}
