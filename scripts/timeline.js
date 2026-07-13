@@ -102,7 +102,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         .map(category => `<span class="chip">${MSArchive.escapeHtml(category)}</span>`)
         .join('');
       const images = media.slice(0, 2)
-        .map(item => `<a href="gallery.html?event=${encodeURIComponent(event.id)}"><img src="assets/images/${encodeURIComponent(item.file)}" alt="${MSArchive.escapeHtml(item.caption)}" loading="lazy"></a>`)
+        .map(item => {
+          if (item.type === 'video') {
+            return `<figure class="event-media-item video-item">
+              ${MSArchive.mediaPreviewMarkup(item, {controls: true})}
+              <figcaption>${MSArchive.escapeHtml(item.caption)}</figcaption>
+            </figure>`;
+          }
+          return `<a class="event-media-item" href="gallery.html?event=${encodeURIComponent(event.id)}">${MSArchive.mediaPreviewMarkup(item)}</a>`;
+        })
         .join('');
 
       return `<article class="event-card" id="${MSArchive.escapeHtml(event.id)}" data-importance="${event.importance}">

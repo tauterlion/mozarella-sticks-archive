@@ -1,0 +1,105 @@
+.tool-shell {
+  padding-top: 54px;
+  padding-bottom: 80px;
+}
+
+.tool-header {
+  max-width: 820px;
+  padding: 42px 0 28px;
+}
+
+.tool-header p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+.tool-card {
+  margin-top: 18px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 14px;
+}
+
+.tool-grid input[type="file"],
+.tool-grid input[type="text"] {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.tool-note,
+.optional {
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.tool-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+}
+
+.manager-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.manager-record {
+  display: grid;
+  grid-template-columns: minmax(150px, .8fr) 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+}
+
+.manager-record code {
+  color: var(--gold);
+}
+
+.manager-record p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.manager-record button {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.manager-record button:hover {
+  color: var(--tomato);
+  border-color: var(--tomato);
+}
+
+@media (max-width: 820px) {
+  .tool-grid,
+  .manager-record {
+    grid-template-columns: 1fr;
+  }
+}

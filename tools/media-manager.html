@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Manager · Mozarella Sticks Archive</title>
+  <link rel="stylesheet" href="../styles/shared.css">
+  <link rel="stylesheet" href="../styles/tools.css">
+</head>
+<body data-page="tools">
+  <main class="tool-shell shell">
+    <a class="text-link" href="../index.html">← Return to archive</a>
+    <header class="tool-header">
+      <p class="eyebrow">Local helper</p>
+      <h1>Media Manager</h1>
+      <p>Select files, link them to an event, and download an updated <code>media.json</code>. File IDs and media types are generated automatically from filenames.</p>
+    </header>
+
+    <section class="tool-card">
+      <div class="tool-grid">
+        <div class="filter-field">
+          <label for="manager-files">Files</label>
+          <input id="manager-files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/svg+xml,video/mp4,video/webm" multiple>
+        </div>
+        <div class="filter-field">
+          <label for="manager-event">Related event</label>
+          <select id="manager-event"><option value="">Choose an event</option></select>
+        </div>
+        <div class="filter-field">
+          <label for="manager-caption">Caption override <span class="optional">(optional)</span></label>
+          <input id="manager-caption" type="text" placeholder="Leave blank to generate from filename">
+        </div>
+      </div>
+
+      <div class="tool-actions">
+        <button id="manager-add" class="button primary" type="button">Add selected files</button>
+        <button id="manager-download" class="button secondary" type="button">Download updated media.json</button>
+      </div>
+      <p class="tool-note">This helper updates the JSON file only. You must still upload the actual files into <code>assets/media/</code>.</p>
+    </section>
+
+    <section class="tool-card">
+      <div class="tool-heading">
+        <div>
+          <p class="eyebrow">Draft records</p>
+          <h2 id="manager-count">0 newly added</h2>
+        </div>
+        <button id="manager-clear" class="button ghost" type="button">Clear new records</button>
+      </div>
+      <div id="manager-list" class="manager-list">
+        <div class="empty-state">No new files have been added in this session.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../scripts/shared.js"></script>
+  <script src="media-manager.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Image Filename Checklist
 
-Place approved files in `assets/images/`. A filename only appears on the website when the matching image file exists.
+Place approved files in `assets/medias/`. A filename only appears on the website when the matching media file exists.
 
 ## Close-Up
 
@@ -62,3 +62,22 @@ Place approved files in `assets/images/`. A filename only appears on the website
 - `tyler-concert-01.jpg` — Tyler, The Creator Concert
 - `model-un-school-2026-01.jpg` — School-Hosted Model UN Competition
 - `physics-wendys-01.jpg` — Final Assignment and Wendy’s in the Physics Classroom
+
+
+## Videos
+
+Video files may use the same stems with `.mp4`, for example:
+
+```text
+spirit-week-dance-01.mp4
+close-up-salute-01.mp4
+prom-2025-01.mp4
+```
+
+A generated poster can use:
+
+```text
+spirit-week-dance-01-poster.jpg
+```
+
+New files should be placed in `assets/media/`.

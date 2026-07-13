@@ -1,17 +1,64 @@
-
 (() => {
   const MS = window.MSArchive = window.MSArchive || {};
+  const SCRIPT_URL = document.currentScript?.src || '';
+  const SITE_ROOT = SCRIPT_URL ? new URL('../', SCRIPT_URL) : new URL('./', location.href);
+
+  MS.siteUrl = path => new URL(path, SITE_ROOT).href;
+
   const DATA_PATHS = {
-    timeline: 'data/timeline.json',
-    people: 'data/people.json',
-    media: 'data/media.json'
+    timeline: MS.siteUrl('data/timeline.json'),
+    people: MS.siteUrl('data/people.json'),
+    media: MS.siteUrl('data/media.json')
   };
+
+  const IMAGE_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'avif']);
+  const VIDEO_EXTENSIONS = new Set(['mp4', 'webm', 'ogv']);
+  const MEDIA_DIRECTORIES = ['assets/media/', 'assets/images/'];
 
   MS.normalize = (value = '') => value.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   MS.escapeHtml = (value = '') => value.toString().replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
   MS.slug = (value = '') => MS.normalize(value).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   MS.certaintyLabel = value => ({confirmed: 'Confirmed', approximate: 'Approximate', range: 'Date range'}[value] || value);
   MS.importanceLabel = value => value ? value[0].toUpperCase() + value.slice(1) : '';
+
+  MS.fileExtension = (file = '') => {
+    const clean = file.split('?')[0].split('#')[0];
+    const dot = clean.lastIndexOf('.');
+    return dot >= 0 ? clean.slice(dot + 1).toLowerCase() : '';
+  };
+
+  MS.fileStem = (file = '') => {
+    const base = file.split('/').pop().split('?')[0].split('#')[0];
+    const dot = base.lastIndexOf('.');
+    return dot >= 0 ? base.slice(0, dot) : base;
+  };
+
+  MS.mediaType = item => {
+    if (item?.type === 'image' || item?.type === 'video') return item.type;
+    const extension = MS.fileExtension(item?.file || '');
+    if (IMAGE_EXTENSIONS.has(extension)) return 'image';
+    if (VIDEO_EXTENSIONS.has(extension)) return 'video';
+    return 'unknown';
+  };
+
+  MS.mediaMime = item => {
+    const extension = MS.fileExtension(item?.file || '');
+    const types = {
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+      png: 'image/png',
+      webp: 'image/webp',
+      gif: 'image/gif',
+      svg: 'image/svg+xml',
+      avif: 'image/avif',
+      mp4: 'video/mp4',
+      webm: 'video/webm',
+      ogv: 'video/ogg'
+    };
+    return types[extension] || '';
+  };
+
+  MS.mediaId = item => item?.id || MS.slug(MS.fileStem(item?.file || 'media'));
 
   MS.loadJson = async key => {
     const response = await fetch(DATA_PATHS[key]);
@@ -20,12 +67,33 @@
   };
 
   MS.loadAll = async () => {
-    const [timeline, people, media] = await Promise.all([
+    const [timeline, people, mediaData] = await Promise.all([
       MS.loadJson('timeline'), MS.loadJson('people'), MS.loadJson('media')
     ]);
     const peopleById = Object.fromEntries(people.people.map(person => [person.id, person]));
     const eventsById = Object.fromEntries(timeline.events.map(event => [event.id, event]));
-    return {...timeline, people: people.people, peopleById, media: media.media, eventsById};
+
+    const rawMedia = Array.isArray(mediaData) ? mediaData : (mediaData.media || []);
+    const normalizedMedia = rawMedia.map((item, index) => {
+      const event = eventsById[item.eventId];
+      return {
+        ...item,
+        id: MS.mediaId(item),
+        type: MS.mediaType(item),
+        caption: item.caption || MS.fileStem(item.file).replace(/[-_]+/g, ' '),
+        people: Array.isArray(item.people) ? item.people : [],
+        era: item.era || event?.era || '',
+        order: Number.isFinite(item.order) ? item.order : index + 1
+      };
+    });
+
+    return {
+      ...timeline,
+      people: people.people,
+      peopleById,
+      media: normalizedMedia,
+      eventsById
+    };
   };
 
   MS.personName = (id, data) => data.peopleById[id]?.displayName || id;
@@ -51,16 +119,98 @@
     select.append(fragment);
   };
 
-  MS.imageExists = src => new Promise(resolve => {
+  MS.mediaUrlCandidates = item => {
+    if (!item?.file) return [];
+    if (/^(?:https?:)?\/\//i.test(item.file) || item.file.startsWith('/')) return [item.file];
+    if (item.path) return [MS.siteUrl(item.path)];
+    return MEDIA_DIRECTORIES.map(directory => MS.siteUrl(`${directory}${item.file}`));
+  };
+
+  MS.posterUrlCandidates = item => {
+    if (!item?.poster) return [];
+    if (/^(?:https?:)?\/\//i.test(item.poster) || item.poster.startsWith('/')) return [item.poster];
+    if (item.posterPath) return [MS.siteUrl(item.posterPath)];
+    return MEDIA_DIRECTORIES.map(directory => MS.siteUrl(`${directory}${item.poster}`));
+  };
+
+  const checkImage = src => new Promise(resolve => {
     const image = new Image();
-    image.onload = () => resolve(true);
-    image.onerror = () => resolve(false);
+    const timeout = window.setTimeout(() => resolve(false), 10000);
+    image.onload = () => { window.clearTimeout(timeout); resolve(true); };
+    image.onerror = () => { window.clearTimeout(timeout); resolve(false); };
     image.src = src;
   });
 
+  const checkVideo = src => new Promise(resolve => {
+    const video = document.createElement('video');
+    const timeout = window.setTimeout(() => {
+      video.removeAttribute('src');
+      video.load();
+      resolve(false);
+    }, 12000);
+    video.preload = 'metadata';
+    video.muted = true;
+    video.playsInline = true;
+    video.onloadedmetadata = () => {
+      window.clearTimeout(timeout);
+      video.removeAttribute('src');
+      video.load();
+      resolve(true);
+    };
+    video.onerror = () => {
+      window.clearTimeout(timeout);
+      video.removeAttribute('src');
+      video.load();
+      resolve(false);
+    };
+    video.src = src;
+  });
+
+  MS.mediaExists = (src, type) => type === 'video' ? checkVideo(src) : checkImage(src);
+
+  MS.firstExistingUrl = async (candidates, type) => {
+    for (const candidate of candidates) {
+      if (await MS.mediaExists(candidate, type)) return candidate;
+    }
+    return '';
+  };
+
+  MS.resolveMedia = async item => {
+    if (!['image', 'video'].includes(item.type)) return null;
+    const url = await MS.firstExistingUrl(MS.mediaUrlCandidates(item), item.type);
+    if (!url) return null;
+
+    let posterUrl = '';
+    if (item.type === 'video' && item.poster) {
+      posterUrl = await MS.firstExistingUrl(MS.posterUrlCandidates(item), 'image');
+    }
+
+    return {...item, url, posterUrl};
+  };
+
   MS.availableMedia = async media => {
-    const checks = await Promise.all(media.map(async item => ({item, exists: await MS.imageExists(`assets/images/${item.file}`)})));
-    return checks.filter(result => result.exists).map(result => result.item);
+    const resolved = await Promise.all(media.map(item => MS.resolveMedia(item)));
+    return resolved.filter(Boolean).sort((a, b) => a.order - b.order);
+  };
+
+  MS.mediaPreviewMarkup = (item, options = {}) => {
+    const className = options.className || '';
+    const controls = options.controls !== false;
+    const autoplay = Boolean(options.autoplay);
+    const muted = Boolean(options.muted);
+    const poster = item.posterUrl ? ` poster="${MS.escapeHtml(item.posterUrl)}"` : '';
+    const controlAttr = controls ? ' controls' : '';
+    const autoplayAttr = autoplay ? ' autoplay' : '';
+    const mutedAttr = muted ? ' muted' : '';
+
+    if (item.type === 'video') {
+      return `<video class="${MS.escapeHtml(className)}" preload="metadata" playsinline${controlAttr}${autoplayAttr}${mutedAttr}${poster}>
+        <source src="${MS.escapeHtml(item.url)}" type="${MS.escapeHtml(MS.mediaMime(item))}">
+        Your browser does not support this video.
+      </video>`;
+    }
+
+    return `<img class="${MS.escapeHtml(className)}" src="${MS.escapeHtml(item.url)}" alt="${MS.escapeHtml(item.caption)}" loading="lazy">`;
   };
 
   MS.errorMarkup = error => {

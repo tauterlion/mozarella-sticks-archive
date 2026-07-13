@@ -547,18 +547,32 @@
   margin-top: 20px;
 }
 
-.event-media a {
+.event-media-item {
   display: block;
   overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line);
   border-radius: 13px;
   background: var(--surface-2);
 }
 
-.event-media img {
+.event-media img,
+.event-media video {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   transition: transform .25s ease, filter .25s ease;
+}
+
+.event-media video {
+  background: #080808;
+}
+
+.event-media-item figcaption {
+  padding: 9px 11px;
+  color: var(--muted);
+  font-size: .76rem;
 }
 
 .event-media a:hover img {

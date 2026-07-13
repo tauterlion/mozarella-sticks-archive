@@ -1,4 +1,4 @@
-# Mozarella Sticks Archive — Version B.1
+# Mozarella Sticks Archive — Version B.1.2
 
 A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
 
@@ -6,11 +6,11 @@ A GitHub Pages–ready static archive with a timeline, gallery, and reusable eve
 
 - `index.html` — archive landing page
 - `timeline.html` — searchable and filterable timeline
-- `gallery.html` — event-linked gallery that only shows files that exist
+- `gallery.html` — event-linked image and video gallery that only shows files that exist
 - `event.html?id=EVENT_ID` — reusable full event page
 - `data/timeline.json` — 98 cleaned timeline events
 - `data/people.json` — canonical names, aliases, and Member/Connected Person tags
-- `data/media.json` — approved filename placeholders
+- `data/media.json` — approved image/video records; IDs and media types may be omitted and will be generated from filenames
 
 No raw WhatsApp exports, phone numbers, screenshots, or private evidence are included.
 
@@ -55,14 +55,23 @@ Importance values:
 - `supporting`
 - `minor`
 
-## Add images
+## Add images and videos
 
-1. Check `data/media.json` for the filename linked to an event.
-2. Rename the approved image to match the `file` value.
-3. Place it in `assets/images/`.
-4. Refresh the website.
+Use `assets/media/` for new photos and videos. The old `assets/images/` folder remains supported for compatibility.
 
-Missing files remain invisible. Images automatically appear in the matching expanded timeline card, event page, and gallery.
+A minimal record in `data/media.json` only needs:
+
+```json
+{
+  "file": "event-clip-01.mp4",
+  "caption": "A short caption.",
+  "eventId": "event-id"
+}
+```
+
+The site automatically derives the media ID and whether the file is an image or video.
+
+Missing files remain invisible. Existing media automatically appears in the matching expanded timeline card, event page, and gallery.
 
 Recommended filename format:
 
@@ -87,3 +96,27 @@ The data structure is ready for later People and Dictionary sections. Those page
 - Consolidated Era, Person, Category, Importance, and Date controls inside one Filters drawer.
 - Added hover highlights and glow states across navigation, links, buttons, tags, and event controls.
 - Increased event date and title sizes.
+
+
+## MP4 and media tools
+
+Supported gallery media:
+
+- Images: JPG, JPEG, PNG, WebP, GIF, SVG, AVIF
+- Video: MP4, WebM, OGV
+
+MP4 with H.264 video and AAC audio is the recommended video format.
+
+GitHub Pages cannot downscale videos at runtime. Use:
+
+```bash
+python tools/prepare_media.py input-video.mov --event EVENT_ID --caption "Caption"
+```
+
+The script converts video to web-compatible MP4, fits it within 720p according to orientation, caps it at 30 FPS, creates a poster frame, places it in `assets/media/`, and updates `data/media.json`.
+
+For a no-code manifest helper, preview the site locally and open:
+
+```text
+http://localhost:8000/tools/media-manager.html
+```
