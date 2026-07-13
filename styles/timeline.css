@@ -381,7 +381,6 @@
 .event-card::before {
   content: "";
   position: absolute;
-  box-sizing: border-box;
   left: -35px;
   top: 30px;
   width: 14px;

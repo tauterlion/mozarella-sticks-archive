@@ -19,7 +19,8 @@
         "marco",
         "lorena"
       ],
-      "order": 1
+      "order": 1,
+      "path": "assets/media/close-up-departure-01.jpg"
     },
     {
       "id": "close-up-dining-hall-01",
@@ -40,7 +41,8 @@
         "marco",
         "lorena"
       ],
-      "order": 2
+      "order": 2,
+      "path": "assets/media/close-up-dining-hall-01.jpg"
     },
     {
       "id": "close-up-breakfast-01",
@@ -53,7 +55,8 @@
         "gage",
         "valentin"
       ],
-      "order": 3
+      "order": 3,
+      "path": "assets/media/close-up-breakfast-01.jpg"
     },
     {
       "id": "close-up-original-chat-01",
@@ -76,7 +79,8 @@
         "sebastian",
         "alexander"
       ],
-      "order": 4
+      "order": 4,
+      "path": "assets/media/close-up-original-chat-01.jpg"
     },
     {
       "id": "close-up-cheddar-01",
@@ -93,7 +97,8 @@
         "lydia",
         "libby"
       ],
-      "order": 5
+      "order": 5,
+      "path": "assets/media/close-up-cheddar-01.jpg"
     },
     {
       "id": "close-up-gartic-01",
@@ -110,7 +115,8 @@
         "marco",
         "lydia"
       ],
-      "order": 6
+      "order": 6,
+      "path": "assets/media/close-up-gartic-01.jpg"
     },
     {
       "id": "cheddar-chaos-01",
@@ -126,7 +132,8 @@
         "lucas",
         "libby"
       ],
-      "order": 7
+      "order": 7,
+      "path": "assets/media/cheddar-chaos-01.jpg"
     },
     {
       "id": "close-up-statue-liberty-01",
@@ -142,7 +149,8 @@
         "marco",
         "jeidenne"
       ],
-      "order": 8
+      "order": 8,
+      "path": "assets/media/close-up-statue-liberty-01.jpg"
     },
     {
       "id": "close-up-ferry-01",
@@ -158,7 +166,8 @@
         "marco",
         "jeidenne"
       ],
-      "order": 9
+      "order": 9,
+      "path": "assets/media/close-up-ferry-01.jpg"
     },
     {
       "id": "close-up-tower-01",
@@ -179,7 +188,8 @@
         "marco",
         "lorena"
       ],
-      "order": 10
+      "order": 10,
+      "path": "assets/media/close-up-tower-01.jpg"
     },
     {
       "id": "close-up-tower-02",
@@ -200,7 +210,8 @@
         "marco",
         "lorena"
       ],
-      "order": 11
+      "order": 11,
+      "path": "assets/media/close-up-tower-02.jpg"
     },
     {
       "id": "close-up-salute-01",
@@ -218,7 +229,8 @@
         "jeidenne",
         "alexander"
       ],
-      "order": 12
+      "order": 12,
+      "path": "assets/media/close-up-salute-01.jpg"
     },
     {
       "id": "close-up-edit-01",
@@ -233,7 +245,8 @@
         "jeidenne",
         "marco"
       ],
-      "order": 13
+      "order": 13,
+      "path": "assets/media/close-up-edit-01.jpg"
     },
     {
       "id": "june-five-hangout-01",
@@ -253,7 +266,8 @@
         "marco",
         "lorena"
       ],
-      "order": 14
+      "order": 14,
+      "path": "assets/media/june-five-hangout-01.jpg"
     },
     {
       "id": "crushing-playlist-01",
@@ -269,7 +283,8 @@
         "lorena",
         "marco"
       ],
-      "order": 15
+      "order": 15,
+      "path": "assets/media/crushing-playlist-01.jpg"
     },
     {
       "id": "model-un-saint-johns-01",
@@ -278,7 +293,8 @@
       "eventId": "saint-johns-model-un-2024",
       "era": "8th Grade – Fall 2024",
       "people": [],
-      "order": 16
+      "order": 16,
+      "path": "assets/media/model-un-saint-johns-01.jpg"
     },
     {
       "id": "party-bus-01",
@@ -287,7 +303,8 @@
       "eventId": "party-bus-adventure",
       "era": "8th Grade – Fall 2024",
       "people": [],
-      "order": 17
+      "order": 17,
+      "path": "assets/media/party-bus-01.jpg"
     },
     {
       "id": "party-bus-ferris-wheel-01",
@@ -296,7 +313,8 @@
       "eventId": "party-bus-adventure",
       "era": "8th Grade – Fall 2024",
       "people": [],
-      "order": 18
+      "order": 18,
+      "path": "assets/media/party-bus-ferris-wheel-01.jpg"
     },
     {
       "id": "model-un-baldwin-01",
@@ -305,7 +323,8 @@
       "eventId": "baldwin-model-un-2025",
       "era": "8th Grade – Winter 2025",
       "people": [],
-      "order": 19
+      "order": 19,
+      "path": "assets/media/model-un-baldwin-01.jpg"
     },
     {
       "id": "spirit-week-2025-01",
@@ -326,7 +345,8 @@
         "kateryna",
         "marco"
       ],
-      "order": 20
+      "order": 20,
+      "path": "assets/media/spirit-week-2025-01.jpg"
     },
     {
       "id": "promposal-ale-lorena-01",
@@ -342,7 +362,8 @@
         "shane",
         "kateryna"
       ],
-      "order": 21
+      "order": 21,
+      "path": "assets/media/promposal-ale-lorena-01.jpg"
     },
     {
       "id": "promposal-lucas-lydia-01",
@@ -358,7 +379,8 @@
         "shane",
         "kateryna"
       ],
-      "order": 22
+      "order": 22,
+      "path": "assets/media/promposal-lucas-lydia-01.jpg"
     },
     {
       "id": "promposal-shane-kateryna-01",
@@ -374,7 +396,8 @@
         "shane",
         "kateryna"
       ],
-      "order": 23
+      "order": 23,
+      "path": "assets/media/promposal-shane-kateryna-01.jpg"
     },
     {
       "id": "prom-2025-01",
@@ -397,7 +420,8 @@
         "jeidenne",
         "marco"
       ],
-      "order": 24
+      "order": 24,
+      "path": "assets/media/prom-2025-01.jpg"
     },
     {
       "id": "prom-2025-02",
@@ -420,7 +444,8 @@
         "jeidenne",
         "marco"
       ],
-      "order": 25
+      "order": 25,
+      "path": "assets/media/prom-2025-02.jpg"
     },
     {
       "id": "graduation-2025-01",
@@ -443,7 +468,8 @@
         "todd",
         "aedan"
       ],
-      "order": 26
+      "order": 26,
+      "path": "assets/media/graduation-2025-01.jpg"
     },
     {
       "id": "gage-sleepover-01",
@@ -461,7 +487,8 @@
         "marco",
         "todd"
       ],
-      "order": 27
+      "order": 27,
+      "path": "assets/media/gage-sleepover-01.jpg"
     },
     {
       "id": "trampoline-park-01",
@@ -475,7 +502,8 @@
         "kateryna",
         "lorena"
       ],
-      "order": 28
+      "order": 28,
+      "path": "assets/media/trampoline-park-01.jpg"
     },
     {
       "id": "gage-return-01",
@@ -491,7 +519,8 @@
         "aedan",
         "nicholas"
       ],
-      "order": 29
+      "order": 29,
+      "path": "assets/media/gage-return-01.jpg"
     },
     {
       "id": "brava-party-01",
@@ -513,7 +542,8 @@
         "marco",
         "nicholas"
       ],
-      "order": 30
+      "order": 30,
+      "path": "assets/media/brava-party-01.jpg"
     },
     {
       "id": "spirit-week-practice-2026-01",
@@ -528,7 +558,8 @@
         "kateryna",
         "lorena"
       ],
-      "order": 31
+      "order": 31,
+      "path": "assets/media/spirit-week-practice-2026-01.jpg"
     },
     {
       "id": "chilis-2026-01",
@@ -546,7 +577,8 @@
         "jeidenne",
         "libby"
       ],
-      "order": 32
+      "order": 32,
+      "path": "assets/media/chilis-2026-01.jpg"
     },
     {
       "id": "model-un-winners-01",
@@ -558,7 +590,8 @@
         "kateryna",
         "lorena"
       ],
-      "order": 33
+      "order": 33,
+      "path": "assets/media/model-un-winners-01.jpg"
     },
     {
       "id": "spirit-week-dance-01",
@@ -578,7 +611,8 @@
         "serafina",
         "sebastian"
       ],
-      "order": 34
+      "order": 34,
+      "path": "assets/media/spirit-week-dance-01.jpg"
     },
     {
       "id": "battle-bands-01",
@@ -594,7 +628,8 @@
         "josie",
         "leah"
       ],
-      "order": 35
+      "order": 35,
+      "path": "assets/media/battle-bands-01.jpg"
     },
     {
       "id": "josie-birthday-01",
@@ -620,7 +655,8 @@
         "jeidenne",
         "dash"
       ],
-      "order": 36
+      "order": 36,
+      "path": "assets/media/josie-birthday-01.jpg"
     },
     {
       "id": "josie-birthday-02",
@@ -646,7 +682,8 @@
         "jeidenne",
         "dash"
       ],
-      "order": 37
+      "order": 37,
+      "path": "assets/media/josie-birthday-02.jpg"
     },
     {
       "id": "mary-poppins-01",
@@ -660,7 +697,8 @@
         "lorena",
         "lydia"
       ],
-      "order": 38
+      "order": 38,
+      "path": "assets/media/mary-poppins-01.jpg"
     },
     {
       "id": "project-hail-mary-01",
@@ -683,7 +721,8 @@
         "kamilo",
         "leah"
       ],
-      "order": 39
+      "order": 39,
+      "path": "assets/media/project-hail-mary-01.jpg"
     },
     {
       "id": "tyler-concert-01",
@@ -699,7 +738,8 @@
         "marife",
         "serafina"
       ],
-      "order": 40
+      "order": 40,
+      "path": "assets/media/tyler-concert-01.jpg"
     },
     {
       "id": "model-un-school-2026-01",
@@ -708,7 +748,8 @@
       "eventId": "school-model-un-2026",
       "era": "9th Grade – Spring 2026",
       "people": [],
-      "order": 41
+      "order": 41,
+      "path": "assets/media/model-un-school-2026-01.jpg"
     },
     {
       "id": "physics-wendys-01",
@@ -719,7 +760,8 @@
       "people": [
         "dash"
       ],
-      "order": 42
+      "order": 42,
+      "path": "assets/media/physics-wendys-01.jpg"
     },
     {
       "id": "flowers",
@@ -728,7 +770,8 @@
       "caption": "Flowers that Alejandro gave to Lorena",
       "eventId": "prom",
       "people": [],
-      "order": 43
+      "order": 43,
+      "path": "assets/media/flowers.jpg"
     },
     {
       "id": "katerynapromposal",
@@ -737,7 +780,8 @@
       "caption": "Shane's Promposal",
       "eventId": "promposals",
       "people": [],
-      "order": 44
+      "order": 44,
+      "path": "assets/media/katerynapromposal.mp4"
     },
     {
       "id": "lucas-leah",
@@ -746,7 +790,8 @@
       "caption": "Lucas and Leah at the arcades",
       "eventId": "lucas-leah",
       "people": [],
-      "order": 45
+      "order": 45,
+      "path": "assets/media/lucas&leah.jpg"
     },
     {
       "id": "lydiapromposal",
@@ -755,7 +800,8 @@
       "caption": "Lucas's Promposal",
       "eventId": "promposals",
       "people": [],
-      "order": 46
+      "order": 46,
+      "path": "assets/media/lydiapromposal.mp4"
     },
     {
       "id": "toddinferria",
@@ -764,7 +810,8 @@
       "caption": "Todd in Feria",
       "eventId": "todd-aedan-integrate",
       "people": [],
-      "order": 47
+      "order": 47,
+      "path": "assets/media/toddinferria.mp4"
     },
     {
       "id": "wemadeit",
@@ -773,7 +820,8 @@
       "caption": "Lucas's End of Speech",
       "eventId": "graduation",
       "people": [],
-      "order": 48
+      "order": 48,
+      "path": "assets/media/wemadeit.mp4"
     },
     {
       "id": "breakupmoment",
@@ -782,7 +830,8 @@
       "caption": "A clip of the the boys' reaction towards Lucas's breakup",
       "eventId": "breakup",
       "people": [],
-      "order": 49
+      "order": 49,
+      "path": "assets/media/breakupmoment.mp4"
     },
     {
       "id": "chedder-next-to-dunkin",
@@ -791,7 +840,8 @@
       "caption": "Cheddar next to Dunkin",
       "eventId": "cheddar-becomes-mascot",
       "people": [],
-      "order": 50
+      "order": 50,
+      "path": "assets/media/Chedder next to Dunkin.jpg"
     },
     {
       "id": "chickfila",
@@ -800,7 +850,8 @@
       "caption": "Group's reaction towards the image",
       "eventId": "chickfila",
       "people": [],
-      "order": 51
+      "order": 51,
+      "path": "assets/media/chickfila.png"
     },
     {
       "id": "dominiqueallysamachi",
@@ -809,7 +860,8 @@
       "caption": "Dominique, Allysa, and Machi's original appearance",
       "eventId": "original-gc-created",
       "people": [],
-      "order": 52
+      "order": 52,
+      "path": "assets/media/dominiqueallysamachi.png"
     },
     {
       "id": "everyoneatgraduation",
@@ -818,7 +870,8 @@
       "caption": "Everyone at Graduation",
       "eventId": "graduation",
       "people": [],
-      "order": 53
+      "order": 53,
+      "path": "assets/media/everyoneatgraduation.jpg"
     },
     {
       "id": "francepicture",
@@ -827,7 +880,8 @@
       "caption": "Lucas in France with his mother",
       "eventId": "france-departure",
       "people": [],
-      "order": 54
+      "order": 54,
+      "path": "assets/media/francepicture.jpg"
     },
     {
       "id": "gage-ec",
@@ -836,7 +890,8 @@
       "caption": "Gage and his (now ex) girlfriend",
       "eventId": "gage-beach",
       "people": [],
-      "order": 55
+      "order": 55,
+      "path": "assets/media/gage&ec.jpg"
     },
     {
       "id": "libbyassistance",
@@ -845,7 +900,8 @@
       "caption": "Libby and Alejandro talking about Zach",
       "eventId": "libby-zach",
       "people": [],
-      "order": 56
+      "order": 56,
+      "path": "assets/media/libbyassistance.png"
     },
     {
       "id": "libbyintroduction",
@@ -854,7 +910,8 @@
       "caption": "Libby is added to the GC",
       "eventId": "libby-added",
       "people": [],
-      "order": 57
+      "order": 57,
+      "path": "assets/media/libbyintroduction.png"
     },
     {
       "id": "lorenapromposal",
@@ -863,7 +920,8 @@
       "caption": "Alejandro's Promposal",
       "eventId": "promposals",
       "people": [],
-      "order": 58
+      "order": 58,
+      "path": "assets/media/lorenapromposal.mp4"
     },
     {
       "id": "lucas-lydia",
@@ -872,7 +930,8 @@
       "caption": "Lucas and Lydia at Prom",
       "eventId": "prom",
       "people": [],
-      "order": 59
+      "order": 59,
+      "path": "assets/media/lucas&lydia.jpg"
     },
     {
       "id": "mozarellastickgc",
@@ -881,7 +940,8 @@
       "caption": "Original Mozarella Sticks GC",
       "eventId": "original-gc-created",
       "people": [],
-      "order": 60
+      "order": 60,
+      "path": "assets/media/MozarellaStickGC.png"
     },
     {
       "id": "picturesexample",
@@ -890,7 +950,8 @@
       "caption": "Mega Chicks on a tower in Close-Up",
       "eventId": "closeup-observation-photos",
       "people": [],
-      "order": 61
+      "order": 61,
+      "path": "assets/media/picturesexample.jpg"
     },
     {
       "id": "postpracticeexample",
@@ -899,7 +960,8 @@
       "caption": "Post-Practice hangout example",
       "eventId": "spirit-week-2025",
       "people": [],
-      "order": 62
+      "order": 62,
+      "path": "assets/media/postpracticeexample.jpg"
     },
     {
       "id": "spirit-week-dance-video-enhanced",
@@ -908,7 +970,8 @@
       "caption": "Spirit Week Dance (2025)",
       "eventId": "spirit-week-2025",
       "people": [],
-      "order": 63
+      "order": 63,
+      "path": "assets/media/Spirit Week Dance Video (Enhanced).mp4"
     },
     {
       "id": "watchme",
@@ -917,7 +980,8 @@
       "caption": "\"Watch Me\" and the crowd shits themselves",
       "eventId": "original-gc-created",
       "people": [],
-      "order": 65
+      "order": 64,
+      "path": "assets/media/Watchme.png"
     },
     {
       "id": "theoggang",
@@ -926,7 +990,8 @@
       "caption": "Group photo taken at Washington D.C.",
       "eventId": "closeup-photo-archive",
       "people": [],
-      "order": 65
+      "order": 65,
+      "path": "assets/media/theoggang.jpg"
     },
     {
       "id": "zach-libby",
@@ -935,7 +1000,8 @@
       "caption": "Zach & Libby at Prom",
       "eventId": "prom",
       "people": [],
-      "order": 66
+      "order": 66,
+      "path": "assets/media/zach&libby.jpg"
     }
   ]
 }

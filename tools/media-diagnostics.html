@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Diagnostics · Mozarella Sticks Archive</title>
+  <link rel="stylesheet" href="../styles/shared.css">
+  <link rel="stylesheet" href="../styles/tools.css">
+</head>
+<body>
+  <main class="tool-shell shell">
+    <a class="text-link" href="../index.html">← Return to archive</a>
+    <header class="tool-header">
+      <p class="eyebrow">Local helper</p>
+      <h1>Media Diagnostics</h1>
+      <p>Checks every media.json record against the files hosted in <code>assets/media/</code>.</p>
+    </header>
+    <section class="tool-card">
+      <div class="tool-heading">
+        <div>
+          <p class="eyebrow">Results</p>
+          <h2 id="diag-summary">Checking files…</h2>
+        </div>
+        <button id="diag-rerun" class="button secondary" type="button">Run again</button>
+      </div>
+      <div id="diag-list" class="manager-list"></div>
+    </section>
+  </main>
+  <script src="../scripts/shared.js?v=1.2.2"></script>
+  <script src="media-diagnostics.js?v=1.2.2"></script>
+</body>
+</html>

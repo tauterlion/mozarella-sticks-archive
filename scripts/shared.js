@@ -133,56 +133,43 @@
     return MEDIA_DIRECTORIES.map(directory => MS.siteUrl(`${directory}${item.poster}`));
   };
 
-  const checkImage = src => new Promise(resolve => {
-    const image = new Image();
-    const timeout = window.setTimeout(() => resolve(false), 10000);
-    image.onload = () => { window.clearTimeout(timeout); resolve(true); };
-    image.onerror = () => { window.clearTimeout(timeout); resolve(false); };
-    image.src = src;
-  });
+  const checkUrl = async src => {
+    try {
+      const head = await fetch(src, {
+        method: 'HEAD',
+        cache: 'no-store'
+      });
+      if (head.ok) return true;
 
-  const checkVideo = src => new Promise(resolve => {
-    const video = document.createElement('video');
-    const timeout = window.setTimeout(() => {
-      video.removeAttribute('src');
-      video.load();
-      resolve(false);
-    }, 12000);
-    video.preload = 'metadata';
-    video.muted = true;
-    video.playsInline = true;
-    video.onloadedmetadata = () => {
-      window.clearTimeout(timeout);
-      video.removeAttribute('src');
-      video.load();
-      resolve(true);
-    };
-    video.onerror = () => {
-      window.clearTimeout(timeout);
-      video.removeAttribute('src');
-      video.load();
-      resolve(false);
-    };
-    video.src = src;
-  });
+      // Some static hosts may not support HEAD consistently.
+      const fallback = await fetch(src, {
+        method: 'GET',
+        headers: {'Range': 'bytes=0-0'},
+        cache: 'no-store'
+      });
+      return fallback.ok || fallback.status === 206;
+    } catch {
+      return false;
+    }
+  };
 
-  MS.mediaExists = (src, type) => type === 'video' ? checkVideo(src) : checkImage(src);
+  MS.mediaExists = src => checkUrl(src);
 
-  MS.firstExistingUrl = async (candidates, type) => {
+  MS.firstExistingUrl = async candidates => {
     for (const candidate of candidates) {
-      if (await MS.mediaExists(candidate, type)) return candidate;
+      if (await MS.mediaExists(candidate)) return candidate;
     }
     return '';
   };
 
   MS.resolveMedia = async item => {
     if (!['image', 'video'].includes(item.type)) return null;
-    const url = await MS.firstExistingUrl(MS.mediaUrlCandidates(item), item.type);
+    const url = await MS.firstExistingUrl(MS.mediaUrlCandidates(item));
     if (!url) return null;
 
     let posterUrl = '';
     if (item.type === 'video' && item.poster) {
-      posterUrl = await MS.firstExistingUrl(MS.posterUrlCandidates(item), 'image');
+      posterUrl = await MS.firstExistingUrl(MS.posterUrlCandidates(item));
     }
 
     return {...item, url, posterUrl};

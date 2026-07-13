@@ -1,4 +1,4 @@
-# Mozarella Sticks Archive — Version B.1.2
+# Mozarella Sticks Archive — Version B.1.2.2
 
 A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
 
@@ -120,3 +120,17 @@ For a no-code manifest helper, preview the site locally and open:
 ```text
 http://localhost:8000/tools/media-manager.html
 ```
+
+
+## Media Manager fix in 1.2.1
+
+The Media Manager now loads `timeline.json`, `people.json`, and `media.json` directly from the repository root. This prevents the empty-event-dropdown issue caused by relative paths or a cached older `shared.js` file.
+
+
+## Media detection fix in 1.2.2
+
+- Media existence is checked with lightweight HTTP requests instead of loading full video metadata.
+- Large or slow MP4 files no longer block the entire Gallery from rendering.
+- Every media record now has an explicit `assets/media/...` path.
+- Duplicate media ordering was normalized.
+- `tools/media-diagnostics.html` reports exactly which files are found or missing.
