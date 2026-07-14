@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Media Manager · Mozarella Sticks Archive</title>
   <link rel="stylesheet" href="../styles/shared.css">
-  <link rel="stylesheet" href="../styles/tools.css">
+  <link rel="stylesheet" href="../styles/tools.css?v=1.4.0">
 </head>
 <body data-page="tools">
   <main class="tool-shell shell">
@@ -13,14 +13,21 @@
     <header class="tool-header">
       <p class="eyebrow">Local helper</p>
       <h1>Media Manager</h1>
-      <p>Select files, link them to an event, and download an updated <code>media.json</code>. File IDs and media types are generated automatically from filenames.</p>
+      <p>Add new photos and videos, tag the people who appear, or safely update the caption, people, and related event for an existing media record. IDs and file metadata stay locked.</p>
     </header>
 
-    <section class="tool-card">
+    <section class="tool-card" aria-labelledby="add-media-heading">
+      <div class="tool-heading">
+        <div>
+          <p class="eyebrow">New media</p>
+          <h2 id="add-media-heading">Add files</h2>
+        </div>
+      </div>
+
       <div class="tool-grid">
         <div class="filter-field">
           <label for="manager-files">Files</label>
-          <input id="manager-files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/svg+xml,video/mp4,video/webm" multiple>
+          <input id="manager-files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/svg+xml,video/mp4,video/webm,video/ogg" multiple>
         </div>
         <div class="filter-field">
           <label for="manager-event">Related event</label>
@@ -29,6 +36,23 @@
         <div class="filter-field">
           <label for="manager-caption">Caption override <span class="optional">(optional)</span></label>
           <input id="manager-caption" type="text" placeholder="Leave blank to generate from filename">
+        </div>
+        <div class="filter-field">
+          <span class="field-label">People shown <span class="optional">(optional)</span></span>
+          <details class="people-picker" id="manager-people-picker">
+            <summary><span data-people-summary>No people selected</span></summary>
+            <div class="people-picker-panel">
+              <label class="people-search-label">
+                <span>Search people</span>
+                <input type="search" data-people-search placeholder="Type a name or alias">
+              </label>
+              <div class="people-picker-actions">
+                <button type="button" data-people-all>Select all</button>
+                <button type="button" data-people-clear>Clear</button>
+              </div>
+              <div class="people-options" data-people-options role="group" aria-label="People shown in new media"></div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -39,21 +63,83 @@
       <p class="tool-note">This helper updates the JSON file only. You must still upload the actual files into <code>assets/media/</code>.</p>
     </section>
 
-    <section class="tool-card">
+    <section class="tool-card" aria-labelledby="edit-media-heading">
       <div class="tool-heading">
         <div>
-          <p class="eyebrow">Draft records</p>
-          <h2 id="manager-count">0 newly added</h2>
+          <p class="eyebrow">Existing media</p>
+          <h2 id="edit-media-heading">Edit a record</h2>
+          <p id="manager-existing-count" class="tool-note">Loading records…</p>
         </div>
-        <button id="manager-clear" class="button ghost" type="button">Clear new records</button>
+      </div>
+
+      <div class="filter-field manager-record-select">
+        <label for="manager-existing">Choose an existing record</label>
+        <select id="manager-existing"><option value="">Choose media to edit</option></select>
+      </div>
+
+      <div id="manager-editor" class="manager-editor" hidden>
+        <div class="manager-locked-grid" aria-label="Locked media fields">
+          <div><span>ID</span><code id="manager-edit-id"></code></div>
+          <div><span>File</span><code id="manager-edit-file"></code></div>
+          <div><span>Type</span><code id="manager-edit-type"></code></div>
+          <div><span>Order</span><code id="manager-edit-order"></code></div>
+        </div>
+
+        <div class="tool-grid">
+          <div class="filter-field">
+            <label for="manager-edit-event">Related event</label>
+            <select id="manager-edit-event"><option value="">Choose an event</option></select>
+          </div>
+          <div class="filter-field">
+            <label for="manager-edit-caption">Caption</label>
+            <input id="manager-edit-caption" type="text">
+          </div>
+          <div class="filter-field">
+            <span class="field-label">People shown</span>
+            <details class="people-picker" id="manager-edit-people-picker">
+              <summary><span data-people-summary>No people selected</span></summary>
+              <div class="people-picker-panel">
+                <label class="people-search-label">
+                  <span>Search people</span>
+                  <input type="search" data-people-search placeholder="Type a name or alias">
+                </label>
+                <div class="people-picker-actions">
+                  <button type="button" data-people-all>Select all</button>
+                  <button type="button" data-people-clear>Clear</button>
+                </div>
+                <div class="people-options" data-people-options role="group" aria-label="People shown in existing media"></div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="tool-actions">
+          <button id="manager-save-edit" class="button primary" type="button">Save record changes</button>
+          <button id="manager-revert-edit" class="button ghost" type="button">Revert selected record</button>
+        </div>
+        <p id="manager-edit-status" class="tool-note" role="status" aria-live="polite"></p>
+        <p class="tool-note">Only the caption, people list, and related event can be changed. ID, filename, path, type, availability, and order remain untouched. The stored era follows the selected event when necessary.</p>
+      </div>
+    </section>
+
+    <section class="tool-card" aria-labelledby="pending-heading">
+      <div class="tool-heading">
+        <div>
+          <p class="eyebrow">Session changes</p>
+          <h2 id="pending-heading"><span id="manager-count">0</span> pending changes</h2>
+        </div>
+        <div class="tool-actions compact-actions">
+          <button id="manager-clear" class="button ghost" type="button">Clear new records</button>
+          <button id="manager-reset-edits" class="button ghost" type="button">Reset existing edits</button>
+        </div>
       </div>
       <div id="manager-list" class="manager-list">
-        <div class="empty-state">No new files have been added in this session.</div>
+        <div class="empty-state">No changes have been made in this session.</div>
       </div>
     </section>
   </main>
 
   <script src="../scripts/shared.js?v=1.3.2"></script>
-  <script src="media-manager.js?v=1.3.2"></script>
+  <script src="media-manager.js?v=1.4.0"></script>
 </body>
 </html>
