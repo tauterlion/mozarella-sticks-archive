@@ -159,6 +159,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       filterToggle.setAttribute('aria-expanded', open.toString());
     };
 
+    setFilterDrawer(false);
+
     filterToggle.addEventListener('click', () => {
       setFilterDrawer(filterToggle.getAttribute('aria-expanded') !== 'true');
     });
