@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     url.hash = encodeURIComponent(eventId);
     return `timeline.html${url.search}${url.hash}`;
   };
-  const eventUrl = eventId => {
+  const eventUrl = (eventId, updateReturnAnchor = true) => {
     const eventParams = new URLSearchParams({id: eventId});
-    eventParams.set('from', returnUrlForEvent(eventId));
+    eventParams.set('from', updateReturnAnchor ? returnUrlForEvent(eventId) : returnUrl);
     return `event.html?${eventParams}`;
   };
 
@@ -55,9 +55,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     const available = await MSArchive.availableMedia(data.media.filter(item => item.eventId === event.id));
     const orderedEvents = [...data.events]
       .sort((a, b) => String(a.sort || '').localeCompare(String(b.sort || '')));
-    const index = orderedEvents.findIndex(item => item.id === event.id);
-    const previous = orderedEvents[index - 1];
-    const next = orderedEvents[index + 1];
+    const returnState = new URL(returnUrl, location.href);
+    const returnParams = returnState.searchParams;
+    const allowedValues = (key, defaults) => {
+      const raw = returnParams.get(key);
+      if (raw === null) return new Set(defaults);
+      if (raw === 'none') return new Set();
+      const valid = new Set(raw.split(',').filter(value => defaults.includes(value)));
+      return valid.size ? valid : new Set(defaults);
+    };
+    const allowedImportance = allowedValues('importance', ['major', 'supporting', 'minor']);
+    const allowedCertainty = allowedValues('certainty', ['confirmed', 'approximate', 'range']);
+    const returnQuery = MSArchive.normalize(returnParams.get('q') || '');
+    const navigationMatches = candidate => {
+      if (returnQuery && !MSArchive.eventSearchText(candidate, data).includes(returnQuery)) return false;
+      if (returnParams.get('era') && candidate.era !== returnParams.get('era')) return false;
+      if (returnParams.get('person') && !candidate.people.includes(returnParams.get('person'))) return false;
+      if (returnParams.get('category') && !candidate.categories.includes(returnParams.get('category'))) return false;
+      if (!allowedImportance.has(candidate.importance)) return false;
+      if (!allowedCertainty.has(candidate.certainty)) return false;
+      return true;
+    };
+    const filteredNavigation = orderedEvents.filter(navigationMatches);
+    const navigationEvents = filteredNavigation.some(item => item.id === event.id)
+      ? filteredNavigation
+      : orderedEvents;
+    const index = navigationEvents.findIndex(item => item.id === event.id);
+    const previous = navigationEvents[index - 1];
+    const next = navigationEvents[index + 1];
 
     const related = orderedEvents
       .filter(candidate => candidate.id !== event.id)
@@ -101,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="eyebrow">Related history</p>
           <h2>Connected events</h2>
           <div class="related-grid">${related.map(item => `
-            <a class="related-card" href="${MSArchive.escapeHtml(eventUrl(item.id))}">
+            <a class="related-card" href="${MSArchive.escapeHtml(eventUrl(item.id, false))}">
               <span>${MSArchive.escapeHtml(item.dateLabel)}</span>
               <h3>${MSArchive.escapeHtml(item.title)}</h3>
             </a>`).join('')}</div>
