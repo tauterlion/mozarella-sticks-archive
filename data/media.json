@@ -1641,6 +1641,69 @@
       "eventId": "zach-moves",
       "people": [],
       "order": 137
+    },
+    {
+      "id": "ominous-statue-garden",
+      "file": "ominous-statue-garden.jpeg",
+      "type": "image",
+      "caption": "A very ominous statue in the botanical garden...",
+      "eventId": "caguas-botanical-garden",
+      "people": [],
+      "order": 138
+    },
+    {
+      "id": "group-walking-01",
+      "file": "group-walking-01.jpeg",
+      "type": "image",
+      "caption": "A group of people walking down a beautiful path",
+      "eventId": "caguas-botanical-garden",
+      "people": [],
+      "order": 139
+    },
+    {
+      "id": "group-walking-02",
+      "file": "group-walking-02.jpeg",
+      "type": "image",
+      "caption": "Another photo of a group of people walking down a nice path",
+      "eventId": "caguas-botanical-garden",
+      "people": [],
+      "order": 140
+    },
+    {
+      "id": "beach-party-everyone",
+      "file": "beach-party-everyone.jpg",
+      "type": "image",
+      "caption": "Nearly everyone who appeared in the party is in this photo",
+      "eventId": "welcome-back-beach-party",
+      "people": [],
+      "order": 141
+    },
+    {
+      "id": "foam-disaster",
+      "file": "foam-disaster.jpg",
+      "type": "image",
+      "caption": "A foam disaster.",
+      "eventId": "welcome-back-beach-party",
+      "people": [],
+      "order": 142
+    },
+    {
+      "id": "marshmellows-burning",
+      "file": "marshmellows-burning.jpg",
+      "type": "image",
+      "caption": "Marshmallows being burnt, later placed in smores.",
+      "eventId": "welcome-back-beach-party",
+      "people": [],
+      "order": 143
+    },
+    {
+      "id": "brava-poster",
+      "file": "brava-poster.jpeg",
+      "type": "image",
+      "caption": "The poster used to advertise the BRAVA party",
+      "eventId": "brava",
+      "people": [],
+      "order": 144
     }
   ]
 }
