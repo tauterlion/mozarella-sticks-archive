@@ -57,7 +57,8 @@
         "shane",
         "jeidenne",
         "marco",
-        "lorena"
+        "lorena",
+        "sebastian"
       ],
       "storylines": [
         "Formation of the MS"
@@ -88,7 +89,8 @@
         "shane",
         "jeidenne",
         "marco",
-        "lorena"
+        "lorena",
+        "sebastian"
       ],
       "storylines": [
         "Formation of the MS"
@@ -170,11 +172,16 @@
       "people": [
         "alejandro",
         "lucas",
+        "lydia",
+        "kateryna",
         "gage",
+        "libby",
+        "dash",
+        "shane",
         "jeidenne",
         "marco",
-        "lydia",
-        "libby"
+        "lorena",
+        "sebastian"
       ],
       "storylines": [
         "Formation of the MS",
@@ -231,12 +238,17 @@
       ],
       "people": [
         "alejandro",
-        "dash",
         "lucas",
+        "lydia",
+        "gage",
+        "libby",
+        "kateryna",
+        "lorena",
         "jeidenne",
-        "sebastian",
+        "dash",
+        "shane",
         "marco",
-        "lydia"
+        "sebastian"
       ],
       "storylines": [
         "Formation of the MS"
@@ -260,10 +272,7 @@
       "people": [
         "alejandro",
         "bash",
-        "cynthia",
-        "jeidenne",
-        "lucas",
-        "libby"
+        "cynthia"
       ],
       "storylines": [
         "Cheddar"
@@ -287,10 +296,13 @@
       "people": [
         "alejandro",
         "lydia",
-        "lucas",
+        "kateryna",
+        "lorena",
+        "libby",
         "gage",
         "marco",
-        "jeidenne"
+        "shane",
+        "valentin"
       ],
       "storylines": [
         "Formation of the MS"
@@ -322,7 +334,10 @@
         "shane",
         "jeidenne",
         "marco",
-        "lorena"
+        "lorena",
+        "alexander",
+        "bash",
+        "valentin"
       ],
       "storylines": [
         "Formation of the MS"
@@ -344,11 +359,7 @@
         "Arrival or Departure"
       ],
       "people": [
-        "dash",
-        "alejandro",
-        "jeidenne",
-        "alexander",
-        "marco"
+        "dash"
       ],
       "storylines": [
         "Formation of the MS"
@@ -483,10 +494,19 @@
       ],
       "people": [
         "alejandro",
-        "dash",
         "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "dash",
+        "shane",
         "jeidenne",
-        "marco"
+        "marco",
+        "lorena",
+        "alexander",
+        "bash",
+        "valentin"
       ],
       "storylines": [
         "Formation of the MS"
@@ -539,8 +559,9 @@
         "Digital History"
       ],
       "people": [
-        "jeidenne",
-        "dominique"
+        "allysa",
+        "dominique",
+        "sebastian"
       ],
       "storylines": [
         "Formation of the MS"
@@ -589,7 +610,8 @@
         "alejandro",
         "kateryna",
         "lorena",
-        "marco"
+        "marco",
+        "libby"
       ],
       "storylines": [
         "Lucas and Lydia"
@@ -683,10 +705,15 @@
       ],
       "people": [
         "alejandro",
-        "kateryna",
         "lucas",
         "lydia",
-        "libby"
+        "kateryna",
+        "gage",
+        "libby",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena"
       ],
       "storylines": [
         "Formation of the MS",
@@ -777,7 +804,15 @@
         "School Event",
         "Competition"
       ],
-      "people": [],
+      "people": [
+        "kateryna",
+        "lorena",
+        "leah",
+        "shane",
+        "libby",
+        "lydia",
+        "alejandro"
+      ],
       "storylines": [
         "Model UN"
       ]
@@ -822,7 +857,28 @@
         "Party",
         "Hangout"
       ],
-      "people": [],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena",
+        "bash",
+        "dominique",
+        "allysa",
+        "valentin",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "jaime",
+        "dash"
+      ],
       "storylines": []
     },
     {
@@ -890,8 +946,7 @@
       ],
       "people": [
         "lucas",
-        "lydia",
-        "alejandro"
+        "lydia"
       ],
       "storylines": [
         "Lucas and Lydia"
@@ -912,7 +967,18 @@
         "School Event",
         "Competition"
       ],
-      "people": [],
+      "people": [
+        "kateryna",
+        "lorena",
+        "leah",
+        "shane",
+        "libby",
+        "lydia",
+        "alejandro",
+        "dash",
+        "sebastian",
+        "maria"
+      ],
       "storylines": [
         "Model UN"
       ]
@@ -974,13 +1040,13 @@
     },
     {
       "id": "kamilo-bowling-birthday",
-      "date": "2025-05-01",
-      "dateLabel": "May 1, 2025",
-      "sort": "2025-05-01T17:00:00",
+      "date": "2026-05-01",
+      "dateLabel": "May 1, 2026",
+      "sort": "2026-05-01T17:00:00",
       "title": "Kamilo’s Bowling Birthday Party",
       "summary": "Most of the Mozarella Sticks gather at a bowling alley to celebrate Kamilo’s jokingly proclaimed 47th birthday.",
       "details": "Kamilo’s birthday party brings together a large portion of the group at a bowling alley filled with music and food. Everyone spends the event bowling, celebrating, and enjoying the gathering, with the occasion remembered as Kamilo’s 47th birthday.",
-      "era": "8th Grade – Spring 2025",
+      "era": "9th Grade – Spring 2026",
       "certainty": "confirmed",
       "importance": "supporting",
       "categories": [
@@ -1078,18 +1144,33 @@
       ],
       "people": [
         "alejandro",
-        "lorena",
         "lucas",
         "lydia",
-        "libby",
-        "zach",
-        "gage",
         "kateryna",
+        "gage",
+        "libby",
         "shane",
-        "todd",
-        "aedan",
         "jeidenne",
-        "marco"
+        "marco",
+        "lorena",
+        "bash",
+        "dominique",
+        "allysa",
+        "valentin",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "jaime",
+        "dash",
+        "bianca",
+        "isabel",
+        "sienna",
+        "lorena-rodriguez",
+        "nicholas",
+        "zach",
+        "sebastian",
+        "maria"
       ],
       "storylines": [
         "Prom 2025"
@@ -1111,7 +1192,27 @@
         "Travel",
         "Hangout"
       ],
-      "people": [],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "jaime",
+        "dash",
+        "nicholas",
+        "sebastian",
+        "maria"
+      ],
       "storylines": []
     },
     {
@@ -1130,19 +1231,32 @@
         "Arrival or Departure"
       ],
       "people": [
-        "lucas",
-        "kateryna",
-        "lorena",
-        "gage",
         "alejandro",
+        "lucas",
         "lydia",
+        "kateryna",
+        "gage",
         "libby",
-        "dash",
         "shane",
         "jeidenne",
         "marco",
+        "lorena",
+        "bash",
+        "dominique",
+        "allysa",
+        "valentin",
+        "aedan",
         "todd",
-        "aedan"
+        "josie",
+        "serafina",
+        "jaime",
+        "dash",
+        "bianca",
+        "isabel",
+        "lorena-rodriguez",
+        "nicholas",
+        "sebastian",
+        "maria"
       ],
       "storylines": [
         "Gage’s departure"
@@ -1165,8 +1279,7 @@
       ],
       "people": [
         "lucas",
-        "lydia",
-        "alejandro"
+        "lydia"
       ],
       "storylines": [
         "Lucas and Lydia"
@@ -1429,13 +1542,7 @@
         "Digital History"
       ],
       "people": [
-        "samantha",
-        "aedan",
-        "gage",
-        "alejandro",
-        "lucas",
-        "kateryna",
-        "lorena"
+        "samantha"
       ],
       "storylines": [
         "Ninth-grade expansion"
@@ -1485,10 +1592,14 @@
       "people": [
         "gage",
         "samantha",
+        "dash",
         "alejandro",
         "lucas",
         "aedan",
-        "nicholas"
+        "libby",
+        "kateryna",
+        "lydia",
+        "lorena"
       ],
       "storylines": [
         "Ninth-grade expansion",
@@ -1516,7 +1627,9 @@
         "kateryna",
         "libby",
         "samantha",
-        "aedan"
+        "aedan",
+        "josie",
+        "marife"
       ],
       "storylines": [
         "Ninth-grade expansion",
@@ -1530,7 +1643,7 @@
       "sort": "2025-10-19T16:00:00",
       "title": "Welcome-Back Beach Party",
       "summary": "The grade gathers at the beach for a welcome-back party with music, water activities, and a sunset picnic.",
-      "details": "The party includes a DJ, a Spuma foam party, surfing classes, and sunset picnics with s’mores. It becomes a broad grade-wide memory early in ninth grade.",
+      "details": "The party includes a DJ, a Spuma foam party, surfing classes, and sunset picnics with s’mores. It becomes a broad grade-wide memory early in ninth grade. Alongside that, Gage came back.",
       "era": "9th Grade – Fall 2025",
       "certainty": "confirmed",
       "importance": "supporting",
@@ -1539,7 +1652,34 @@
         "Party",
         "Hangout"
       ],
-      "people": [],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "gage",
+        "libby",
+        "shane",
+        "jeidenne",
+        "marco",
+        "lorena",
+        "bash",
+        "dominique",
+        "allysa",
+        "valentin",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "jaime",
+        "dash",
+        "bianca",
+        "isabel",
+        "lorena-rodriguez",
+        "nicholas",
+        "sebastian",
+        "maria"
+      ],
       "storylines": []
     },
     {
@@ -1575,7 +1715,7 @@
       "summary": "Alejandro and Maria discuss a possible relationship but agree not to begin one.",
       "details": "During the discussion, Alejandro says Maria is “not my type at all,” leaving a brief negative mark on her. Their feelings later change without this becoming a major dramatic reversal.",
       "era": "9th Grade – Fall 2025",
-      "certainty": "approximate",
+      "certainty": "confirmed",
       "importance": "supporting",
       "categories": [
         "Relationship"
@@ -1661,18 +1801,30 @@
         "Hangout"
       ],
       "people": [
-        "lucas",
-        "kateryna",
-        "lorena",
         "alejandro",
-        "maria",
-        "samantha",
-        "aedan",
+        "lucas",
+        "lydia",
+        "kateryna",
         "libby",
-        "dash",
+        "shane",
         "jeidenne",
         "marco",
-        "nicholas"
+        "lorena",
+        "bash",
+        "dominique",
+        "allysa",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "jaime",
+        "dash",
+        "bianca",
+        "isabel",
+        "lorena-rodriguez",
+        "nicholas",
+        "sebastian",
+        "maria"
       ],
       "storylines": [
         "Ninth-grade expansion"
@@ -1725,8 +1877,7 @@
         "alejandro",
         "maria",
         "lucas",
-        "libby",
-        "jeidenne"
+        "libby"
       ],
       "storylines": [
         "Alejandro and Maria"
@@ -1781,10 +1932,25 @@
       ],
       "people": [
         "alejandro",
-        "sebastian",
         "lucas",
+        "lydia",
         "kateryna",
-        "lorena"
+        "libby",
+        "jeidenne",
+        "marco",
+        "lorena",
+        "valentin",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "dash",
+        "bianca",
+        "isabel",
+        "lorena-rodriguez",
+        "nicholas",
+        "sebastian",
+        "maria"
       ],
       "storylines": [
         "Spirit Week 2026"
@@ -1885,7 +2051,28 @@
       "categories": [
         "School Event"
       ],
-      "people": [],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lydia",
+        "kateryna",
+        "libby",
+        "jeidenne",
+        "marco",
+        "lorena",
+        "valentin",
+        "aedan",
+        "todd",
+        "josie",
+        "serafina",
+        "dash",
+        "bianca",
+        "isabel",
+        "lorena-rodriguez",
+        "nicholas",
+        "sebastian",
+        "maria"
+      ],
       "storylines": []
     },
     {
@@ -1906,12 +2093,16 @@
       "people": [
         "alejandro",
         "maria",
-        "aedan",
         "samantha",
         "lucas",
-        "nicholas",
         "jeidenne",
-        "libby"
+        "libby",
+        "todd",
+        "marco",
+        "serafina",
+        "nicholas",
+        "alexander",
+        "dash"
       ],
       "storylines": [
         "Ninth-grade expansion"
@@ -1934,9 +2125,7 @@
       ],
       "people": [
         "alejandro",
-        "aedan",
-        "samantha",
-        "nicholas"
+        "aedan"
       ],
       "storylines": [
         "Alejandro and Aedan beef"
@@ -1990,11 +2179,7 @@
       ],
       "people": [
         "alejandro",
-        "maria",
-        "serafina",
-        "dash",
-        "lucas",
-        "libby"
+        "maria"
       ],
       "storylines": [
         "Alejandro and Maria"
@@ -2135,14 +2320,24 @@
       "people": [
         "alejandro",
         "lucas",
+        "lydia",
         "kateryna",
+        "libby",
+        "jeidenne",
+        "marco",
         "lorena",
-        "samantha",
+        "valentin",
         "aedan",
-        "nicholas",
+        "todd",
         "josie",
         "serafina",
-        "sebastian"
+        "dash",
+        "bianca",
+        "isabel",
+        "lorena-rodriguez",
+        "nicholas",
+        "sebastian",
+        "maria"
       ],
       "storylines": [
         "Spirit Week 2026"
@@ -2214,7 +2409,6 @@
       ],
       "people": [
         "lucas",
-        "jeidenne",
         "todd"
       ],
       "storylines": []
@@ -2286,7 +2480,7 @@
       "dateLabel": "March 7, 2026",
       "sort": "2026-03-07T18:00:00",
       "title": "Lucas and Samantha Reveal Their Relationship",
-      "summary": "Lucas and Samantha publicly reveal their relationship during Josie’s themed birthday party.",
+      "summary": "Lucas and Samantha publicly reveal their relationship same day as Josie's birthday party.",
       "details": "They had been dating privately since Valentine’s Day. The reveal ends the relationship’s highly limited secrecy.",
       "era": "9th Grade – Spring 2026",
       "certainty": "confirmed",
@@ -2297,11 +2491,7 @@
       ],
       "people": [
         "lucas",
-        "samantha",
-        "josie",
-        "alejandro",
-        "maria",
-        "aedan"
+        "samantha"
       ],
       "storylines": [
         "Lucas and Samantha"
@@ -2431,7 +2621,8 @@
         "kateryna",
         "serafina",
         "lorena",
-        "lydia"
+        "lydia",
+        "sebastian"
       ],
       "storylines": [
         "School performances"
@@ -2534,7 +2725,16 @@
         "School Event",
         "Competition"
       ],
-      "people": [],
+      "people": [
+        "kateryna",
+        "lorena",
+        "leah",
+        "libby",
+        "lydia",
+        "dash",
+        "sebastian",
+        "maria"
+      ],
       "storylines": [
         "Model UN"
       ]
@@ -2623,7 +2823,15 @@
         "Hangout"
       ],
       "people": [
-        "dash"
+        "dash",
+        "alejandro",
+        "aedan",
+        "lucas",
+        "kateryna",
+        "lorena",
+        "maria",
+        "marife",
+        "serafina"
       ],
       "storylines": []
     },
