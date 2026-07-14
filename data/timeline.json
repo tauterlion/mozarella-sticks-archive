@@ -950,6 +950,29 @@
       ]
     },
     {
+      "id": "track-pantsing-prank",
+      "date": "2025-04-25",
+      "dateLabel": "Late April 2025",
+      "sort": "2025-04-25T11:00:00",
+      "title": "The Track Pantsing Prank",
+      "summary": "Jeidenne and Bash pull a sudden prank on Alejandro during P.E., creating an awkward but funny shared memory.",
+      "details": "While the group is walking around the track in partially separated clusters, Jeidenne and Bash call Lorena’s name so several girls turn around, then pants Alejandro in front of them. Alejandro immediately pulls his pants back up as the group reacts with surprise and laughter. The incident is remembered as chaotic humor rather than a lasting conflict.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "approximate",
+      "importance": "minor",
+      "categories": [
+        "School Event",
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro",
+        "jeidenne",
+        "bash",
+        "lorena"
+      ],
+      "storylines": []
+    },
+    {
       "id": "promposals",
       "date": "2025-05-05",
       "dateLabel": "Before May 17, 2025",
@@ -1034,6 +1057,25 @@
       "storylines": [
         "Prom 2025"
       ]
+    },
+    {
+      "id": "caguas-botanical-garden",
+      "date": "2025-05-19",
+      "dateLabel": "May 19, 2025",
+      "sort": "2025-05-19T09:00:00",
+      "title": "Caguas Botanical Garden Field Trip",
+      "summary": "The grade visits a botanical garden in Caguas to explore nature and learn about local cultural history.",
+      "details": "Students walk through the grounds, observe plants and fish in the ponds, and learn from the garden’s cultural and historical exhibits. The trip becomes a relaxed shared school memory between prom and graduation.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Travel",
+        "Hangout"
+      ],
+      "people": [],
+      "storylines": []
     },
     {
       "id": "graduation",
@@ -1443,6 +1485,25 @@
         "Ninth-grade expansion",
         "Alejandro and Maria"
       ]
+    },
+    {
+      "id": "welcome-back-beach-party",
+      "date": "2025-10-19",
+      "dateLabel": "October 19, 2025",
+      "sort": "2025-10-19T16:00:00",
+      "title": "Welcome-Back Beach Party",
+      "summary": "The grade gathers at the beach for a welcome-back party with music, water activities, and a sunset picnic.",
+      "details": "The party includes a DJ, a Spuma foam party, surfing classes, and sunset picnics with s’mores. It becomes a broad grade-wide memory early in ninth grade.",
+      "era": "9th Grade – Fall 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Party",
+        "Hangout"
+      ],
+      "people": [],
+      "storylines": []
     },
     {
       "id": "shower-leak",

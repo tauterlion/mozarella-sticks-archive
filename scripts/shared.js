@@ -61,7 +61,7 @@
   MS.mediaId = item => item?.id || MS.slug(MS.fileStem(item?.file || 'media'));
 
   MS.loadJson = async key => {
-    const response = await fetch(DATA_PATHS[key]);
+    const response = await fetch(DATA_PATHS[key], {cache: 'no-store'});
     if (!response.ok) throw new Error(`Could not load ${DATA_PATHS[key]} (${response.status})`);
     return response.json();
   };

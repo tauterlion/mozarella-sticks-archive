@@ -1,4 +1,4 @@
-# Mozarella Sticks Archive — Version B.1.2.2
+# Mozarella Sticks Archive — Version B.1.3.0
 
 A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
 
@@ -8,7 +8,7 @@ A GitHub Pages–ready static archive with a timeline, gallery, and reusable eve
 - `timeline.html` — searchable and filterable timeline
 - `gallery.html` — event-linked image and video gallery that only shows files that exist
 - `event.html?id=EVENT_ID` — reusable full event page
-- `data/timeline.json` — 98 cleaned timeline events
+- `data/timeline.json` — 101 cleaned timeline events
 - `data/people.json` — canonical names, aliases, and Member/Connected Person tags
 - `data/media.json` — approved image/video records; IDs and media types may be omitted and will be generated from filenames
 
@@ -134,3 +134,10 @@ The Media Manager now loads `timeline.json`, `people.json`, and `media.json` dir
 - Every media record now has an explicit `assets/media/...` path.
 - Duplicate media ordering was normalized.
 - `tools/media-diagnostics.html` reports exactly which files are found or missing.
+
+
+## Timeline additions in 1.3.0
+
+- Late April 2025 — The Track Pantsing Prank
+- May 19, 2025 — Caguas Botanical Garden Field Trip
+- October 19, 2025 — Welcome-Back Beach Party
