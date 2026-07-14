@@ -1,83 +1,164 @@
-# Image Filename Checklist
+# Media Filename and Placement Guide
 
-Place approved files in `assets/medias/`. A filename only appears on the website when the matching media file exists.
+`data/media.json` is the source of truth for gallery media. This guide explains how filenames, paths, availability flags, videos, and poster images should be handled.
 
-## Close-Up
+The old checklist in this file was not a complete inventory of the current 144-record media manifest. Do not use this document to decide whether a media record exists; check `data/media.json` instead.
 
-- `close-up-departure-01.jpg` — Close-Up Trip Begins
-- `close-up-dining-hall-01.jpg` — Dining-Hall Unification
-- `close-up-breakfast-01.jpg` — Valentin Questions Kateryna About Gage
-- `close-up-original-chat-01.jpg` — Original Mozarella Sticks Group Chat Created
-- `close-up-cheddar-01.jpg` — Cheddar Becomes the Group’s Shared Mascot
-- `close-up-gartic-01.jpg` — Morning Gartic Phone Sessions
-- `cheddar-chaos-01.jpg` — Cheddar Is Restricted to the Hotel Room
-- `close-up-statue-liberty-01.jpg` — Statue of Liberty Group Photos
-- `close-up-ferry-01.jpg` — Statue of Liberty Group Photos
-- `close-up-tower-01.jpg` — Observation-Tower Photos After Sunset
-- `close-up-tower-02.jpg` — Observation-Tower Photos After Sunset
-- `close-up-salute-01.jpg` — The Return-Flight Salute
-- `close-up-edit-01.jpg` — The Group Archives Close-Up
-## Summer 2024
+## Where new files belong
 
-- `june-five-hangout-01.jpg` — First Post–Close-Up Group Hangout
-- `crushing-playlist-01.jpg` — “Crushing Too Hard” Playlist Incident
-## 8th Grade – Fall 2024
-
-- `model-un-saint-johns-01.jpg` — Model UN Competition at Saint Johns
-- `party-bus-01.jpg` — Grade-Wide Party Bus Adventure
-- `party-bus-ferris-wheel-01.jpg` — Grade-Wide Party Bus Adventure
-## 8th Grade – Winter 2025
-
-- `model-un-baldwin-01.jpg` — Model UN Competition at Baldwin
-## 8th Grade – Spring 2025
-
-- `spirit-week-2025-01.jpg` — Spirit Week Dance Era
-- `promposal-ale-lorena-01.jpg` — Promposals
-- `promposal-lucas-lydia-01.jpg` — Promposals
-- `promposal-shane-kateryna-01.jpg` — Promposals
-- `prom-2025-01.jpg` — Eighth-Grade Prom
-- `prom-2025-02.jpg` — Eighth-Grade Prom
-- `graduation-2025-01.jpg` — Eighth-Grade Graduation
-- `gage-sleepover-01.jpg` — Gage’s Final Boys’ Sleepover
-## Summer 2025
-
-- `trampoline-park-01.jpg` — Core Four Trampoline Park Outing
-- `gage-return-01.jpg` — Gathering at Gage’s Former Puerto Rico Home
-## 9th Grade – Fall 2025
-
-- `brava-party-01.jpg` — BRAVA Grade Party
-- `spirit-week-practice-2026-01.jpg` — First Spirit Week Practice
-## 9th Grade – Winter 2026
-
-- `chilis-2026-01.jpg` — Chili’s Gathering
-- `model-un-winners-01.jpg` — Kateryna and Lorena Win Model UN
-- `spirit-week-dance-01.jpg` — Spirit Week Dance
-- `battle-bands-01.jpg` — Battle of the Bands
-## 9th Grade – Spring 2026
-
-- `josie-birthday-01.jpg` — Josie’s Themed Birthday Party
-- `josie-birthday-02.jpg` — Josie’s Themed Birthday Party
-- `mary-poppins-01.jpg` — School Production of Mary Poppins
-- `project-hail-mary-01.jpg` — Project Hail Mary Movie Reunion
-- `tyler-concert-01.jpg` — Tyler, The Creator Concert
-- `model-un-school-2026-01.jpg` — School-Hosted Model UN Competition
-- `physics-wendys-01.jpg` — Final Assignment and Wendy’s in the Physics Classroom
-
-
-## Videos
-
-Video files may use the same stems with `.mp4`, for example:
+Place all new images, videos, and generated poster frames in:
 
 ```text
-spirit-week-dance-01.mp4
-close-up-salute-01.mp4
-prom-2025-01.mp4
+assets/media/
 ```
 
-A generated poster can use:
+The older `assets/images/` folder remains supported as a legacy fallback, but new files should not be added there.
+
+The incorrect plural path `assets/medias/` is not used.
+
+## Recommended naming pattern
+
+Use lowercase letters, numbers, and hyphens:
 
 ```text
+event-name-01.jpg
+event-name-02.jpg
+event-name-01.mp4
+event-name-01-poster.jpg
+```
+
+Good examples:
+
+```text
+kamilo-birthday-group-01.jpg
+caguas-botanical-garden-01.jpeg
+welcome-back-beach-party-01.jpg
+spirit-week-dance-01.mp4
 spirit-week-dance-01-poster.jpg
 ```
 
-New files should be placed in `assets/media/`.
+Recommended rules:
+
+- Keep the filename descriptive and tied to the event.
+- Use two-digit numbering when an event has multiple files.
+- Avoid spaces, emoji, ampersands, and punctuation in new filenames.
+- Keep the extension lowercase.
+- Treat capitalization as significant because GitHub Pages paths are case-sensitive.
+
+Legacy files with spaces, capitals, or punctuation can remain in place. Their manifest `file` and `path` values must match the actual filename exactly.
+
+## Supported formats
+
+Images:
+
+```text
+.jpg .jpeg .png .webp .gif .svg .avif
+```
+
+Videos:
+
+```text
+.mp4 .webm .ogv
+```
+
+MP4 with H.264 video and AAC audio is the preferred video format for broad browser support.
+
+## Manifest path and availability
+
+Each record should point to the exact repository path:
+
+```json
+{
+  "file": "kamilo-birthday-group-01.jpg",
+  "path": "assets/media/kamilo-birthday-group-01.jpg",
+  "available": true
+}
+```
+
+Availability behavior:
+
+- `available: true` means the site renders the record immediately and trusts that the file exists.
+- `available: false` keeps the record as a hidden placeholder.
+- Omitting `available` uses legacy file-detection behavior and may cause an additional network request.
+
+A record marked available should always have a real file at its exact path. GitHub Actions verifies this with:
+
+```bash
+python tools/validate_archive.py --check-files
+```
+
+## Media IDs
+
+Media IDs should be unique and stable. For new files, use the filename stem when possible:
+
+```text
+file: kamilo-birthday-group-01.jpg
+id:   kamilo-birthday-group-01
+```
+
+The site and tools can derive an ID from the filename, but keeping an explicit ID in `data/media.json` makes references and validation clearer.
+
+## Event and people links
+
+Every record should use a valid event ID from `data/timeline.json`:
+
+```json
+"eventId": "kamilo-bowling-birthday"
+```
+
+Use canonical person IDs from `data/people.json`:
+
+```json
+"people": ["kamilo", "alejandro", "maria"]
+```
+
+These fields control event grouping and person filtering in the Gallery.
+
+## Video poster frames
+
+A video may include a generated poster image so the page can display a preview before playback.
+
+Recommended pair:
+
+```text
+spirit-week-dance-01.mp4
+spirit-week-dance-01-poster.jpg
+```
+
+Use `tools/prepare_media.py` to convert videos and create poster frames automatically:
+
+```bash
+python tools/prepare_media.py input-video.mov --event EVENT_ID --caption "Caption"
+```
+
+## Recommended workflow
+
+1. Choose or confirm the event ID in `data/timeline.json`.
+2. Rename the media file using the recommended convention.
+3. Place it in `assets/media/`.
+4. Add the record with the Media Manager or edit `data/media.json` directly.
+5. Add the people visible in the media using canonical IDs.
+6. Run the archive validator.
+7. Preview the Gallery and matching event page locally.
+8. Use the diagnostics page when a file does not appear.
+
+Local tools:
+
+```text
+http://localhost:8000/tools/media-manager.html
+http://localhost:8000/tools/media-diagnostics.html
+```
+
+## Troubleshooting missing media
+
+Check these items first:
+
+- The file is inside `assets/media/`.
+- `file` and `path` match the real filename exactly.
+- The extension is supported.
+- `available` is `true` for files that should be visible.
+- `eventId` matches a real timeline event.
+- The media record has a unique `id` and `order` value.
+- GitHub Pages has finished deploying the latest commit.
+
+The diagnostics page performs real requests and reports manifest/file mismatches without changing the repository.
