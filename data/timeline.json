@@ -2835,6 +2835,27 @@
       "storylines": []
     },
     {
+      "id": "nico-todd-peru-trip",
+      "date": "2026-06-07",
+      "dateLabel": "June 7–17, 2026",
+      "sort": "2026-06-07T08:00:00",
+      "title": "Nico and Todd Travel to Peru",
+      "summary": "Nico and Todd join a school trip to Peru, visiting historic sites including Machu Picchu.",
+      "details": "From June 7 through June 17, Nico and Todd travel to Peru on a school trip. The group visits historic and cultural sites, including Machu Picchu, making the trip a major shared travel experience for the two of them.",
+      "era": "Summer 2026",
+      "certainty": "range",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Travel"
+      ],
+      "people": [
+        "nicholas",
+        "todd"
+      ],
+      "storylines": []
+    },
+    {
       "id": "zach-moves",
       "date": "2026-06-20",
       "dateLabel": "June 20, 2026",
