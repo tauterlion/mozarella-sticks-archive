@@ -1,0 +1,17 @@
+.person-option[hidden] {
+  display: none !important;
+}
+
+.people-search-empty {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: .82rem;
+  text-align: center;
+}
+
+.people-search-empty[hidden] {
+  display: none;
+}
