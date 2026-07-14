@@ -164,12 +164,21 @@
 
   MS.resolveMedia = async item => {
     if (!['image', 'video'].includes(item.type)) return null;
-    const url = await MS.firstExistingUrl(MS.mediaUrlCandidates(item));
+    if (item.available === false) return null;
+
+    const candidates = MS.mediaUrlCandidates(item);
+    const url = item.available === true
+      ? (candidates[0] || '')
+      : await MS.firstExistingUrl(candidates);
+
     if (!url) return null;
 
     let posterUrl = '';
-    if (item.type === 'video' && item.poster) {
-      posterUrl = await MS.firstExistingUrl(MS.posterUrlCandidates(item));
+    if (item.type === 'video' && item.poster && item.posterAvailable !== false) {
+      const posterCandidates = MS.posterUrlCandidates(item);
+      posterUrl = item.posterAvailable === true
+        ? (posterCandidates[0] || '')
+        : await MS.firstExistingUrl(posterCandidates);
     }
 
     return {...item, url, posterUrl};

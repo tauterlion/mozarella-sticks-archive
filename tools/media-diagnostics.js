@@ -16,14 +16,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const found = results.filter(item => item.resolved);
       const missing = results.filter(item => !item.resolved);
+      const mismatches = results.filter(item =>
+        (item.available === true && !item.resolved) ||
+        (item.available === false && item.resolved)
+      );
 
-      summary.textContent = `${found.length} found · ${missing.length} missing`;
+      summary.textContent = `${found.length} found · ${missing.length} missing · ${mismatches.length} manifest mismatches`;
 
       list.innerHTML = results.map(item => `
         <article class="manager-record">
           <div>
             <code>${MSArchive.escapeHtml(item.file)}</code>
-            <p>${item.resolved ? 'Found' : 'Missing'}</p>
+            <p>${item.resolved ? 'Found' : 'Missing'}${item.available === item.resolved ? '' : ' · manifest mismatch'}</p>
           </div>
           <div>
             <strong>${MSArchive.escapeHtml(item.caption)}</strong>

@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         newRecords.push({
           id,
           file: file.name,
+          path: `assets/media/${file.name}`,
+          available: true,
           type,
           caption: captionInput.value.trim() && files.length === 1
             ? captionInput.value.trim()

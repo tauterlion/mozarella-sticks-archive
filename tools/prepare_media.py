@@ -189,6 +189,8 @@ def update_manifest(
     record = {
         "id": media_id,
         "file": file_name,
+        "path": f"assets/media/{file_name}",
+        "available": True,
         "type": media_type,
         "caption": caption or humanize(Path(file_name).stem),
         "eventId": event_id,
@@ -197,6 +199,8 @@ def update_manifest(
     }
     if poster:
         record["poster"] = poster
+        record["posterPath"] = f"assets/media/{poster}"
+        record["posterAvailable"] = True
 
     replaced = False
     for index, item in enumerate(records):

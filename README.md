@@ -1,4 +1,4 @@
-# Mozarella Sticks Archive — Version B.1.3.0
+# Mozarella Sticks Archive — Version B.1.3.2
 
 A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
 
@@ -141,3 +141,24 @@ The Media Manager now loads `timeline.json`, `people.json`, and `media.json` dir
 - Late April 2025 — The Track Pantsing Prank
 - May 19, 2025 — Caguas Botanical Garden Field Trip
 - October 19, 2025 — Welcome-Back Beach Party
+
+
+## Performance fix in 1.3.1
+
+The archive no longer checks every media URL before rendering the timeline or gallery.
+
+Each media record now has:
+
+- `available: true` when the file currently exists
+- `available: false` for an intentionally empty placeholder
+- an explicit `path` under `assets/media/`
+
+The Media Manager and preparation script automatically add these fields to future records. The diagnostics page still performs real network checks and reports manifest mismatches.
+
+
+## Media sync in 1.3.2
+
+- Merged the latest 144-record media manifest.
+- Preserved the fast `available` flags from the performance revision.
+- Marked the seven newest supplied media records as available.
+- This patch intentionally excludes `assets/media/`; overlay it onto the existing project so newer media files remain in place.
