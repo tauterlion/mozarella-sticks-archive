@@ -973,6 +973,43 @@
       "storylines": []
     },
     {
+      "id": "kamilo-bowling-birthday",
+      "date": "2025-05-01",
+      "dateLabel": "May 1, 2025",
+      "sort": "2025-05-01T17:00:00",
+      "title": "Kamilo’s Bowling Birthday Party",
+      "summary": "Most of the Mozarella Sticks gather at a bowling alley to celebrate Kamilo’s jokingly proclaimed 47th birthday.",
+      "details": "Kamilo’s birthday party brings together a large portion of the group at a bowling alley filled with music and food. Everyone spends the event bowling, celebrating, and enjoying the gathering, with the occasion remembered as Kamilo’s 47th birthday.",
+      "era": "8th Grade – Spring 2025",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Party",
+        "Hangout",
+        "Birthday"
+      ],
+      "people": [
+        "alejandro",
+        "kamilo",
+        "lorena",
+        "alexander",
+        "maria",
+        "lydia",
+        "dash",
+        "lucas",
+        "serafina",
+        "jaime",
+        "jeidenne",
+        "josie",
+        "nicholas",
+        "aedan",
+        "sebastian",
+        "samantha"
+      ],
+      "storylines": []
+    },
+    {
       "id": "promposals",
       "date": "2025-05-05",
       "dateLabel": "Before May 17, 2025",

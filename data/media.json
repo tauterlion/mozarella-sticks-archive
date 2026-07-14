@@ -1926,6 +1926,28 @@
       "order": 144,
       "path": "assets/media/brava-poster.jpeg",
       "available": true
+    },
+    {
+      "id": "lydia-killed-serafina-ohno",
+      "file": "lydia-killed-serafina-ohno.jpeg",
+      "path": "assets/media/lydia-killed-serafina-ohno.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "[EVIDENCE PHOTO 01] Suspect observed standing over the deceased victim while holding the alleged weapon.",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 145
+    },
+    {
+      "id": "group-picture-josies-birthday",
+      "file": "group-picture-josies-birthday.jpeg",
+      "path": "assets/media/group-picture-josies-birthday.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Everyone having a blast at Josie's birthday",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 146
     }
   ]
 }
