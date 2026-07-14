@@ -822,7 +822,11 @@
       "type": "video",
       "caption": "Shane's Promposal",
       "eventId": "promposals",
-      "people": [],
+      "people": [
+        "kateryna",
+        "lydia",
+        "shane"
+      ],
       "order": 44,
       "path": "assets/media/katerynapromposal.mp4",
       "available": true
@@ -833,7 +837,10 @@
       "type": "image",
       "caption": "Lucas and Leah at the arcades",
       "eventId": "lucas-leah",
-      "people": [],
+      "people": [
+        "lucas",
+        "leah"
+      ],
       "order": 45,
       "path": "assets/media/lucas&leah.jpg",
       "available": true
@@ -844,7 +851,17 @@
       "type": "video",
       "caption": "Lucas's Promposal",
       "eventId": "promposals",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "shane",
+        "todd"
+      ],
       "order": 46,
       "path": "assets/media/lydiapromposal.mp4",
       "available": true
@@ -855,7 +872,11 @@
       "type": "video",
       "caption": "Todd in Feria",
       "eventId": "todd-aedan-integrate",
-      "people": [],
+      "people": [
+        "alejandro",
+        "kateryna",
+        "todd"
+      ],
       "order": 47,
       "path": "assets/media/toddinferria.mp4",
       "available": true
@@ -866,7 +887,9 @@
       "type": "video",
       "caption": "Lucas's End of Speech",
       "eventId": "graduation",
-      "people": [],
+      "people": [
+        "lucas"
+      ],
       "order": 48,
       "path": "assets/media/wemadeit.mp4",
       "available": true
@@ -877,7 +900,12 @@
       "type": "video",
       "caption": "A clip of the the boys' reaction towards Lucas's breakup",
       "eventId": "breakup",
-      "people": [],
+      "people": [
+        "alejandro",
+        "jeidenne",
+        "lucas",
+        "marco"
+      ],
       "order": 49,
       "path": "assets/media/breakupmoment.mp4",
       "available": true
@@ -899,7 +927,10 @@
       "type": "image",
       "caption": "Group's reaction towards the image",
       "eventId": "chickfila",
-      "people": [],
+      "people": [
+        "jeidenne",
+        "marco"
+      ],
       "order": 51,
       "path": "assets/media/chickfila.png",
       "available": true
@@ -910,7 +941,14 @@
       "type": "image",
       "caption": "Dominique, Allysa, and Machi's original appearance",
       "eventId": "original-gc-created",
-      "people": [],
+      "people": [
+        "jeidenne",
+        "lorena",
+        "lydia",
+        "sebastian",
+        "allysa",
+        "dominique"
+      ],
       "order": 52,
       "path": "assets/media/dominiqueallysamachi.png",
       "available": true
@@ -921,7 +959,41 @@
       "type": "image",
       "caption": "Everyone at Graduation",
       "eventId": "graduation",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "alexander",
+        "dash",
+        "gage",
+        "jeidenne",
+        "josie",
+        "kamilo",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "marco",
+        "maria",
+        "marife",
+        "nicholas",
+        "samantha",
+        "sebastian",
+        "serafina",
+        "shane",
+        "sienna",
+        "todd",
+        "allysa",
+        "bash",
+        "bianca",
+        "dominique",
+        "isabel",
+        "jaime",
+        "leah",
+        "leo",
+        "lorena-rodriguez",
+        "valentin"
+      ],
       "order": 53,
       "path": "assets/media/everyoneatgraduation.jpg",
       "available": true
@@ -932,7 +1004,9 @@
       "type": "image",
       "caption": "Lucas in France with his mother",
       "eventId": "france-departure",
-      "people": [],
+      "people": [
+        "lucas"
+      ],
       "order": 54,
       "path": "assets/media/francepicture.jpg",
       "available": true
@@ -943,7 +1017,9 @@
       "type": "image",
       "caption": "Gage and his (now ex) girlfriend",
       "eventId": "gage-beach",
-      "people": [],
+      "people": [
+        "gage"
+      ],
       "order": 55,
       "path": "assets/media/gage&ec.jpg",
       "available": true
@@ -954,7 +1030,11 @@
       "type": "image",
       "caption": "Libby and Alejandro talking about Zach",
       "eventId": "libby-zach",
-      "people": [],
+      "people": [
+        "alejandro",
+        "libby",
+        "zach"
+      ],
       "order": 56,
       "path": "assets/media/libbyassistance.png",
       "available": true
@@ -963,9 +1043,15 @@
       "id": "libbyintroduction",
       "file": "libbyintroduction.png",
       "type": "image",
-      "caption": "Libby is added to the GC",
+      "caption": "Libby is added to the GC by Kateryna",
       "eventId": "libby-added",
-      "people": [],
+      "people": [
+        "alejandro",
+        "jeidenne",
+        "kateryna",
+        "libby",
+        "lucas"
+      ],
       "order": 57,
       "path": "assets/media/libbyintroduction.png",
       "available": true
@@ -976,7 +1062,12 @@
       "type": "video",
       "caption": "Alejandro's Promposal",
       "eventId": "promposals",
-      "people": [],
+      "people": [
+        "alejandro",
+        "kateryna",
+        "lorena",
+        "lucas"
+      ],
       "order": 58,
       "path": "assets/media/lorenapromposal.mp4",
       "available": true
@@ -985,9 +1076,12 @@
       "id": "lucas-lydia",
       "file": "lucas&lydia.jpg",
       "type": "image",
-      "caption": "Lucas and Lydia at Prom",
+      "caption": "Lucas and Lydia at Prom, taking a selfie both smiling and having a good time.",
       "eventId": "prom",
-      "people": [],
+      "people": [
+        "lucas",
+        "lydia"
+      ],
       "order": 59,
       "path": "assets/media/lucas&lydia.jpg",
       "available": true
@@ -1009,7 +1103,12 @@
       "type": "image",
       "caption": "Mega Chicks on a tower in Close-Up",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "kateryna",
+        "libby",
+        "lorena",
+        "lydia"
+      ],
       "order": 61,
       "path": "assets/media/picturesexample.jpg",
       "available": true
@@ -1020,7 +1119,13 @@
       "type": "image",
       "caption": "Post-Practice hangout example",
       "eventId": "spirit-week-2025",
-      "people": [],
+      "people": [
+        "jeidenne",
+        "lucas",
+        "marco",
+        "nicholas",
+        "shane"
+      ],
       "order": 62,
       "path": "assets/media/postpracticeexample.jpg",
       "available": true
@@ -1031,7 +1136,40 @@
       "type": "video",
       "caption": "Spirit Week Dance (2025)",
       "eventId": "spirit-week-2025",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "alexander",
+        "dash",
+        "gage",
+        "jeidenne",
+        "josie",
+        "kamilo",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "marco",
+        "maria",
+        "marife",
+        "nicholas",
+        "samantha",
+        "sebastian",
+        "serafina",
+        "shane",
+        "sienna",
+        "todd",
+        "allysa",
+        "bianca",
+        "dominique",
+        "isabel",
+        "jaime",
+        "leah",
+        "leo",
+        "lorena-rodriguez",
+        "valentin"
+      ],
       "order": 63,
       "path": "assets/media/Spirit Week Dance Video (Enhanced).mp4",
       "available": true
@@ -1042,7 +1180,12 @@
       "type": "image",
       "caption": "\"Watch Me\" and the crowd shits themselves",
       "eventId": "original-gc-created",
-      "people": [],
+      "people": [
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia"
+      ],
       "order": 64,
       "path": "assets/media/Watchme.png",
       "available": true
@@ -1053,7 +1196,15 @@
       "type": "image",
       "caption": "Group photo taken at Washington D.C.",
       "eventId": "closeup-photo-archive",
-      "people": [],
+      "people": [
+        "alejandro",
+        "gage",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia"
+      ],
       "order": 65,
       "path": "assets/media/theoggang.jpg",
       "available": true
@@ -1064,7 +1215,10 @@
       "type": "image",
       "caption": "Zach & Libby at Prom",
       "eventId": "prom",
-      "people": [],
+      "people": [
+        "libby",
+        "zach"
+      ],
       "order": 66,
       "path": "assets/media/zach&libby.jpg",
       "available": true
@@ -1075,7 +1229,21 @@
       "type": "image",
       "caption": "A selfie taken at a dining hall in Washington D.C., featuring almost everyone.",
       "eventId": "closeup-photo-archive",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "dash",
+        "jeidenne",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "sebastian",
+        "shane",
+        "bash",
+        "valentin"
+      ],
       "order": 67,
       "path": "assets/media/dining-hall-washington.jpeg",
       "available": true
@@ -1086,7 +1254,17 @@
       "type": "image",
       "caption": "A group photo, and Libby, on an observation tower.",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "gage",
+        "jeidenne",
+        "libby",
+        "lucas",
+        "shane",
+        "bash",
+        "valentin"
+      ],
       "order": 68,
       "path": "assets/media/group-photo-tower.jpeg",
       "available": true
@@ -1108,7 +1286,21 @@
       "type": "video",
       "caption": "Not the same day as when everyone came together for the first time, but this was breakfast.",
       "eventId": "dining-hall-unification",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "dash",
+        "gage",
+        "jeidenne",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lydia",
+        "marco",
+        "sebastian",
+        "shane",
+        "valentin"
+      ],
       "order": 70,
       "path": "assets/media/average-breakfast-morning.mp4",
       "available": true
@@ -1119,7 +1311,9 @@
       "type": "image",
       "caption": "Bash Posing",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "bash"
+      ],
       "order": 71,
       "path": "assets/media/bash-posing.jpeg",
       "available": true
@@ -1141,7 +1335,9 @@
       "type": "image",
       "caption": "Gage Posing",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "gage"
+      ],
       "order": 73,
       "path": "assets/media/gage-posing.jpeg",
       "available": true
@@ -1152,7 +1348,9 @@
       "type": "image",
       "caption": "Jeidenne posing",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "jeidenne"
+      ],
       "order": 74,
       "path": "assets/media/jeidenne-posing.jpeg",
       "available": true
@@ -1163,7 +1361,9 @@
       "type": "image",
       "caption": "Kateryna posing",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "kateryna"
+      ],
       "order": 75,
       "path": "assets/media/kate-posing.jpeg",
       "available": true
@@ -1174,7 +1374,9 @@
       "type": "image",
       "caption": "Libby posing",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "libby"
+      ],
       "order": 76,
       "path": "assets/media/libby-posing.jpeg",
       "available": true
@@ -1185,7 +1387,9 @@
       "type": "image",
       "caption": "Lorena posing",
       "eventId": "closeup-observation-photos",
-      "people": [],
+      "people": [
+        "lorena"
+      ],
       "order": 77,
       "path": "assets/media/lorena-posing.jpeg",
       "available": true
@@ -1195,8 +1399,18 @@
       "file": "statue-groupphoto.jpeg",
       "type": "image",
       "caption": "A group photo taken at the Statue of Liberty, taken by Alejandro Valentin.",
-      "eventId": "closeup-observation-photos",
-      "people": [],
+      "eventId": "statue-liberty-photos",
+      "people": [
+        "alejandro",
+        "gage",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lydia",
+        "marco",
+        "shane",
+        "valentin"
+      ],
       "order": 78,
       "path": "assets/media/statue-groupphoto.jpeg",
       "available": true
@@ -1207,7 +1421,9 @@
       "type": "image",
       "caption": "Alejandro flexing his new outfit",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "alejandro"
+      ],
       "order": 79,
       "path": "assets/media/ale-flex.jpeg",
       "available": true
@@ -1218,7 +1434,9 @@
       "type": "image",
       "caption": "Josie casually aurafarm, kudos to whoeever took that picture",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "josie"
+      ],
       "order": 80,
       "path": "assets/media/josie-aurafarm.jpeg",
       "available": true
@@ -1229,7 +1447,9 @@
       "type": "image",
       "caption": "Lucas ready to fight, re-enacting the Johnny Cage after being told that he reminds Alejandro of that character.",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "lucas"
+      ],
       "order": 81,
       "path": "assets/media/lucas-posing.jpeg",
       "available": true
@@ -1240,7 +1460,9 @@
       "type": "image",
       "caption": "Marife taking a bite out of a burnt marshmellow",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "marife"
+      ],
       "order": 82,
       "path": "assets/media/marife-gulp.jpeg",
       "available": true
@@ -1251,7 +1473,9 @@
       "type": "image",
       "caption": "Nico making a face",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "nicholas"
+      ],
       "order": 83,
       "path": "assets/media/nico-afraid.jpeg",
       "available": true
@@ -1262,7 +1486,10 @@
       "type": "image",
       "caption": "Todd wearing an old man's costume",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "josie",
+        "todd"
+      ],
       "order": 84,
       "path": "assets/media/super-old-todd.jpeg",
       "available": true
@@ -1273,7 +1500,10 @@
       "type": "image",
       "caption": "Kateryna and Lorena celebrating their victory in Model U.N.. Congratulaions!",
       "eventId": "model-un-winners",
-      "people": [],
+      "people": [
+        "kateryna",
+        "lorena"
+      ],
       "order": 85,
       "path": "assets/media/kate-lorena-victory.jpeg",
       "available": true
@@ -1284,7 +1514,10 @@
       "type": "image",
       "caption": "Awww such a cute photo",
       "eventId": "brava",
-      "people": [],
+      "people": [
+        "alejandro",
+        "kateryna"
+      ],
       "order": 86,
       "path": "assets/media/kate-and-alejandro-selfie.jpeg",
       "available": true
@@ -1295,7 +1528,10 @@
       "type": "image",
       "caption": "Awww another cute photo",
       "eventId": "brava",
-      "people": [],
+      "people": [
+        "aedan",
+        "lydia"
+      ],
       "order": 87,
       "path": "assets/media/aedan-and-lydia-hugging.jpeg",
       "available": true
@@ -1306,7 +1542,15 @@
       "type": "image",
       "caption": "And another another cute photo awww so cute",
       "eventId": "brava",
-      "people": [],
+      "people": [
+        "aedan",
+        "josie",
+        "lydia",
+        "maria",
+        "marife",
+        "samantha",
+        "serafina"
+      ],
       "order": 88,
       "path": "assets/media/group-female-photo.jpeg",
       "available": true
@@ -1317,7 +1561,11 @@
       "type": "image",
       "caption": "Serafina, Alejandro, and Bumblee selfie",
       "eventId": "tyler-concert",
-      "people": [],
+      "people": [
+        "alejandro",
+        "nicholas",
+        "serafina"
+      ],
       "order": 89,
       "path": "assets/media/fin-ale-and-bumblee.jpeg",
       "available": true
@@ -1339,7 +1587,12 @@
       "type": "video",
       "caption": "Tyler, The Creator performing on stage",
       "eventId": "tyler-concert",
-      "people": [],
+      "people": [
+        "alejandro",
+        "dash",
+        "kateryna",
+        "nicholas"
+      ],
       "order": 91,
       "path": "assets/media/tyler-performing.mp4",
       "available": true
@@ -1350,7 +1603,19 @@
       "type": "video",
       "caption": "Everyone dancing on stage with the group!",
       "eventId": "tuna-segreles",
-      "people": [],
+      "people": [
+        "aedan",
+        "dash",
+        "jeidenne",
+        "kamilo",
+        "kateryna",
+        "lorena",
+        "lucas",
+        "samantha",
+        "sebastian",
+        "todd",
+        "leo"
+      ],
       "order": 92,
       "path": "assets/media/everyone-dancing.mp4",
       "available": true
@@ -1361,7 +1626,9 @@
       "type": "video",
       "caption": "Leo performing on stage with his piano",
       "eventId": "tuna-segreles",
-      "people": [],
+      "people": [
+        "leo"
+      ],
       "order": 93,
       "path": "assets/media/leo-piano.mp4",
       "available": true
@@ -1372,7 +1639,11 @@
       "type": "image",
       "caption": "Lucas speaking through the microphone while Kateryna and Lorena stand aside.",
       "eventId": "tuna-segreles",
-      "people": [],
+      "people": [
+        "kateryna",
+        "lorena",
+        "lucas"
+      ],
       "order": 94,
       "path": "assets/media/lucas-speaking.jpeg",
       "available": true
@@ -1383,7 +1654,14 @@
       "type": "image",
       "caption": "Alejandro taking a selfie, Jeidenne pops up.",
       "eventId": "prom",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "jeidenne",
+        "sebastian",
+        "todd",
+        "jaime"
+      ],
       "order": 95,
       "path": "assets/media/ale-selfie-prom.jpeg",
       "available": true
@@ -1394,7 +1672,15 @@
       "type": "image",
       "caption": "A salute chain, performed while everyone left the airport.",
       "eventId": "return-flight-salute",
-      "people": [],
+      "people": [
+        "alejandro",
+        "gage",
+        "jeidenne",
+        "lucas",
+        "lydia",
+        "shane",
+        "valentin"
+      ],
       "order": 96,
       "path": "assets/media/salute-chain.jpeg",
       "available": true
@@ -1416,7 +1702,10 @@
       "type": "video",
       "caption": "Shane presenting in a classroom during Model U.N.",
       "eventId": "saint-johns-model-un-2024",
-      "people": [],
+      "people": [
+        "alejandro",
+        "shane"
+      ],
       "order": 98,
       "path": "assets/media/shane-speech-modelun.mp4",
       "available": true
@@ -1427,7 +1716,14 @@
       "type": "image",
       "caption": "A group photo taken on a bus on their way back to school after their first Model UN day.",
       "eventId": "saint-johns-model-un-2024",
-      "people": [],
+      "people": [
+        "alejandro",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lydia",
+        "shane"
+      ],
       "order": 99,
       "path": "assets/media/saint-johns-group-photo.jpeg",
       "available": true
@@ -1438,7 +1734,15 @@
       "type": "video",
       "caption": "The party bus in action",
       "eventId": "party-bus-adventure",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "josie",
+        "lorena",
+        "lucas",
+        "lydia",
+        "marco"
+      ],
       "order": 100,
       "path": "assets/media/party-bus-bebito.mp4",
       "available": true
@@ -1449,7 +1753,10 @@
       "type": "image",
       "caption": "A sunset that occurred the same day as the party bus",
       "eventId": "party-bus-adventure",
-      "people": [],
+      "people": [
+        "lucas",
+        "marco"
+      ],
       "order": 101,
       "path": "assets/media/sunset-party-area.jpeg",
       "available": true
@@ -1460,7 +1767,14 @@
       "type": "video",
       "caption": "Swinging ferris wheel, everyone points their cameras everywhere",
       "eventId": "party-bus-adventure",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "lucas",
+        "lydia",
+        "marco",
+        "shane"
+      ],
       "order": 102,
       "path": "assets/media/swinging-ferris-wheel.mp4",
       "available": true
@@ -1482,7 +1796,11 @@
       "type": "image",
       "caption": "A selfie taken by Alejandro during a Model U.N. session",
       "eventId": "baldwin-model-un-2025",
-      "people": [],
+      "people": [
+        "alejandro",
+        "dash",
+        "sebastian"
+      ],
       "order": 104,
       "path": "assets/media/model-un-selfie-alejandro.jpeg",
       "available": true
@@ -1493,7 +1811,9 @@
       "type": "video",
       "caption": "Kevin riding a zipline over at Lorena's house",
       "eventId": "spirit-week-2025",
-      "people": [],
+      "people": [
+        "lydia"
+      ],
       "order": 105,
       "path": "assets/media/kevin-zipline.mp4",
       "available": true
@@ -1504,7 +1824,10 @@
       "type": "image",
       "caption": "Todd and Shane sitting on the roof, watching the sunset and talking",
       "eventId": "spirit-week-2025",
-      "people": [],
+      "people": [
+        "shane",
+        "todd"
+      ],
       "order": 106,
       "path": "assets/media/todd-shane-sunset.jpeg",
       "available": true
@@ -1515,7 +1838,14 @@
       "type": "video",
       "caption": "Alejandro recording everyone at the Graduation set-up.",
       "eventId": "graduation",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "jeidenne",
+        "marco",
+        "shane",
+        "valentin"
+      ],
       "order": 107,
       "path": "assets/media/graduation-video-interview.mp4",
       "available": true
@@ -1526,7 +1856,19 @@
       "type": "image",
       "caption": "A selfie taken over at Gage's, when he returned to Puerto Rico for the first time.",
       "eventId": "gage-return-hangout",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "dash",
+        "gage",
+        "jeidenne",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "samantha"
+      ],
       "order": 108,
       "path": "assets/media/gathering-at-gages.jpeg",
       "available": true
@@ -1548,7 +1890,10 @@
       "type": "image",
       "caption": "Alejandro and Maria taking a selfie, their first \"date\".",
       "eventId": "ale-maria-date",
-      "people": [],
+      "people": [
+        "alejandro",
+        "maria"
+      ],
       "order": 110,
       "path": "assets/media/ale-and-maria.jpeg",
       "available": true
@@ -1559,7 +1904,14 @@
       "type": "image",
       "caption": "A group selfie taken in front of the cafeteria, somehow Dash wasn't aware.",
       "eventId": "exploration-week",
-      "people": [],
+      "people": [
+        "alejandro",
+        "dash",
+        "jeidenne",
+        "kateryna",
+        "libby",
+        "lorena"
+      ],
       "order": 111,
       "path": "assets/media/group-photo-selfie-cafeteria.jpeg",
       "available": true
@@ -1570,7 +1922,10 @@
       "type": "image",
       "caption": "A group photo of Marco, Nico, and a senior building a home.",
       "eventId": "exploration-week",
-      "people": [],
+      "people": [
+        "marco",
+        "nicholas"
+      ],
       "order": 112,
       "path": "assets/media/group-photo-building.jpeg",
       "available": true
@@ -1581,7 +1936,14 @@
       "type": "image",
       "caption": "A selfie of some guys forming a circle. Trippyyyyy",
       "eventId": "exploration-week",
-      "people": [],
+      "people": [
+        "alejandro",
+        "dash",
+        "jeidenne",
+        "lucas",
+        "marco",
+        "nicholas"
+      ],
       "order": 113,
       "path": "assets/media/circle-selfie-guys.jpeg",
       "available": true
@@ -1592,7 +1954,11 @@
       "type": "image",
       "caption": "Alejandro took a selfie at Chili's, including Serafina and Maria in the pictures.",
       "eventId": "chilis",
-      "people": [],
+      "people": [
+        "alejandro",
+        "maria",
+        "serafina"
+      ],
       "order": 114,
       "path": "assets/media/selfie-fin-maria-alejandro.jpeg",
       "available": true
@@ -1603,7 +1969,10 @@
       "type": "image",
       "caption": "Todd.",
       "eventId": "chilis",
-      "people": [],
+      "people": [
+        "alejandro",
+        "todd"
+      ],
       "order": 115,
       "path": "assets/media/todd-sus-chilis.jpeg",
       "available": true
@@ -1614,7 +1983,10 @@
       "type": "video",
       "caption": "Dash being happy over Maria and Alejandro",
       "eventId": "ale-maria-reveal",
-      "people": [],
+      "people": [
+        "alejandro",
+        "dash"
+      ],
       "order": 116,
       "path": "assets/media/dash-congratulating.mp4",
       "available": true
@@ -1625,7 +1997,11 @@
       "type": "image",
       "caption": "Lydia found a cat, offered its adoption in the GC",
       "eventId": "lydia-cat",
-      "people": [],
+      "people": [
+        "jeidenne",
+        "lydia",
+        "marco"
+      ],
       "order": 117,
       "path": "assets/media/lydia-finds-cat.jpeg",
       "available": true
@@ -1636,7 +2012,10 @@
       "type": "image",
       "caption": "Zach was given a sword by Libby for Valentine's, screenshot of Instagram story.",
       "eventId": "sword-gift",
-      "people": [],
+      "people": [
+        "libby",
+        "zach"
+      ],
       "order": 118,
       "path": "assets/media/zach-sword.jpeg",
       "available": true
@@ -1647,7 +2026,9 @@
       "type": "image",
       "caption": "Marco posing while on stage, somehow found the camera.",
       "eventId": "battle-of-bands",
-      "people": [],
+      "people": [
+        "marco"
+      ],
       "order": 119,
       "path": "assets/media/marco-posing.jpeg",
       "available": true
@@ -1658,7 +2039,9 @@
       "type": "image",
       "caption": "Leo laughs while he holds the keytar",
       "eventId": "battle-of-bands",
-      "people": [],
+      "people": [
+        "leo"
+      ],
       "order": 120,
       "path": "assets/media/leo-laughing-bass.jpeg",
       "available": true
@@ -1669,7 +2052,11 @@
       "type": "image",
       "caption": "Jeidenne taking a selfie with Kamilo and Josie, clearly having a good time",
       "eventId": "battle-of-bands",
-      "people": [],
+      "people": [
+        "jeidenne",
+        "josie",
+        "kamilo"
+      ],
       "order": 121,
       "path": "assets/media/jeidenne-selfie-blue.jpeg",
       "available": true
@@ -1702,7 +2089,11 @@
       "type": "image",
       "caption": "Serafina leaks a possible new schedule change to the GC",
       "eventId": "schedule-leak",
-      "people": [],
+      "people": [
+        "jeidenne",
+        "lucas",
+        "serafina"
+      ],
       "order": 124,
       "path": "assets/media/serafina-schedule-leak.jpeg",
       "available": true
@@ -1713,7 +2104,29 @@
       "type": "video",
       "caption": "Everyone singing happy birthday to Maria, playing their instruments in the school hallway",
       "eventId": "maria-birthday-song",
-      "people": [],
+      "people": [
+        "aedan",
+        "alejandro",
+        "alexander",
+        "dash",
+        "jeidenne",
+        "josie",
+        "kamilo",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "marco",
+        "maria",
+        "nicholas",
+        "samantha",
+        "sebastian",
+        "serafina",
+        "sienna",
+        "todd",
+        "jaime"
+      ],
       "order": 125,
       "path": "assets/media/happy-birthday-maria-parada.mp4",
       "available": true
@@ -1724,7 +2137,9 @@
       "type": "image",
       "caption": "A picture of someone as a statue, with Kateryna cropped on the left.",
       "eventId": "mary-poppins",
-      "people": [],
+      "people": [
+        "kateryna"
+      ],
       "order": 126,
       "path": "assets/media/someone-statue-poppins.jpeg",
       "available": true
@@ -1757,7 +2172,9 @@
       "type": "image",
       "caption": "Lorena as a stature, far left side of the stage.",
       "eventId": "mary-poppins",
-      "people": [],
+      "people": [
+        "lorena"
+      ],
       "order": 129,
       "path": "assets/media/lorena-statue-poppins.jpeg",
       "available": true
@@ -1768,7 +2185,21 @@
       "type": "image",
       "caption": "A reunion photo, containing all the participants.",
       "eventId": "project-hail-mary",
-      "people": [],
+      "people": [
+        "alejandro",
+        "jeidenne",
+        "kamilo",
+        "kateryna",
+        "lucas",
+        "lydia",
+        "maria",
+        "nicholas",
+        "samantha",
+        "sebastian",
+        "serafina",
+        "todd",
+        "leah"
+      ],
       "order": 130,
       "path": "assets/media/reunion-project-hailmary.jpeg",
       "available": true
@@ -1779,7 +2210,9 @@
       "type": "image",
       "caption": "Someone speaking at Model UN",
       "eventId": "school-model-un-2026",
-      "people": [],
+      "people": [
+        "josie"
+      ],
       "order": 131,
       "path": "assets/media/someone-speaking-modelun.jpeg",
       "available": true
@@ -1801,7 +2234,9 @@
       "type": "image",
       "caption": "Josie holding up a placard during a Model U.N. session",
       "eventId": "school-model-un-2026",
-      "people": [],
+      "people": [
+        "josie"
+      ],
       "order": 133,
       "path": "assets/media/josie-objection.jpeg",
       "available": true
@@ -1812,7 +2247,9 @@
       "type": "image",
       "caption": "Lydia behind the Tomodachi Life logo",
       "eventId": "tomodachi-island",
-      "people": [],
+      "people": [
+        "lydia"
+      ],
       "order": 134,
       "path": "assets/media/tomodachi-splashscreen-lydia.jpeg",
       "available": true
@@ -1823,7 +2260,10 @@
       "type": "image",
       "caption": "Alejandro casually posing while Maria trips in Tomodachi Life",
       "eventId": "tomodachi-island",
-      "people": [],
+      "people": [
+        "alejandro",
+        "maria"
+      ],
       "order": 135,
       "path": "assets/media/maria-tripping-tomodachi.jpeg",
       "available": true
@@ -1834,7 +2274,9 @@
       "type": "image",
       "caption": "Dash eagerly smiling in Tomodachi Life",
       "eventId": "tomodachi-island",
-      "people": [],
+      "people": [
+        "dash"
+      ],
       "order": 136,
       "path": "assets/media/dash-smiling-tomodachi.jpeg",
       "available": true
@@ -1845,7 +2287,10 @@
       "type": "image",
       "caption": "The last picture taken together, the day before he moved away.",
       "eventId": "zach-moves",
-      "people": [],
+      "people": [
+        "libby",
+        "zach"
+      ],
       "order": 137,
       "path": "assets/media/last-day-zachlibby.jpeg",
       "available": true
@@ -1867,7 +2312,12 @@
       "type": "image",
       "caption": "A group of people walking down a beautiful path",
       "eventId": "caguas-botanical-garden",
-      "people": [],
+      "people": [
+        "alexander",
+        "dash",
+        "josie",
+        "shane"
+      ],
       "order": 139,
       "path": "assets/media/group-walking-01.jpeg",
       "available": true
@@ -1878,7 +2328,12 @@
       "type": "image",
       "caption": "Another photo of a group of people walking down a nice path",
       "eventId": "caguas-botanical-garden",
-      "people": [],
+      "people": [
+        "alexander",
+        "gage",
+        "jeidenne",
+        "jaime"
+      ],
       "order": 140,
       "path": "assets/media/group-walking-02.jpeg",
       "available": true
@@ -1889,7 +2344,25 @@
       "type": "image",
       "caption": "Nearly everyone who appeared in the party is in this photo",
       "eventId": "welcome-back-beach-party",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "dash",
+        "gage",
+        "josie",
+        "kamilo",
+        "kateryna",
+        "lorena",
+        "lydia",
+        "marco",
+        "maria",
+        "marife",
+        "nicholas",
+        "samantha",
+        "sebastian",
+        "serafina",
+        "shane"
+      ],
       "order": 141,
       "path": "assets/media/beach-party-everyone.jpg",
       "available": true
@@ -1900,7 +2373,18 @@
       "type": "image",
       "caption": "A foam disaster.",
       "eventId": "welcome-back-beach-party",
-      "people": [],
+      "people": [
+        "gage",
+        "jeidenne",
+        "josie",
+        "lorena",
+        "lydia",
+        "marco",
+        "marife",
+        "samantha",
+        "serafina",
+        "leah"
+      ],
       "order": 142,
       "path": "assets/media/foam-disaster.jpg",
       "available": true
@@ -1935,7 +2419,10 @@
       "type": "image",
       "caption": "[EVIDENCE PHOTO 01] Suspect observed standing over the deceased victim while holding the alleged weapon.",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "lydia",
+        "serafina"
+      ],
       "order": 145
     },
     {
@@ -1946,7 +2433,19 @@
       "type": "image",
       "caption": "Everyone having a blast at Josie's birthday",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "alejandro",
+        "gage",
+        "jeidenne",
+        "kateryna",
+        "lorena",
+        "lucas",
+        "lydia",
+        "marife",
+        "nicholas",
+        "samantha",
+        "todd"
+      ],
       "order": 146
     },
     {
@@ -1955,9 +2454,23 @@
       "path": "assets/media/group-picture-kamilos-birthday.jpeg",
       "available": true,
       "type": "image",
-      "caption": "Everyone who had participated in Kamilo's birthday party.",
+      "caption": "Everyone (besides Josie and Kateryna... and Lucas; he was pissing) who had participated in Kamilo's birthday party.",
       "eventId": "kamilo-bowling-birthday",
-      "people": [],
+      "people": [
+        "alejandro",
+        "alexander",
+        "dash",
+        "jeidenne",
+        "kamilo",
+        "lorena",
+        "lucas",
+        "lydia",
+        "maria",
+        "nicholas",
+        "samantha",
+        "serafina",
+        "jaime"
+      ],
       "order": 147
     },
     {
@@ -1968,7 +2481,17 @@
       "type": "image",
       "caption": "The girls and bumblebee grouped together, holding bowling balls and smiling.",
       "eventId": "kamilo-bowling-birthday",
-      "people": [],
+      "people": [
+        "aedan",
+        "josie",
+        "kateryna",
+        "lorena",
+        "lydia",
+        "maria",
+        "nicholas",
+        "samantha",
+        "serafina"
+      ],
       "order": 148
     },
     {
@@ -1979,7 +2502,10 @@
       "type": "image",
       "caption": "Kateryna and Lydia posing for a selfie, Lydia was then immediately called for her turn on the lane.",
       "eventId": "kamilo-bowling-birthday",
-      "people": [],
+      "people": [
+        "kateryna",
+        "lydia"
+      ],
       "order": 149
     },
     {
@@ -1990,7 +2516,12 @@
       "type": "image",
       "caption": "Aedan, Maria, and Samantha presumably recreating the IShowSpeed face.",
       "eventId": "kamilo-bowling-birthday",
-      "people": [],
+      "people": [
+        "aedan",
+        "kateryna",
+        "maria",
+        "samantha"
+      ],
       "order": 150
     },
     {
@@ -2001,7 +2532,10 @@
       "type": "image",
       "caption": "Serafina took a selfie with Valentina and Josie while they were having a drink.",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "josie",
+        "serafina"
+      ],
       "order": 151
     },
     {
@@ -2012,7 +2546,10 @@
       "type": "image",
       "caption": "Todd and Nico sitting on top of a rock, they called themselves \"The Thinkers\".",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "nicholas",
+        "todd"
+      ],
       "order": 152
     },
     {
@@ -2025,6 +2562,51 @@
       "eventId": "josie-birthday",
       "people": [],
       "order": 153
+    },
+    {
+      "id": "aurafarm-nico-todd-peru",
+      "file": "aurafarm-nico-todd-peru.jpeg",
+      "path": "assets/media/aurafarm-nico-todd-peru.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Todd and Nico cover their faces with their hats, while Leo smiles.",
+      "eventId": "nico-todd-peru-trip",
+      "era": "Summer 2026",
+      "people": [
+        "nicholas",
+        "todd"
+      ],
+      "order": 154
+    },
+    {
+      "id": "awkward-selfie-nico-todd",
+      "file": "awkward-selfie-nico-todd.jpeg",
+      "path": "assets/media/awkward-selfie-nico-todd.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Todd, Nico, and Leo awkwardly smile with one other unknown person.",
+      "eventId": "nico-todd-peru-trip",
+      "era": "Summer 2026",
+      "people": [
+        "nicholas",
+        "todd"
+      ],
+      "order": 155
+    },
+    {
+      "id": "chegui-cameo",
+      "file": "chegui-cameo.jpeg",
+      "path": "assets/media/chegui-cameo.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Chegui cameo'd, Todd is plotting something with Nico.",
+      "eventId": "nico-todd-peru-trip",
+      "era": "Summer 2026",
+      "people": [
+        "nicholas",
+        "todd"
+      ],
+      "order": 156
     }
   ]
 }
