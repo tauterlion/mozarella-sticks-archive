@@ -1,24 +1,50 @@
-# Mozarella Sticks Archive — Version B.1.3.2
+# Mozarella Sticks Archive
 
-A GitHub Pages–ready static archive with a timeline, gallery, and reusable event pages.
+A GitHub Pages–ready static archive of the Mozarella Sticks’ shared history, built around a searchable timeline, an event-linked photo and video gallery, and reusable event pages.
 
-## Included
+The public site currently carries the label **Version B · Media Sync 1.3.2**. The repository also includes later maintenance improvements, including chronological timeline rendering and automatic archive validation.
 
-- `index.html` — archive landing page
+## Current archive snapshot
+
+| Item | Current total |
+|---|---:|
+| Timeline events | 102 |
+| Eras | 10 |
+| People indexed | 35 |
+| Members | 23 |
+| Connected people | 12 |
+| Media records | 144 |
+| Available media records | 102 |
+| Hidden placeholders | 42 |
+
+The documented timeline currently runs from **May 12, 2024** through **June 20, 2026**.
+
+No raw WhatsApp exports, phone numbers, or private evidence files are included in the public archive.
+
+## Repository map
+
+- `index.html` — archive landing page and live archive statistics
 - `timeline.html` — searchable and filterable timeline
-- `gallery.html` — event-linked image and video gallery that only shows files that exist
+- `gallery.html` — image and video gallery
 - `event.html?id=EVENT_ID` — reusable full event page
-- `data/timeline.json` — 101 cleaned timeline events
-- `data/people.json` — canonical names, aliases, and Member/Connected Person tags
-- `data/media.json` — approved image/video records; IDs and media types may be omitted and will be generated from filenames
-
-No raw WhatsApp exports, phone numbers, screenshots, or private evidence are included.
+- `data/timeline.json` — eras, categories, and timeline events
+- `data/people.json` — canonical person IDs, display names, aliases, and statuses
+- `data/media.json` — image and video manifest
+- `assets/media/` — current media folder
+- `assets/images/` — legacy fallback folder; do not use for new files
+- `scripts/` — shared rendering and page behavior
+- `styles/` — shared and page-specific styling
+- `tools/media-manager.html` — no-code media-manifest helper
+- `tools/media-diagnostics.html` — real file-availability diagnostics
+- `tools/prepare_media.py` — video conversion and manifest helper
+- `tools/validate_archive.py` — archive data validator
+- `IMAGE_FILENAMES.md` — filename, placement, and media workflow guide
 
 ## Preview locally
 
-Because the site loads JSON files, opening `index.html` directly with `file://` may be blocked by browser security.
+The site loads JSON with `fetch()`, so opening `index.html` directly through `file://` may be blocked by browser security.
 
-From the project folder, run:
+From the repository root, run:
 
 ```bash
 python -m http.server 8000
@@ -30,135 +56,215 @@ Then open:
 http://localhost:8000/
 ```
 
+Useful local tools:
+
+```text
+http://localhost:8000/tools/media-manager.html
+http://localhost:8000/tools/media-diagnostics.html
+```
+
 ## Publish with GitHub Pages
 
-1. Create a GitHub repository.
-2. Upload the entire project, preserving the folders.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select the `main` branch and `/ (root)` folder.
-6. Save and wait for the public URL.
+1. Open **Settings → Pages** in the repository.
+2. Under **Build and deployment**, choose **Deploy from a branch**.
+3. Select the `main` branch and `/ (root)` folder.
+4. Save and wait for GitHub Pages to deploy the site.
 
-## Add an event
+## Sources of truth
 
-Add a new object to `data/timeline.json` inside `events`. Preserve the existing field names and use a unique, permanent `id`.
+The three JSON manifests control nearly all archive content:
 
-Date certainty values:
+```text
+data/timeline.json = what happened and who participated
+data/people.json   = who exists and how names appear
+data/media.json    = which photos and videos belong to each event
+```
+
+Person and event IDs are permanent internal references. Display names, captions, and descriptions can change, but IDs should not be renamed casually because other records may depend on them.
+
+## Add or edit an event
+
+Add an object inside the `events` array in `data/timeline.json`.
+
+```json
+{
+  "id": "kamilo-bowling-birthday",
+  "date": "2026-05-01",
+  "dateLabel": "May 1, 2026",
+  "sort": "2026-05-01T17:00:00",
+  "title": "Kamilo’s Bowling Birthday Party",
+  "summary": "A short summary for cards and search results.",
+  "details": "The full archive description.",
+  "era": "9th Grade – Spring 2026",
+  "certainty": "confirmed",
+  "importance": "supporting",
+  "categories": ["Birthday", "Party", "Hangout"],
+  "people": ["kamilo", "alejandro"],
+  "storylines": []
+}
+```
+
+Allowed certainty values:
 
 - `confirmed`
 - `approximate`
 - `range`
 
-Importance values:
+Allowed importance values:
 
 - `major`
 - `supporting`
 - `minor`
 
-## Add images and videos
+Use canonical IDs from `data/people.json` in the `people` array. The timeline page sorts events by the `sort` timestamp before rendering, but keeping the JSON array chronological is still recommended because other pages and tools may use the stored order.
 
-Use `assets/media/` for new photos and videos. The old `assets/images/` folder remains supported for compatibility.
+## Add or edit a person
 
-A minimal record in `data/media.json` only needs:
+Add or update a record in `data/people.json`:
 
 ```json
 {
-  "file": "event-clip-01.mp4",
-  "caption": "A short caption.",
-  "eventId": "event-id"
+  "id": "kamilo",
+  "displayName": "Kamilo",
+  "aliases": [],
+  "status": "Member"
 }
 ```
 
-The site automatically derives the media ID and whether the file is an image or video.
+Allowed statuses are:
 
-Missing files remain invisible. Existing media automatically appears in the matching expanded timeline card, event page, and gallery.
+- `Member`
+- `Connected Person`
 
-Recommended filename format:
+Changing `displayName` or `aliases` is safe. Changing `id` requires updating every timeline and media reference that uses it.
+
+## Add images and videos
+
+Place new files in:
 
 ```text
-event-name-01.jpg
-event-name-02.jpg
+assets/media/
 ```
 
-Use lowercase letters, hyphens, two-digit numbering, and no punctuation or emoji.
+A recommended media record is:
 
-## Future expansion
+```json
+{
+  "id": "kamilo-birthday-group",
+  "file": "kamilo-birthday-group.jpg",
+  "caption": "The group at Kamilo’s bowling birthday party.",
+  "eventId": "kamilo-bowling-birthday",
+  "era": "9th Grade – Spring 2026",
+  "people": ["kamilo", "alejandro"],
+  "order": 145,
+  "path": "assets/media/kamilo-birthday-group.jpg",
+  "available": true
+}
+```
 
-The data structure is ready for later People and Dictionary sections. Those pages can reference the same stable event and person IDs without duplicating timeline content.
+The site can derive a media ID and media type from the filename, but explicit IDs, paths, ordering, and availability flags make the manifest easier to validate and maintain.
 
+Availability behavior:
 
-## Interface revision 1.1
+- `available: true` — the site trusts the manifest and renders the record without a preliminary network check
+- `available: false` — the record remains as a hidden placeholder
+- missing `available` — legacy fallback behavior may perform a network check
 
-- Restored the vertical timeline line and event dots from Version A.
-- Event cards keep people and category tags behind **View more**.
-- Added animated event expansion.
-- Rebuilt timeline search as a sticky oval search bar with rotating prompts.
-- Consolidated Era, Person, Category, Importance, and Date controls inside one Filters drawer.
-- Added hover highlights and glow states across navigation, links, buttons, tags, and event controls.
-- Increased event date and title sizes.
+Records marked available must have a matching file at the exact case-sensitive path. The validator checks this automatically in GitHub Actions.
 
-
-## MP4 and media tools
-
-Supported gallery media:
+Supported formats:
 
 - Images: JPG, JPEG, PNG, WebP, GIF, SVG, AVIF
 - Video: MP4, WebM, OGV
 
 MP4 with H.264 video and AAC audio is the recommended video format.
 
-GitHub Pages cannot downscale videos at runtime. Use:
+See `IMAGE_FILENAMES.md` for naming and placement guidance.
 
-```bash
-python tools/prepare_media.py input-video.mov --event EVENT_ID --caption "Caption"
-```
+## Media Manager
 
-The script converts video to web-compatible MP4, fits it within 720p according to orientation, caps it at 30 FPS, creates a poster frame, places it in `assets/media/`, and updates `data/media.json`.
-
-For a no-code manifest helper, preview the site locally and open:
+Start the local server and open:
 
 ```text
 http://localhost:8000/tools/media-manager.html
 ```
 
+The Media Manager loads the current timeline, people, and media manifests. It can prepare new media records and download a complete replacement `media.json` containing both the original records and additions made during that browser session.
 
-## Media Manager fix in 1.2.1
+Important limitations:
 
-The Media Manager now loads `timeline.json`, `people.json`, and `media.json` directly from the repository root. This prevents the empty-event-dropdown issue caused by relative paths or a cached older `shared.js` file.
+- It does not upload or move image/video files.
+- New files must still be placed in `assets/media/`.
+- Unsaved additions are lost when the page is refreshed or closed.
+- The downloaded manifest must replace `data/media.json` before the next session.
 
+## Prepare videos
 
-## Media detection fix in 1.2.2
+GitHub Pages does not transcode media at runtime. Use the preparation helper for large or incompatible source videos:
 
-- Media existence is checked with lightweight HTTP requests instead of loading full video metadata.
-- Large or slow MP4 files no longer block the entire Gallery from rendering.
-- Every media record now has an explicit `assets/media/...` path.
-- Duplicate media ordering was normalized.
-- `tools/media-diagnostics.html` reports exactly which files are found or missing.
+```bash
+python tools/prepare_media.py input-video.mov --event EVENT_ID --caption "Caption"
+```
 
+The helper converts video to a web-compatible MP4, fits it within 720p according to orientation, caps it at 30 FPS, creates a poster frame, places generated files in `assets/media/`, and updates `data/media.json`.
 
-## Timeline additions in 1.3.0
+## Validate the archive
 
-- Late April 2025 — The Track Pantsing Prank
-- May 19, 2025 — Caguas Botanical Garden Field Trip
-- October 19, 2025 — Welcome-Back Beach Party
+Run the dependency-free validator from the repository root:
 
+```bash
+python tools/validate_archive.py
+```
 
-## Performance fix in 1.3.1
+Also verify that all records marked available have real files:
 
-The archive no longer checks every media URL before rendering the timeline or gallery.
+```bash
+python tools/validate_archive.py --check-files
+```
 
-Each media record now has:
+Validation checks include:
 
-- `available: true` when the file currently exists
-- `available: false` for an intentionally empty placeholder
-- an explicit `path` under `assets/media/`
+- duplicate event, person, media, filename, path, and order values
+- duplicate people inside a single event or media record
+- unknown person and event references
+- required fields and allowed enum values
+- date, visible date label, sort timestamp, era year, and season consistency
+- media extension, type, path, and availability consistency
 
-The Media Manager and preparation script automatically add these fields to future records. The diagnostics page still performs real network checks and reports manifest mismatches.
+The workflow in `.github/workflows/validate-archive.yml` runs automatically on relevant pull requests and pushes to `main`.
 
+## Media diagnostics
 
-## Media sync in 1.3.2
+The normal site trusts `available: true` for performance. To perform real browser requests against every media path, open:
 
-- Merged the latest 144-record media manifest.
-- Preserved the fast `available` flags from the performance revision.
-- Marked the seven newest supplied media records as available.
-- This patch intentionally excludes `assets/media/`; overlay it onto the existing project so newer media files remain in place.
+```text
+http://localhost:8000/tools/media-diagnostics.html
+```
+
+Use the diagnostics page when a gallery item is missing, a filename may have incorrect capitalization, or the manifest and repository files may be out of sync.
+
+## Maintenance history
+
+### 1.3.0 — Timeline additions
+
+Added the Track Pantsing Prank, Caguas Botanical Garden Field Trip, and Welcome-Back Beach Party.
+
+### 1.3.1 — Media performance
+
+Introduced explicit `path` and `available` fields so the site no longer performs more than one hundred file checks before rendering.
+
+### 1.3.2 — Media sync
+
+Merged the 144-record media manifest while preserving fast availability flags and the existing media folder.
+
+### Post-1.3.2 maintenance
+
+- Added Kamilo’s May 1, 2026 bowling birthday event.
+- Updated participant lists across much of the timeline.
+- Sorted timeline rendering by each event’s `sort` timestamp.
+- Added automatic repository validation through GitHub Actions.
+- Refreshed documentation to match the current archive structure and workflow.
+
+## Planned expansion
+
+The stable person and event IDs are ready to support future People and Dictionary sections without duplicating timeline content.
