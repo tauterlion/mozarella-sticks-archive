@@ -20,6 +20,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const filterToggle = document.querySelector('#filter-toggle');
     const filterDrawer = document.querySelector('#filter-drawer');
     const activeFilterCount = document.querySelector('#active-filter-count');
+    const activeFilters = document.querySelector('#active-filters');
+
+    const importanceLabels = {
+      major: 'Major',
+      supporting: 'Supporting',
+      minor: 'Minor'
+    };
+    const certaintyLabels = {
+      confirmed: 'Confirmed',
+      approximate: 'Approximate',
+      range: 'Range'
+    };
 
     MSArchive.setOptions(eraFilter, data.eraOrder);
     MSArchive.setOptions(
@@ -30,21 +42,88 @@ document.addEventListener('DOMContentLoaded', async () => {
     );
     MSArchive.setOptions(categoryFilter, data.categoryOrder);
 
-    const params = new URLSearchParams(location.search);
-    search.value = params.get('q') || '';
-    eraFilter.value = params.get('era') || '';
-    personFilter.value = params.get('person') || '';
-    categoryFilter.value = params.get('category') || '';
+    const validOptionValue = (select, value) =>
+      [...select.options].some(option => option.value === value) ? value : '';
 
-    if (params.get('importance')) {
-      const allowed = new Set(params.get('importance').split(','));
-      importanceChecks.forEach(input => input.checked = allowed.has(input.value));
-    }
+    const applyMultiValue = (params, key, controls) => {
+      const raw = params.get(key);
+      if (raw === null) {
+        controls.forEach(input => input.checked = true);
+        return;
+      }
 
-    if (params.get('certainty')) {
-      const allowed = new Set(params.get('certainty').split(','));
-      certaintyChecks.forEach(input => input.checked = allowed.has(input.value));
-    }
+      const allowedValues = new Set(controls.map(input => input.value));
+      const selected = raw === 'none'
+        ? new Set()
+        : new Set(raw.split(',').filter(value => allowedValues.has(value)));
+      if (raw !== 'none' && selected.size === 0) {
+        controls.forEach(input => input.checked = true);
+        return;
+      }
+      controls.forEach(input => input.checked = selected.has(input.value));
+    };
+
+    const applyUrlState = () => {
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      eraFilter.value = validOptionValue(eraFilter, params.get('era') || '');
+      personFilter.value = validOptionValue(personFilter, params.get('person') || '');
+      categoryFilter.value = validOptionValue(categoryFilter, params.get('category') || '');
+      applyMultiValue(params, 'importance', importanceChecks);
+      applyMultiValue(params, 'certainty', certaintyChecks);
+    };
+
+    const selectedValues = controls => controls
+      .filter(input => input.checked)
+      .map(input => input.value);
+
+    const buildStateParams = () => {
+      const params = new URLSearchParams();
+      const allowedImportance = selectedValues(importanceChecks);
+      const allowedCertainty = selectedValues(certaintyChecks);
+
+      if (search.value.trim()) params.set('q', search.value.trim());
+      if (eraFilter.value) params.set('era', eraFilter.value);
+      if (personFilter.value) params.set('person', personFilter.value);
+      if (categoryFilter.value) params.set('category', categoryFilter.value);
+      if (allowedImportance.length !== importanceChecks.length) {
+        params.set('importance', allowedImportance.length ? allowedImportance.join(',') : 'none');
+      }
+      if (allowedCertainty.length !== certaintyChecks.length) {
+        params.set('certainty', allowedCertainty.length ? allowedCertainty.join(',') : 'none');
+      }
+
+      return params;
+    };
+
+    const currentAnchor = () => {
+      try {
+        return decodeURIComponent(location.hash.slice(1));
+      } catch {
+        return '';
+      }
+    };
+
+    const buildTimelineUrl = (anchor = '') => {
+      const params = buildStateParams();
+      const query = params.toString();
+      const hash = anchor ? `#${encodeURIComponent(anchor)}` : '';
+      return `timeline.html${query ? `?${query}` : ''}${hash}`;
+    };
+
+    const syncTimelineUrl = anchor => {
+      const relativeUrl = buildTimelineUrl(anchor);
+      const browserUrl = `${location.pathname}${relativeUrl.slice('timeline.html'.length)}`;
+      history.replaceState(null, '', browserUrl);
+      try {
+        sessionStorage.setItem('msArchive.timelineReturnUrl', relativeUrl);
+      } catch (error) {
+        console.warn('Timeline state could not be saved for this session.', error);
+      }
+      return relativeUrl;
+    };
+
+    applyUrlState();
 
     const searchPrompts = [
       'Try “Close-Up”',
@@ -54,6 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       'Try “Samantha”'
     ];
     let promptIndex = 0;
+    let hasAppliedInitialHash = false;
 
     const updateSearchState = () => {
       searchShell.classList.toggle('has-value', Boolean(search.value.trim()));
@@ -83,15 +163,65 @@ document.addEventListener('DOMContentLoaded', async () => {
       setFilterDrawer(filterToggle.getAttribute('aria-expanded') !== 'true');
     });
 
-    const activePanelFilterCount = () => {
-      let count = 0;
-      if (eraFilter.value) count += 1;
-      if (personFilter.value) count += 1;
-      if (categoryFilter.value) count += 1;
-      count += 3 - importanceChecks.filter(input => input.checked).length;
-      count += 3 - certaintyChecks.filter(input => input.checked).length;
-      activeFilterCount.textContent = count;
-      activeFilterCount.hidden = count === 0;
+    const setAllChecked = (controls, checked) => {
+      controls.forEach(input => input.checked = checked);
+    };
+
+    const resetAllFilters = () => {
+      search.value = '';
+      eraFilter.value = '';
+      personFilter.value = '';
+      categoryFilter.value = '';
+      setAllChecked(importanceChecks, true);
+      setAllChecked(certaintyChecks, true);
+    };
+
+    const activeFilterDefinitions = () => {
+      const filters = [];
+      const importance = selectedValues(importanceChecks);
+      const certainty = selectedValues(certaintyChecks);
+
+      if (search.value.trim()) {
+        filters.push({key: 'q', label: `Search: ${search.value.trim()}`});
+      }
+      if (eraFilter.value) {
+        filters.push({key: 'era', label: `Era: ${eraFilter.value}`});
+      }
+      if (personFilter.value) {
+        const personName = data.peopleById[personFilter.value]?.displayName || personFilter.value;
+        filters.push({key: 'person', label: `Person: ${personName}`});
+      }
+      if (categoryFilter.value) {
+        filters.push({key: 'category', label: `Category: ${categoryFilter.value}`});
+      }
+      if (importance.length !== importanceChecks.length) {
+        const label = importance.length
+          ? importance.map(value => importanceLabels[value] || value).join(', ')
+          : 'None';
+        filters.push({key: 'importance', label: `Importance: ${label}`});
+      }
+      if (certainty.length !== certaintyChecks.length) {
+        const label = certainty.length
+          ? certainty.map(value => certaintyLabels[value] || value).join(', ')
+          : 'None';
+        filters.push({key: 'certainty', label: `Date: ${label}`});
+      }
+
+      return filters;
+    };
+
+    const renderActiveFilters = () => {
+      const filters = activeFilterDefinitions();
+      activeFilterCount.textContent = filters.length;
+      activeFilterCount.hidden = filters.length === 0;
+      activeFilters.hidden = filters.length === 0;
+      activeFilters.innerHTML = filters.length
+        ? `${filters.map(filter => `
+            <button class="active-filter-chip" type="button" data-clear-filter="${filter.key}" aria-label="Remove ${MSArchive.escapeHtml(filter.label)} filter">
+              <span>${MSArchive.escapeHtml(filter.label)}</span><span aria-hidden="true">×</span>
+            </button>`).join('')}
+            <button class="clear-all-filters" type="button" data-clear-filter="all">Clear all</button>`
+        : '';
     };
 
     const eventMarkup = (event, media) => {
@@ -112,6 +242,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           return `<a class="event-media-item" href="gallery.html?event=${encodeURIComponent(event.id)}">${MSArchive.mediaPreviewMarkup(item)}</a>`;
         })
         .join('');
+      const returnUrl = buildTimelineUrl(event.id);
+      const eventUrl = `event.html?id=${encodeURIComponent(event.id)}&from=${encodeURIComponent(returnUrl)}`;
 
       return `<article class="event-card" id="${MSArchive.escapeHtml(event.id)}" data-importance="${event.importance}">
         <div class="event-main">
@@ -126,7 +258,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="event-summary">${MSArchive.escapeHtml(event.summary)}</p>
           <div class="event-actions">
             <button type="button" data-expand="${event.id}" aria-expanded="false" aria-controls="details-${event.id}">View more</button>
-            <a href="event.html?id=${encodeURIComponent(event.id)}">Full event page →</a>
+            <a href="${MSArchive.escapeHtml(eventUrl)}">Full event page →</a>
           </div>
         </div>
 
@@ -153,13 +285,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       button.setAttribute('aria-expanded', open.toString());
     };
 
-    const render = () => {
+    const render = ({preserveHash = false, syncHistory = true} = {}) => {
       const query = MSArchive.normalize(search.value.trim());
-      const allowedImportance = new Set(importanceChecks.filter(input => input.checked).map(input => input.value));
-      const allowedCertainty = new Set(certaintyChecks.filter(input => input.checked).map(input => input.value));
+      const allowedImportance = new Set(selectedValues(importanceChecks));
+      const allowedCertainty = new Set(selectedValues(certaintyChecks));
+      const anchor = preserveHash ? currentAnchor() : '';
 
       const filtered = [...data.events]
-        .sort((a, b) => a.sort.localeCompare(b.sort))
+        .sort((a, b) => String(a.sort || '').localeCompare(String(b.sort || '')))
         .filter(event => {
           if (query && !MSArchive.eventSearchText(event, data).includes(query)) return false;
           if (eraFilter.value && event.era !== eraFilter.value) return false;
@@ -171,8 +304,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
       document.querySelector('#visible-count').textContent = filtered.length;
-      activePanelFilterCount();
+      renderActiveFilters();
       updateSearchState();
+
+      if (syncHistory) syncTimelineUrl(anchor);
 
       const grouped = data.eraOrder
         .map(era => [era, filtered.filter(event => event.era === era)])
@@ -198,41 +333,52 @@ document.addEventListener('DOMContentLoaded', async () => {
         `).join('');
       }
 
-      const nextParams = new URLSearchParams();
-      if (search.value.trim()) nextParams.set('q', search.value.trim());
-      if (eraFilter.value) nextParams.set('era', eraFilter.value);
-      if (personFilter.value) nextParams.set('person', personFilter.value);
-      if (categoryFilter.value) nextParams.set('category', categoryFilter.value);
-      if (allowedImportance.size !== 3) nextParams.set('importance', [...allowedImportance].join(','));
-      if (allowedCertainty.size !== 3) nextParams.set('certainty', [...allowedCertainty].join(','));
-
-      history.replaceState(
-        null,
-        '',
-        `${location.pathname}${nextParams.size ? `?${nextParams}` : ''}${location.hash}`
-      );
-
       root.querySelectorAll('[data-expand]').forEach(button => {
         button.addEventListener('click', () => {
           setPanel(button, button.getAttribute('aria-expanded') !== 'true');
         });
       });
 
-      if (location.hash) {
-        requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView({block: 'center'}));
+      if (anchor && !hasAppliedInitialHash) {
+        hasAppliedInitialHash = true;
+        requestAnimationFrame(() => {
+          const target = document.getElementById(anchor);
+          target?.scrollIntoView({block: 'center'});
+          target?.classList.add('returned-event');
+          window.setTimeout(() => target?.classList.remove('returned-event'), 1800);
+        });
       }
     };
 
     [search, eraFilter, personFilter, categoryFilter, ...importanceChecks, ...certaintyChecks]
-      .forEach(control => control.addEventListener(control === search ? 'input' : 'change', render));
+      .forEach(control => control.addEventListener(control === search ? 'input' : 'change', () => {
+        hasAppliedInitialHash = true;
+        render({preserveHash: false});
+      }));
+
+    activeFilters.addEventListener('click', event => {
+      const button = event.target.closest('[data-clear-filter]');
+      if (!button) return;
+
+      switch (button.dataset.clearFilter) {
+        case 'q': search.value = ''; break;
+        case 'era': eraFilter.value = ''; break;
+        case 'person': personFilter.value = ''; break;
+        case 'category': categoryFilter.value = ''; break;
+        case 'importance': setAllChecked(importanceChecks, true); break;
+        case 'certainty': setAllChecked(certaintyChecks, true); break;
+        case 'all': resetAllFilters(); break;
+        default: return;
+      }
+
+      hasAppliedInitialHash = true;
+      render({preserveHash: false});
+    });
 
     document.querySelector('#reset-filters').addEventListener('click', () => {
-      search.value = '';
-      eraFilter.value = '';
-      personFilter.value = '';
-      categoryFilter.value = '';
-      [...importanceChecks, ...certaintyChecks].forEach(input => input.checked = true);
-      render();
+      resetAllFilters();
+      hasAppliedInitialHash = true;
+      render({preserveHash: false});
     });
 
     document.querySelector('#expand-all').addEventListener('click', event => {
@@ -242,8 +388,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       event.currentTarget.textContent = shouldOpen ? 'Collapse all' : 'Expand all';
     });
 
+    window.addEventListener('popstate', () => {
+      applyUrlState();
+      hasAppliedInitialHash = false;
+      render({preserveHash: true, syncHistory: false});
+    });
+
+    window.addEventListener('pageshow', event => {
+      if (!event.persisted) return;
+      applyUrlState();
+      hasAppliedInitialHash = false;
+      render({preserveHash: true});
+    });
+
     updateSearchState();
-    render();
+    render({preserveHash: true});
   } catch (error) {
     root.innerHTML = MSArchive.errorMarkup(error);
   }
