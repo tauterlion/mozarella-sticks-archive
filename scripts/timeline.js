@@ -158,15 +158,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       const allowedImportance = new Set(importanceChecks.filter(input => input.checked).map(input => input.value));
       const allowedCertainty = new Set(certaintyChecks.filter(input => input.checked).map(input => input.value));
 
-      const filtered = data.events.filter(event => {
-        if (query && !MSArchive.eventSearchText(event, data).includes(query)) return false;
-        if (eraFilter.value && event.era !== eraFilter.value) return false;
-        if (personFilter.value && !event.people.includes(personFilter.value)) return false;
-        if (categoryFilter.value && !event.categories.includes(categoryFilter.value)) return false;
-        if (!allowedImportance.has(event.importance)) return false;
-        if (!allowedCertainty.has(event.certainty)) return false;
-        return true;
-      });
+      const filtered = [...data.events]
+        .sort((a, b) => a.sort.localeCompare(b.sort))
+        .filter(event => {
+          if (query && !MSArchive.eventSearchText(event, data).includes(query)) return false;
+          if (eraFilter.value && event.era !== eraFilter.value) return false;
+          if (personFilter.value && !event.people.includes(personFilter.value)) return false;
+          if (categoryFilter.value && !event.categories.includes(categoryFilter.value)) return false;
+          if (!allowedImportance.has(event.importance)) return false;
+          if (!allowedCertainty.has(event.certainty)) return false;
+          return true;
+        });
 
       document.querySelector('#visible-count').textContent = filtered.length;
       activePanelFilterCount();

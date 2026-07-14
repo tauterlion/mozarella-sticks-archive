@@ -1,0 +1,39 @@
+name: Validate archive data
+
+on:
+  pull_request:
+    paths:
+      - "data/**"
+      - "assets/media/**"
+      - "tools/validate_archive.py"
+      - ".github/workflows/validate-archive.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "data/**"
+      - "assets/media/**"
+      - "tools/validate_archive.py"
+      - ".github/workflows/validate-archive.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate timeline, people, and media
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run archive validator
+        run: python tools/validate_archive.py --check-files
