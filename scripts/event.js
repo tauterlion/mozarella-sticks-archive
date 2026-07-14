@@ -32,9 +32,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const returnUrl = requestedReturnUrl || storedReturnUrl || `timeline.html${id ? `#${encodeURIComponent(id)}` : ''}`;
   const returnHasFilters = Boolean(new URL(returnUrl, location.href).search);
+  const returnUrlForEvent = eventId => {
+    const url = new URL(returnUrl, location.href);
+    url.hash = encodeURIComponent(eventId);
+    return `timeline.html${url.search}${url.hash}`;
+  };
   const eventUrl = eventId => {
     const eventParams = new URLSearchParams({id: eventId});
-    eventParams.set('from', returnUrl);
+    eventParams.set('from', returnUrlForEvent(eventId));
     return `event.html?${eventParams}`;
   };
 
