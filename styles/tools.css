@@ -22,12 +22,26 @@
 
 .tool-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
 }
 
+.filter-field {
+  min-width: 0;
+}
+
+.filter-field label,
+.field-label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 700;
+}
+
 .tool-grid input[type="file"],
-.tool-grid input[type="text"] {
+.tool-grid input[type="text"],
+.tool-grid input[type="search"],
+.tool-grid select,
+.manager-record-select select {
   width: 100%;
   min-height: 46px;
   padding: 10px 12px;
@@ -37,11 +51,20 @@
   color: var(--text);
 }
 
+.manager-record-select {
+  margin-top: 18px;
+}
+
 .tool-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
+}
+
+.compact-actions {
+  margin-top: 0;
+  justify-content: flex-end;
 }
 
 .tool-note,
@@ -57,6 +80,151 @@
   align-items: center;
 }
 
+.tool-heading h2 {
+  margin-bottom: 0;
+}
+
+.people-picker {
+  position: relative;
+}
+
+.people-picker summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.people-picker summary::-webkit-details-marker {
+  display: none;
+}
+
+.people-picker summary::after {
+  content: "▾";
+  color: var(--muted);
+  transition: transform .18s ease;
+}
+
+.people-picker[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.people-picker-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(390px, 90vw);
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+}
+
+.people-search-label span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.people-search-label input {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.people-picker-actions {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.people-picker-actions button {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 6px 9px;
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.people-options {
+  display: grid;
+  max-height: 280px;
+  overflow: auto;
+  gap: 4px;
+  padding-right: 4px;
+}
+
+.person-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  padding: 7px 8px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.person-option:hover {
+  background: var(--surface);
+}
+
+.person-option small {
+  color: var(--muted);
+  font-size: .7rem;
+}
+
+.manager-editor {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.manager-locked-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.manager-locked-grid > div {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--bg);
+}
+
+.manager-locked-grid span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.manager-locked-grid code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--gold);
+}
+
 .manager-list {
   display: grid;
   gap: 10px;
@@ -65,7 +233,7 @@
 
 .manager-record {
   display: grid;
-  grid-template-columns: minmax(150px, .8fr) 1fr auto;
+  grid-template-columns: minmax(170px, .8fr) 1fr auto;
   gap: 14px;
   align-items: center;
   padding: 14px;
@@ -84,6 +252,36 @@
   font-size: .82rem;
 }
 
+.record-badge {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.record-badge.edited {
+  color: var(--gold);
+}
+
+.record-badge.new {
+  color: var(--green, #7ed6a7);
+}
+
+.record-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.manager-record button,
+.people-picker-actions button {
+  cursor: pointer;
+}
+
 .manager-record button {
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -92,14 +290,31 @@
   color: var(--muted);
 }
 
-.manager-record button:hover {
+.manager-record button:hover,
+.people-picker-actions button:hover {
   color: var(--tomato);
   border-color: var(--tomato);
 }
 
 @media (max-width: 820px) {
-  .tool-grid,
+  .tool-heading,
   .manager-record {
+    align-items: stretch;
     grid-template-columns: 1fr;
+  }
+
+  .tool-heading {
+    flex-direction: column;
+  }
+
+  .compact-actions {
+    justify-content: flex-start;
+  }
+
+  .people-picker-panel {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+    box-shadow: none;
   }
 }
