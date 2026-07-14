@@ -2763,9 +2763,9 @@
       "date": "2026-04-22",
       "dateLabel": "April 22, 2026",
       "sort": "2026-04-22T09:00:00",
-      "title": "Vaqueros vs. Indios Feud Begins",
-      "summary": "Jeidenne and Sebastian begin a playful rivalry centered on the Vaqueros and Indios.",
-      "details": "The joking feud begins specifically between Jeidenne, supporting the Vaqueros, and Sebastian, supporting the Indios. Its later development can be expanded as more events are documented.",
+      "title": "Vaqueros vs. Cangrejeros Feud Begins",
+      "summary": "Jeidenne and Sebastian begin a playful rivalry centered on the Vaqueros and Cangrejeros.",
+      "details": "The feud begins specifically between Jeidenne, supporting the Vaqueros, and Sebastian, supporting the Cangrejeros. Its later development can be expanded as more events are documented.",
       "era": "9th Grade – Spring 2026",
       "certainty": "confirmed",
       "importance": "minor",
@@ -2778,7 +2778,7 @@
         "sebastian"
       ],
       "storylines": [
-        "Vaqueros vs. Indios"
+        "Vaqueros vs. Cangrejeros"
       ]
     },
     {
