@@ -1948,6 +1948,83 @@
       "eventId": "josie-birthday",
       "people": [],
       "order": 146
+    },
+    {
+      "id": "group-picture-kamilos-birthday",
+      "file": "group-picture-kamilos-birthday.jpeg",
+      "path": "assets/media/group-picture-kamilos-birthday.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Everyone who had participated in Kamilo's birthday party.",
+      "eventId": "kamilo-bowling-birthday",
+      "people": [],
+      "order": 147
+    },
+    {
+      "id": "bowling-balls-group-picture-bumblebee",
+      "file": "bowling-balls-group-picture-bumblebee.jpeg",
+      "path": "assets/media/bowling-balls-group-picture-bumblebee.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "The girls and bumblebee grouped together, holding bowling balls and smiling.",
+      "eventId": "kamilo-bowling-birthday",
+      "people": [],
+      "order": 148
+    },
+    {
+      "id": "kate-and-lydia-bowling-selfie",
+      "file": "kate-and-lydia-bowling-selfie.jpeg",
+      "path": "assets/media/kate-and-lydia-bowling-selfie.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Kateryna and Lydia posing for a selfie, Lydia was then immediately called for her turn on the lane.",
+      "eventId": "kamilo-bowling-birthday",
+      "people": [],
+      "order": 149
+    },
+    {
+      "id": "ishowspeed-bowling-face",
+      "file": "ishowspeed-bowling-face.jpeg",
+      "path": "assets/media/ishowspeed-bowling-face.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Aedan, Maria, and Samantha presumably recreating the IShowSpeed face.",
+      "eventId": "kamilo-bowling-birthday",
+      "people": [],
+      "order": 150
+    },
+    {
+      "id": "sipping-serafina-selfie",
+      "file": "sipping-serafina-selfie.jpeg",
+      "path": "assets/media/sipping-serafina-selfie.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Serafina took a selfie with Valentina and Josie while they were having a drink.",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 151
+    },
+    {
+      "id": "todd-nico-rock-thinkers",
+      "file": "todd-nico-rock-thinkers.jpeg",
+      "path": "assets/media/todd-nico-rock-thinkers.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Todd and Nico sitting on top of a rock, they called themselves \"The Thinkers\".",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 152
+    },
+    {
+      "id": "bunny-valentina",
+      "file": "bunny-valentina.jpeg",
+      "path": "assets/media/bunny-valentina.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "🐰",
+      "eventId": "josie-birthday",
+      "people": [],
+      "order": 153
     }
   ]
 }
