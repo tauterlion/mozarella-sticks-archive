@@ -1,10 +1,19 @@
 /* Timeline filter state */
 .active-filter-bar {
+  position: sticky;
+  top: calc(82px + var(--timeline-toolbar-height, 78px));
+  z-index: 89;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  padding-top: 14px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .16);
+  backdrop-filter: blur(16px);
 }
 
 .active-filter-bar[hidden] {
@@ -55,6 +64,11 @@
   text-decoration: underline;
 }
 
+body[data-page="timeline"] .timeline-era,
+body[data-page="timeline"] .event-card {
+  scroll-margin-top: calc(188px + var(--timeline-filter-bar-height, 0px));
+}
+
 .event-card.returned-event,
 .event-card:target {
   border-color: color-mix(in srgb, var(--gold) 72%, var(--line));
@@ -102,13 +116,22 @@
   .active-filter-bar {
     overflow-x: auto;
     flex-wrap: nowrap;
-    padding-bottom: 4px;
+    padding: 9px 10px;
     scrollbar-width: thin;
   }
 
   .active-filter-chip,
   .clear-all-filters {
     flex: 0 0 auto;
+  }
+
+  body[data-page="timeline"] .current-era-status {
+    top: calc(
+      82px
+      + var(--timeline-toolbar-height, 78px)
+      + var(--timeline-filter-bar-height, 0px)
+      + 8px
+    );
   }
 
   .event-pagination {
