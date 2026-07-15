@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const eventSort = item => String(data.eventsById[item.eventId]?.sort || '');
     const sortItems = items => items.sort((left, right) => {
       if (sortSelect.value === 'newest') {
-        return eventSort(right).localeCompare(eventSort(left)) || manifestOrder(right) - manifestOrder(left);
+        return eventSort(right).localeCompare(eventSort(left)) || manifestOrder(left) - manifestOrder(right);
       }
       if (sortSelect.value === 'oldest') {
         return eventSort(left).localeCompare(eventSort(right)) || manifestOrder(left) - manifestOrder(right);
@@ -114,8 +114,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (restoreFocus && lastFocusedElement?.isConnected) lastFocusedElement.focus();
     };
 
-    const openLightbox = (index, {preserveOpener = false} = {}) => {
+    const openLightbox = (index, {preserveOpener = false, preserveViewerFocus = false} = {}) => {
       if (!visibleItems.length) return;
+      const viewerFocus = preserveViewerFocus
+        && document.activeElement instanceof HTMLElement
+        && lightbox.contains(document.activeElement)
+        ? document.activeElement
+        : null;
+
       currentIndex = Math.max(0, Math.min(index, visibleItems.length - 1));
       const item = visibleItems[currentIndex];
       if (!preserveOpener && document.activeElement instanceof HTMLElement) {
@@ -134,12 +140,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       nextButton.setAttribute('aria-label', `Next media item. ${currentIndex + 1} of ${visibleItems.length}`);
       lightbox.hidden = false;
       document.body.style.overflow = 'hidden';
-      closeButton.focus();
+
+      const focusTarget = viewerFocus?.isConnected ? viewerFocus : closeButton;
+      focusTarget.focus();
     };
 
     const move = delta => {
       if (!visibleItems.length) return;
-      openLightbox((currentIndex + delta + visibleItems.length) % visibleItems.length, {preserveOpener: true});
+      openLightbox(
+        (currentIndex + delta + visibleItems.length) % visibleItems.length,
+        {preserveOpener: true, preserveViewerFocus: true}
+      );
     };
 
     const render = ({syncHistory = true} = {}) => {
@@ -211,6 +222,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         closeLightbox();
         return;
       }
+
+      const keyboardTarget = event.target instanceof Element ? event.target : document.activeElement;
+      const usingMediaControls = keyboardTarget instanceof Element
+        && Boolean(keyboardTarget.closest('video[controls], audio[controls]'));
+      if (usingMediaControls && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
         move(-1);
@@ -223,12 +240,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
       if (event.key === 'Home') {
         event.preventDefault();
-        openLightbox(0, {preserveOpener: true});
+        openLightbox(0, {preserveOpener: true, preserveViewerFocus: true});
         return;
       }
       if (event.key === 'End') {
         event.preventDefault();
-        openLightbox(visibleItems.length - 1, {preserveOpener: true});
+        openLightbox(visibleItems.length - 1, {preserveOpener: true, preserveViewerFocus: true});
         return;
       }
       if (event.key !== 'Tab') return;
