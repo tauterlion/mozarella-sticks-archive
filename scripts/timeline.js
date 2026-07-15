@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const filterDrawer = document.querySelector('#filter-drawer');
     const activeFilterCount = document.querySelector('#active-filter-count');
     const activeFilters = document.querySelector('#active-filters');
+    const eraNav = document.querySelector('#era-nav');
+    const currentEraStatus = document.querySelector('#current-era-status');
+    const currentEraName = currentEraStatus.querySelector('strong');
 
     const importanceLabels = {
       major: 'Major',
@@ -31,6 +34,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       confirmed: 'Confirmed',
       approximate: 'Approximate',
       range: 'Range'
+    };
+
+    const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const highlightText = (value, rawQuery) => {
+      const text = String(value || '');
+      const terms = [...new Set(String(rawQuery || '').trim().split(/\s+/).filter(Boolean))]
+        .sort((a, b) => b.length - a.length);
+      if (!terms.length) return MSArchive.escapeHtml(text);
+
+      const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
+      return text.split(pattern).map((part, index) => index % 2
+        ? `<mark class="search-highlight">${MSArchive.escapeHtml(part)}</mark>`
+        : MSArchive.escapeHtml(part)).join('');
     };
 
     MSArchive.setOptions(eraFilter, data.eraOrder);
@@ -134,6 +150,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     ];
     let promptIndex = 0;
     let hasAppliedInitialHash = false;
+    let renderedEraSections = [];
+    let eraFrame = 0;
 
     const updateSearchState = () => {
       searchShell.classList.toggle('has-value', Boolean(search.value.trim()));
@@ -183,19 +201,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       const importance = selectedValues(importanceChecks);
       const certainty = selectedValues(certaintyChecks);
 
-      if (search.value.trim()) {
-        filters.push({key: 'q', label: `Search: ${search.value.trim()}`});
-      }
-      if (eraFilter.value) {
-        filters.push({key: 'era', label: `Era: ${eraFilter.value}`});
-      }
+      if (search.value.trim()) filters.push({key: 'q', label: `Search: ${search.value.trim()}`});
+      if (eraFilter.value) filters.push({key: 'era', label: `Era: ${eraFilter.value}`});
       if (personFilter.value) {
         const personName = data.peopleById[personFilter.value]?.displayName || personFilter.value;
         filters.push({key: 'person', label: `Person: ${personName}`});
       }
-      if (categoryFilter.value) {
-        filters.push({key: 'category', label: `Category: ${categoryFilter.value}`});
-      }
+      if (categoryFilter.value) filters.push({key: 'category', label: `Category: ${categoryFilter.value}`});
       if (importance.length !== importanceChecks.length) {
         const label = importance.length
           ? importance.map(value => importanceLabels[value] || value).join(', ')
@@ -226,19 +238,51 @@ document.addEventListener('DOMContentLoaded', async () => {
         : '';
     };
 
-    const eventMarkup = (event, media) => {
+    const updateCurrentEra = () => {
+      eraFrame = 0;
+      if (!renderedEraSections.length) {
+        currentEraStatus.hidden = true;
+        return;
+      }
+
+      const marker = Math.min(window.innerHeight * .34, 260);
+      let current = renderedEraSections[0];
+      renderedEraSections.forEach(section => {
+        if (section.getBoundingClientRect().top <= marker) current = section;
+      });
+
+      const eraId = current.id;
+      const eraName = current.querySelector('.era-heading h2')?.textContent || eraId;
+      eraNav.querySelectorAll('a').forEach(link => {
+        const active = link.dataset.eraTarget === eraId;
+        link.toggleAttribute('aria-current', active);
+        if (active) link.setAttribute('aria-current', 'location');
+      });
+      currentEraName.textContent = eraName;
+      currentEraStatus.hidden = false;
+    };
+
+    const scheduleCurrentEra = () => {
+      if (eraFrame) return;
+      eraFrame = window.requestAnimationFrame(updateCurrentEra);
+    };
+
+    const eventMarkup = (event, media, rawQuery) => {
       const people = event.people
-        .map(id => `<a class="chip" href="timeline.html?person=${encodeURIComponent(id)}">${MSArchive.escapeHtml(MSArchive.personName(id, data))}</a>`)
+        .map(id => {
+          const name = MSArchive.personName(id, data);
+          return `<a class="chip" href="timeline.html?person=${encodeURIComponent(id)}">${highlightText(name, rawQuery)}</a>`;
+        })
         .join('');
       const categories = event.categories
-        .map(category => `<span class="chip">${MSArchive.escapeHtml(category)}</span>`)
+        .map(category => `<span class="chip">${highlightText(category, rawQuery)}</span>`)
         .join('');
       const images = media.slice(0, 2)
         .map(item => {
           if (item.type === 'video') {
             return `<figure class="event-media-item video-item">
               ${MSArchive.mediaPreviewMarkup(item, {controls: true})}
-              <figcaption>${MSArchive.escapeHtml(item.caption)}</figcaption>
+              <figcaption>${highlightText(item.caption, rawQuery)}</figcaption>
             </figure>`;
           }
           return `<a class="event-media-item" href="gallery.html?event=${encodeURIComponent(event.id)}">${MSArchive.mediaPreviewMarkup(item)}</a>`;
@@ -250,14 +294,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       return `<article class="event-card" id="${MSArchive.escapeHtml(event.id)}" data-importance="${event.importance}">
         <div class="event-main">
           <div class="event-topline">
-            <div class="event-date">${MSArchive.escapeHtml(event.dateLabel)}</div>
+            <div class="event-date">${highlightText(event.dateLabel, rawQuery)}</div>
             <div class="event-badges">
               <span class="badge ${event.importance}">${MSArchive.importanceLabel(event.importance)}</span>
               <span class="badge ${event.certainty}">${MSArchive.certaintyLabel(event.certainty)}</span>
             </div>
           </div>
-          <h3>${MSArchive.escapeHtml(event.title)}</h3>
-          <p class="event-summary">${MSArchive.escapeHtml(event.summary)}</p>
+          <h3>${highlightText(event.title, rawQuery)}</h3>
+          <p class="event-summary">${highlightText(event.summary, rawQuery)}</p>
           <div class="event-actions">
             <button type="button" data-expand="${event.id}" aria-expanded="false" aria-controls="details-${event.id}">View more</button>
             <a href="${MSArchive.escapeHtml(eventUrl)}">Full event page →</a>
@@ -266,7 +310,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         <div class="event-details" id="details-${event.id}" data-open="false" aria-hidden="true" inert>
           <div class="event-details-inner">
-            <p>${MSArchive.escapeHtml(event.details)}</p>
+            <p>${highlightText(event.details, rawQuery)}</p>
             <div class="event-meta">
               ${people ? `<div class="meta-row"><span class="meta-label">People</span><div class="chip-list">${people}</div></div>` : ''}
               <div class="meta-row"><span class="meta-label">Tags</span><div class="chip-list">${categories}</div></div>
@@ -288,7 +332,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const render = ({preserveHash = false, syncHistory = true} = {}) => {
-      const query = MSArchive.normalize(search.value.trim());
+      const rawQuery = search.value.trim();
+      const query = MSArchive.normalize(rawQuery);
       const allowedImportance = new Set(selectedValues(importanceChecks));
       const allowedCertainty = new Set(selectedValues(certaintyChecks));
       const anchor = preserveHash ? currentAnchor() : '';
@@ -315,8 +360,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         .map(era => [era, filtered.filter(event => event.era === era)])
         .filter(([, events]) => events.length);
 
-      document.querySelector('#era-nav').innerHTML = grouped
-        .map(([era, events]) => `<a href="#${MSArchive.slug(era)}">${MSArchive.escapeHtml(era)} <span>(${events.length})</span></a>`)
+      eraNav.innerHTML = grouped
+        .map(([era, events]) => {
+          const eraId = MSArchive.slug(era);
+          return `<a href="#${eraId}" data-era-target="${eraId}">${MSArchive.escapeHtml(era)} <span>(${events.length})</span></a>`;
+        })
         .join('');
 
       if (!filtered.length) {
@@ -325,15 +373,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         root.innerHTML = grouped.map(([era, events]) => `
           <section class="timeline-era" id="${MSArchive.slug(era)}">
             <header class="era-heading">
-              <h2>${MSArchive.escapeHtml(era)}</h2>
+              <h2>${highlightText(era, rawQuery)}</h2>
               <span class="era-count">${events.length} event${events.length === 1 ? '' : 's'}</span>
             </header>
             <div class="event-list">
-              ${events.map(event => eventMarkup(event, mediaByEvent[event.id] || [])).join('')}
+              ${events.map(event => eventMarkup(event, mediaByEvent[event.id] || [], rawQuery)).join('')}
             </div>
           </section>
         `).join('');
       }
+
+      renderedEraSections = [...root.querySelectorAll('.timeline-era')];
+      scheduleCurrentEra();
 
       root.querySelectorAll('[data-expand]').forEach(button => {
         button.addEventListener('click', () => {
@@ -348,6 +399,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           target?.scrollIntoView({block: 'center'});
           target?.classList.add('returned-event');
           window.setTimeout(() => target?.classList.remove('returned-event'), 1800);
+          scheduleCurrentEra();
         });
       }
     };
@@ -389,6 +441,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       buttons.forEach(button => setPanel(button, shouldOpen));
       event.currentTarget.textContent = shouldOpen ? 'Collapse all' : 'Expand all';
     });
+
+    window.addEventListener('scroll', scheduleCurrentEra, {passive: true});
+    window.addEventListener('resize', scheduleCurrentEra);
 
     window.addEventListener('popstate', () => {
       applyUrlState();
