@@ -7,6 +7,7 @@
   <title>Gallery · Mozarella Sticks Archive</title>
   <link rel="stylesheet" href="styles/shared.css">
   <link rel="stylesheet" href="styles/gallery.css">
+  <link rel="stylesheet" href="styles/browsing-polish.css?v=1.6.0">
 </head>
 <body data-page="gallery">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -34,12 +35,15 @@
   </div>
   <div class="timeline-summary"><strong id="gallery-count">—</strong><span>media items</span></div>
 </section>
-<section class="gallery-controls shell" aria-label="Gallery filters">
-  <div class="search-field wide-field"><label for="gallery-search">Search</label><input id="gallery-search" type="search" placeholder="Search captions, events, or people" autocomplete="off"></div>
+<section class="gallery-controls shell" aria-label="Gallery filters and sorting">
+  <div class="search-field wide-field"><label for="gallery-search">Search</label><input id="gallery-search" type="search" placeholder="Search captions, events, or people" autocomplete="off" aria-keyshortcuts="/" title="Press / to focus search"></div>
   <div class="filter-field"><label for="gallery-era">Era</label><select id="gallery-era"><option value="">All eras</option></select></div>
   <div class="filter-field"><label for="gallery-person">Person</label><select id="gallery-person"><option value="">All people</option></select></div>
   <div class="filter-field"><label for="gallery-event">Event</label><select id="gallery-event"><option value="">All events</option></select></div>
+  <div class="filter-field"><label for="gallery-type">Media type</label><select id="gallery-type"><option value="">Images and videos</option><option value="image">Images only</option><option value="video">Videos only</option></select></div>
+  <div class="filter-field"><label for="gallery-sort">Sort</label><select id="gallery-sort"><option value="manifest">Archive order</option><option value="newest">Newest events first</option><option value="oldest">Oldest events first</option></select></div>
   <button id="gallery-reset" class="button ghost" type="button">Reset</button>
+  <p class="gallery-keyboard-hint"><kbd>/</kbd> focuses search. In the viewer, use <kbd>←</kbd>/<kbd>→</kbd>, <kbd>Home</kbd>/<kbd>End</kbd>, and <kbd>Esc</kbd>.</p>
 </section>
 <section id="gallery-root" class="gallery-grid shell" aria-live="polite"><div class="loading-state">Checking media files…</div></section>
 <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Media viewer">
@@ -56,6 +60,7 @@
 </footer>
 
   <script src="scripts/shared.js?v=1.3.2" defer></script>
-  <script src="scripts/gallery.js?v=1.2.2" defer></script>
+  <script src="scripts/gallery.js?v=1.6.0" defer></script>
+  <script src="scripts/browsing-polish.js?v=1.6.0" defer></script>
 </body>
 </html>
