@@ -53,8 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.title = `${event.title} · Mozarella Sticks Archive`;
     const available = await MSArchive.availableMedia(data.media.filter(item => item.eventId === event.id));
-    const orderedEvents = [...data.events]
-      .sort((a, b) => String(a.sort || '').localeCompare(String(b.sort || '')));
+    const orderedEvents = MSArchive.orderedEvents(data.events);
     const returnState = new URL(returnUrl, location.href);
     const returnParams = returnState.searchParams;
     const allowedValues = (key, defaults) => {
@@ -175,6 +174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ${relatedMarkup}
         ${pagination}
       </article>`;
+    MSArchive.reveal(root);
   } catch (error) {
     root.innerHTML = MSArchive.errorMarkup(error);
   }

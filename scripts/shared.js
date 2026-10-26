@@ -96,6 +96,20 @@
     };
   };
 
+  const escapeRegExp = value => value.replace(/[.*+?^{}$()|[\]\\]/g, '\\$&');
+  MS.highlightText = (value, rawQuery) => {
+    const text = String(value || '');
+    const terms = [...new Set(String(rawQuery || '').trim().split(/\s+/).filter(Boolean))]
+      .sort((a, b) => b.length - a.length);
+    if (!terms.length) return MS.escapeHtml(text);
+    const pattern = new RegExp('(' + terms.map(escapeRegExp).join('|') + ')', 'gi');
+    return text.split(pattern).map((part, index) => index % 2
+      ? '<mark class="search-highlight">' + MS.escapeHtml(part) + '</mark>'
+      : MS.escapeHtml(part)).join('');
+  };
+
+  MS.orderedEvents = events => [...events].sort((a,b) => String(a.sort || '').localeCompare(String(b.sort || '')));
+
   MS.personName = (id, data) => data.peopleById[id]?.displayName || id;
   MS.personSearchText = (id, data) => {
     const person = data.peopleById[id];
@@ -216,17 +230,26 @@
     return `<div class="error-state"><strong>The archive could not load.</strong>${MS.escapeHtml(error.message)}${localHint}</div>`;
   };
 
-  const storedTheme = localStorage.getItem('ms-theme');
+  let storedTheme = '';
+  try { storedTheme = localStorage.getItem('ms-theme'); } catch {}
   const preferredTheme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  document.documentElement.dataset.theme = storedTheme || preferredTheme;
-
+  document.documentElement.dataset.theme = ['dark','light'].includes(storedTheme) ? storedTheme : preferredTheme;
   document.addEventListener('DOMContentLoaded', () => {
     const page = document.body.dataset.page;
-    document.querySelector(`[data-nav="${page}"]`)?.setAttribute('aria-current', 'page');
-    document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+    document.querySelector('[data-nav="'+page+'"]')?.setAttribute('aria-current','page');
+    const toggle = document.querySelector('.theme-toggle');
+    const labelTheme = () => {
+      const light = document.documentElement.dataset.theme === 'light';
+      toggle?.setAttribute('aria-label', 'Switch to '+(light?'dark':'light')+' theme');
+      toggle?.setAttribute('aria-pressed', String(light));
+      if (toggle) toggle.title = 'Current theme: '+(light?'light':'dark');
+    };
+    labelTheme();
+    toggle?.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
       document.documentElement.dataset.theme = next;
-      localStorage.setItem('ms-theme', next);
+      try { localStorage.setItem('ms-theme', next); } catch {}
+      labelTheme();
     });
   });
 })();

@@ -11,15 +11,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       const results = await Promise.all(data.media.map(async item => {
         const candidates = MSArchive.mediaUrlCandidates(item);
         const resolved = await MSArchive.firstExistingUrl(candidates);
-        return {...item, resolved, candidates};
+        const mismatch = (item.available === true && !resolved) || (item.available === false && Boolean(resolved));
+        return {...item, resolved, candidates, mismatch};
       }));
 
       const found = results.filter(item => item.resolved);
       const missing = results.filter(item => !item.resolved);
-      const mismatches = results.filter(item =>
-        (item.available === true && !item.resolved) ||
-        (item.available === false && item.resolved)
-      );
+      const mismatches = results.filter(item => item.mismatch);
 
       summary.textContent = `${found.length} found · ${missing.length} missing · ${mismatches.length} manifest mismatches`;
 
@@ -27,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <article class="manager-record">
           <div>
             <code>${MSArchive.escapeHtml(item.file)}</code>
-            <p>${item.resolved ? 'Found' : 'Missing'}${item.available === item.resolved ? '' : ' · manifest mismatch'}</p>
+            <p>${item.resolved ? 'Found' : 'Missing'}${item.mismatch ? ' · manifest mismatch' : ''}</p>
           </div>
           <div>
             <strong>${MSArchive.escapeHtml(item.caption)}</strong>

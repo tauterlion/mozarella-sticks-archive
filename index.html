@@ -10,13 +10,14 @@
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  
+
 <header class="site-header">
   <a class="brand" href="index.html" aria-label="Mozarella Sticks Archive home">
     <span class="brand-mark" aria-hidden="true">MS</span>
     <span><strong>Mozarella Sticks</strong><small>Archive</small></span>
   </a>
   <nav class="primary-nav" aria-label="Primary navigation">
+    <a data-nav="home" href="index.html">Home</a>
     <a data-nav="timeline" href="timeline.html">Timeline</a>
     <a data-nav="gallery" href="gallery.html">Gallery</a>
   </nav>
@@ -27,56 +28,23 @@
 
   <main id="main-content">
 <section class="home-hero shell">
-  <div class="hero-copy">
-    <p class="eyebrow">Version B · Media Sync 1.3.2</p>
-    <h1>An evolving archive of the Mozarella Sticks.</h1>
-    <p class="hero-lede">Explore the group’s history through a searchable timeline and an event-linked photo and video gallery.</p>
-    <div class="hero-actions">
-      <a class="button primary" href="timeline.html">Explore the timeline</a>
-      <a class="button secondary" href="gallery.html">Open the gallery</a>
-    </div>
-  </div>
-  <aside class="archive-card" aria-label="Archive statistics">
-    <p class="archive-card-label">Current archive</p>
-    <div class="stat-grid">
-      <div><strong id="event-stat">—</strong><span>events</span></div>
-      <div><strong id="era-stat">—</strong><span>eras</span></div>
-      <div><strong id="people-stat">—</strong><span>people indexed</span></div>
-      <div><strong id="media-stat">—</strong><span>media slots</span></div>
-    </div>
-    <p id="archive-range" class="archive-range">Loading archive range…</p>
-  </aside>
+ <div class="hero-copy"><p class="eyebrow">The Mozarella Sticks Archive</p><h1>A shared history.<br><em>Still unfolding.</em></h1><p class="hero-lede">Trips, everyday moments, and milestones from a shared history.</p><div class="hero-actions"><a class="button primary" href="timeline.html">Explore the timeline ↗</a><a class="button secondary" href="gallery.html">Browse photographs & films</a></div></div>
+ <figure id="hero-photo" class="hero-photo"></figure>
 </section>
-<section class="home-sections shell" aria-label="Archive sections">
-  <article class="section-card timeline-card">
-    <span class="card-index">01</span>
-    <p class="eyebrow">Chronology</p>
-    <h2>Timeline</h2>
-    <p>Filter events by era, person, category, importance, or date confidence. Open any event for a dedicated detail page.</p>
-    <a class="text-link" href="timeline.html">Browse all events <span aria-hidden="true">→</span></a>
-  </article>
-  <article class="section-card gallery-card">
-    <span class="card-index">02</span>
-    <p class="eyebrow">Media</p>
-    <h2>Gallery</h2>
-    <p>Approved images and videos appear automatically when their matching files are added to the repository.</p>
-    <a class="text-link" href="gallery.html">Browse available media <span aria-hidden="true">→</span></a>
-  </article>
-</section>
-<section class="home-latest shell">
-  <div class="section-heading">
-    <div><p class="eyebrow">Latest entry</p><h2>Where the archive currently ends</h2></div>
-  </div>
-  <div id="latest-event" class="latest-event skeleton">Loading latest event…</div>
-</section>
+<section class="shell" aria-label="Archive statistics"><div class="stat-grid">
+ <div><strong id="event-stat">—</strong><span>historical events</span></div><div><strong id="era-stat">—</strong><span>eras of our history</span></div><div><strong id="people-stat">—</strong><span>people indexed</span></div><div><strong id="media-stat">—</strong><span>available media</span></div>
+</div><p id="archive-range" class="archive-range">Loading archive range…</p></section>
+<section class="home-section shell"><div class="section-heading"><div><p class="eyebrow">Selected memories</p><h2>Moments worth returning to.</h2></div><a class="text-link" href="timeline.html">View timeline →</a></div><div id="featured-events" class="featured-grid"></div></section>
+<section class="home-section shell"><div class="section-heading"><div><p class="eyebrow">From the archive</p><h2>Photographs & films.</h2></div><a class="text-link" href="gallery.html">View the complete Gallery →</a></div><div id="home-photographs" class="home-photographs"></div></section>
+<section class="home-section shell"><div class="section-heading"><div><p class="eyebrow">Latest entry</p><h2>Our latest chapter.</h2></div></div><div id="latest-event" class="latest-event skeleton">Loading latest event…</div></section>
 </main>
-  
+
 <footer class="site-footer">
   <p>A cleaned, community-approved archive. Raw chats and private evidence are not included.</p>
-  <p class="footer-future">People and Dictionary sections are planned for a later version.</p>
 </footer>
 
-  <script src="scripts/shared.js?v=1.3.2" defer></script>
-  <script src="scripts/home.js?v=1.2.2" defer></script>
+  <script src="scripts/shared.js?v=2" defer></script>
+  <script src="scripts/interactions.js" defer></script>
+<script src="scripts/home.js?v=2" defer></script>
 </body>
 </html>
