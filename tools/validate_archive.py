@@ -413,7 +413,7 @@ class Validator:
 
         month_ranges = {
             "Summer": range(6, 9),
-            "Fall": range(9, 13),
+            "Fall": range(8, 13),  # School years can begin in August.
             "Winter": range(1, 3),
             "Spring": range(3, 6),
         }
