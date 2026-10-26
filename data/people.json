@@ -39,6 +39,12 @@
       "status": "Member"
     },
     {
+      "id": "charlee",
+      "displayName": "Charlee",
+      "aliases": [],
+      "status": "Member"
+    },
+    {
       "id": "dash",
       "displayName": "Dash",
       "aliases": [
@@ -95,6 +101,12 @@
         "Kat",
         "Specter"
       ],
+      "status": "Member"
+    },
+    {
+      "id": "leo",
+      "displayName": "Leo",
+      "aliases": [],
       "status": "Member"
     },
     {
@@ -300,12 +312,6 @@
     {
       "id": "leah",
       "displayName": "Leah",
-      "aliases": [],
-      "status": "Connected Person"
-    },
-    {
-      "id": "leo",
-      "displayName": "Leo",
       "aliases": [],
       "status": "Connected Person"
     },

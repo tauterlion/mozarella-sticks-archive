@@ -9,7 +9,8 @@
     "9th Grade – Fall 2025",
     "9th Grade – Winter 2026",
     "9th Grade – Spring 2026",
-    "Summer 2026"
+    "Summer 2026",
+    "10th Grade – Fall 2026"
   ],
   "categoryOrder": [
     "Relationship",
@@ -1035,43 +1036,6 @@
         "jeidenne",
         "bash",
         "lorena"
-      ],
-      "storylines": []
-    },
-    {
-      "id": "kamilo-bowling-birthday",
-      "date": "2026-05-01",
-      "dateLabel": "May 1, 2026",
-      "sort": "2026-05-01T17:00:00",
-      "title": "Kamilo’s Bowling Birthday Party",
-      "summary": "Most of the Mozarella Sticks gather at a bowling alley to celebrate Kamilo’s jokingly proclaimed 47th birthday.",
-      "details": "Kamilo’s birthday party brings together a large portion of the group at a bowling alley filled with music and food. Everyone spends the event bowling, celebrating, and enjoying the gathering, with the occasion remembered as Kamilo’s 47th birthday.",
-      "era": "9th Grade – Spring 2026",
-      "certainty": "confirmed",
-      "importance": "supporting",
-      "categories": [
-        "Friend-Group Development",
-        "Party",
-        "Hangout",
-        "Birthday"
-      ],
-      "people": [
-        "alejandro",
-        "kamilo",
-        "lorena",
-        "alexander",
-        "maria",
-        "lydia",
-        "dash",
-        "lucas",
-        "serafina",
-        "jaime",
-        "jeidenne",
-        "josie",
-        "nicholas",
-        "aedan",
-        "sebastian",
-        "samantha"
       ],
       "storylines": []
     },
@@ -2807,6 +2771,43 @@
       ]
     },
     {
+      "id": "kamilo-bowling-birthday",
+      "date": "2026-05-01",
+      "dateLabel": "May 1, 2026",
+      "sort": "2026-05-01T17:00:00",
+      "title": "Kamilo’s Bowling Birthday Party",
+      "summary": "Most of the Mozarella Sticks gather at a bowling alley to celebrate Kamilo’s jokingly proclaimed 47th birthday.",
+      "details": "Kamilo’s birthday party brings together a large portion of the group at a bowling alley filled with music and food. Everyone spends the event bowling, celebrating, and enjoying the gathering, with the occasion remembered as Kamilo’s 47th birthday.",
+      "era": "9th Grade – Spring 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Friend-Group Development",
+        "Party",
+        "Hangout",
+        "Birthday"
+      ],
+      "people": [
+        "alejandro",
+        "kamilo",
+        "lorena",
+        "alexander",
+        "maria",
+        "lydia",
+        "dash",
+        "lucas",
+        "serafina",
+        "jaime",
+        "jeidenne",
+        "josie",
+        "nicholas",
+        "aedan",
+        "sebastian",
+        "samantha"
+      ],
+      "storylines": []
+    },
+    {
       "id": "physics-final-wendys",
       "date": "2026-05-12",
       "dateLabel": "May 12, 2026",
@@ -2877,6 +2878,215 @@
       "storylines": [
         "Libby and Zach"
       ]
+    },
+    {
+      "id": "alejandro-shaves-beard",
+      "date": "2026-07-30",
+      "dateLabel": "July 30, 2026",
+      "sort": "2026-07-30T12:00:00",
+      "title": "Alejandro Shaves His Beard",
+      "summary": "After growing out a full beard during summer 2026, Alejandro shaves it off.",
+      "details": "Throughout the summer, Alejandro grew his beard out fully, drawing mixed reactions to his appearance. He ultimately shaved it off on July 30, 2026.",
+      "era": "Summer 2026",
+      "certainty": "confirmed",
+      "importance": "minor",
+      "categories": [
+        "Minor Memory"
+      ],
+      "people": [
+        "alejandro"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "charlee-joins-friend-group",
+      "date": "2026-08-10",
+      "dateLabel": "August 10, 2026",
+      "sort": "2026-08-10T12:00:00",
+      "title": "Charlee Joins the Friend Group",
+      "summary": "Charlee arrives at TASIS, while Leo and Machicote become more closely integrated into the Mozarella Sticks.",
+      "details": "At the start of the new school year, Charlee joined TASIS and quickly became part of the girls’ friend group. Although more reserved and quiet than the group's often chaotic atmosphere, she easily befriended people across the Mozarella Sticks. Around the same time, Leo and Sebastian “Machicote” became increasingly integrated into the boys’ circle instead of remaining on its periphery. Both were later added to their respective group chats and invited to hangouts more regularly.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Friend-Group Development",
+        "Arrival or Departure"
+      ],
+      "people": [
+        "charlee",
+        "leo",
+        "sebastian"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "nj-week-2026",
+      "date": "2026-09-02",
+      "dateLabel": "September 2–6, 2026",
+      "sort": "2026-09-02T12:00:00",
+      "title": "NJ Week Conflicts and Breakups",
+      "summary": "A difficult week brings multiple relationship conflicts and breakups across the group.",
+      "details": "From September 2 through 6, a stretch nicknamed “NJ Week” (New Jersey Week) became known for its conflicts. Alejandro and Maria faced a major disagreement, while Lucas and Samantha broke up and Josie and Alexander also ended their relationship. Alejandro and Maria subsequently resolved their conflict and continued dating. Despite the turmoil, Jeidenne and Aedan regarded the week as one of their best.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "range",
+      "importance": "major",
+      "categories": [
+        "Relationship",
+        "Conflict"
+      ],
+      "people": [
+        "alejandro",
+        "maria",
+        "lucas",
+        "samantha",
+        "josie",
+        "alexander",
+        "jeidenne",
+        "aedan"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "jeidenne-aedan-relationship",
+      "date": "2026-09-15",
+      "dateLabel": "September 15, 2026",
+      "sort": "2026-09-15T12:00:00",
+      "title": "Jeidenne and Aedan Begin Dating",
+      "summary": "Jeidenne and Aedan establish their relationship after months of growing closer.",
+      "details": "After several months of development, Jeidenne and Aedan established their relationship on September 15, 2026. Around this time, they also began showing affection publicly more often.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "major",
+      "categories": [
+        "Relationship"
+      ],
+      "people": [
+        "jeidenne",
+        "aedan"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "chilis-movie-hangout",
+      "date": "2026-09-18",
+      "dateLabel": "September 18, 2026",
+      "sort": "2026-09-18T12:00:00",
+      "title": "Chili’s and Movie Hangout",
+      "summary": "A large, unusually relaxed group hangout includes Chili’s, Baskin-Robbins, and a movie at Lydia’s home.",
+      "details": "The Mozarella Sticks hosted an unusually calm hangout with much of the friend group in attendance. The gathering began at Chili’s, continued with dessert at a nearby Baskin-Robbins, and ended with a screening of Guardians of the Galaxy at Lydia’s home.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lorena",
+        "lydia",
+        "dash",
+        "serafina",
+        "kateryna",
+        "jeidenne",
+        "josie",
+        "nicholas",
+        "aedan",
+        "maria",
+        "libby",
+        "todd",
+        "samantha"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "alejandro-birthday-2026",
+      "date": "2026-09-26",
+      "dateLabel": "September 26, 2026",
+      "sort": "2026-09-26T12:00:00",
+      "title": "Alejandro’s Birthday Pool Party",
+      "summary": "Alejandro celebrates his birthday with friends, swimming, puzzles, and Jackbox games.",
+      "details": "Alejandro hosted a birthday party attended by the invited group of boys. The celebration included swimming in the pool, solving puzzles, and playing Jackbox together.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Birthday",
+        "Party",
+        "Hangout"
+      ],
+      "people": [
+        "alejandro",
+        "marco",
+        "alexander",
+        "dash",
+        "lucas",
+        "shane",
+        "jaime",
+        "jeidenne",
+        "kamilo",
+        "leo",
+        "sebastian",
+        "todd"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "friendship-edit-v2",
+      "date": "2026-10-14",
+      "dateLabel": "October 14, 2026",
+      "sort": "2026-10-14T12:00:00",
+      "title": "Alejandro Showcases Second FRIENDSHIP Edit",
+      "summary": "Alejandro shares a second version of his FRIENDSHIP edit, prompting appreciative responses from friends.",
+      "details": "Alejandro edited and showcased the second version of the FRIENDSHIP video. Many friends responded positively and expressed appreciation for one another. One response read: “I know if I said this in the gc I was gonna get (made fun of), but that video was so amazing 🥹🥹”",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Creative Project",
+        "Digital History",
+        "Friend-Group Development"
+      ],
+      "people": [
+        "alejandro"
+      ],
+      "storylines": []
+    },
+    {
+      "id": "october-psat-2026",
+      "date": "2026-10-14",
+      "dateLabel": "October 14, 2026",
+      "sort": "2026-10-14T12:00:00",
+      "title": "Students Take the PSAT",
+      "summary": "Middle and high school students take the PSAT and disagree about which sections were most difficult.",
+      "details": "Middle and high school students took the PSAT. Their reactions were mixed afterward: some found the math sections more challenging, while others considered the English questions harder.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event"
+      ],
+      "people": [],
+      "storylines": []
+    },
+    {
+      "id": "stuco-medalla-arena-party",
+      "date": "2026-10-17",
+      "dateLabel": "October 17, 2026",
+      "sort": "2026-10-17T12:00:00",
+      "title": "StuCo Class Party at Medalla Arena",
+      "summary": "The student council hosts a class party at Medalla Arena in Toroverda.",
+      "details": "The StuCo board organized a class party at Medalla Arena in Toroverda. Activities included table tennis, eight-ball pool, karaoke rooms, arcade games, a minor-friendly bar, and food.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "School Event",
+        "Party"
+      ],
+      "people": [],
+      "storylines": []
     }
   ]
 }

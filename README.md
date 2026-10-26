@@ -8,16 +8,16 @@ Revision 2 applies the approved editorial remaster to the full archive, includin
 
 | Item | Current total |
 |---|---:|
-| Timeline events | 103 |
-| Eras | 10 |
-| People indexed | 35 |
-| Members | 23 |
-| Connected people | 12 |
+| Timeline events | 112 |
+| Eras | 11 |
+| People indexed | 36 |
+| Members | 25 |
+| Connected people | 11 |
 | Media records | 156 |
 | Available media records | 114 |
 | Hidden placeholders | 42 |
 
-The documented timeline currently runs from **May 12, 2024** through **June 20, 2026**.
+The documented timeline currently runs from **May 12, 2024** through **October 17, 2026**.
 
 No raw WhatsApp exports, phone numbers, or private evidence files are included in the public archive.
 
