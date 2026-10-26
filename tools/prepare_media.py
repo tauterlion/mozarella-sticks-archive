@@ -20,6 +20,9 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
+import tempfile
+import copy
 import re
 import shutil
 import subprocess
@@ -169,51 +172,75 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def update_manifest(
-    file_name: str,
-    media_type: str,
-    poster: str | None,
-    event_id: str,
-    caption: str | None,
-    people: list[str],
-) -> None:
-    timeline = load_json(TIMELINE_JSON)
-    events = {event["id"]: event for event in timeline["events"]}
-    if event_id not in events:
+def validate_references(event_id: str, people: list[str] | None) -> None:
+    events = load_json(TIMELINE_JSON)["events"]
+    if event_id not in {event["id"] for event in events}:
         raise RuntimeError(f"Unknown event ID: {event_id}")
+    known = {person["id"] for person in load_json(ROOT / "data" / "people.json")["people"]}
+    unknown = set(people or []) - known
+    if unknown:
+        raise RuntimeError(f"Unknown people IDs: {', '.join(sorted(unknown))}")
 
-    data = load_json(MEDIA_JSON)
-    records = data.get("media", data if isinstance(data, list) else [])
+
+def merged_manifest(data, file_name, media_type, poster, event_id, caption, people):
+    """Retain the envelope and all existing editorial fields unless explicitly edited."""
+    result = copy.deepcopy(data)
+    records = result if isinstance(result, list) else result["media"]
     media_id = slugify(Path(file_name).stem)
-
-    record = {
-        "id": media_id,
-        "file": file_name,
-        "path": f"assets/media/{file_name}",
-        "available": True,
-        "type": media_type,
-        "caption": caption or humanize(Path(file_name).stem),
-        "eventId": event_id,
-        "people": people,
-        "order": max([int(item.get("order", 0)) for item in records] + [0]) + 1,
-    }
-    if poster:
-        record["poster"] = poster
-        record["posterPath"] = f"assets/media/{poster}"
-        record["posterAvailable"] = True
-
-    replaced = False
-    for index, item in enumerate(records):
-        if item.get("file") == file_name or item.get("id") == media_id:
-            record["order"] = item.get("order", record["order"])
-            records[index] = record
-            replaced = True
-            break
-    if not replaced:
+    matches = [item for item in records if item.get("file") == file_name]
+    if len(matches) > 1:
+        raise RuntimeError("Ambiguous filename: multiple existing records.")
+    existing = matches[0] if matches else None
+    if existing is None and any(item.get("id") == media_id for item in records):
+        raise RuntimeError("Generated ID belongs to a different file; choose a unique filename.")
+    if existing and existing.get("eventId") != event_id:
+        raise RuntimeError("Existing media belongs to a different event. Edit its association explicitly in Media Manager.")
+    if existing:
+        record = existing
+        record.update(path=f"assets/media/{file_name}", available=True, type=media_type)
+        if caption is not None:
+            record["caption"] = caption
+        if people is not None:
+            record["people"] = list(people)
+    else:
+        record = {
+            "id": media_id, "file": file_name, "path": f"assets/media/{file_name}",
+            "available": True, "type": media_type,
+            "caption": caption if caption is not None else humanize(Path(file_name).stem),
+            "eventId": event_id, "people": list(people or []),
+            "order": max([int(item.get("order", 0)) for item in records] + [0]) + 1,
+        }
         records.append(record)
+    if poster:
+        record.update(poster=poster, posterPath=f"assets/media/{poster}", posterAvailable=True)
+    return result
 
-    MEDIA_JSON.write_text(json.dumps({"media": records}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"{'Updated' if replaced else 'Added'} media record: {media_id}")
+
+def update_manifest(file_name, media_type, poster, event_id, caption, people):
+    validate_references(event_id, people)
+    original = MEDIA_JSON.read_bytes()
+    data = json.loads(original)
+    result = merged_manifest(data, file_name, media_type, poster, event_id, caption, people)
+    # Stage and validate before touching the original; keep a unique recoverable backup.
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=MEDIA_JSON.parent,
+                                     prefix=".media-", suffix=".json", delete=False) as stream:
+        temporary = Path(stream.name)
+        json.dump(result, stream, indent=2, ensure_ascii=False)
+        stream.write("\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+    try:
+        json.loads(temporary.read_text(encoding="utf-8"))
+        if MEDIA_JSON.read_bytes() != original:
+            raise RuntimeError("media.json changed while preparing; refusing to overwrite newer edits.")
+        with tempfile.NamedTemporaryFile(dir=MEDIA_JSON.parent, prefix="media-backup-",
+                                         suffix=".json", delete=False) as backup:
+            backup.write(original)
+            backup_path = Path(backup.name)
+        os.replace(temporary, MEDIA_JSON)
+        print(f"Saved media.json; previous version: {backup_path}")
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def main() -> int:
@@ -221,10 +248,15 @@ def main() -> int:
     parser.add_argument("files", nargs="+", type=Path, help="Input image or video files")
     parser.add_argument("--event", help="Timeline event ID to link the media to")
     parser.add_argument("--caption", help="Caption. Best used when processing one file.")
-    parser.add_argument("--people", nargs="*", default=[], help="Canonical person IDs")
+    parser.add_argument("--people", nargs="*", default=None, help="Canonical person IDs")
     parser.add_argument("--no-manifest", action="store_true", help="Do not update data/media.json")
     args = parser.parse_args()
 
+    if args.event and not args.no_manifest:
+        validate_references(args.event, args.people)
+    for source in args.files:
+        if not source.expanduser().is_file():
+            raise RuntimeError(f"Input file not found: {source}")
     MEDIA_DIR.mkdir(parents=True, exist_ok=True)
 
     for source in args.files:

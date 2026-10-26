@@ -72,10 +72,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (a.status !== b.status) return a.status === 'Member' ? -1 : 1;
         return a.displayName.localeCompare(b.displayName);
       });
-    const sourceMedia = (Array.isArray(mediaData) ? mediaData : (mediaData.media || []))
-      .map(item => ({...item, people: clonePeople(item.people)}));
-    const workingMedia = sourceMedia
-      .map(item => ({...item, people: clonePeople(item.people)}));
+    const sourceMedia = structuredClone(Array.isArray(mediaData) ? mediaData : (mediaData.media || []));
+    const workingMedia = structuredClone(sourceMedia);
 
     if (!events.length) throw new Error('timeline.json loaded, but it contains no events.');
     if (!people.length) throw new Error('people.json loaded, but it contains no people.');
@@ -85,6 +83,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     const workingById = new Map(workingMedia.map(item => [item.id || MSArchive.mediaId(item), item]));
 
     let newRecords = [];
+    let loadedId = '';
+    const exportPayload = () => Array.isArray(mediaData)
+      ? [...workingMedia, ...newRecords]
+      : {...mediaData, media: [...workingMedia, ...newRecords]};
+    let lastExport = JSON.stringify(mediaData);
+    const formDirty = () => {
+      const item = workingById.get(loadedId);
+      return Boolean(item && (editCaption.value !== (item.caption || '')
+        || editEvent.value !== (item.eventId || '')
+        || !samePeople(editPeoplePicker.getValue(), item.people)));
+    };
+    const addDirty = () => Boolean(filesInput.files.length || captionInput.value || addPeoplePicker.getValue().length);
+    window.addEventListener('beforeunload', event => {
+      if (!formDirty() && !addDirty() && JSON.stringify(exportPayload()) === lastExport) return;
+      event.preventDefault();
+      event.returnValue = '';
+    });
+
     const editedIds = new Set();
     let nextOrder = Math.max(0, ...workingMedia.map(item => Number(item.order) || 0)) + 1;
 
@@ -296,6 +312,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const loadEditor = id => {
+      loadedId = id;
       const item = workingById.get(id);
       if (!item) {
         editor.hidden = true;
@@ -311,7 +328,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       editEvent.value = item.eventId || '';
       editCaption.value = item.caption || '';
       editPeoplePicker.setValue(item.people);
-      editStatus.textContent = editedIds.has(id) ? 'This record has unsaved session changes.' : '';
+      editStatus.textContent = editedIds.has(id) ? 'Saved in this session; download to keep your changes.' : '';
     };
 
     refreshExistingSelect();
@@ -372,11 +389,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       filesInput.value = '';
       captionInput.value = '';
+      addPeoplePicker.clear();
       renderChanges();
       if (duplicates) alert(`${duplicates} duplicate filename${duplicates === 1 ? ' was' : 's were'} skipped.`);
     });
 
-    existingSelect.addEventListener('change', () => loadEditor(existingSelect.value));
+    existingSelect.addEventListener('change', () => {
+      if (formDirty() && !confirm('Discard unfinished changes to this record?')) {
+        existingSelect.value = loadedId;
+        return;
+      }
+      loadEditor(existingSelect.value);
+    });
+    editor.addEventListener('input', () => {
+      editStatus.textContent = formDirty() ? 'Unfinished edits — save record changes before downloading.' : '';
+    });
+    editor.addEventListener('change', () => {
+      editStatus.textContent = formDirty() ? 'Unfinished edits — save record changes before downloading.' : '';
+    });
 
     saveEditButton.addEventListener('click', () => {
       const id = existingSelect.value;
@@ -412,6 +442,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     revertEditButton.addEventListener('click', () => {
       const id = existingSelect.value;
+      if ((formDirty() || editedIds.has(id)) && !confirm('Revert this record to the repository version?')) return;
       const original = originalById.get(id);
       const item = workingById.get(id);
       if (!original || !item) return;
@@ -430,12 +461,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.querySelector('#manager-clear').addEventListener('click', () => {
+      if (newRecords.length && !confirm('Remove all new records from this session?')) return;
       newRecords = [];
       renderChanges();
     });
 
     resetEditsButton.addEventListener('click', () => {
-      if (editedIds.size && !window.confirm('Reset all existing-record edits made in this session?')) return;
+      if ((editedIds.size || formDirty()) && !window.confirm('Reset all existing-record edits made in this session?')) return;
       sourceMedia.forEach(original => {
         const id = original.id || MSArchive.mediaId(original);
         const item = workingById.get(id);
@@ -452,16 +484,33 @@ document.addEventListener('DOMContentLoaded', async () => {
       renderChanges();
     });
 
-    downloadButton.addEventListener('click', () => {
-      const combined = [...workingMedia, ...newRecords];
+    downloadButton.addEventListener('click', async () => {
+      if (formDirty() || addDirty()) {
+        alert('Finish or clear the pending form first. Save record changes or add selected files before downloading.');
+        return;
+      }
+      downloadButton.disabled = true;
+      try {
+        const latest = await fetchJson('../data/media.json');
+        if (JSON.stringify(latest) !== JSON.stringify(mediaData)) {
+          alert('The repository manifest changed since this session started. Keep this page open and reconcile your edits with the latest manifest before exporting.');
+          return;
+        }
+      } catch {
+        alert('Could not check the current manifest. Keep this page open and retry when it is available.');
+        return;
+      } finally { downloadButton.disabled = false; }
+      const payload = exportPayload();
       const blob = new Blob(
-        [JSON.stringify({media: combined}, null, 2) + '\n'],
+        [JSON.stringify(payload, null, 2) + '\n'],
         {type: 'application/json'}
       );
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = 'media.json';
       link.click();
+      lastExport = JSON.stringify(payload);
+      editStatus.textContent = 'Download requested. Verify the downloaded file; the repository has not been changed.';
       window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
     });
 
