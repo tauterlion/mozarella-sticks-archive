@@ -7,8 +7,6 @@
   <title>Timeline · Mozarella Sticks Archive</title>
   <link rel="stylesheet" href="styles/shared.css">
   <link rel="stylesheet" href="styles/timeline.css">
-  <link rel="stylesheet" href="styles/navigation-state.css?v=1.7.0">
-  <link rel="stylesheet" href="styles/browsing-polish.css?v=1.6.0">
 </head>
 <body data-page="timeline">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -19,6 +17,7 @@
     <span><strong>Mozarella Sticks</strong><small>Archive</small></span>
   </a>
   <nav class="primary-nav" aria-label="Primary navigation">
+    <a data-nav="home" href="index.html">Home</a>
     <a data-nav="timeline" href="timeline.html">Timeline</a>
     <a data-nav="gallery" href="gallery.html">Gallery</a>
   </nav>
@@ -30,35 +29,22 @@
   <main id="main-content">
 <section class="timeline-hero shell">
   <div>
-    <p class="eyebrow">Interactive chronology</p>
-    <h1>Timeline</h1>
-    <p>Search the complete archive or narrow it by era, person, category, importance, or date confidence.</p>
+    <p class="eyebrow">The chronology</p>
+    <h1>Every era has a story.</h1>
+
   </div>
-  <div class="timeline-summary"><strong id="visible-count">—</strong><span>events shown</span></div>
+  <div class="timeline-summary" role="status" aria-live="polite"><strong id="visible-count">—</strong><span>events · Oldest first</span><button id="expand-all" class="button ghost" type="button">Expand all</button></div>
 </section>
 
-<section class="timeline-toolbar shell" aria-label="Timeline search and filters">
-  <div class="toolbar-row">
-    <div class="search-oval">
-      <label class="sr-only" for="timeline-search">Search timeline</label>
-      <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24">
-        <path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"></path>
-      </svg>
-      <input id="timeline-search" type="search" autocomplete="off" aria-label="Search timeline" aria-keyshortcuts="/" title="Press / to focus search">
-      <span id="search-suggestion" class="search-suggestion" aria-hidden="true">Try “Close-Up”</span>
-    </div>
-    <button id="filter-toggle" class="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-drawer" aria-keyshortcuts="f" title="Press F to toggle filters">
-      <svg aria-hidden="true" viewBox="0 0 24 24">
-        <path d="M4 6h16M7 12h10m-7 6h4"></path>
-      </svg>
-      <span>Filters</span>
-      <span id="active-filter-count" class="filter-count" hidden>0</span>
-    </button>
-  </div>
-
+<div class="search-dock"><button id="search-launch" aria-haspopup="dialog" aria-controls="search-panel" aria-expanded="false"><svg class="search-symbol" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span id="search-prompt" aria-hidden="true">Search the archive</span><span id="search-total"></span></button></div>
+<dialog id="search-panel" aria-labelledby="search-title">
+ <header class="search-panel-header"><h2 id="search-title">Find a memory</h2><button id="search-close" class="icon-button" aria-label="Close search">×</button></header>
+ <div class="search-input-wrap"><label class="sr-only" for="timeline-search">Search events, people, eras and descriptions</label><input id="timeline-search" type="search" autocomplete="off" placeholder="A person, place, or memory…" enterkeyhint="search"></div>
+ <div class="search-panel-scroll">
+ <button id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-drawer">Filters <span id="active-filter-count" hidden></span><span aria-hidden="true">⌄</span></button>
   <div id="filter-drawer" class="filter-drawer" data-open="false" aria-hidden="true">
     <div class="filter-drawer-inner">
-      <div class="filter-field"><label for="era-filter">Era</label><select id="era-filter"><option value="">All eras</option></select></div>
+      <div class="filter-field"><label for="era-filter">Filter by era</label><select id="era-filter"><option value="">All eras</option></select></div>
       <div class="filter-field"><label for="person-filter">Person</label><select id="person-filter"><option value="">All people</option></select></div>
       <div class="filter-field"><label for="category-filter">Category</label><select id="category-filter"><option value="">All categories</option></select></div>
 
@@ -78,21 +64,26 @@
 
       <div class="control-actions">
         <button id="reset-filters" class="button ghost" type="button">Reset filters</button>
-        <button id="expand-all" class="button ghost" type="button">Expand all</button>
+
       </div>
     </div>
   </div>
-</section>
 
+ <div id="search-people" class="search-people"></div>
+ <p id="search-status" role="status" aria-live="polite"></p>
+ <div id="search-matches"></div>
+ </div>
+ <footer class="search-panel-footer"><button class="button primary" id="show-results">View events →</button></footer>
+</dialog>
 <div id="active-filters" class="active-filter-bar shell" hidden role="group" aria-label="Active timeline filters"></div>
-<div id="current-era-status" class="current-era-status shell" hidden><span>Current era:</span><strong></strong></div>
+<div id="current-era-status" class="current-era-status shell sr-only" hidden><span>Current era:</span><strong></strong></div>
 
 <div class="timeline-layout shell">
-  <aside class="era-jump" aria-label="Jump to era">
-    <p class="eyebrow">Jump to era</p>
+  <aside class="era-jump" aria-label="Chapters">
+    <p class="eyebrow">Chapters</p>
     <nav id="era-nav"></nav>
   </aside>
-  <section id="timeline-root" class="timeline-root" aria-live="polite">
+  <section id="timeline-root" class="timeline-root" tabindex="-1">
     <div class="loading-state">Loading timeline…</div>
   </section>
 </div>
@@ -100,11 +91,10 @@
 
 <footer class="site-footer">
   <p>A cleaned, community-approved archive. Raw chats and private evidence are not included.</p>
-  <p class="footer-future">People and Dictionary sections are planned for a later version.</p>
 </footer>
 
-  <script src="scripts/shared.js?v=1.3.2" defer></script>
-  <script src="scripts/timeline.js?v=1.6.0" defer></script>
-  <script src="scripts/browsing-polish.js?v=1.7.0" defer></script>
+  <script src="scripts/shared.js?v=2" defer></script>
+  <script src="scripts/interactions.js" defer></script>
+  <script src="scripts/timeline.js?v=2" defer></script>
 </body>
 </html>

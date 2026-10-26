@@ -1,0 +1,150 @@
+{
+  "browser": "155.0.8059.85",
+  "checks": [
+    "All 103 events render chronologically",
+    "Every timeline title, summary, history and date preserved",
+    "Search focus, Tab cycling, Escape and focus return",
+    "Every era filter matches the complete dataset",
+    "Every person filter matches the complete dataset",
+    "Every category filter matches the complete dataset",
+    "Archive title, text, place and alias searches",
+    "Multi-select filters preserve none-selected and all-selected semantics",
+    "Chapter jumps preserve filter state",
+    "Filtered previous/next and return URLs preserve full context",
+    "Expand/collapse all and direct filter URLs",
+    "All 103 full-event pages retain original narratives and associated available media",
+    "All 114 available Gallery records, exact captions/order; 42 hidden placeholders remain hidden",
+    "Every Gallery era filter matches original associations",
+    "Every Gallery person filter matches original associations",
+    "Every Gallery event filter matches original associations",
+    "Every Gallery type filter matches original associations",
+    "Gallery sorting and URL restoration",
+    "Gallery viewer arrows, Home/End, Escape, background isolation and focus restoration",
+    "All 20 original videos decode and play in Chrome",
+    "Unedited Media Manager export preserves every original field and record",
+    "Unfinished edits block export, warn on record switch and activate leave protection",
+    "Saving one caption changes only that field in export",
+    "Stale repository manifest blocks unsafe export",
+    "Consolidated people picker retains filtering, empty state and Escape",
+    "Adding and clearing media preserves all pre-existing records",
+    "Diagnostics rows and summary agree",
+    "60 page/theme/portrait/landscape layouts without horizontal overflow; complete filters reachable",
+    "Short mobile viewport keeps search input and scrollable results reachable",
+    "Reduced motion stops rotating prompts and retains search",
+    "Animation failure leaves content and search functional",
+    "No uncaught JavaScript errors"
+  ],
+  "playback": [
+    {
+      "src": "http://127.0.0.1:8765/assets/media/katerynapromposal.mp4",
+      "ok": true,
+      "width": 480
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/lydiapromposal.mp4",
+      "ok": true,
+      "width": 848
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/toddinferria.mp4",
+      "ok": true,
+      "width": 392
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/wemadeit.mp4",
+      "ok": true,
+      "width": 464
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/breakupmoment.mp4",
+      "ok": true,
+      "width": 640
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/lorenapromposal.mp4",
+      "ok": true,
+      "width": 480
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/Spirit%20Week%20Dance%20Video%20(Enhanced).mp4",
+      "ok": true,
+      "width": 1280
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/cheddar-quick-pet.mp4",
+      "ok": true,
+      "width": 480
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/average-breakfast-morning.mp4",
+      "ok": true,
+      "width": 474
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/tyler-performing.mp4",
+      "ok": true,
+      "width": 478
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/everyone-dancing.mp4",
+      "ok": true,
+      "width": 848
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/leo-piano.mp4",
+      "ok": true,
+      "width": 478
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/shane-speech-modelun.mp4",
+      "ok": true,
+      "width": 392
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/party-bus-bebito.mp4",
+      "ok": true,
+      "width": 848
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/swinging-ferris-wheel.mp4",
+      "ok": true,
+      "width": 848
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/kevin-zipline.mp4",
+      "ok": true,
+      "width": 478
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/graduation-video-interview.mp4",
+      "ok": true,
+      "width": 478
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/dash-congratulating.mp4",
+      "ok": true,
+      "width": 474
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/happy-birthday-maria-parada.mp4",
+      "ok": true,
+      "width": 832
+    },
+    {
+      "src": "http://127.0.0.1:8765/assets/media/resurrection-poppins.mp4",
+      "ok": true,
+      "width": 474
+    }
+  ],
+  "layoutCases": 60,
+  "errors": [],
+  "supplementalChecks": [
+    "Touch tap opens search",
+    "Genuine prompt rotation pauses while open",
+    "Theme persists across page navigation",
+    "Gallery Escape clears search",
+    "Character shortcuts can be disabled",
+    "Unavailable storage preserves rendering and theme toggle",
+    "Literal punctuation safely highlights and searches"
+  ]
+}

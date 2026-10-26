@@ -2,19 +2,19 @@
 
 A GitHub Pages–ready static archive of the Mozarella Sticks’ shared history, built around a searchable timeline, an event-linked photo and video gallery, and reusable event pages.
 
-The public site currently carries the label **Version B · Media Sync 1.3.2**. The repository also includes later maintenance improvements, including chronological timeline rendering and automatic archive validation.
+Revision 2 applies the approved editorial remaster to the full archive, including the Timeline, Gallery, event pages and maintenance tools. See [integration verification](docs/revision-2-review.md) for scope, tests and screenshots.
 
 ## Current archive snapshot
 
 | Item | Current total |
 |---|---:|
-| Timeline events | 102 |
+| Timeline events | 103 |
 | Eras | 10 |
 | People indexed | 35 |
 | Members | 23 |
 | Connected people | 12 |
-| Media records | 144 |
-| Available media records | 102 |
+| Media records | 156 |
+| Available media records | 114 |
 | Hidden placeholders | 42 |
 
 The documented timeline currently runs from **May 12, 2024** through **June 20, 2026**.
@@ -268,3 +268,20 @@ Merged the 144-record media manifest while preserving fast availability flags an
 ## Planned expansion
 
 The stable person and event IDs are ready to support future People and Dictionary sections without duplicating timeline content.
+
+## Revision 2 controls and verification
+
+The Timeline search pill opens on click, tap, keyboard focus or `/`. `F` opens its filters.
+The existing multi-select importance/certainty controls retain their `none` URL state.
+Chapter bookmarks navigate within matching events; **Filter by era** narrows results.
+Escape closes the search dialog. Enter shows the full matching chronology.
+Gallery retains all six controls, sorting, native video playback and viewer navigation.
+`T` returns to the top. Character shortcuts can be disabled in the public-page footer.
+Reduced-motion preferences disable entrance effects and rotating search prompts.
+
+No framework or production build step is required. For optional browser regression
+checks, install Playwright in a separate test environment, serve the repository,
+and run `node tests/browser-regression.cjs`. `PLAYWRIGHT_MODULE`, `CHROME_BIN`,
+`BASE_URL`, and `REVIEW_OUTPUT` can override the module path, browser executable,
+local URL, and screenshot/result directory. The test defaults to port 8765.
+Run `python -m unittest discover -s tests -p "test_*.py"` for media safety tests.

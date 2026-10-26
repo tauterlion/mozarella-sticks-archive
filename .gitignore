@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+data/media-backup-*.json
+data/.media-*.json

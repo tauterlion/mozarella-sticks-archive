@@ -54,3 +54,28 @@ Add people when useful:
 ```bash
 python tools/prepare_media.py clip.mp4 --event spirit-week-dance --people lucas samantha alejandro
 ```
+
+## Editing and export safeguards
+
+The manager distinguishes unfinished form edits from changes saved to the current
+browser session. Switching records asks before discarding unfinished edits. Downloads
+require pending forms to be saved, added, or cleared first. Leaving warns when edits
+have not been exported. Revert/reset/clear actions confirm before discarding work.
+An export preserves the original manifest envelope and all untouched record fields.
+Before export, the manager re-fetches media.json and blocks an outdated session from
+silently replacing a newer manifest. A download does not publish anything: verify the
+file and review its diff against the latest repository before replacing the manifest.
+This browser helper still does not upload assets or provide multi-user merge support.
+
+The preparation helper validates event/person references before preparing files.
+For an existing exact filename it retains the stable ID, order, caption, people,
+era and unknown metadata. Only explicit `--caption` / `--people` options edit those
+fields. Omitting `--people` preserves existing tags; supplying it with no values
+explicitly clears them. Ambiguous filename/ID collisions and event reassignment are
+rejected. A new filename creates a new record. Existing physical files are never
+overwritten by preparation; the normal unique-name suffix is retained.
+
+Manifest updates are staged and atomically replaced, with a unique
+`data/media-backup-*.json` backup of the previous bytes. These local backups are
+ignored by Git. FFmpeg/FFprobe are still required for video conversion. Conversion
+was not rerun during the remaster; browser playback of the 20 originals was tested.

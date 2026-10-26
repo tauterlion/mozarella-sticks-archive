@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, {});
 
     const search = document.querySelector('#timeline-search');
-    const suggestion = document.querySelector('#search-suggestion');
-    const searchShell = document.querySelector('.search-oval');
+
     const eraFilter = document.querySelector('#era-filter');
     const personFilter = document.querySelector('#person-filter');
     const categoryFilter = document.querySelector('#category-filter');
@@ -36,18 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       range: 'Range'
     };
 
-    const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const highlightText = (value, rawQuery) => {
-      const text = String(value || '');
-      const terms = [...new Set(String(rawQuery || '').trim().split(/\s+/).filter(Boolean))]
-        .sort((a, b) => b.length - a.length);
-      if (!terms.length) return MSArchive.escapeHtml(text);
-
-      const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
-      return text.split(pattern).map((part, index) => index % 2
-        ? `<mark class="search-highlight">${MSArchive.escapeHtml(part)}</mark>`
-        : MSArchive.escapeHtml(part)).join('');
-    };
+    const highlightText = MSArchive.highlightText;
 
     MSArchive.setOptions(eraFilter, data.eraOrder);
     MSArchive.setOptions(
@@ -141,34 +129,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     applyUrlState();
 
-    const searchPrompts = [
-      'Try “Close-Up”',
-      'Try “Model U.N.”',
-      'Try “Spirit Week”',
-      'Try “France”',
-      'Try “Samantha”'
-    ];
-    let promptIndex = 0;
     let hasAppliedInitialHash = false;
     let renderedEraSections = [];
     let eraFrame = 0;
-
-    const updateSearchState = () => {
-      searchShell.classList.toggle('has-value', Boolean(search.value.trim()));
-    };
-
-    const rotateSuggestion = () => {
-      if (document.hidden || search.value.trim() || document.activeElement === search) return;
-      suggestion.classList.remove('swap');
-      void suggestion.offsetWidth;
-      suggestion.classList.add('swap');
-      window.setTimeout(() => {
-        promptIndex = (promptIndex + 1) % searchPrompts.length;
-        suggestion.textContent = searchPrompts[promptIndex];
-      }, 210);
-    };
-
-    window.setInterval(rotateSuggestion, 2600);
+    const orderedEvents = MSArchive.orderedEvents(data.events);
+    const searchIndex = new Map(orderedEvents.map(event => [event.id, MSArchive.eventSearchText(event, data)]));
+    const searchUI = MSArchive.setupTimelineSearch({
+      data, search,
+      choosePerson(id) { personFilter.value = id; search.value = ''; render(); }
+    });
 
     const setFilterDrawer = open => {
       filterDrawer.dataset.open = open.toString();
@@ -245,12 +214,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
 
-      const marker = Math.min(window.innerHeight * .34, 260);
+      const marker = document.querySelector('.site-header').getBoundingClientRect().bottom + 100;
       let current = renderedEraSections[0];
       renderedEraSections.forEach(section => {
         if (section.getBoundingClientRect().top <= marker) current = section;
       });
 
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) current = renderedEraSections.at(-1);
       const eraId = current.id;
       const eraName = current.querySelector('.era-heading h2')?.textContent || eraId;
       eraNav.querySelectorAll('a').forEach(link => {
@@ -303,8 +273,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           <h3>${highlightText(event.title, rawQuery)}</h3>
           <p class="event-summary">${highlightText(event.summary, rawQuery)}</p>
           <div class="event-actions">
-            <button type="button" data-expand="${event.id}" aria-expanded="false" aria-controls="details-${event.id}">View more</button>
-            <a href="${MSArchive.escapeHtml(eventUrl)}">Full event page →</a>
+            <button type="button" data-expand="${event.id}" aria-expanded="false" aria-controls="details-${event.id}">Details & people</button>
+            <a href="${MSArchive.escapeHtml(eventUrl)}">Full event ↗</a>
           </div>
         </div>
 
@@ -327,7 +297,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       panel.dataset.open = open.toString();
       panel.setAttribute('aria-hidden', (!open).toString());
       panel.inert = !open;
-      button.textContent = open ? 'Show less' : 'View more';
+      if (!open) panel.querySelectorAll('video').forEach(video => video.pause());
+      button.textContent = open ? 'Close details' : 'Details & people';
       button.setAttribute('aria-expanded', open.toString());
     };
 
@@ -338,10 +309,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const allowedCertainty = new Set(selectedValues(certaintyChecks));
       const anchor = preserveHash ? currentAnchor() : '';
 
-      const filtered = [...data.events]
-        .sort((a, b) => String(a.sort || '').localeCompare(String(b.sort || '')))
+      const filtered = orderedEvents
         .filter(event => {
-          if (query && !MSArchive.eventSearchText(event, data).includes(query)) return false;
+          if (query && !searchIndex.get(event.id).includes(query)) return false;
           if (eraFilter.value && event.era !== eraFilter.value) return false;
           if (personFilter.value && !event.people.includes(personFilter.value)) return false;
           if (categoryFilter.value && !event.categories.includes(categoryFilter.value)) return false;
@@ -352,7 +322,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       document.querySelector('#visible-count').textContent = filtered.length;
       renderActiveFilters();
-      updateSearchState();
+      searchUI.update(filtered, buildTimelineUrl, activeFilterDefinitions());
+      document.querySelector('#expand-all').textContent = 'Expand all';
+
 
       if (syncHistory) syncTimelineUrl(anchor);
 
@@ -383,6 +355,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         `).join('');
       }
 
+      MSArchive.reveal(root);
       renderedEraSections = [...root.querySelectorAll('.timeline-era')];
       scheduleCurrentEra();
 
@@ -427,6 +400,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       hasAppliedInitialHash = true;
       render({preserveHash: false});
+      document.querySelector('#search-launch').focus({preventScroll:true});
     });
 
     document.querySelector('#reset-filters').addEventListener('click', () => {
@@ -442,6 +416,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       event.currentTarget.textContent = shouldOpen ? 'Collapse all' : 'Expand all';
     });
 
+    eraNav.addEventListener('click', event => {
+      const link = event.target.closest('[data-era-target]');
+      if (!link) return;
+      event.preventDefault();
+      const target = document.getElementById(link.dataset.eraTarget);
+      target.tabIndex = -1; target.focus({preventScroll:true});
+      target.scrollIntoView({block:'start', behavior:MSArchive.reducedMotion.matches?'instant':'smooth'});
+      syncTimelineUrl(target.id);
+    });
     window.addEventListener('scroll', scheduleCurrentEra, {passive: true});
     window.addEventListener('resize', scheduleCurrentEra);
 
@@ -458,7 +441,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       render({preserveHash: true});
     });
 
-    updateSearchState();
+
     render({preserveHash: true});
   } catch (error) {
     root.innerHTML = MSArchive.errorMarkup(error);

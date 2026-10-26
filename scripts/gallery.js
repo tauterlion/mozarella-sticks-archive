@@ -23,18 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let lastFocusedElement = null;
 
     const clonePeople = value => Array.isArray(value) ? value : [];
-    const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const highlightText = (value, rawQuery) => {
-      const text = String(value || '');
-      const terms = [...new Set(String(rawQuery || '').trim().split(/\s+/).filter(Boolean))]
-        .sort((a, b) => b.length - a.length);
-      if (!terms.length) return MSArchive.escapeHtml(text);
-
-      const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
-      return text.split(pattern).map((part, index) => index % 2
-        ? `<mark class="search-highlight">${MSArchive.escapeHtml(part)}</mark>`
-        : MSArchive.escapeHtml(part)).join('');
-    };
+    const highlightText = MSArchive.highlightText;
 
     MSArchive.setOptions(eraFilter, data.eraOrder);
     MSArchive.setOptions(
@@ -110,6 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (lightbox.hidden) return;
       clearStage();
       lightbox.hidden = true;
+      document.querySelectorAll('[data-viewer-inert]').forEach(el => { el.inert = false; delete el.dataset.viewerInert; });
       document.body.style.overflow = '';
       if (restoreFocus && lastFocusedElement?.isConnected) lastFocusedElement.focus();
     };
@@ -139,6 +129,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       previousButton.setAttribute('aria-label', `Previous media item. ${currentIndex + 1} of ${visibleItems.length}`);
       nextButton.setAttribute('aria-label', `Next media item. ${currentIndex + 1} of ${visibleItems.length}`);
       lightbox.hidden = false;
+      for (let current = lightbox; current.parentElement; current = current.parentElement) {
+        [...current.parentElement.children].filter(el => el !== current && !el.inert && !['SCRIPT','STYLE'].includes(el.tagName)).forEach(el => {el.inert = true; el.dataset.viewerInert = '';});
+      }
+      document.querySelector('#lightbox-position').textContent = (currentIndex + 1)+' of '+visibleItems.length;
       document.body.style.overflow = 'hidden';
 
       const focusTarget = viewerFocus?.isConnected ? viewerFocus : closeButton;
@@ -202,6 +196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).join('');
       }
 
+      MSArchive.reveal(root);
       root.querySelectorAll('[data-index]').forEach(button => {
         button.addEventListener('click', () => openLightbox(Number(button.dataset.index)));
       });

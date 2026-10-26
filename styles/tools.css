@@ -318,3 +318,23 @@
     box-shadow: none;
   }
 }
+
+.person-option[hidden] {
+  display: none !important;
+}
+
+.people-search-empty {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: .82rem;
+  text-align: center;
+}
+
+.people-search-empty[hidden] {
+  display: none;
+}
+
+.manager-record{min-width:0;overflow-wrap:anywhere}.manager-record code{overflow-wrap:anywhere;word-break:break-word}.manager-editor select{max-width:100%}.manager-hero h1{font-family:var(--serif)}
