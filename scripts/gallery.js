@@ -215,6 +215,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           ...[...groups.keys()].filter(era => !data.eraOrder.includes(era))
         ];
         if (sortSelect.value === 'newest') chapterNames.reverse();
+        // Keep lightbox arrows in the same order the visitor sees on screen.
+        visibleItems = chapterNames.flatMap(era => groups.get(era).map(entry => entry.item));
+        const itemIndexes = new Map(visibleItems.map((item, index) => [item, index]));
         root.innerHTML = chapterNames.map((era, sectionIndex) => {
           const items = groups.get(era);
           const headingId = 'gallery-era-heading-' + sectionIndex;
@@ -223,13 +226,15 @@ document.addEventListener('DOMContentLoaded', async () => {
               <h2 id="${headingId}">${MSArchive.escapeHtml(era)}</h2>
               <span class="gallery-era-count">${items.length} ${items.length === 1 ? 'item' : 'items'}</span>
             </header>
-            <div class="gallery-era-grid">${items.map(({item, index}) => `
-              <article class="media-card" data-type="${MSArchive.escapeHtml(item.type)}">
+            <div class="gallery-era-grid">${items.map(({item}) => {
+              const index = itemIndexes.get(item);
+              return `<article class="media-card" data-type="${MSArchive.escapeHtml(item.type)}">
                 <button class="media-button" type="button" data-index="${index}"
                   aria-label="Open ${MSArchive.escapeHtml(item.caption)}, item ${index + 1} of ${visibleItems.length}">
                   ${cardMediaMarkup(item)}
                 </button>
-              </article>`).join('')}</div>
+              </article>`;
+            }).join('')}</div>
           </section>`;
         }).join('');
 
