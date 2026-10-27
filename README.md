@@ -138,6 +138,16 @@ Allowed statuses are:
 
 Changing `displayName` or `aliases` is safe. Changing `id` requires updating every timeline and media reference that uses it.
 
+## Longer full-event narratives
+
+The regular `details` field remains the short expandable Timeline explanation. For
+selected events that need one or more longer paragraphs on their dedicated Full Event
+Page, add an optional `fullDetails` string to the same event object. Separate
+paragraphs with two newline characters (`\\n\\n` in JSON). The Full Event Page
+preserves those paragraph boundaries and supports simple `*italics*` and
+`**bold**` emphasis. If `fullDetails` is absent, the original `details` field
+remains the fallback. The Timeline search indexes both versions.
+
 ## Add images and videos
 
 Place new files in:
