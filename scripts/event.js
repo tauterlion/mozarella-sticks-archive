@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <span class="badge ${event.certainty}">${MSArchive.certaintyLabel(event.certainty)}</span>
           </div>
         </header>
-        <section class="event-prose">${renderEventProse(event.details || event.summary)}</section>
+        <section class="event-prose">${renderEventProse(event.fullDetails || event.details || event.summary)}</section>
         <aside class="event-sidebar">
           ${people ? `<h2>People</h2><div class="chip-list">${people}</div>` : ''}
           <h2>Categories</h2><div class="chip-list">${categories}</div>
