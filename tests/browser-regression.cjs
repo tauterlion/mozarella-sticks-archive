@@ -77,7 +77,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
   assert.equal(await page.locator('.event-header h1').textContent(),e.title);
   assert.equal(await page.locator('.event-lede').textContent(),e.summary);
   const renderedParagraphs=await page.locator('.event-prose p').allTextContents();
-  const plainProse=(e.details||e.summary).replace(/\*\*([^*\n]+)\*\*|\*([^*\n]+)\*/g,(_,bold,italic)=>bold??italic);
+  const plainProse=(e.fullDetails||e.details||e.summary).replace(/\*\*([^*\n]+)\*\*|\*([^*\n]+)\*/g,(_,bold,italic)=>bold??italic);
   assert.equal(renderedParagraphs.join('\n\n'),plainProse);
   if(e.id==='gage-confession')assert.equal(await page.locator('.event-prose em').first().textContent(),'The Wiz');
   const captions=await page.locator('.event-gallery figcaption').allTextContents();
