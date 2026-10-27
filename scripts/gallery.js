@@ -10,9 +10,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const eventFilter = document.querySelector('#gallery-event');
     const typeFilter = document.querySelector('#gallery-type');
     const sortSelect = document.querySelector('#gallery-sort');
+    const filterDetails = document.querySelector('#gallery-filter-details');
+    const activeFilterCount = document.querySelector('#gallery-active-count');
     const lightbox = document.querySelector('#lightbox');
     const stage = document.querySelector('#lightbox-stage');
     const caption = document.querySelector('#lightbox-caption');
+    const mediaMeta = document.querySelector('#lightbox-meta');
+    const mediaPeople = document.querySelector('#lightbox-people');
     const eventLink = document.querySelector('#lightbox-event-link');
     const closeButton = document.querySelector('.lightbox-close');
     const previousButton = document.querySelector('.lightbox-prev');
@@ -52,6 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       eventFilter.value = validOptionValue(eventFilter, params.get('event') || '');
       typeFilter.value = validOptionValue(typeFilter, params.get('type') || '', '');
       sortSelect.value = validOptionValue(sortSelect, params.get('sort') || 'manifest', 'manifest');
+      filterDetails.open = Boolean(eraFilter.value || personFilter.value || eventFilter.value || typeFilter.value || sortSelect.value !== 'manifest');
     };
 
     const syncUrl = () => {
@@ -124,7 +129,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         : MSArchive.mediaPreviewMarkup(item);
 
       caption.textContent = item.caption;
-      eventLink.href = `event.html?id=${encodeURIComponent(item.eventId)}`;
+      const associatedEvent = data.eventsById[item.eventId];
+      mediaMeta.textContent = [
+        item.type === 'video' ? 'Video' : 'Photo',
+        associatedEvent?.dateLabel || '',
+        associatedEvent?.era || item.era || ''
+      ].filter(Boolean).join(' · ');
+      const taggedPeople = clonePeople(item.people).map(personId => MSArchive.personName(personId, data));
+      mediaPeople.textContent = taggedPeople.length ? 'People: ' + taggedPeople.join(', ') : '';
+      mediaPeople.hidden = !taggedPeople.length;
+      eventLink.hidden = !associatedEvent;
+      if (associatedEvent) {
+        eventLink.href = `event.html?id=${encodeURIComponent(associatedEvent.id)}`;
+        eventLink.textContent = 'View event: ' + associatedEvent.title;
+      }
       lightbox.setAttribute('aria-label', `Media viewer: ${item.caption}`);
       previousButton.setAttribute('aria-label', `Previous media item. ${currentIndex + 1} of ${visibleItems.length}`);
       nextButton.setAttribute('aria-label', `Next media item. ${currentIndex + 1} of ${visibleItems.length}`);
@@ -173,6 +191,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       }));
 
       document.querySelector('#gallery-count').textContent = visibleItems.length;
+      const filtersActive = [eraFilter.value, personFilter.value, eventFilter.value, typeFilter.value,
+        sortSelect.value === 'manifest' ? '' : sortSelect.value].filter(Boolean).length;
+      activeFilterCount.hidden = !filtersActive;
+      activeFilterCount.textContent = filtersActive + ' active';
       if (syncHistory) syncUrl();
 
       if (!available.length) {
@@ -180,20 +202,37 @@ document.addEventListener('DOMContentLoaded', async () => {
       } else if (!visibleItems.length) {
         root.innerHTML = '<div class="empty-state"><strong>No media matches those filters.</strong>Try resetting the gallery filters.</div>';
       } else {
-        root.innerHTML = visibleItems.map((item, index) => {
-          const event = data.eventsById[item.eventId];
-          const eventTitle = event?.title || item.eventId;
-          const dateLabel = event?.dateLabel || '';
-          return `<article class="media-card" data-type="${MSArchive.escapeHtml(item.type)}">
-            <button class="media-button" type="button" data-index="${index}" aria-label="Open ${MSArchive.escapeHtml(item.caption)}, item ${index + 1} of ${visibleItems.length}">
-              ${cardMediaMarkup(item)}
-            </button>
-            <div class="media-info">
-              <p>${highlightText(item.caption, rawQuery)}</p>
-              <a class="media-event" href="event.html?id=${encodeURIComponent(item.eventId)}">${highlightText(eventTitle, rawQuery)}${dateLabel ? ` · ${highlightText(dateLabel, rawQuery)}` : ''}</a>
-            </div>
-          </article>`;
+        // Archive chapter sections are canonical, regardless of manifest file ordering.
+        // The global visibleItems order still drives lightbox previous/next navigation.
+        const groups = new Map();
+        visibleItems.forEach((item, index) => {
+          const chapter = data.eventsById[item.eventId]?.era || item.era || 'Other memories';
+          if (!groups.has(chapter)) groups.set(chapter, []);
+          groups.get(chapter).push({item, index});
+        });
+        const chapterNames = [
+          ...data.eraOrder.filter(era => groups.has(era)),
+          ...[...groups.keys()].filter(era => !data.eraOrder.includes(era))
+        ];
+        if (sortSelect.value === 'newest') chapterNames.reverse();
+        root.innerHTML = chapterNames.map((era, sectionIndex) => {
+          const items = groups.get(era);
+          const headingId = 'gallery-era-heading-' + sectionIndex;
+          return `<section class="gallery-era-section" aria-labelledby="${headingId}">
+            <header class="gallery-era-heading">
+              <h2 id="${headingId}">${MSArchive.escapeHtml(era)}</h2>
+              <span class="gallery-era-count">${items.length} ${items.length === 1 ? 'item' : 'items'}</span>
+            </header>
+            <div class="gallery-era-grid">${items.map(({item, index}) => `
+              <article class="media-card" data-type="${MSArchive.escapeHtml(item.type)}">
+                <button class="media-button" type="button" data-index="${index}"
+                  aria-label="Open ${MSArchive.escapeHtml(item.caption)}, item ${index + 1} of ${visibleItems.length}">
+                  ${cardMediaMarkup(item)}
+                </button>
+              </article>`).join('')}</div>
+          </section>`;
         }).join('');
+
       }
 
       MSArchive.reveal(root);
@@ -274,6 +313,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       eventFilter.value = '';
       typeFilter.value = '';
       sortSelect.value = 'manifest';
+      filterDetails.open = false;
       render();
       search.focus();
     });
