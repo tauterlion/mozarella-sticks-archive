@@ -8,7 +8,10 @@
 .event-lede{max-width:65ch;font-size:19px;line-height:1.8;color:var(--muted);margin-bottom:23px}
 .event-header-meta{display:flex;flex-wrap:wrap;gap:8px}
 .event-prose{max-width:66ch;font-size:18px;line-height:1.9}
-.event-prose p{white-space:pre-line}
+.event-prose p{white-space:pre-wrap;overflow-wrap:break-word}
+.event-prose p+p{margin-top:1.35em}
+.event-prose em{font-style:italic}
+.event-prose strong{font-weight:700}
 .event-sidebar{padding:23px;background:var(--surface);border:1px solid var(--line);border-radius:6px}
 .event-sidebar h2{font:11px "Segoe UI",system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:24px 0 13px}
 .event-sidebar h2:first-child{margin-top:0}

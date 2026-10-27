@@ -117,7 +117,7 @@
   };
 
   MS.eventSearchText = (event, data) => MS.normalize([
-    event.title, event.summary, event.details, event.dateLabel, event.era,
+    event.title, event.summary, event.details, event.fullDetails || '', event.dateLabel, event.era,
     ...event.categories, ...event.storylines,
     ...event.people.map(id => MS.personSearchText(id, data))
   ].join(' '));

@@ -172,6 +172,11 @@ class Validator:
             self.required_string(raw, "title", file, location)
             self.required_string(raw, "summary", file, location)
             self.required_string(raw, "details", file, location)
+            # A longer narrative is optional, but must be usable when provided.
+            if "fullDetails" in raw:
+                full_details = raw["fullDetails"]
+                if not isinstance(full_details, str) or not full_details.strip():
+                    self.error(file, f"{location}.fullDetails", "Expected a non-empty string.")
             era = self.required_string(raw, "era", file, location)
             certainty = self.required_string(raw, "certainty", file, location)
             importance = self.required_string(raw, "importance", file, location)

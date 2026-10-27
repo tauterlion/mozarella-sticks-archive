@@ -2607,6 +2607,142 @@
         "todd"
       ],
       "order": 156
+    },
+    {
+      "id": "whatsapp-image-2026-09-18-at-6-00-16-pm",
+      "file": "WhatsApp Image 2026-09-18 at 6.00.16 PM.jpeg",
+      "path": "assets/media/WhatsApp Image 2026-09-18 at 6.00.16 PM.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Lucas, Ted, and Jeidenne taking a selfie at Chili's",
+      "eventId": "chilis-movie-hangout",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "jeidenne",
+        "lucas"
+      ],
+      "order": 157
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-30-00-pm",
+      "file": "WhatsApp Image 2026-10-27 at 6.30.00 PM.jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.30.00 PM.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Alejandro awkwardly smiling as everyone sings him happy birthday (the chocolate cake was really good)",
+      "eventId": "alejandro-birthday-2026",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "alejandro"
+      ],
+      "order": 158
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-29-27-pm",
+      "file": "WhatsApp Image 2026-10-27 at 6.29.27 PM.jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.29.27 PM.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "The people who were at Alejandro's birthday party!",
+      "eventId": "alejandro-birthday-2026",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "alejandro",
+        "alexander",
+        "dash",
+        "jeidenne",
+        "lucas",
+        "marco",
+        "nicholas",
+        "shane",
+        "todd",
+        "jaime"
+      ],
+      "order": 159
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-27-35-pm",
+      "file": "WhatsApp Image 2026-10-27 at 6.27.35 PM.jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.27.35 PM.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "The majority of the people within the friend group that attended the Medalla class party",
+      "eventId": "stuco-medalla-arena-party",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "aedan",
+        "charlee",
+        "jeidenne",
+        "kamilo",
+        "kateryna",
+        "libby",
+        "lorena",
+        "lucas",
+        "lydia",
+        "marife",
+        "samantha",
+        "serafina",
+        "bash"
+      ],
+      "order": 160
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-24-31-pm",
+      "file": "WhatsApp Image 2026-10-27 at 6.24.31 PM.jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.24.31 PM.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "The Kahoot results, while Verity laughs. (we don't know who's who, besides Verity being Jaime)",
+      "eventId": "alejandro-birthday-2026",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "jaime"
+      ],
+      "order": 161
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-24-31-pm-1",
+      "file": "WhatsApp Image 2026-10-27 at 6.24.31 PM (1).jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.24.31 PM (1).jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Kamilo's smug ass posing",
+      "eventId": "stuco-medalla-arena-party",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "kamilo"
+      ],
+      "order": 162
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-24-30-pm",
+      "file": "WhatsApp Image 2026-10-27 at 6.24.30 PM.jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.24.30 PM.jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "Fully bearded Alejandro",
+      "eventId": "alejandro-shaves-beard",
+      "era": "Summer 2026",
+      "people": [
+        "alejandro"
+      ],
+      "order": 163
+    },
+    {
+      "id": "whatsapp-image-2026-10-27-at-6-24-30-pm-1",
+      "file": "WhatsApp Image 2026-10-27 at 6.24.30 PM (1).jpeg",
+      "path": "assets/media/WhatsApp Image 2026-10-27 at 6.24.30 PM (1).jpeg",
+      "available": true,
+      "type": "image",
+      "caption": "The car ride to Lydia's home after Baskin Robbins (Alejandro was sitting on Sam)",
+      "eventId": "chilis-movie-hangout",
+      "era": "10th Grade – Fall 2026",
+      "people": [
+        "alejandro",
+        "kateryna",
+        "samantha"
+      ],
+      "order": 164
     }
   ]
 }

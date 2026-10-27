@@ -21,7 +21,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
  const ids=()=>page.locator('.event-card').evaluateAll(nodes=>nodes.map(e=>e.id));
  const open=async()=>{await page.locator('#search-launch').click();await page.waitForTimeout(330);assert.ok(await page.locator('#search-panel').evaluate(e=>e.open));};
  const close=async()=>{await page.keyboard.press('Escape');await page.waitForTimeout(260);assert.ok(!await page.locator('#search-panel').evaluate(e=>e.open));};
- await go('timeline.html');assert.deepEqual(await ids(),events.map(e=>e.id));check('All 103 events render chronologically');
+ await go('timeline.html');assert.deepEqual(await ids(),events.map(e=>e.id));check('All '+events.length+' events render chronologically');
  const records=await page.locator('.event-card').evaluateAll(cards=>cards.map(c=>({id:c.id,title:c.querySelector('h3').textContent,summary:c.querySelector('.event-summary').textContent,details:c.querySelector('.event-details-inner>p').textContent,date:c.querySelector('.event-date').textContent})));
  for(const r of records){const e=events.find(e=>e.id===r.id);for(const key of ['title','summary','details'])assert.equal(r[key],e[key]);assert.equal(r.date,e.dateLabel);}
  check('Every timeline title, summary, history and date preserved');
@@ -76,14 +76,23 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
   await go('event.html?id='+encodeURIComponent(e.id));
   assert.equal(await page.locator('.event-header h1').textContent(),e.title);
   assert.equal(await page.locator('.event-lede').textContent(),e.summary);
-  assert.equal(await page.locator('.event-prose p').textContent(),e.details||e.summary);
+  const renderedParagraphs=await page.locator('.event-prose p').allTextContents();
+  const plainProse=(e.fullDetails||e.details||e.summary).replace(/\*\*([^*\n]+)\*\*|\*([^*\n]+)\*/g,(_,bold,italic)=>bold??italic);
+  assert.equal(renderedParagraphs.join('\n\n'),plainProse);
+  if(e.id==='gage-confession')assert.equal(await page.locator('.event-prose em').first().textContent(),'The Wiz');
   const captions=await page.locator('.event-gallery figcaption').allTextContents();
   assert.deepEqual(captions,available.filter(m=>m.eventId===e.id).sort((a,b)=>a.order-b.order).map(m=>m.caption));
  }
  check('All 103 full-event pages retain original narratives and associated available media');
  await go('gallery.html');assert.equal(await page.locator('.media-card').count(),available.length);
- const captions=await page.locator('.media-info>p').allTextContents();assert.deepEqual(captions,[...available].sort((a,b)=>a.order-b.order).map(m=>m.caption));
- check('All 114 available Gallery records, exact captions/order; 42 hidden placeholders remain hidden');
+ const expectedChapters=timeline.eraOrder.filter(era=>available.some(m=>events.find(e=>e.id===m.eventId)?.era===era));
+ assert.deepEqual(await page.locator('.gallery-era-heading h2').allTextContents(),expectedChapters);
+ assert.equal(await page.locator('.media-info').count(),0);
+ const galleryIndexLabels=await page.locator('.media-button').evaluateAll(buttons=>buttons.map(b=>Number(b.dataset.index)));
+ assert.deepEqual([...galleryIndexLabels].sort((a,b)=>a-b),available.map((_,i)=>i));
+ check('All '+available.length+' available Gallery records grouped by era with photo-first tiles');
+ await page.locator('#gallery-filter-details summary').click();
+ assert.ok(await page.locator('#gallery-reset').isVisible());
  for(const [key,selector,values]of [['era','#gallery-era',timeline.eraOrder],['person','#gallery-person',people.map(p=>p.id)],['event','#gallery-event',[...new Set(available.map(m=>m.eventId))]],['type','#gallery-type',['image','video']]]){
   for(const value of values){
    await page.locator(selector).selectOption(value);
@@ -93,10 +102,12 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
   await page.locator(selector).selectOption('');check('Every Gallery '+key+' filter matches original associations');
  }
  await page.locator('#gallery-sort').selectOption('newest');
- const sorted=[...available].sort((a,b)=>events.find(e=>e.id===b.eventId).sort.localeCompare(events.find(e=>e.id===a.eventId).sort)||a.order-b.order);
- assert.deepEqual(await page.locator('.media-info>p').allTextContents(),sorted.map(m=>m.caption));
- await page.reload();await page.waitForSelector('.media-card');assert.equal(await page.locator('#gallery-sort').inputValue(),'newest');check('Gallery sorting and URL restoration');
+ assert.deepEqual(await page.locator('.gallery-era-heading h2').allTextContents(),[...expectedChapters].reverse());
+ await page.reload();await page.waitForSelector('.media-card');assert.equal(await page.locator('#gallery-sort').inputValue(),'newest');
+ assert.ok(await page.locator('#gallery-filter-details').evaluate(e=>e.open));check('Gallery sorting, chapter order and URL restoration');
  await page.locator('#gallery-reset').click();await page.locator('.media-button').first().click();
+ assert.ok(await page.locator('#lightbox-caption').textContent());
+ assert.ok((await page.locator('#lightbox-meta').textContent()).includes(' · '));
  assert.ok(await page.locator('.site-header').evaluate(e=>e.inert));
  await page.keyboard.press('ArrowRight');assert.ok((await page.locator('#lightbox-position').textContent()).startsWith('2 '));
  await page.keyboard.press('End');assert.ok((await page.locator('#lightbox-position').textContent()).startsWith('114 '));
@@ -104,6 +115,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
  assert.ok(await page.locator('#lightbox').evaluate(e=>e.hidden));
  assert.ok(!await page.locator('.site-header').evaluate(e=>e.inert));assert.ok(await page.locator('.media-button').first().evaluate(e=>e===document.activeElement));
  check('Gallery viewer arrows, Home/End, Escape, background isolation and focus restoration');
+ await page.locator('#gallery-filter-details summary').click();
  await page.locator('#gallery-type').selectOption('video');
  for(let i=0;i<await page.locator('.media-button').count();i++){
   await page.locator('.media-button').nth(i).click();
@@ -117,7 +129,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
   playback.push(result);assert.ok(result.ok,JSON.stringify(result));
   await page.keyboard.press('Escape');
  }
- check('All 20 original videos decode and play in Chrome');
+ check('All '+media.filter(m=>m.available!==false&&m.type==='video').length+' original videos decode and play in Chrome');
  await go('tools/media-manager.html');await page.waitForFunction(()=>!document.querySelector('#manager-download').disabled);
  const download=async()=>{const pending=page.waitForEvent('download');await page.locator('#manager-download').click();const d=await pending;return JSON.parse(fs.readFileSync(await d.path(),'utf8'));};
  assert.deepEqual(await download(),manifest);check('Unedited Media Manager export preserves every original field and record');
@@ -166,6 +178,12 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
      assert.ok(r.x>=0&&r.y>=0&&r.x+r.width<=size.width+1&&r.y+r.height<=size.height+1,'search bounds');
      await page.locator('#filter-toggle').click();await page.waitForTimeout(320);
      await page.locator('#reset-filters').scrollIntoViewIfNeeded();assert.ok(await page.locator('#reset-filters').isVisible());await close();
+    }
+    if(url==='gallery.html'){
+     await page.locator('#gallery-filter-details summary').click();
+     await page.locator('#gallery-reset').scrollIntoViewIfNeeded();
+     assert.ok(await page.locator('#gallery-reset').isVisible());
+     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'gallery expanded-filter overflow');
     }
    }
   }
