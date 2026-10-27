@@ -105,6 +105,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       .map(story => `<a class="chip" href="timeline.html?q=${encodeURIComponent(story)}">${MSArchive.escapeHtml(story)}</a>`)
       .join('');
 
+    // Preserve separate paragraphs and simple author-approved inline emphasis.
+    // Escape source text before interpreting *italics* or **bold** formatting.
+    const renderEventProse = value => String(value || '')
+      .split(/\r?\n[ \t]*\r?\n+/)
+      .filter(paragraph => paragraph.trim())
+      .map(paragraph => {
+        const escaped = MSArchive.escapeHtml(paragraph);
+        const formatted = escaped.replace(/\*\*([^*\n]+)\*\*|\*([^*\n]+)\*/g,
+          (_, bold, italic) => bold !== undefined ? `<strong>${bold}</strong>` : `<em>${italic}</em>`);
+        return `<p>${formatted}</p>`;
+      }).join('');
+
     const gallery = available.length
       ? `<section class="event-gallery">${available.map(item => {
           if (item.type === 'video') {
@@ -164,7 +176,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <span class="badge ${event.certainty}">${MSArchive.certaintyLabel(event.certainty)}</span>
           </div>
         </header>
-        <section class="event-prose"><p>${MSArchive.escapeHtml(event.details || event.summary)}</p></section>
+        <section class="event-prose">${renderEventProse(event.details || event.summary)}</section>
         <aside class="event-sidebar">
           ${people ? `<h2>People</h2><div class="chip-list">${people}</div>` : ''}
           <h2>Categories</h2><div class="chip-list">${categories}</div>
