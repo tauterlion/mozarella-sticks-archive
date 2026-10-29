@@ -9,7 +9,7 @@ const timeline=JSON.parse(fs.readFileSync(path.join(root,'data/timeline.json')))
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'data/media.json'))),media=manifest.media;
 const events=[...timeline.events].sort((a,b)=>a.sort.localeCompare(b.sort)),available=media.filter(m=>m.available!==false);
 const normalize=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...e.categories,...e.storylines,...e.people.flatMap(id=>{const p=people.find(p=>p.id===id);return p?[p.displayName,...p.aliases]:[id];})].join(' '));
+const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.dateLabel,e.era,...e.categories,...e.storylines,...e.people.flatMap(id=>{const p=people.find(p=>p.id===id);return p?[p.displayName,...p.aliases]:[id];})].join(' '));
 (async()=>{
  fs.mkdirSync(output,{recursive:true});
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})});
@@ -83,7 +83,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
   const captions=await page.locator('.event-gallery figcaption').allTextContents();
   assert.deepEqual(captions,available.filter(m=>m.eventId===e.id).sort((a,b)=>a.order-b.order).map(m=>m.caption));
  }
- check('All 103 full-event pages retain original narratives and associated available media');
+ check('All '+events.length+' full-event pages retain original narratives and associated available media');
  await go('gallery.html');assert.equal(await page.locator('.media-card').count(),available.length);
  const expectedChapters=timeline.eraOrder.filter(era=>available.some(m=>events.find(e=>e.id===m.eventId)?.era===era));
  assert.deepEqual(await page.locator('.gallery-era-heading h2').allTextContents(),expectedChapters);
@@ -110,7 +110,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
  assert.ok((await page.locator('#lightbox-meta').textContent()).includes(' · '));
  assert.ok(await page.locator('.site-header').evaluate(e=>e.inert));
  await page.keyboard.press('ArrowRight');assert.ok((await page.locator('#lightbox-position').textContent()).startsWith('2 '));
- await page.keyboard.press('End');assert.ok((await page.locator('#lightbox-position').textContent()).startsWith('114 '));
+ await page.keyboard.press('End');assert.ok((await page.locator('#lightbox-position').textContent()).startsWith(available.length+' '));
  await page.keyboard.press('Home');await page.keyboard.press('Escape');
  assert.ok(await page.locator('#lightbox').evaluate(e=>e.hidden));
  assert.ok(!await page.locator('.site-header').evaluate(e=>e.inert));assert.ok(await page.locator('.media-button').first().evaluate(e=>e===document.activeElement));
@@ -145,7 +145,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.dateLabel,e.era,...
  const edited=await download();const expected=structuredClone(manifest);expected.media[0].caption='Regression test caption';assert.deepEqual(edited,expected);
  check('Saving one caption changes only that field in export');
  await page.route('**/data/media.json',route=>route.fulfill({json:{...manifest,revision:'changed-elsewhere'}}));
- page.once('dialog',async d=>{message=d.message();await d.accept();});await page.locator('#manager-download').click();assert.match(message,/manifest changed/);
+ const staleDialog=page.waitForEvent('dialog');await page.locator('#manager-download').click();const staleAlert=await staleDialog;message=staleAlert.message();await staleAlert.accept();assert.match(message,/manifest changed/);
  await page.unroute('**/data/media.json');check('Stale repository manifest blocks unsafe export');
  page.once('dialog',d=>d.accept());await page.locator('#manager-reset-edits').click();assert.deepEqual(await download(),manifest);
  await page.locator('#manager-people-picker summary').click();

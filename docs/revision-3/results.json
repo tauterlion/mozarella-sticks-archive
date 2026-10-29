@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "Initial member and only seven nearby portrait requests",
+    "All members ordered by authoritative name; both wrap directions",
+    "All 12 Connected People alphabetical; correct initial selection",
+    "Reviewed names, legacy aliases, accents and cross-category search select without opening profiles",
+    "Suggestions support pointer, keyboard, Escape, empty results and input caret",
+    "Carousel has actual running transform animations",
+    "Rapid input retains synchronized selection and profile URL",
+    "Center click, profile link, explicit return and browser Back preserve selection",
+    "Clicking a neighbor selects it",
+    "Keyboard selection transfers card focus; Enter opens the selected person",
+    "Ambient palette changes through an intermediate color, not a jump",
+    "All 37 profiles: exact reviewed text, minimal missing biographies, only canonical tagged events and available tagged media",
+    "Media dialog video playback, keyboard controls and focus restoration",
+    "JPG-only arrival/removal activates/restores both pages for Allysa, Elizabeth/libby and Valentina; no data/code edits",
+    "24 desktop/laptop/tablet/phone page and theme combinations without horizontal overflow",
+    "Reduced motion retains usable navigation",
+    "Touch swipe selects next person",
+    "No browser JavaScript errors"
+  ],
+  "errors": []
+}

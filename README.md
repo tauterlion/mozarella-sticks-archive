@@ -10,11 +10,11 @@ Revision 2 applies the approved editorial remaster to the full archive, includin
 |---|---:|
 | Timeline events | 112 |
 | Eras | 11 |
-| People indexed | 36 |
+| People indexed | 37 |
 | Members | 25 |
-| Connected people | 11 |
-| Media records | 156 |
-| Available media records | 114 |
+| Connected people | 12 |
+| Media records | 164 |
+| Available media records | 122 |
 | Hidden placeholders | 42 |
 
 The documented timeline currently runs from **May 12, 2024** through **October 17, 2026**.
@@ -27,6 +27,9 @@ No raw WhatsApp exports, phone numbers, or private evidence files are included i
 - `timeline.html` — searchable and filterable timeline
 - `gallery.html` — image and video gallery
 - `event.html?id=EVENT_ID` — reusable full event page
+- `people.html?person=PERSON_ID` — animated, searchable People directory
+- `person.html?id=PERSON_ID` — editorial profile, tagged historical appearances and media
+- `assets/portraits/` — automatically discovered `<canonical-id>.jpg` portraits
 - `data/timeline.json` — eras, categories, and timeline events
 - `data/people.json` — canonical person IDs, display names, aliases, and statuses
 - `data/media.json` — image and video manifest
@@ -295,3 +298,15 @@ and run `node tests/browser-regression.cjs`. `PLAYWRIGHT_MODULE`, `CHROME_BIN`,
 `BASE_URL`, and `REVIEW_OUTPUT` can override the module path, browser executable,
 local URL, and screenshot/result directory. The test defaults to port 8765.
 Run `python -m unittest discover -s tests -p "test_*.py"` for media safety tests.
+
+## Revision 3 People update
+
+The People directory and editorial profiles use the existing static site architecture. Membership categories sort by authoritative `fullName`, while `displayName`, original IDs and aliases remain available to existing pages. `data/people.json` adds `fullName`, independent `isOG`, and the 28 reviewed `biography`/`knownFor` entries. Nine Connected People retain minimal profiles without invented copy. Sienna is Connected; Valentina Correa is the new Member with canonical ID `valentina` (normalized from the handoff proposal `valentina-correa`).
+
+Search selects a person without opening the profile; it includes accent-insensitive full names and aliases, prioritizing exact matches. Selection uses `replaceState` and `people.html?person=...`, so returning from a profile restores the selected card without adding an entry for every arrow tap.
+
+**Portrait uploads need no JSON or code changes.** Follow the [JPG upload instructions](assets/portraits/README.md). Missing photos are expected and show silhouettes. Historical media and portrait assets are separate.
+
+Profiles show up to three explicit person-tagged events, selecting major events first, then chronological order with ID as a stable tie-break. Event imagery must belong to the same event; a photo explicitly tagging the person is preferred. Text-only cards are used when no available image exists. The media strip shows the first ten explicitly tagged, available media in archive order; its viewer can browse all matching media. The View All links open the complete existing Timeline/Gallery filters.
+
+See [Revision 3 review and screenshots](docs/revision-3-review.md) for validation and limitations. Run `python -m unittest discover -s tests -p "test_*.py"` and `python tools/validate_archive.py --check-files`. Optional browser suites: `node tests/people-browser.cjs` and `node tests/browser-regression.cjs` with Playwright installed and a local server at `http://127.0.0.1:8765/`. Override `PLAYWRIGHT_MODULE`, `CHROME_BIN`, `BASE_URL` and `REVIEW_OUTPUT` as needed. The website itself has no new runtime dependency or build step.
