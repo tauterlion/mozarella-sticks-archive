@@ -310,3 +310,15 @@ Search selects a person without opening the profile; it includes accent-insensit
 Profiles show up to three explicit person-tagged events, selecting major events first, then chronological order with ID as a stable tie-break. Event imagery must belong to the same event; a photo explicitly tagging the person is preferred. Text-only cards are used when no available image exists. The media strip shows the first ten explicitly tagged, available media in archive order; its viewer can browse all matching media. The View All links open the complete existing Timeline/Gallery filters.
 
 See [Revision 3 review and screenshots](docs/revision-3-review.md) for validation and limitations. Run `python -m unittest discover -s tests -p "test_*.py"` and `python tools/validate_archive.py --check-files`. Optional browser suites: `node tests/people-browser.cjs` and `node tests/browser-regression.cjs` with Playwright installed and a local server at `http://127.0.0.1:8765/`. Override `PLAYWRIGHT_MODULE`, `CHROME_BIN`, `BASE_URL` and `REVIEW_OUTPUT` as needed. The website itself has no new runtime dependency or build step.
+
+### Personal background palettes
+
+Set an optional `palette` on a person's existing entry in `data/people.json`, with exactly three six-digit hex colors in **dark, middle, light** order. Keep the three colors in the requested color family. For example, Lucas uses:
+
+```json
+"palette": ["#153F32", "#246D4E", "#70B88D"]
+```
+
+Edit only this array to change their colors; no JavaScript edits or portrait registration are needed. The shared resolver applies it to the directory's moving ambient fields, portrait/silhouette backgrounds, and existing editorial profile accents. Removing the array restores that person's unchanged deterministic default. Malformed arrays fall back to the default as a whole. Gold controls, text colors, gradient opacity/masks, motion, theme and reduced-motion behavior remain independent of these colors.
+
+The six approved palettes and current screenshots are documented in [personalized palette review](docs/personalized-palettes.md).

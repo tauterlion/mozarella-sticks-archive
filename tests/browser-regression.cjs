@@ -151,7 +151,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
  await page.locator('#manager-people-picker summary').click();
  await page.locator('#manager-people-picker [data-people-search]').fill('zzzz-no-person');
  assert.equal(await page.locator('#manager-people-picker .person-option:visible').count(),0);
- assert.ok(await page.locator('#manager-people-picker [data-people-empty]').isVisible());
+ await page.locator('#manager-people-picker [data-people-empty]').waitFor({state:'visible'});
  await page.locator('#manager-people-picker [data-people-search]').press('Escape');
  assert.equal(await page.locator('#manager-people-picker .person-option:visible').count(),people.length);
  await page.locator('#manager-people-picker summary').click();check('Consolidated people picker retains filtering, empty state and Escape');

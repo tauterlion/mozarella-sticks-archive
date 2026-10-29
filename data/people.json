@@ -41,6 +41,11 @@
         "Social presence",
         "Video edits",
         "Creativity"
+      ],
+      "palette": [
+        "#392056",
+        "#643B91",
+        "#AA79D1"
       ]
     },
     {
@@ -135,6 +140,11 @@
         "Humor",
         "Involvement",
         "Boricua pride"
+      ],
+      "palette": [
+        "#063D73",
+        "#007DD8",
+        "#15D9F4"
       ]
     },
     {
@@ -153,6 +163,11 @@
       "knownFor": [
         "Swedish",
         "Laugh"
+      ],
+      "palette": [
+        "#75641B",
+        "#B6A13D",
+        "#F4DE86"
       ]
     },
     {
@@ -229,6 +244,11 @@
         "Mormon",
         "Athletic",
         "Overall charm"
+      ],
+      "palette": [
+        "#5A254A",
+        "#A64A83",
+        "#E9A3CA"
       ]
     },
     {
@@ -269,6 +289,11 @@
         "Intelligence",
         "AP Chemistry",
         "Dating history"
+      ],
+      "palette": [
+        "#153F32",
+        "#246D4E",
+        "#70B88D"
       ]
     },
     {
@@ -332,6 +357,11 @@
       "knownFor": [
         "Last name",
         "Humor"
+      ],
+      "palette": [
+        "#123E50",
+        "#1D7185",
+        "#4CB0B6"
       ]
     },
     {

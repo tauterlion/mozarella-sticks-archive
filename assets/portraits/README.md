@@ -14,4 +14,4 @@ If a photo does not appear, check exact filename/case (`libby.jpg`, not `Libby.J
 
 Only nearby carousel portraits are requested initially (the center plus three on each side); more load when approached. Each profile loads its portrait directly. Images use a centered crop, favoring the upper part of the frame. Keep faces away from extreme edges and leave room at the bottom for directory labels.
 
-No real portrait originals were included in the Revision 3 handoff. Test images used to verify this workflow are removed after testing and are not committed here.
+The initial Revision 3 handoff contained no portrait originals; a first batch of 16 JPGs has since been uploaded to the draft branch. Tests preserve existing originals and use temporary fixtures only for people without a JPG. Those test images are removed after testing and are not committed here.

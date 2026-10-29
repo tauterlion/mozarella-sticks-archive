@@ -1,5 +1,7 @@
 # Revision 3 — People update review
 
+**Latest update:** The first batch of 16 portraits and six personalized palettes are now on the draft branch. See [current palette screenshots and verification](personalized-palettes.md). The initial-review notes below describe the earlier, pre-upload snapshot.
+
 Draft implementation based on `main` at `74eb6ee5973e8873c98ca35bd02066d43b775929` (Patch 2.1). No merge or deployment is part of this change.
 
 ## What changed

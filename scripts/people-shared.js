@@ -2,7 +2,15 @@
 (() => {
   const MS = window.MSArchive;
   const palettes = [['#67435e','#26394f','#a66e43'],['#745237','#482d49','#40585d'],['#285c60','#344761','#8e625d'],['#704655','#3f375a','#796344']];
-  MS.peoplePalette = person => palettes[[...person.id].reduce((n,c)=>n+c.charCodeAt(0),0)%palettes.length];
+  // Optional people.json palette: exactly three #RRGGBB colors, dark to light.
+  // Ignore malformed overrides as a whole so existing defaults remain predictable.
+  MS.peoplePalette = person => {
+    if (Array.isArray(person.palette) && person.palette.length === 3
+      && person.palette.every(color => typeof color === 'string' && /^#[0-9a-f]{6}$/i.test(color))) {
+      return [...person.palette];
+    }
+    return palettes[[...person.id].reduce((n,c)=>n+c.charCodeAt(0),0)%palettes.length];
+  };
   MS.applyPeoplePalette = (element, person) => MS.peoplePalette(person).forEach((color,i)=>element.style.setProperty('--person-color-'+i,color));
   MS.portraitPath = person => MS.siteUrl(`assets/portraits/${encodeURIComponent(person.id)}.jpg`);
   MS.createPortrait = (person, {eager=false}={}) => {

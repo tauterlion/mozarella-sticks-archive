@@ -7,7 +7,7 @@ const people=JSON.parse(fs.readFileSync(path.join(root,'data/people.json'))).peo
  page.on('pageerror',e=>errors.push(e.message));const check=s=>{checks.push(s);console.log('PASS '+s);};
  const go=async p=>{await page.goto(base+p);await page.waitForFunction(()=>document.querySelector('.person-card[data-selected=true],#person-name,.empty-state'));await page.waitForTimeout(650);};
  const selected=()=>page.locator('.person-card[data-selected=true]').getAttribute('data-person');
- await go('people.html');assert.equal(await selected(),'aedan');assert.equal(await page.locator('.person-portrait[data-loaded=false]').count(),7);check('Initial member and only seven nearby portrait requests');
+ await go('people.html');assert.equal(await selected(),'aedan');assert.equal(await page.locator('.person-portrait img[src]').count(),7);check('Initial member and only seven nearby portrait requests');
  const members=people.filter(p=>p.status==='Member').sort((a,b)=>a.fullName.localeCompare(b.fullName,'en',{sensitivity:'base'}));
  for(const p of members){assert.equal(await selected(),p.id);await page.locator('.next').click();}assert.equal(await selected(),'aedan');await page.locator('.previous').click();assert.equal(await selected(),members.at(-1).id);check('All members ordered by authoritative name; both wrap directions');
  await page.locator('[data-category="Connected Person"]').click();assert.equal(await selected(),'allysa');
@@ -30,12 +30,16 @@ const people=JSON.parse(fs.readFileSync(path.join(root,'data/people.json'))).peo
   assert.equal(await page.locator('.profile-biography').count(),person.biography?1:0);if(person.biography)assert.equal(await page.locator('.profile-biography').textContent(),person.biography);
   const eventIds=await page.locator('.profile-event').evaluateAll(ns=>ns.map(n=>n.dataset.event));assert.ok(eventIds.length<=3);for(const id of eventIds)assert.ok(timeline.find(e=>e.id===id).people.includes(person.id));
   const mediaIds=await page.locator('.profile-media-item').evaluateAll(ns=>ns.map(n=>n.dataset.media));for(const id of mediaIds){const m=media.find(m=>m.id===id);assert.equal(m.available,true);assert.ok(m.people.includes(person.id));}
-  assert.equal(await page.locator('#profile-portrait img:not([hidden])').count(),0);
+  assert.equal(await page.locator('#profile-portrait img:not([hidden])').count(),Number(fs.existsSync(path.join(root,'assets/portraits',person.id+'.jpg'))));
  }check('All 37 profiles: exact reviewed text, minimal missing biographies, only canonical tagged events and available tagged media');
  await go('person.html?id=lorena');await page.locator('.profile-media-item').first().click();assert.ok(await page.locator('#person-viewer-stage video').evaluate(async v=>{v.muted=true;await v.play();await new Promise(r=>setTimeout(r,200));return v.currentTime>0&&v.videoWidth>0;}));assert.equal(await page.locator('#person-viewer').evaluate(n=>n.open),true);await page.keyboard.press('End');await page.keyboard.press('Home');await page.keyboard.press('Escape');assert.equal(await page.locator('#person-viewer').evaluate(n=>n.open),false);assert.equal(await page.locator('.profile-media-item').first().evaluate(n=>n===document.activeElement),true);check('Media dialog video playback, keyboard controls and focus restoration');
  const fixturePage=await context.newPage();await fixturePage.setViewportSize({width:300,height:400});await fixturePage.setContent('<body style="margin:0;background:#6b596d;color:white;display:grid;place-items:center;height:100vh;font:24px sans-serif">TEST FIXTURE<br>Not a real portrait</body>');const fixture=await fixturePage.screenshot({type:'jpeg'});await fixturePage.close();
  for(const id of ['allysa','libby','valentina']){
-  const file=path.join(root,'assets/portraits',id+'.jpg');assert.ok(!fs.existsSync(file),'Never overwrite a real portrait');
+  const file=path.join(root,'assets/portraits',id+'.jpg');
+  if(fs.existsSync(file)){
+   for(const route of ['people.html?person='+id,'person.html?id='+id]){await go(route);const portrait=page.locator(route.startsWith('people')?`.person-card[data-person="${id}"] .person-portrait`:'#profile-portrait .person-portrait');assert.equal(await portrait.getAttribute('data-loaded'),'true');}
+   continue; // Real uploaded portraits must never be overwritten or removed by fixtures.
+  }
   try{
    await go('people.html?person='+id);assert.equal(await page.locator(`.person-card[data-person="${id}"] .person-portrait`).getAttribute('data-loaded'),'false');
    fs.writeFileSync(file,fixture);
@@ -43,7 +47,7 @@ const people=JSON.parse(fs.readFileSync(path.join(root,'data/people.json'))).peo
    if(id==='libby'){await page.screenshot({path:path.join(out,'profile-photo-fixture.png'),fullPage:true});await go('people.html?person=libby');await page.screenshot({path:path.join(out,'directory-photo-fixture.png')});}
   }finally{if(fs.existsSync(file))fs.unlinkSync(file);}
   for(const route of ['people.html?person='+id,'person.html?id='+id]){await go(route);const p=page.locator(route.startsWith('people')?`.person-card[data-person="${id}"] .person-portrait`:'#profile-portrait .person-portrait');assert.equal(await p.getAttribute('data-loaded'),'false');}
- }check('JPG-only arrival/removal activates/restores both pages for Allysa, Elizabeth/libby and Valentina; no data/code edits');
+ }check('Both-page portrait checks: existing originals load; missing portraits accept JPG-only arrival/removal without data/code edits');
  for(const theme of ['dark','light'])for(const [width,height]of [[1672,941],[1440,900],[1280,720],[768,1024],[390,844],[320,740]])for(const route of ['people.html?person=lorena','person.html?id=lorena']){
   await page.setViewportSize({width,height});await page.emulateMedia({colorScheme:theme});await page.evaluate(t=>localStorage.setItem('ms-theme',t),theme);await go(route);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route} ${width} ${theme} overflow`);
