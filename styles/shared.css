@@ -74,3 +74,5 @@ body[data-page=timeline] .back-to-top{bottom:calc(96px + env(safe-area-inset-bot
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+@media(min-width:461px) and (max-width:650px){.brand>span:last-child{display:none}.primary-nav{margin-inline:auto}}

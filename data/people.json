@@ -15,7 +15,14 @@
         "Lucent",
         "Lil' Sis"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Aedan Kirkpatrick",
+      "isOG": false,
+      "biography": "Warmhearted and distinctive, Aedan stays close to the people she cares about. When something isn't right, she's willing to speak up, even when it's awkward.",
+      "knownFor": [
+        "Origin story",
+        "Interesting accent"
+      ]
     },
     {
       "id": "alejandro",
@@ -26,7 +33,20 @@
         "Natrolite",
         "Natwolite"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Alejandro Rosado",
+      "isOG": true,
+      "biography": "A socially adaptable and expressive person who isn't afraid to show his appreciation for the people around him.",
+      "knownFor": [
+        "Social presence",
+        "Video edits",
+        "Creativity"
+      ],
+      "palette": [
+        "#392056",
+        "#643B91",
+        "#AA79D1"
+      ]
     },
     {
       "id": "alexander",
@@ -36,13 +56,30 @@
         "Alex",
         "Analyst"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Alexander Flachowsky",
+      "isOG": false,
+      "biography": "Reserved but sharp, Alexander is always willing to lend a hand with anything involving mathematics or computers.",
+      "knownFor": [
+        "Intelligence",
+        "German"
+      ]
     },
     {
       "id": "charlee",
       "displayName": "Charlee",
-      "aliases": [],
-      "status": "Member"
+      "aliases": [
+        "Charlee",
+        "Charles"
+      ],
+      "status": "Member",
+      "fullName": "Charleston Robison",
+      "isOG": false,
+      "biography": "One of the group's newer members, Charlee brings a calmer contrast to the usual chaos while still fitting right in.",
+      "knownFor": [
+        "Contrast",
+        "Light eyes"
+      ]
     },
     {
       "id": "dash",
@@ -51,18 +88,37 @@
         "Dashel",
         "Reid",
         "Greenburg",
-        "Yankee"
+        "Yankee",
+        "Dash",
+        "Dashie"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Reid Dashel Greenberg",
+      "isOG": true,
+      "biography": "Unafraid to show affection for his closest friends, Dash brings a distinctive mix of humor, enthusiasm, and personality to the group.",
+      "knownFor": [
+        "Music production",
+        "Humor",
+        "Hosting hangouts"
+      ]
     },
     {
       "id": "gage",
       "displayName": "Gage",
       "aliases": [
         "Weber",
-        "Monarch"
+        "Monarch",
+        "Gage"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Gage Weber",
+      "isOG": true,
+      "biography": "Known for his strength and musical ability, Gage is a smart, self-sufficient member whose absence from Puerto Rico is felt by many in the group.",
+      "knownFor": [
+        "Strength",
+        "Musical talent",
+        "Overall impact"
+      ]
     },
     {
       "id": "jeidenne",
@@ -72,9 +128,24 @@
         "Nieves",
         "Jeipenny",
         "Nimbus",
-        "Jei Jei bai bai"
+        "Jei Jei bai bai",
+        "Jeidencito",
+        "JJ"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Jeidenne Nieves",
+      "isOG": true,
+      "biography": "Jeidenne brings humor and a memorable presence to hangouts, especially late-night ones. He's also proudly Boricua, with a strong appreciation for Puerto Rican culture.",
+      "knownFor": [
+        "Humor",
+        "Involvement",
+        "Boricua pride"
+      ],
+      "palette": [
+        "#063D73",
+        "#007DD8",
+        "#15D9F4"
+      ]
     },
     {
       "id": "josie",
@@ -82,15 +153,38 @@
       "aliases": [
         "Toro",
         "Jose",
-        "Joseph"
+        "Joseph",
+        "Josie"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Josie Toro",
+      "isOG": false,
+      "biography": "Always ready to laugh at the smallest things, Josie brings goofy energy to the group. She's also caring and dependable when a friend needs support.",
+      "knownFor": [
+        "Swedish",
+        "Laugh"
+      ],
+      "palette": [
+        "#75641B",
+        "#B6A13D",
+        "#F4DE86"
+      ]
     },
     {
       "id": "kamilo",
       "displayName": "Kamilo",
-      "aliases": [],
-      "status": "Member"
+      "aliases": [
+        "Kamilo"
+      ],
+      "status": "Member",
+      "fullName": "Kamilo Sepulveda",
+      "isOG": false,
+      "biography": "Usually laid-back but quick with a joke, Kamilo tends to communicate through humor, even when he's less active in the group.",
+      "knownFor": [
+        "Little brother",
+        "Unique hairstyle",
+        "Running"
+      ]
     },
     {
       "id": "kateryna",
@@ -101,13 +195,31 @@
         "Kat",
         "Specter"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Kateryna Alvarez",
+      "isOG": false,
+      "biography": "Giggly yet dedicated, Kateryna approaches her interests with enthusiasm and focus. She's intelligent, sociable, and particularly enjoys spending time with the girls in the group.",
+      "knownFor": [
+        "Model UN",
+        "Movie addiction",
+        "Ukrainian"
+      ]
     },
     {
       "id": "leo",
       "displayName": "Leo",
-      "aliases": [],
-      "status": "Member"
+      "aliases": [
+        "Witting",
+        "Eugenio"
+      ],
+      "status": "Member",
+      "fullName": "Leo Witting",
+      "isOG": false,
+      "biography": "Reserved and laid-back, Leo tends to watch the group's chaos unfold from the calmer side of things.",
+      "knownFor": [
+        "Musical talent",
+        "Germany"
+      ]
     },
     {
       "id": "libby",
@@ -119,9 +231,25 @@
         "Macbeth",
         "Libeth",
         "Frost",
-        "5:00 Twin"
+        "5:00 Twin",
+        "Libby",
+        "Libster",
+        "Liberator"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Elizabeth Macbeth",
+      "isOG": true,
+      "biography": "Sometimes called the 'mother of Mozarella Sticks,' Libby combines a calm but lively personality with a habit of looking on the bright side.",
+      "knownFor": [
+        "Mormon",
+        "Athletic",
+        "Overall charm"
+      ],
+      "palette": [
+        "#5A254A",
+        "#A64A83",
+        "#E9A3CA"
+      ]
     },
     {
       "id": "lorena",
@@ -132,7 +260,15 @@
         "Lore",
         "Artemis"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Lorena Viñuela",
+      "isOG": true,
+      "biography": "A caring and perceptive person who tends to stay clear of group drama. She's intelligent and has a knack for reading the room.",
+      "knownFor": [
+        "Leadership",
+        "General vibe",
+        "Model UN"
+      ]
     },
     {
       "id": "lucas",
@@ -142,9 +278,23 @@
         "Gabriel",
         "Lukey",
         "Calculator",
-        "Doakes"
+        "Doakes",
+        "Lucasito"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Lucas Ramirez",
+      "isOG": true,
+      "biography": "An intelligent student who somehow survives his grueling academic workload, Lucas is also widely connected across the friend group.",
+      "knownFor": [
+        "Intelligence",
+        "AP Chemistry",
+        "Dating history"
+      ],
+      "palette": [
+        "#153F32",
+        "#246D4E",
+        "#70B88D"
+      ]
     },
     {
       "id": "lydia",
@@ -153,9 +303,19 @@
         "Corsino",
         "Dragon Warrior",
         "Panda",
-        "Recon"
+        "Recon",
+        "Lyds",
+        "Litty"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Lydia Corsino",
+      "isOG": true,
+      "biography": "Smart and well connected with the girls in the group, Lydia has a reputation for taking trivia seriously. As she'd put it: 'Bro idk.'",
+      "knownFor": [
+        "Intelligence",
+        "Trivia sweat",
+        "Athletic"
+      ]
     },
     {
       "id": "marco",
@@ -165,9 +325,17 @@
         "Valiente",
         "Marcos",
         "Cruise",
-        "The Weird Wizerd"
+        "The Weird Wizerd",
+        "Marco"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Marco Valiente",
+      "isOG": true,
+      "biography": "Independent yet social, Marco is quick to speak up when something seems off. His expressive reactions and wide-ranging moods are part of what makes him memorable.",
+      "knownFor": [
+        "Old hairstyle",
+        "Giggly mood"
+      ]
     },
     {
       "id": "maria",
@@ -176,9 +344,25 @@
         "Trebilcock",
         "Mamommy",
         "Inkwraith",
-        "Marigga"
+        "Marigga",
+        "Mari",
+        "Marisabel",
+        "Triplecock",
+        "Mariquita"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Maria Trebilcock",
+      "isOG": false,
+      "biography": "Maria can swing between boundless energy and complete exhaustion. Either way, her sense of responsibility, humor, and one-of-a-kind vocabulary stand out.",
+      "knownFor": [
+        "Last name",
+        "Humor"
+      ],
+      "palette": [
+        "#123E50",
+        "#1D7185",
+        "#4CB0B6"
+      ]
     },
     {
       "id": "marife",
@@ -186,7 +370,14 @@
       "aliases": [
         "Mafe"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Marife Dávila",
+      "isOG": false,
+      "biography": "Approachable and socially confident, Marife can say a lot with only a few words. She often steps into leadership roles and likes to see things through.",
+      "knownFor": [
+        "Swimming",
+        "Colored hair"
+      ]
     },
     {
       "id": "nicholas",
@@ -197,7 +388,14 @@
         "Fuell",
         "King Frog"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Nicholas Fuell",
+      "isOG": false,
+      "biography": "Quick with jokes and lighthearted sarcasm, Nicholas also knows when to be kind and take responsibility.",
+      "knownFor": [
+        "JoJo's Bizarre Adventure",
+        "Chivalry"
+      ]
     },
     {
       "id": "samantha",
@@ -210,9 +408,18 @@
         "Whistle",
         "Thistle",
         "Ref",
-        "The Korean"
+        "The Korean",
+        "Verity",
+        "Sammy"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Samantha Thistle",
+      "isOG": false,
+      "biography": "Sometimes laughing nonstop and other times keeping to herself, Samantha is especially close to the girls in the group and loves sharing the latest gossip.",
+      "knownFor": [
+        "Korean/Japanese",
+        "Giggly mood"
+      ]
     },
     {
       "id": "sebastian",
@@ -223,7 +430,14 @@
         "Machicote",
         "Sebastian Machicote"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Sebastian Machicote",
+      "isOG": false,
+      "biography": "Easy to connect with, Sebastian has a conversational style all his own, mixing Spanish and Japanese references with ease.",
+      "knownFor": [
+        "Japanese LARP",
+        "Vocabulary"
+      ]
     },
     {
       "id": "serafina",
@@ -233,9 +447,17 @@
         "Fin",
         "Phin",
         "Fina",
-        "Fifi"
+        "Fifi",
+        "Fie-ñûr"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Serafina Murphy",
+      "isOG": false,
+      "biography": "Warm, outgoing, and full of energy, Serafina stays closely involved with the group. Her roasts and distinctive hairstyles make her hard to miss.",
+      "knownFor": [
+        "Interesting roasts",
+        "Unique hairstyle"
+      ]
     },
     {
       "id": "shane",
@@ -243,17 +465,34 @@
       "aliases": [
         "Smater",
         "Siphon",
-        "Elsa"
+        "Elsa",
+        "Sha-nae-nae"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Shane Smater",
+      "isOG": true,
+      "biography": "If the Mozarella Sticks had character stats, Shane would have most of them maxed out. Need I say more?",
+      "knownFor": [
+        "Intelligence",
+        "Haircut",
+        "Nonchalance"
+      ]
     },
     {
       "id": "sienna",
       "displayName": "Sienna",
       "aliases": [
-        "Seyneyney"
+        "Seyneyney",
+        "Sienna"
       ],
-      "status": "Member"
+      "status": "Connected Person",
+      "fullName": "Sienna Ritter",
+      "isOG": false,
+      "biography": "Quiet and usually found spending time with the girls, Sienna has a knack for bringing an interesting story into conversation.",
+      "knownFor": [
+        "Red hair",
+        "Accent"
+      ]
     },
     {
       "id": "todd",
@@ -263,57 +502,97 @@
         "Toddtastic",
         "Tod",
         "Anderson",
-        "Torpedo"
+        "Torpedo",
+        "Todd-tastic"
       ],
-      "status": "Member"
+      "status": "Member",
+      "fullName": "Todd Andersen",
+      "isOG": false,
+      "biography": "Todd's energy can be unpredictable: calm and collected one moment, excited and ready for action the next. Through it all, he's usually smiling.",
+      "knownFor": [
+        "Backflips",
+        "Mormon",
+        "Athletic"
+      ]
     },
     {
       "id": "allysa",
       "displayName": "Allysa",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Allysa",
+      "isOG": false
     },
     {
       "id": "bash",
       "displayName": "Bash",
-      "aliases": [],
-      "status": "Connected Person"
+      "aliases": [
+        "Bash"
+      ],
+      "status": "Connected Person",
+      "fullName": "Sebastian Stratton",
+      "isOG": false,
+      "biography": "A ball of energy, Bash is always willing to take on something entertaining or daring. Although he visits only occasionally now, he tends to make an impression.",
+      "knownFor": [
+        "Bravery",
+        "Gym-rat",
+        "Rizz"
+      ]
     },
     {
       "id": "bianca",
       "displayName": "Bianca",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Bianca",
+      "isOG": false
     },
     {
       "id": "cynthia",
       "displayName": "Cynthia",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Cynthia",
+      "isOG": false
     },
     {
       "id": "dominique",
       "displayName": "Dominique",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Dominique",
+      "isOG": false
     },
     {
       "id": "isabel",
       "displayName": "Isabel",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Isabel",
+      "isOG": false
     },
     {
       "id": "jaime",
       "displayName": "Jaime",
-      "aliases": [],
-      "status": "Connected Person"
+      "aliases": [
+        "Jaimito"
+      ],
+      "status": "Connected Person",
+      "fullName": "Jaime Del Valle",
+      "isOG": false,
+      "biography": "Jaime's goofy side may not always be obvious in the wider group, but it comes through around the boys.",
+      "knownFor": [
+        "Facial hair",
+        "Strength"
+      ]
     },
     {
       "id": "leah",
       "displayName": "Leah",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Leah",
+      "isOG": false
     },
     {
       "id": "lorena-rodriguez",
@@ -321,19 +600,41 @@
       "aliases": [
         "Lorena Rodriguez"
       ],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Lorena Rodríguez",
+      "isOG": false
     },
     {
       "id": "valentin",
       "displayName": "Valentin",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Valentin",
+      "isOG": false
     },
     {
       "id": "zach",
       "displayName": "Zach",
       "aliases": [],
-      "status": "Connected Person"
+      "status": "Connected Person",
+      "fullName": "Zach",
+      "isOG": false
+    },
+    {
+      "id": "valentina",
+      "displayName": "Valentina",
+      "aliases": [
+        "Vale",
+        "Tina"
+      ],
+      "fullName": "Valentina Correa",
+      "status": "Member",
+      "isOG": false,
+      "biography": "Lively and expressive, Valentina brings excitement and a sharp sense of sarcasm to conversations. You never quite know what she'll say next.",
+      "knownFor": [
+        "Horseback riding",
+        "Cross-country"
+      ]
     }
   ]
 }

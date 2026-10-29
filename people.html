@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>People · Mozarella Sticks Archive</title><link rel="stylesheet" href="styles/shared.css"><link rel="stylesheet" href="styles/people.css"></head>
+<body data-page="people" class="people-page"><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header">
+  <a class="brand" href="index.html" aria-label="Mozarella Sticks Archive home">
+    <span class="brand-mark" aria-hidden="true">MS</span>
+    <span><strong>Mozarella Sticks</strong><small>Archive</small></span>
+  </a>
+  <nav class="primary-nav" aria-label="Primary navigation">
+    <a data-nav="home" href="index.html">Home</a>
+    <a data-nav="timeline" href="timeline.html">Timeline</a>
+    <a data-nav="people" href="people.html">People</a>
+    <a data-nav="gallery" href="gallery.html">Gallery</a>
+  </nav>
+  <button class="icon-button theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+    <span class="theme-icon" aria-hidden="true">◐</span>
+  </button>
+</header>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<main id="main-content" class="directory"><h1 class="sr-only">People</h1>
+<div class="directory-toolbar"><div class="people-categories" role="group" aria-label="Membership"><button type="button" data-category="Member" aria-pressed="true">Members</button><button type="button" data-category="Connected Person" aria-pressed="false">Connected People</button></div>
+<div class="people-search"><label class="sr-only" for="people-search">Search people</label><input type="search" id="people-search" placeholder="Search people…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="people-suggestions" aria-expanded="false"><div id="people-suggestions" role="listbox" aria-label="People suggestions" hidden></div></div></div>
+<section class="carousel" aria-label="People carousel" aria-roledescription="carousel"><div id="portrait-track"></div><button class="carousel-arrow previous" aria-label="Previous person" type="button">‹</button><button class="carousel-arrow next" aria-label="Next person" type="button">›</button></section>
+<div class="directory-bottom"><a class="button profile-link" id="view-profile" href="people.html">View Profile <span aria-hidden="true">→</span></a><p id="selection-status" role="status" aria-live="polite"></p><p class="keyboard-hint">← → Browse <span>Enter</span> View profile</p></div><p id="people-error" role="alert"></p>
+<noscript><p class="empty-state">Enable JavaScript to explore the people directory.</p></noscript></main>
+<script src="scripts/shared.js?v=3" defer></script><script src="scripts/people-shared.js" defer></script><script src="scripts/people.js" defer></script></body></html>

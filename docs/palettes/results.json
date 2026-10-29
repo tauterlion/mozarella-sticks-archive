@@ -1,0 +1,35 @@
+{
+  "checks": [
+    "Six exact overrides, all unchanged deterministic defaults, malformed-array fallback",
+    "Six interpolated palette transitions and screenshots: desktop, dark",
+    "Six editorial palette accents and silhouettes: desktop, dark",
+    "Six interpolated palette transitions and screenshots: mobile, dark",
+    "Six editorial palette accents and silhouettes: mobile, dark",
+    "Six interpolated palette transitions and screenshots: desktop, light",
+    "Six editorial palette accents and silhouettes: desktop, light",
+    "Six interpolated palette transitions and screenshots: mobile, light",
+    "Six editorial palette accents and silhouettes: mobile, light",
+    "All 16 uploaded original JPGs load on both pages",
+    "All six palettes remain functional with reduced motion",
+    "No JavaScript errors"
+  ],
+  "errors": [],
+  "portraits": [
+    "alexander",
+    "dash",
+    "gage",
+    "jeidenne",
+    "josie",
+    "kamilo",
+    "kateryna",
+    "libby",
+    "lucas",
+    "lydia",
+    "marco",
+    "maria",
+    "marife",
+    "samantha",
+    "todd",
+    "valentina"
+  ]
+}
