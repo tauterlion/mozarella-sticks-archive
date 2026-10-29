@@ -975,7 +975,6 @@
         "lydia",
         "marco",
         "maria",
-        "marife",
         "nicholas",
         "samantha",
         "sebastian",
@@ -2592,21 +2591,6 @@
         "todd"
       ],
       "order": 155
-    },
-    {
-      "id": "chegui-cameo",
-      "file": "chegui-cameo.jpeg",
-      "path": "assets/media/chegui-cameo.jpeg",
-      "available": true,
-      "type": "image",
-      "caption": "Chegui cameo'd, Todd is plotting something with Nico.",
-      "eventId": "nico-todd-peru-trip",
-      "era": "Summer 2026",
-      "people": [
-        "nicholas",
-        "todd"
-      ],
-      "order": 156
     },
     {
       "id": "whatsapp-image-2026-09-18-at-6-00-16-pm",
