@@ -13,8 +13,8 @@ Revision 2 applies the approved editorial remaster to the full archive, includin
 | People indexed | 37 |
 | Members | 25 |
 | Connected people | 12 |
-| Media records | 164 |
-| Available media records | 122 |
+| Media records | 163 |
+| Available media records | 121 |
 | Hidden placeholders | 42 |
 
 The documented timeline currently runs from **May 12, 2024** through **October 17, 2026**.
