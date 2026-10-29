@@ -15,6 +15,22 @@
 .event-sidebar{padding:23px;background:var(--surface);border:1px solid var(--line);border-radius:6px}
 .event-sidebar h2{font:11px "Segoe UI",system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:24px 0 13px}
 .event-sidebar h2:first-child{margin-top:0}
+/* Subtle, keyboard-accessible destination hint for event participant chips. */
+.event-sidebar .person-chip{position:relative}
+.event-sidebar .person-chip::after{
+  content:attr(data-hint);
+  position:absolute;left:50%;bottom:calc(100% + 6px);z-index:5;
+  padding:4px 8px;border:1px solid var(--line);border-radius:4px;
+  background:var(--bg-elevated);color:var(--text);box-shadow:var(--shadow);
+  font:11px/1.4 "Segoe UI",system-ui,sans-serif;white-space:nowrap;
+  opacity:0;pointer-events:none;transform:translate(-50%,4px);
+  transition:opacity .16s ease,transform .16s ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .event-sidebar .person-chip:hover::after{opacity:1;transform:translate(-50%,0)}
+}
+.event-sidebar .person-chip:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+
 .event-gallery{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .event-gallery figure{padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:5px;overflow:hidden}
 .event-gallery img,.event-gallery video{width:100%;height:400px;object-fit:contain;background:var(--bg)}
