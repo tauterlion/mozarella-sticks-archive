@@ -85,6 +85,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
   if(e.people.length){
    const personHrefs=await page.locator('.event-sidebar .chip-list').first().locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
    assert.deepEqual(personHrefs,e.people.map(pid=>'person.html?id='+encodeURIComponent(pid)),e.id+' person chips must open profiles');
+   assert.deepEqual(await page.locator('.event-sidebar .person-chip').evaluateAll(links=>links.map(a=>a.dataset.hint)),e.people.map(()=>'View profile'),e.id+' profile hints');
   }
   const categoryHrefs=await page.locator('.event-sidebar .chip-list').nth(e.people.length?1:0).locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
   assert.deepEqual(categoryHrefs,e.categories.map(category=>'timeline.html?category='+encodeURIComponent(category)),e.id+' category links must stay filtered');
@@ -100,6 +101,8 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
  await go('event.html?id=nico-todd-peru-trip');
  assert.equal(await page.locator('.event-sidebar a[href="timeline.html?person=nicholas"]').count(),1);
  assert.equal(await page.locator('.event-sidebar a[href="person.html?id=todd"]').count(),1);
+ assert.equal(await page.locator('.event-sidebar a[href="timeline.html?person=nicholas"]').getAttribute('data-hint'),'View timeline');
+ assert.equal(await page.locator('.event-sidebar a[href="person.html?id=todd"]').getAttribute('data-hint'),'View profile');
  await page.unroute('**/data/people.json');
  await go('event.html?id=nico-todd-peru-trip');
  await page.locator('.event-sidebar a[href="person.html?id=todd"]').click();
