@@ -37,7 +37,7 @@ for(const palette of [null,[],['#fff','#000','#111'],['#123456','#234567','red']
   }
   check(`Six editorial palette accents and silhouettes: ${device}, ${theme}`);
  }
- 
+
  for(const p of originals)for(const route of ['people.html?person='+p.id,'person.html?id='+p.id]){
   await page.goto(base+route);const selector=route.startsWith('people')?'.person-card[data-selected=true] .person-portrait':'#profile-portrait .person-portrait';await page.waitForSelector(selector+'[data-loaded=true]');assert.ok(await page.locator(selector+' img').evaluate(n=>n.naturalWidth>0));
  }check(`All ${originals.length} uploaded original JPGs load on both pages`);
