@@ -104,7 +104,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const href = hasProfile
           ? `person.html?id=${encodeURIComponent(pid)}`
           : `timeline.html?person=${encodeURIComponent(pid)}`;
-        return `<a class="chip" href="${MSArchive.escapeHtml(href)}">${MSArchive.escapeHtml(MSArchive.personName(pid, data))}</a>`;
+        const hint = hasProfile ? 'View profile' : 'View timeline';
+        const name = MSArchive.personName(pid, data);
+        return `<a class="chip person-chip" href="${MSArchive.escapeHtml(href)}" data-hint="${hint}" aria-label="${MSArchive.escapeHtml(name)} — ${hint}">${MSArchive.escapeHtml(name)}</a>`;
       })
       .join('');
     const categories = event.categories
