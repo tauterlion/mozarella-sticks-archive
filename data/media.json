@@ -969,6 +969,7 @@
         "josie",
         "kamilo",
         "kateryna",
+        "leo",
         "libby",
         "lorena",
         "lucas",
@@ -980,8 +981,8 @@
         "sebastian",
         "serafina",
         "shane",
-        "sienna",
         "todd",
+        "valentina",
         "allysa",
         "bash",
         "bianca",
@@ -989,8 +990,8 @@
         "isabel",
         "jaime",
         "leah",
-        "leo",
         "lorena-rodriguez",
+        "sienna",
         "valentin"
       ],
       "order": 53,
@@ -1548,7 +1549,8 @@
         "maria",
         "marife",
         "samantha",
-        "serafina"
+        "serafina",
+        "valentina"
       ],
       "order": 88,
       "path": "assets/media/group-female-photo.jpeg",
@@ -1740,7 +1742,8 @@
         "lorena",
         "lucas",
         "lydia",
-        "marco"
+        "marco",
+        "valentina"
       ],
       "order": 100,
       "path": "assets/media/party-bus-bebito.mp4",
@@ -2360,7 +2363,8 @@
         "samantha",
         "sebastian",
         "serafina",
-        "shane"
+        "shane",
+        "valentina"
       ],
       "order": 141,
       "path": "assets/media/beach-party-everyone.jpg",
@@ -2533,7 +2537,8 @@
       "eventId": "josie-birthday",
       "people": [
         "josie",
-        "serafina"
+        "serafina",
+        "valentina"
       ],
       "order": 151
     },
@@ -2559,7 +2564,9 @@
       "type": "image",
       "caption": "🐰",
       "eventId": "josie-birthday",
-      "people": [],
+      "people": [
+        "valentina"
+      ],
       "order": 153
     },
     {
