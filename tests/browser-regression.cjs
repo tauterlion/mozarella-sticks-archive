@@ -82,8 +82,33 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
   if(e.id==='gage-confession')assert.equal(await page.locator('.event-prose em').first().textContent(),'The Wiz');
   const captions=await page.locator('.event-gallery figcaption').allTextContents();
   assert.deepEqual(captions,available.filter(m=>m.eventId===e.id).sort((a,b)=>a.order-b.order).map(m=>m.caption));
+  if(e.people.length){
+   const personHrefs=await page.locator('.event-sidebar .chip-list').first().locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
+   assert.deepEqual(personHrefs,e.people.map(pid=>'person.html?id='+encodeURIComponent(pid)),e.id+' person chips must open profiles');
+   assert.deepEqual(await page.locator('.event-sidebar .person-chip').evaluateAll(links=>links.map(a=>a.dataset.hint)),e.people.map(()=>'View profile'),e.id+' profile hints');
+  }
+  const categoryHrefs=await page.locator('.event-sidebar .chip-list').nth(e.people.length?1:0).locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
+  assert.deepEqual(categoryHrefs,e.categories.map(category=>'timeline.html?category='+encodeURIComponent(category)),e.id+' category links must stay filtered');
  }
- check('All '+events.length+' full-event pages retain original narratives and associated available media');
+ check('All '+events.length+' full-event pages retain original narratives, person links, and associated available media');
+ // Simulate a referenced historical person whose profile is not indexed.
+ // That chip must retain the old filtered Timeline destination.
+ await page.route('**/data/people.json',route=>route.fulfill({
+  status:200,
+  contentType:'application/json',
+  body:JSON.stringify({people:people.filter(p=>p.id!=='nicholas')})
+ }));
+ await go('event.html?id=nico-todd-peru-trip');
+ assert.equal(await page.locator('.event-sidebar a[href="timeline.html?person=nicholas"]').count(),1);
+ assert.equal(await page.locator('.event-sidebar a[href="person.html?id=todd"]').count(),1);
+ assert.equal(await page.locator('.event-sidebar a[href="timeline.html?person=nicholas"]').getAttribute('data-hint'),'View timeline');
+ assert.equal(await page.locator('.event-sidebar a[href="person.html?id=todd"]').getAttribute('data-hint'),'View profile');
+ await page.unroute('**/data/people.json');
+ await go('event.html?id=nico-todd-peru-trip');
+ await page.locator('.event-sidebar a[href="person.html?id=todd"]').click();
+ await page.waitForURL('**/person.html?id=todd');
+ assert.equal(await page.locator('#person-name').textContent(),'Todd Andersen');
+ check('Event person links open profiles; missing-profile fallback retains filtered Timeline');
  await go('gallery.html');assert.equal(await page.locator('.media-card').count(),available.length);
  const expectedChapters=timeline.eraOrder.filter(era=>available.some(m=>events.find(e=>e.id===m.eventId)?.era===era));
  assert.deepEqual(await page.locator('.gallery-era-heading h2').allTextContents(),expectedChapters);

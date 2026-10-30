@@ -96,7 +96,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       .map(item => item.candidate);
 
     const people = event.people
-      .map(pid => `<a class="chip" href="timeline.html?person=${encodeURIComponent(pid)}">${MSArchive.escapeHtml(MSArchive.personName(pid, data))}</a>`)
+      .map(pid => {
+        const person = data.peopleById[pid];
+        // Every indexed person with a valid profile identity gets a dedicated page.
+        // For legacy/missing profile records, keep the previous filtered Timeline route.
+        const hasProfile = person && typeof person.fullName === 'string' && person.fullName.trim();
+        const href = hasProfile
+          ? `person.html?id=${encodeURIComponent(pid)}`
+          : `timeline.html?person=${encodeURIComponent(pid)}`;
+        const hint = hasProfile ? 'View profile' : 'View timeline';
+        const name = MSArchive.personName(pid, data);
+        return `<a class="chip person-chip" href="${MSArchive.escapeHtml(href)}" data-hint="${hint}" aria-label="${MSArchive.escapeHtml(name)} — ${hint}">${MSArchive.escapeHtml(name)}</a>`;
+      })
       .join('');
     const categories = event.categories
       .map(category => `<a class="chip" href="timeline.html?category=${encodeURIComponent(category)}">${MSArchive.escapeHtml(category)}</a>`)

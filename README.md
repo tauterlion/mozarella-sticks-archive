@@ -13,8 +13,8 @@ Revision 2 applies the approved editorial remaster to the full archive, includin
 | People indexed | 37 |
 | Members | 25 |
 | Connected people | 12 |
-| Media records | 164 |
-| Available media records | 122 |
+| Media records | 163 |
+| Available media records | 121 |
 | Hidden placeholders | 42 |
 
 The documented timeline currently runs from **May 12, 2024** through **October 17, 2026**.
@@ -26,7 +26,7 @@ No raw WhatsApp exports, phone numbers, or private evidence files are included i
 - `index.html` — archive landing page and live archive statistics
 - `timeline.html` — searchable and filterable timeline
 - `gallery.html` — image and video gallery
-- `event.html?id=EVENT_ID` — reusable full event page
+- `event.html?id=EVENT_ID` — reusable full event page (person chips open profiles, or the filtered Timeline when a profile is missing)
 - `people.html?person=PERSON_ID` — animated, searchable People directory
 - `person.html?id=PERSON_ID` — editorial profile, tagged historical appearances and media
 - `assets/portraits/` — automatically discovered `<canonical-id>.jpg` portraits

@@ -304,7 +304,7 @@
       ]
     },
     "charlee": {
-      "fullName": "Charleston Robison",
+      "fullName": "Charleston Robinson",
       "status": "Member",
       "isOG": false,
       "copySha256": "77075f352e31034d08da40d19816be7d3422a700e194b8b5768afba52e008c19",
@@ -414,12 +414,14 @@
       ]
     },
     "marife": {
-      "fullName": "Marife Dávila",
+      "fullName": "Maria Fernanda Davila",
       "status": "Member",
       "isOG": false,
-      "copySha256": "47c21c13fa909e68d30d9818d4cab4b01dff55757be0352e04b0f5c6da5366b9",
+      "copySha256": "6be56768f86b071331a6ba71a99df5925673a2d755450036ef23f984a4630704",
       "aliases": [
-        "Mafe"
+        "Mafe",
+        "Marife",
+        "Marife Dávila"
       ]
     },
     "maria": {

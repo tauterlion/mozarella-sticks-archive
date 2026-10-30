@@ -39,6 +39,24 @@ class ReviewedPeopleTests(unittest.TestCase):
                 self.assertFalse(p.get('knownFor'))
             self.assertIsInstance(p['isOG'], bool)
 
+    def test_patch_3_0_1_participants_and_photo_removal(self):
+        events = {e['id']: e for e in json.loads((ROOT / 'data/timeline.json').read_text(encoding='utf-8'))['events']}
+        media = json.loads((ROOT / 'data/media.json').read_text(encoding='utf-8'))['media']
+        self.assertNotIn('serafina', events['party-bus-adventure']['people'])
+        self.assertNotIn('marife', events['graduation']['people'])
+        graduation_photo = next(m for m in media if m['id'] == 'everyoneatgraduation')
+        self.assertNotIn('marife', graduation_photo['people'])
+        self.assertFalse(any(m['id'] == 'chegui-cameo' for m in media))
+        self.assertFalse((ROOT / 'assets/media/chegui-cameo.jpeg').exists())
+
+    def test_corrected_names_and_search_aliases(self):
+        self.assertEqual(self.by_id['charlee']['fullName'], 'Charleston Robinson')
+        self.assertEqual(self.by_id['marife']['fullName'], 'Maria Fernanda Davila')
+        self.assertEqual(self.by_id['marife']['displayName'], 'Marife')
+        self.assertIn('Mafe', self.by_id['marife']['aliases'])
+        self.assertIn('Marife', self.by_id['marife']['aliases'])
+        self.assertNotIn('Mafe, Marife', self.by_id['marife']['aliases'])
+
     def test_canonical_portrait_names_and_nickname(self):
         self.assertIn('valentina', self.by_id)
         self.assertNotIn('valentina-correa', self.by_id)
