@@ -1,5 +1,5 @@
 {
   "enabled": false,
   "endpoint": "https://kvyrbtooynofijdtmqup.supabase.co/functions/v1/community-submit",
-  "turnstileSitekey": ""
+  "turnstileSitekey": "0x4AAAAAAFtWyzLSetdYAgNW"
 }

@@ -36,3 +36,9 @@ Nine real HTTP checks passed using `node supabase/tests/closed-intake.mjs`:
 No signed upload capabilities were issued. A subsequent database check confirmed intake false, private bucket, and zero records/objects. No cleanup job was run or scheduled.
 
 Turnstile setup, positive hosted upload/TUS and cleanup tests, long-queue renewal/cancellation coverage, moderator enrollment/console, verified takedown and GitHub publication remain release gates. Closed-endpoint checks do not establish that those later flows are ready. Nothing has been enabled publicly or merged.
+
+## Turnstile configuration follow-up
+
+The supplied public Managed-widget sitekey is configured in `data/submissions-config.json`; `enabled` remains false. The deployed backend already reads `TURNSTILE_SECRET_KEY`, calls Cloudflare Siteverify and requires hostname `tauterlion.github.io`, action `aoms_submission`, success and a challenge age no greater than five minutes. The secret is configured directly by the owner, never committed or read into chat.
+
+After wiring the sitekey, 37 local request/security tests, 23 browser checks and nine live closed-intake checks passed. Additional tests cover the Siteverify request contract, wrong hostname/action, stale challenges, and timeout-or-duplicate rejection. These Cloudflare responses are mocked. A real successful Siteverify response and the presence/correctness of the hosted secret have NOT been verified: production rejects intake before contacting Cloudflare. No staging project or hostname currently exists. Keep production disabled until isolated live integration tests and the other release gates are complete.

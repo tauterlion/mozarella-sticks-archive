@@ -84,3 +84,25 @@ test('actual 50 MiB stream accepted, 50 MiB plus one byte rejected',async()=>{
  assert.equal((await boundedBytes(stream(MAX_BYTES),MAX_BYTES)).length,MAX_BYTES);
  await assert.rejects(boundedBytes(stream(MAX_BYTES+1),MAX_BYTES));
 });
+test('batch sends secret and token only to Cloudflare Siteverify',async()=>{
+ let verified=false;
+ const {handler}=setup({fetcher:async(url,options)=>{
+  assert.equal(url,'https://challenges.cloudflare.com/turnstile/v0/siteverify');
+  assert.equal(options.method,'POST');
+  assert.equal(options.body.get('secret'),'test-only');
+  assert.equal(options.body.get('response'),'widget-token');
+  assert.equal(options.body.has('remoteip'),false);
+  verified=true;
+  return Response.json({success:true,hostname:'tauterlion.github.io',action:'aoms_submission',challenge_ts:new Date().toISOString()});
+ }});
+ const response=await handler(request({action:'batch',capability,token:'widget-token',consent:true}));
+ assert.equal(response.status,200);assert.ok(verified);
+ assert.ok(!(await response.text()).includes('test-only'));
+});
+for(const patch of [{hostname:'other.example'},{action:'other_action'},{challenge_ts:new Date(0).toISOString()},{success:false,'error-codes':['timeout-or-duplicate']}]) {
+ test(`invalid Siteverify result cannot create a batch: ${JSON.stringify(patch)}`,async()=>{
+  const {handler,calls}=setup({fetcher:async()=>Response.json({success:true,hostname:'tauterlion.github.io',action:'aoms_submission',challenge_ts:new Date().toISOString(),...patch})});
+  assert.equal((await handler(request({action:'batch',capability,token:'widget-token',consent:true}))).status,400);
+  assert.deepEqual(calls.map(c=>c.action),['tick']);
+ });
+}
