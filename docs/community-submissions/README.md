@@ -4,7 +4,7 @@ Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
 ## Current state (2026-10-30)
 
-The private database foundation was applied and its 45 rollback-only security checks passed. The next migration, `secure_submission_intake`, and the anonymous Edge Function are implemented locally but **not deployed**: the connector's first migration confirmation expired and its second request returned `Migration was declined` without a reason. Do not bypass this confirmation through another execution path.
+The private database foundation and the explicitly approved `secure_submission_intake` migration are applied. Hosted migration version: `20261030232342`. The migration file was renamed to match that history without changing its SQL. The `community-submit` Edge Function is deployed as version 1, with public intake still disabled. The owner approved the migration after reviewing its SQL; the earlier declined confirmation is resolved.
 
 Public intake remains disabled in both the hosted database and `data/submissions-config.json`. The Gallery has no submission link. The new page can be reviewed locally, including file selection and metadata, without contacting Cloudflare or Supabase while disabled.
 
@@ -41,6 +41,7 @@ Run from repository root after `npm ci --prefix supabase/tooling`:
 node supabase/tests/run-local.cjs
 node supabase/tests/intake.cjs
 node --test supabase/tests/upload-security.test.mjs
+node supabase/tests/closed-intake.mjs
 supabase/tooling/node_modules/.bin/deno check supabase/functions/community-submit/index.ts
 python tools/validate_archive.py --check-files
 python -m unittest discover -s tests -p "test_*.py"
@@ -52,14 +53,14 @@ The browser suites use `PLAYWRIGHT_MODULE` and `CHROME_BIN` when the runtime is 
 
 Local results: 45 foundation SQL checks, 25 intake database checks, 32 request/stream/file tests, 23 submission browser checks, all 15 existing Python tests, and the existing full archive browser regression passed. The archive validator reports zero errors/warnings. Full regression includes 112 event pages, all filters, all 20 original video playback checks, Media Manager preservation/unsaved-change guards, diagnostics and 60 responsive/theme layouts. Deno type-check passed. Security tests use isolated PostgreSQL-compatible PGlite and roll back fixtures.
 
-The hosted project was read-checked: intake false, private bucket, zero submissions and zero stored objects. The **new** gateway SQL/API behavior has not been verified hosted because deployment approval was declined. The earlier foundation rollback verification is recorded in `rollback-verification.md`.
+After migration, all 45 hosted rollback-only security checks passed again. The new service-only RPC correctly rejects intake while disabled; anon/authenticated roles cannot execute it. Nine real HTTP closed-intake checks passed against the deployed function. Positive upload/CAPTCHA/transfer tests remain local/mocked, not hosted. The earlier foundation rollback verification is recorded in `rollback-verification.md`; current deployment evidence is in `deployment-verification.md`.
 
 Screenshots are generated outside the repository under `outputs/community-submissions/`: dark/light desktop/mobile. They show the actual 112-event/37-person selectors with synthetic local upload previews, not publicly uploaded media.
 
 ## Deployment and remaining gates
 
-1. Approve and apply the new migration; reconcile its filename to the version returned by hosted migration history, then rerun SQL security checks and advisors. Do not modify the already-applied baseline/foundation migrations.
-2. Deploy `community-submit` using the checked-in config (`verify_jwt=false` only for this intentionally anonymous, application-authenticated endpoint). Keep the database switch false. Verify a request to the actual endpoint is rejected while closed.
+1. Completed: approved migration applied, filename reconciled to hosted history, hosted SQL security checks/advisors rerun. Do not modify already-applied migrations.
+2. Completed: `community-submit` deployed using the checked-in config (`verify_jwt=false` only for this intentionally anonymous, application-authenticated endpoint). Database switch remains false; live closed-intake rejection verified.
 3. Configure the production Turnstile widget for `tauterlion.github.io`. Supply only the public sitekey to the static config; store the secret as `TURNSTILE_SECRET_KEY` in Edge secrets. Defaults: `SUBMISSIONS_ORIGIN=https://tauterlion.github.io`, `TURNSTILE_HOSTNAME=tauterlion.github.io`; Supabase injects `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. No secrets in Git or chat.
 4. Use an isolated staging project for positive hosted tests while production remains off: genuine CAPTCHA/replay/expiry; signed-token TUS compatibility; overwrite/cross-path attempts; real 50 MiB and oversize files; interruption/cancel/retry; quota/concurrency; memory/CPU/egress; late-token cleanup and deletion confirmation; anonymous read/list/preview denial. Establish automated cleanup, capacity alarms and operator monitoring.
 5. Finish automatic queue rollover and the remaining cancellation race/long-queue browser tests. A cancelled transfer remains private and reserved until cleanup, but live TUS cancellation behavior is not yet proven.
