@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.13",
+    "deno": "2.9.6",
+    "supabase": "2.122.0",
+    "tus-js-client": "4.3.1"
+  }
+}
