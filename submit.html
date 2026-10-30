@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Share a memory with the Mozarella Sticks Archive. Anonymous submissions are reviewed before publication.">
+  <meta name="referrer" content="no-referrer">
+  <title>Add to the Archive · Mozarella Sticks</title>
+  <link rel="stylesheet" href="styles/shared.css">
+  <link rel="stylesheet" href="styles/submissions.css">
+</head>
+<body data-page="submit">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Mozarella Sticks Archive home"><span class="brand-mark" aria-hidden="true">MS</span><span><strong>Mozarella Sticks</strong><small>Archive</small></span></a>
+    <nav class="primary-nav" aria-label="Primary navigation"><a data-nav="home" href="index.html">Home</a><a data-nav="timeline" href="timeline.html">Timeline</a><a data-nav="people" href="people.html">People</a><a data-nav="gallery" href="gallery.html">Gallery</a></nav>
+    <button class="icon-button theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"><span class="theme-icon" aria-hidden="true">◐</span></button>
+  </header>
+  <main id="main-content" class="shell submission-shell">
+    <section class="submission-intro">
+      <p class="eyebrow">Community contributions</p>
+      <h1>Add to the Archive</h1>
+      <p class="submission-deck">Some memories deserve a place in the story.</p>
+      <p>Share a memory with the archive. Submissions are anonymous and reviewed by Alejandro before publication.</p>
+      <ol class="submission-steps"><li>Choose your memories</li><li>Add the story</li><li>Send for review</li></ol>
+    </section>
+    <p id="intake-notice" class="submission-notice" role="status">Submissions are not open yet. You can explore the form; nothing will be uploaded.</p>
+    <form id="submission-form">
+      <section class="submission-picker" id="drop-zone" aria-labelledby="choose-heading">
+        <h2 id="choose-heading">Bring a memory.</h2>
+        <p>Drop photos or videos here, or choose files below.</p>
+        <label class="button" for="files">Choose photos & videos</label>
+        <input id="files" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" aria-describedby="file-help">
+        <p id="file-help">JPEG, PNG, WebP, MP4 or WebM · up to 50 MiB per file. No animated images.</p>
+      </section>
+      <p id="selection-message" role="status" aria-live="polite"></p>
+      <div id="submission-files" class="submission-files"></div>
+      <section class="submission-consent" aria-labelledby="before-heading">
+        <h2 id="before-heading">Before you share</h2>
+        <p>There is no public contributor credit, and we do not ask for your name or contact information. Photos and videos can still identify people. Please avoid confidential or private material.</p>
+        <p>Do not submit harassment, doxxing, intimate images without consent, sexual content involving minors, or other illegal or harmful material. Consent to upload does not replace the rights of the people shown.</p>
+        <label class="consent-check"><input id="consent" type="checkbox" required><span>I am allowed to share these files, have considered the people shown, and understand that Alejandro will review them for possible public publication.</span></label>
+        <p class="submission-small">Files stay private during review. Technical anti-abuse checks are processed by Cloudflare and our storage provider. The form does not collect names, emails or IP addresses in archive records. Service providers may process connection information.</p>
+        <div id="turnstile"></div>
+        <button id="send-files" class="button" type="submit" disabled>Send for review</button>
+        <p class="submission-small">Keep this page open while sending. You will receive an anonymous reference, with no email or status notification. Availability depends on archive capacity.</p>
+      </section>
+    </form>
+    <section id="receipt" class="submission-notice" hidden aria-live="polite"><h2>Thank you for sharing.</h2><p>Your completed files are private and awaiting review. They are not published.</p><p id="receipt-reference"></p><p>Save this reference. There is no email or status notification.</p></section>
+    <noscript><p>JavaScript is needed to prepare and send files. <a href="gallery.html">Return to the Gallery</a>.</p></noscript>
+  </main>
+  <footer class="site-footer"><p>A community archive, with care for the people in it. <a href="gallery.html">Back to the Gallery</a></p></footer>
+  <script src="scripts/shared.js?v=2.1" defer></script>
+  <script src="scripts/interactions.js" defer></script>
+  <script src="scripts/vendor/tus-4.3.1.min.js" defer></script>
+  <script src="scripts/submissions.js" type="module"></script>
+</body>
+</html>
