@@ -73,6 +73,14 @@
       </div>
 
       <div class="filter-field manager-record-select">
+        <label for="manager-media-search">Search records by filename, caption, ID, or order</label>
+        <input id="manager-media-search" type="search" placeholder="e.g. valentina, 153, graduation">
+        <label for="manager-media-availability">Availability</label>
+        <select id="manager-media-availability">
+          <option value="all">All records</option>
+          <option value="available">Available only</option>
+          <option value="missing">Missing / pending only</option>
+        </select>
         <label for="manager-existing">Choose an existing record</label>
         <select id="manager-existing"><option value="">Choose media to edit</option></select>
       </div>
@@ -141,6 +149,6 @@
 
   <script src="../scripts/shared.js?v=2"></script>
   <script src="../scripts/interactions.js"></script>
-  <script src="media-manager.js?v=1.4.0"></script>
+  <script src="media-manager.js?v=1.4.1"></script>
 </body>
 </html>
