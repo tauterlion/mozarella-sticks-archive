@@ -210,24 +210,38 @@ document.addEventListener('DOMContentLoaded', async () => {
       return `${order} · ${item.file} — ${item.caption || 'Untitled'}`;
     };
 
+    const mediaSearch = document.querySelector('#manager-media-search');
+    const mediaAvailability = document.querySelector('#manager-media-availability');
     const refreshExistingSelect = selectedId => {
       const current = selectedId ?? existingSelect.value;
+      const term = mediaSearch.value.trim().toLocaleLowerCase();
+      const availability = mediaAvailability.value;
       existingSelect.innerHTML = '<option value="">Choose media to edit</option>';
       const options = document.createDocumentFragment();
       workingMedia
+        .filter(item => {
+          const matchesQuery = [item.id, item.file, item.caption, item.order]
+            .some(value => String(value ?? '').toLocaleLowerCase().includes(term));
+          const matchesAvailability = availability === 'all'
+            || (availability === 'available' ? item.available === true : item.available !== true);
+          return matchesQuery && matchesAvailability;
+        })
         .slice()
         .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0))
         .forEach(item => {
           const id = item.id || MSArchive.mediaId(item);
           const option = document.createElement('option');
           option.value = id;
-          option.textContent = mediaLabel(item);
+          option.textContent = `${mediaLabel(item)} — ${item.available === true ? 'Available' : 'Missing / pending'}`;
           options.append(option);
         });
       existingSelect.append(options);
-      existingCount.textContent = `${workingMedia.length} existing records loaded`;
-      if (current && workingById.has(current)) existingSelect.value = current;
+      const ready = workingMedia.filter(item => item.available === true).length;
+      existingCount.textContent = `${workingMedia.length} registered · ${ready} available · ${workingMedia.length - ready} missing / pending`;
+      if (current && [...existingSelect.options].some(option => option.value === current)) existingSelect.value = current;
     };
+    mediaSearch.addEventListener('input', () => refreshExistingSelect());
+    mediaAvailability.addEventListener('change', () => refreshExistingSelect());
 
     const editableChanged = id => {
       const original = originalById.get(id);
