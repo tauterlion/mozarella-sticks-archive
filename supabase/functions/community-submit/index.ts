@@ -31,7 +31,7 @@ Deno.serve(createHandler({
     const signed = new URL(data.url, `${url}/storage/v1`);
     const token = signed.searchParams.get('token');
     if (!token) throw new Error('storage_unavailable');
-    return { endpoint: `${publicStorageURL}/storage/v1/upload/resumable`,
+    return { endpoint: `${publicStorageURL}/storage/v1/upload/resumable/sign`,
       token, bucket: 'aoms-submissions', path, mime };
   },
   download(path: string) {

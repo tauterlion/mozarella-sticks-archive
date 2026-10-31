@@ -3,7 +3,7 @@ const $ = selector => document.querySelector(selector);
 const MAX = 52428800, TYPES = ['image/jpeg','image/png','image/webp','video/mp4','video/webm'];
 const files = [], references = new Set();
 let config, events, people, token = '', widget, capability, batch, busy = false;
-const message = text => { $('#selection-message').textContent = text; };
+const message = text => { $('#selection-message').textContent = text; $('#send-status').textContent = text; };
 const errors = {
   intake_disabled:'Submissions are not open yet. Your files have not been sent.',
   quota_exhausted:'The private inbox is at capacity. Please try again later.',
@@ -25,7 +25,7 @@ async function api(action, payload = {}) {
 function node(tag, text, attrs = {}) { const el = document.createElement(tag); if (text) el.textContent = text; for (const [key,value] of Object.entries(attrs)) el.setAttribute(key,value); return el; }
 function field(parent, title, tag, attrs = {}) { const label = node('label',title), input = node(tag,'',{'aria-label':title,...attrs}); label.append(input); parent.append(label); return input; }
 function checkbox(parent, title) { const label = node('label','',{class:'people-choice'}), input = node('input','',{type:'checkbox'}); label.append(input,node('span',title)); parent.append(label); return input; }
-function setStatus(item, text) { item.status.textContent = text; }
+function setStatus(item, text) { item.status.textContent = text; $('#send-status').textContent = `${item.file.name}: ${text}`; }
 function updateButton() { $('#send-files').disabled = !config?.enabled || !config.turnstileSitekey || !token && !batch || busy || !files.some(i=>!i.done && !i.cancelled); }
 function metadata(item) {
   const proposed = item.event.value === '__propose';
@@ -131,6 +131,7 @@ $('#submission-form').addEventListener('submit',async e=>{
   if(!queue.length)return;
   for(const item of queue)if(!item.none.checked&&!item.tags.some(t=>t.input.checked)){message(`Select people or “No people to tag” for ${item.file.name}.`);item.none.focus();return;}
   busy=true;updateButton();
+  message('Verifying your submission…');
   try {
     if(!batch) {
       capability ||= Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
