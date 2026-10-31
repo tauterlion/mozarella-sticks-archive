@@ -1,0 +1,6 @@
+project_id = "mozarella-sticks-archive"
+
+[functions.community-submit]
+# Intentionally anonymous: Turnstile, durable limits and per-batch capabilities
+# are verified by the function. No moderator or publication action is exposed.
+verify_jwt = false
