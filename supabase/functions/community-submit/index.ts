@@ -3,6 +3,9 @@ import { IntakeError } from './validation.mjs';
 
 const url = Deno.env.get('SUPABASE_URL') || '';
 const key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+// Local containers use an internal API hostname that browsers cannot resolve.
+// Operator-only override; production keeps its existing hosted Storage URL.
+const publicStorageURL = Deno.env.get('SUBMISSIONS_STORAGE_PUBLIC_URL') || url.replace('.supabase.co', '.storage.supabase.co');
 const headers = { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' };
 const storagePath = (path: string) => path.split('/').map(encodeURIComponent).join('/');
 Deno.serve(createHandler({
@@ -28,7 +31,7 @@ Deno.serve(createHandler({
     const signed = new URL(data.url, `${url}/storage/v1`);
     const token = signed.searchParams.get('token');
     if (!token) throw new Error('storage_unavailable');
-    return { endpoint: `${url.replace('.supabase.co', '.storage.supabase.co')}/storage/v1/upload/resumable`,
+    return { endpoint: `${publicStorageURL}/storage/v1/upload/resumable`,
       token, bucket: 'aoms-submissions', path, mime };
   },
   download(path: string) {

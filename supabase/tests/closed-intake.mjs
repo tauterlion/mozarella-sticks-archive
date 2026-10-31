@@ -1,7 +1,7 @@
 // Read-only closed-intake smoke test. Never enables intake or uploads files.
 import assert from 'node:assert/strict';
-const endpoint='https://kvyrbtooynofijdtmqup.supabase.co/functions/v1/community-submit';
-const origin='https://tauterlion.github.io';
+const endpoint=process.env.INTAKE_TEST_ENDPOINT || 'https://kvyrbtooynofijdtmqup.supabase.co/functions/v1/community-submit';
+const origin=process.env.INTAKE_TEST_ORIGIN || 'https://tauterlion.github.io';
 const capability='0'.repeat(64);
 for(const action of ['batch','resume','authorize','complete','cancel']) {
  const response=await fetch(endpoint,{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify({action,capability}),signal:AbortSignal.timeout(30000)});
