@@ -76,3 +76,44 @@ body[data-page=timeline] .back-to-top{bottom:calc(96px + env(safe-area-inset-bot
 }
 
 @media(min-width:461px) and (max-width:650px){.brand>span:last-child{display:none}.primary-nav{margin-inline:auto}}
+
+/* Revision 3.1 unified film navigation across all public archive pages. */
+.film-wordmark{font:400 30px/1 Georgia,"Times New Roman",serif;letter-spacing:-.07em}
+.film-header .film-brand{min-height:44px;flex:none;white-space:nowrap}
+.film-header .film-header-rule{flex:1;height:1px;align-self:center;background:var(--line)}
+.film-header .film-nav{margin-left:0;align-self:center;gap:clamp(18px,2.8vw,45px)}
+.film-header .film-nav a{
+  color:var(--text);font-size:11px;letter-spacing:.24em;font-weight:600;
+  text-transform:uppercase;white-space:nowrap
+}
+.film-header .film-nav a:hover{color:var(--gold)}
+.film-header .film-nav a[aria-current=page]{color:var(--gold)}
+.film-header .film-theme-toggle{width:39px;height:39px;font-size:17px;flex:none}
+body:not([data-page="home"]) .site-header.film-header{
+  min-height:81px;gap:30px;padding:15px clamp(22px,4.5vw,78px);
+  background:color-mix(in srgb,var(--bg) 94%,transparent);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line)
+}
+body:not([data-page="home"]) .film-header .film-nav a{text-shadow:none}
+main .aoms-motion-drift{translate:0 var(--aoms-scroll-drift,0px)}
+@media(max-width:1000px){
+  .film-header .film-header-rule{display:none}
+  .film-header .film-nav{margin-left:auto}
+}
+@media(max-width:760px){
+  .film-wordmark{font-size:26px}
+  body:not([data-page="home"]) .site-header.film-header{min-height:74px;padding:13px 18px;gap:12px}
+  .film-header .film-nav{gap:clamp(11px,3vw,21px)}
+  .film-header .film-nav a{font-size:10px;letter-spacing:.08em}
+  .film-header .film-nav .nav-discover{display:none}
+  .film-header .film-theme-toggle{width:34px;height:34px;font-size:15px}
+}
+@media(max-width:380px){
+  .film-wordmark{font-size:23px}
+  .film-header .film-nav{gap:9px}
+  .film-header .film-nav a{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  main .aoms-motion-drift{translate:none!important}
+}
