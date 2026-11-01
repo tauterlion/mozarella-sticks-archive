@@ -47,7 +47,7 @@ assert.match(shared,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(motion,/main img:not\(\.hero-image\)/);
 assert.match(motion,/main \.event-summary/);
 assert.match(motion,/main \.event-date/);
-assert.match(motion,/duration:image\?950:1080/);
+assert.match(motion,/\], image\?950:1080\);/);
 assert.match(motion,/change<0\?\.30:\.13/);
 assert.match(motion,/MutationObserver/);
 assert.match(motion,/reduced\.matches/);
