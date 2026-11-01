@@ -127,3 +127,32 @@ body[data-page="home"] main{min-height:0}
 @media(max-width:760px){.stat-grid{grid-template-columns:repeat(2,1fr);gap:20px 0}.stat-grid>div{padding:0 15px}.stat-grid>div:nth-child(2){border:0}.stat-grid>div:nth-child(3){padding-left:0}.home-section{padding-block:42px}.section-heading{align-items:start;flex-direction:column;gap:12px}.featured-grid{grid-template-columns:1fr;gap:35px}.latest-event{flex-direction:column;align-items:start}.hero-actions .button{font-size:12px;padding-inline:13px}}
 
 @media(prefers-reduced-motion:reduce){.home-hero *,.home-hero *::before,.home-hero *::after{animation:none!important;transition:none!important}}
+
+/* Cinematic cut 3.1.1 — image framing, seamless theme fade, oval glass entry. */
+.home-hero .hero-image{top:clamp(-230px,-11vw,-68px)}
+.home-hero .hero-vignette{
+  background:
+    linear-gradient(180deg,
+      rgba(5,5,6,.68) 0%,
+      rgba(8,7,7,.49) 19%,
+      rgba(9,7,6,.06) 46%,
+      rgba(9,7,6,.20) 62%,
+      rgba(9,7,6,.73) 79%,
+      color-mix(in srgb,var(--bg) 78%,rgba(9,7,6,.9)) 91%,
+      var(--bg) 100%),
+    linear-gradient(90deg,rgba(4,4,4,.33),transparent 14%,transparent 86%,rgba(4,4,4,.33));
+}
+.home-hero .cinema-entry-button{
+  border-radius:999px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(20,16,16,.47);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 12px 34px rgba(0,0,0,.16);
+}
+html[data-theme="light"] .home-hero .hero-entry .hero-scroll-hint{
+  color:var(--text);text-shadow:0 1px 2px #fff8
+}
+@media(max-width:760px){
+  .home-hero .hero-image{top:auto;bottom:2.5%}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-hero .cinema-entry-button,.home-hero .hero-scroll-hint{transition:none!important}
+}
