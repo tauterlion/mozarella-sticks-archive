@@ -53,5 +53,8 @@ assert.match(motion,/MutationObserver/);
 assert.match(motion,/reduced\.matches/);
 assert.match(css,/\.cinema-entry-button\{[\s\S]*?border-radius:999px/);
 assert.match(css,/var\(--bg\) 100%/);
+assert.match(css,/Revision 3\.1\.2: let the hero fade/);
+assert.match(css,/\.home-hero::before\{/);
+assert.match(css,/mask-image:linear-gradient\(180deg,#000 0%,#000 54%,transparent 100%\)/);
 
 console.log('PASS: cinematic homepage, unified headers, motion, reduced-motion and safe data mounts');
