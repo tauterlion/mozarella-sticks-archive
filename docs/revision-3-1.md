@@ -4,6 +4,8 @@
 
 Owner-requested refinements:
 
+- Seamless cross-theme photo-to-page transition (3.1.2): fade to the actual page background and mask film grain before the last pixel of the hero, eliminating the visible horizontal color seam.
+
 - Stronger, theme-aware fade across the bottom of the hero, with the unchanged original group photograph raised slightly.
 - Rounded, blurred glass Explore button.
 - A unified AoMS film-style header on all six main public pages (index, Timeline, Gallery, People, profile and event).
