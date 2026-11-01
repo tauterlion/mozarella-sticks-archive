@@ -67,6 +67,8 @@ assert.ok(!script.includes("querySelector('#archive-range')"), 'No abandoned ran
 assert.match(css, /Revision 3\.1\.3/);
 assert.match(css, /font-size:clamp\(2\.8rem,5\.85vw,7\.1rem\)/);
 assert.match(css, /top:clamp\(-270px,-12\.8vw,-78px\)/);
+assert.match(css, /@media\(min-width:761px\) and \(max-width:1200px\)/);
+assert.match(css, /top:calc\(290px - 34vw\)/);
 assert.match(shared, /\.home-hero #home-title\.aoms-motion-drift/);
 assert.ok(!shared.includes('main .aoms-motion-drift'), 'No drift on other page titles');
 assert.match(motion, /if\(el\.id === 'home-title'\)/);
