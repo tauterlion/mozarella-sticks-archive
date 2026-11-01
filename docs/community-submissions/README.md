@@ -18,6 +18,10 @@ Public intake remains disabled in both the hosted database and `data/submissions
 
 Original `data/people.json`, `data/timeline.json`, `data/media.json`, assets, routes and existing features are unchanged. The private event-validation cache had mojibake in its original era seed; the new migration refreshes those cache strings from the unchanged canonical timeline. Historical JSON is not edited.
 
+## Moderator work started
+
+See [moderation.md](moderation.md) for the branch-only, read-only moderator slice and owner account setup. No moderator migration/function is deployed; the review configuration remains disabled. Production inventory above is unchanged.
+
 ## Implemented
 
 - `submit.html`: multiple local image/video previews, per-file captions, all canonical events/people, event proposals, explicit no-people choice, apply-details-to-all, consent, anonymous receipts, progress and retries. No name/email/account field.

@@ -4,6 +4,8 @@ create role authenticated;
 create role service_role bypassrls;
 create schema auth;
 create table auth.users (id uuid primary key);
+-- Auth session shape required by additive read-only moderation migration.
+create table auth.sessions (id uuid primary key, user_id uuid references auth.users(id), aal text, not_after timestamptz);
 create schema storage;
 create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
 insert into storage.buckets values ('aoms-submissions','aoms-submissions',false,52428800,array['image/jpeg','image/png','image/webp','video/mp4','video/webm']);

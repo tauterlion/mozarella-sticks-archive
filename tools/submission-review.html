@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
+  <title>Submission Review · Mozarella Sticks Archive</title>
+  <link rel="stylesheet" href="../styles/shared.css"><link rel="stylesheet" href="../styles/tools.css">
+  <link rel="stylesheet" href="../styles/submission-review.css">
+</head>
+<body data-page="tools"><main class="tool-shell shell">
+  <a class="text-link" href="../index.html">← Return to archive</a>
+  <header class="tool-header"><p class="eyebrow">Private review</p><h1>Submission Review</h1>
+    <p>Review contributed memories. Approval and public publication are separate steps.</p></header>
+  <p id="review-message" role="status" aria-live="polite">Checking review availability…</p>
+  <section id="login-panel" class="tool-card" hidden><h2>Moderator sign-in</h2>
+    <p>For Alejandro only. Use your archive moderator account, then your authenticator app.</p>
+    <form id="login-form" class="review-form">
+      <label>Email<input id="email" type="email" autocomplete="username" required></label>
+      <label>Password<input id="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+  <section id="mfa-panel" class="tool-card" hidden><h2>Authenticator verification</h2>
+    <button id="enroll" type="button" hidden>Set up authenticator</button>
+    <div id="qr-panel" hidden><p>Scan this code in your authenticator app. Keep it private.</p><img id="qr" alt="Private authenticator setup QR code"></div>
+    <form id="mfa-form" class="review-form" hidden><label>Six-digit code<input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required></label><button type="submit">Verify</button></form>
+  </section>
+  <button id="sign-out" type="button" hidden>Sign out</button>
+  <section id="review-panel" hidden>
+    <div class="tool-card"><h2>Review queue</h2><p id="pending-count"></p>
+      <label>Status <select id="queue-status"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="published">Published</option><option value="removed">Removed</option></select></label>
+      <button id="refresh" type="button">Refresh</button><ul id="queue" class="review-queue"></ul>
+      <div class="review-pagination"><button id="previous" type="button">Previous</button><span id="page-number"></span><button id="next" type="button">Next</button></div>
+    </div>
+    <section id="detail" class="tool-card" hidden aria-labelledby="detail-heading"><h2 id="detail-heading" tabindex="-1">Submission details</h2>
+      <dl id="metadata"></dl><button id="preview-button" type="button">Load private preview</button><div id="preview"></div>
+      <p>Editing and review decisions are not available yet. Nothing here publishes files to the archive.</p>
+    </section>
+  </section>
+</main>
+<script src="../scripts/shared.js?v=2"></script><script src="../scripts/interactions.js"></script>
+<script src="../scripts/vendor/supabase-2.118.0.min.js"></script><script src="../scripts/submission-review.js"></script>
+</body></html>
