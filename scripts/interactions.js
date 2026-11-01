@@ -12,20 +12,94 @@
    return animation;
   } catch { return null; }
  };
- const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
-  entries.forEach(({target,isIntersecting}) => {
-   if(!isIntersecting) return;
-   observer.unobserve(target);watched.delete(target);
-   if(seen.has(target))return;seen.add(target);
-   animate(target,[{opacity:.25,transform:'translateY(16px)'},{opacity:1,transform:'none'}],460);
-  });
- },{threshold:.06}) : null;
+
+ // All content remains visible even if scripts, animation, or IntersectionObserver fail.
+ // Animate individual headings, thumbnails and captions, rather than entire event cards:
+ // event filtering, profile carousels and Gallery hover transforms must remain usable.
+ const revealTargets = [
+  'main h1','main h2','main h3',
+  'main img:not(.hero-image)','main video',
+  'main .eyebrow','main .event-date','main .event-summary',
+  'main .event-media-item figcaption','main .media-caption',
+  'main .profile-event-title','main .profile-event-date',
+  'main .scrapbook-photo span','main .feature>p:not(.eyebrow)',
+  'main .cinema-kicker','main .cinema-rule','main .cinema-tagline',
+  'main .cinema-entry-button','main .stat-grid strong'
+ ].join(',');
+ const skipReveal = el => Boolean(el.closest(
+  '.person-card, .lightbox, dialog, [hidden], [aria-hidden="true"]'
+ ));
+ const observer = typeof IntersectionObserver === 'function'
+  ? new IntersectionObserver(entries => {
+   for(const {target,isIntersecting} of entries){
+    if(!isIntersecting) continue;
+    observer.unobserve(target);watched.delete(target);
+    if(seen.has(target))continue;seen.add(target);
+    const image=target.matches('img,video');
+    animate(target,[
+     {opacity:image?.32:.18,transform:'translateY(-22px)'},
+     {opacity:1,transform:'translateY(0px)'}
+    ], image?950:1080);
+   }
+  },{threshold:.06,rootMargin:'0px 0px -3% 0px'}) : null;
  MS.reveal = (root=document) => {
-  if(reduced.matches || !observer)return;
-  watched.forEach(el=>{if(!el.isConnected){observer.unobserve(el);watched.delete(el);}});
-  root.querySelectorAll('.hero-copy,.hero-photo,.section-heading,.feature,.event-card,.era-heading,.event-header,.event-prose,.event-gallery,.media-card,.related-card').forEach(el => {if(!seen.has(el)){observer.observe(el);watched.add(el);}});
+  if(reduced.matches||!observer)return;
+  for(const el of [...watched]){
+   if(!el.isConnected){observer.unobserve(el);watched.delete(el);}
+  }
+  root.querySelectorAll(revealTargets).forEach(el => {
+   if(seen.has(el)||watched.has(el)||skipReveal(el))return;
+   if(el.matches('h1,h2,h3,.event-date,.event-summary,.profile-event-title,.media-caption'))
+    el.classList.add('aoms-motion-drift');
+   observer.observe(el);watched.add(el);
+  });
  };
- reduced.addEventListener('change',()=>{if(reduced.matches){observer?.disconnect();running.forEach(a=>a.cancel());}else MS.reveal();});
+ reduced.addEventListener('change',()=>{
+  if(reduced.matches){
+   observer?.disconnect();running.forEach(a=>a.cancel());
+   document.documentElement.style.removeProperty('--aoms-scroll-drift');
+  }else MS.reveal();
+ });
+
+ // Lazy UI content (timeline cards, Gallery results, profiles) appears after initial load.
+ // Observe additions without repeatedly scanning on every individual mutation.
+ let scanFrame=0;
+ const queueReveal=()=>{
+  if(scanFrame)return;
+  scanFrame=requestAnimationFrame(()=>{scanFrame=0;MS.reveal();});
+ };
+ document.addEventListener('DOMContentLoaded',()=>{
+  const main=document.querySelector('main');
+  if(main&&typeof MutationObserver==='function'){
+   const mutations=new MutationObserver(records=>{
+    if(records.some(record=>record.addedNodes.length))queueReveal();
+   });
+   mutations.observe(main,{childList:true,subtree:true});
+  }
+  MS.reveal();
+ });
+
+ // Directional scroll lag: text follows an upward scroll a little more strongly,
+ // then returns to its normal position. Purely visual, capped and reduced-motion safe.
+ let previousY=window.scrollY, drift=0, desired=0, driftFrame=0;
+ const driftTick=()=>{
+  drift+=(desired-drift)*.20;
+  desired*=.80;
+  if(Math.abs(drift)<.06&&Math.abs(desired)<.06){
+   drift=0;desired=0;driftFrame=0;
+   document.documentElement.style.removeProperty('--aoms-scroll-drift');
+   return;
+  }
+  document.documentElement.style.setProperty('--aoms-scroll-drift',drift.toFixed(2)+'px');
+  driftFrame=requestAnimationFrame(driftTick);
+ };
+ window.addEventListener('scroll',()=>{
+  const y=window.scrollY, change=y-previousY;
+  previousY=y;
+  if(reduced.matches||!change||document.hidden)return;
+  desired=Math.max(-18,Math.min(9,desired+change*(change<0?.30:.13)));
+  if(!driftFrame)driftFrame=requestAnimationFrame(driftTick);
+ },{passive:true});
 
  MS.setupTimelineSearch = ({data,search,choosePerson}) => {
   const $ = selector => document.querySelector(selector);
