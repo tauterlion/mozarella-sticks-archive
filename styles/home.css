@@ -156,3 +156,19 @@ html[data-theme="light"] .home-hero .hero-entry .hero-scroll-hint{
 @media(prefers-reduced-motion:reduce){
   .home-hero .cinema-entry-button,.home-hero .hero-scroll-hint{transition:none!important}
 }
+
+/* Revision 3.1.2: let the hero fade into the actual page color without a grain seam.
+   Keep the translucent overlay below the CTA/title, and fade grain away before the boundary. */
+.home-hero::before{
+  content:"";position:absolute;inset:auto 0 0;height:34%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 0%,
+    color-mix(in srgb,var(--bg) 22%,transparent) 30%,
+    color-mix(in srgb,var(--bg) 74%,transparent) 72%,
+    var(--bg) 98%);
+}
+.home-hero::after{
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 54%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 54%,transparent 100%);
+}
+html[data-theme="light"] .home-hero .hero-corner-note{color:var(--text)}
