@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const available = await MSArchive.availableMedia(data.media);
     document.querySelector('#media-stat').textContent = available.length;
     const ordered = MSArchive.orderedEvents(data.events);
-    const first = ordered[0];
     const last = ordered.at(-1);
-    document.querySelector('#archive-range').textContent = `${first.dateLabel} → ${last.dateLabel}`;
     document.querySelector('#latest-event').classList.remove('skeleton');
     document.querySelector('#latest-event').innerHTML = `
       <div class="latest-date">${MSArchive.escapeHtml(last.dateLabel)}</div>
