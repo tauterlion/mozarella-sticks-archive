@@ -1,5 +1,15 @@
 # AoMS Revision 3.1 — Cinematic Homepage (first iteration)
 
+## Second iteration — 3.1.1
+
+Owner-requested refinements:
+
+- Stronger, theme-aware fade across the bottom of the hero, with the unchanged original group photograph raised slightly.
+- Rounded, blurred glass Explore button.
+- A unified AoMS film-style header on all six main public pages (index, Timeline, Gallery, People, profile and event).
+- Slow 950–1080ms upward entrance fades for headings, thumbnails and event text, excluding the cinematic background photograph.
+- Small capped scroll-direction lag on titles, stronger when scrolling upward. Disabled by reduced-motion preference.
+
 ## Scope
 
 Revise **only the homepage** to open like a film title sequence. The desktop first view uses a full-viewport photograph, prominent *MOZARELLA STICKS* title, film-style navigation, a tagline, and an **Explore the Archive** scroll entry. Continue the existing archive home sections unchanged below the fold.
@@ -11,11 +21,14 @@ Use the existing authentic `assets/media/beach-party-everyone.jpg` asset. Avoid 
 ## Safe file boundaries
 
 - `index.html`: home-only markup, header treatment and persistent section anchors.
-- `styles/home.css`: cinematic hero and responsive presentation, retaining existing feature/gallery/section styles.
+- `styles/home.css`: cinematic hero, bottom fade, oval glass CTA and responsive presentation, retaining existing feature/gallery/section styles.
+- `styles/shared.css`: shared film navigation and text-motion style.
+- `scripts/interactions.js`: progressive enhancement for accessible entrance reveals and capped scroll drift.
+- `timeline.html`, `gallery.html`, `people.html`, `person.html`, `event.html`: unify top navigation without modifying data or page-specific functional markup.
 - `scripts/home.js`: remove only the old dynamic hero selection; preserve all home data loads.
 - `tests/home-cinematic.cjs`: static integration guards.
 
-**Do not edit:** `data/*.json`, other page templates/styles/scripts, Supabase, or PR #18.
+**Do not edit:** `data/*.json`, Supabase, files belonging to the Community Submissions feature branch, or PR #18. Developer-only `tools/` pages retain their existing utility layout.
 
 ## Interaction
 
@@ -33,7 +46,8 @@ Use the existing authentic `assets/media/beach-party-everyone.jpg` asset. Avoid 
 4. Click CTA, scroll arrow, navigation and theme control; check keyboard focus.
 5. Run `node tests/home-cinematic.cjs`, `python tools/validate_archive.py --check-files` and the existing browser regression suite.
 6. Verify no console errors, blocked images, horizontal overflow, changed events, altered people, or missing Gallery media.
-7. Merge only after owner approval and preview review. Do not merge PR #18 together with this redesign.
+7. Verify the animation runs when new Gallery/Timeline items are rendered after data loading, that captions remain readable while scrolling up/down, and that `prefers-reduced-motion` suppresses it.
+8. Merge only after owner approval and preview review. Do not merge PR #18 together with this redesign.
 
 ## Future iterations (not yet included)
 
