@@ -205,5 +205,9 @@ html[data-theme="light"] .home-hero .hero-corner-note{color:var(--text)}
 @media(max-width:380px){
   .cinema-intro h1{font-size:7.5vw}
 }
+/* Intermediate widths otherwise bring the first row of faces too close to the subtitle. */
+@media(min-width:761px) and (max-width:1200px){
+  .home-hero .hero-image{top:calc(290px - 34vw)}
+}
 /* No date-range micro-section beneath the counter grid. */
 .archive-overview{padding-bottom:23px}
