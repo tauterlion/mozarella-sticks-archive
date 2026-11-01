@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div><h3>${MSArchive.escapeHtml(last.title)}</h3><p>${MSArchive.escapeHtml(last.summary)}</p></div>
       <a class="button secondary" href="event.html?id=${encodeURIComponent(last.id)}">Open event</a>`;
     const escape = MSArchive.escapeHtml;
-    const hero = available.find(item => item.id === 'statue-groupphoto') || available.find(item => item.type === 'image');
-    if(hero) document.querySelector('#hero-photo').innerHTML = '<a href="event.html?id='+encodeURIComponent(hero.eventId)+'"><img src="'+escape(hero.url)+'" alt="'+escape(hero.caption)+'" fetchpriority="high"></a><figcaption>'+escape(hero.caption)+'</figcaption>';
+    // The Revision 3.1 hero uses a fixed, authentic archive photo in index.html.
     document.querySelector('#featured-events').innerHTML = ['cheddar-becomes-mascot','graduation','nico-todd-peru-trip'].map(id => data.eventsById[id]).filter(Boolean).map(event => {
       const image = available.find(item => item.eventId === event.id && item.type === 'image');
       const href = 'event.html?id='+encodeURIComponent(event.id);
