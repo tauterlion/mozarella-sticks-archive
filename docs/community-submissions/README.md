@@ -2,7 +2,15 @@
 
 Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
-## Current state (2026-10-30)
+## Current state (2026-11-01)
+
+See [operations.md](operations.md) for deployment, verification and non-destructive rollback commands; [local-staging.md](local-staging.md) for local start/stop. Historical test reports are dated evidence, not current deployment inventories.
+
+| Environment | Deployed / running | Intake | Verified |
+|---|---|---|---|
+| Production `kvyrbtooynofijdtmqup` | Three migrations through `20261030232342`; `community-submit` v1 | Disabled in DB and static config | 45 rollback SQL checks; nine closed-endpoint checks |
+| Isolated Docker `aoms-local` | Same schema; branch backend including signed TUS `/sign` correction | Enabled only for local tests | Real localhost Turnstile, private transfer, binary verification and pending receipt |
+| PR #18 | Latest form feedback and signed TUS correction | Static config disabled | Not merged; these corrections are NOT deployed to production |
 
 The private database foundation and the explicitly approved `secure_submission_intake` migration are applied. Hosted migration version: `20261030232342`. The migration file was renamed to match that history without changing its SQL. The `community-submit` Edge Function is deployed as version 1, with public intake still disabled. The owner approved the migration after reviewing its SQL; the earlier declined confirmation is resolved.
 
@@ -51,9 +59,9 @@ node tests/browser-regression.cjs
 
 The browser suites use `PLAYWRIGHT_MODULE` and `CHROME_BIN` when the runtime is not on the default path. The archive suite expects the site served on `http://127.0.0.1:8765/` (or `BASE_URL`). The submission suite starts its own temporary local server. Browser transfer tests explicitly mock Turnstile, the gateway and TUS; production configuration stays disabled. Real browser-encoded JPEG/PNG/WebP, browser-recorded WebM, and an original MP4 exercise the structural parser locally.
 
-Local results: 45 foundation SQL checks, 25 intake database checks, 32 request/stream/file tests, 23 submission browser checks, all 15 existing Python tests, and the existing full archive browser regression passed. The archive validator reports zero errors/warnings. Full regression includes 112 event pages, all filters, all 20 original video playback checks, Media Manager preservation/unsaved-change guards, diagnostics and 60 responsive/theme layouts. Deno type-check passed. Security tests use isolated PostgreSQL-compatible PGlite and roll back fixtures.
+Local results: 45 foundation SQL checks, 25 intake database checks, 37 request/stream/file tests, 23 submission browser checks, all 15 existing Python tests, and the existing full archive browser regression passed. The archive validator reports zero errors/warnings. Full regression includes 112 event pages, all filters, all 20 original video playback checks, Media Manager preservation/unsaved-change guards, diagnostics and 60 responsive/theme layouts. Deno type-check passed. Security tests use isolated PostgreSQL-compatible PGlite and roll back fixtures.
 
-After migration, all 45 hosted rollback-only security checks passed again. The new service-only RPC correctly rejects intake while disabled; anon/authenticated roles cannot execute it. Nine real HTTP closed-intake checks passed against the deployed function. Positive upload/CAPTCHA/transfer tests remain local/mocked, not hosted. The earlier foundation rollback verification is recorded in `rollback-verification.md`; current deployment evidence is in `deployment-verification.md`.
+After migration, all 45 hosted rollback-only security checks passed again. The new service-only RPC correctly rejects intake while disabled; anon/authenticated roles cannot execute it. Nine real HTTP closed-intake checks passed against the deployed function. A real positive Turnstile/upload/finalization flow also passed against the isolated Docker stack. Production positive uploads remain untested while closed. The earlier foundation rollback verification is recorded in `rollback-verification.md`; current deployment evidence is in `deployment-verification.md`.
 
 Screenshots are generated outside the repository under `outputs/community-submissions/`: dark/light desktop/mobile. They show the actual 112-event/37-person selectors with synthetic local upload previews, not publicly uploaded media.
 
@@ -61,8 +69,8 @@ Screenshots are generated outside the repository under `outputs/community-submis
 
 1. Completed: approved migration applied, filename reconciled to hosted history, hosted SQL security checks/advisors rerun. Do not modify already-applied migrations.
 2. Completed: `community-submit` deployed using the checked-in config (`verify_jwt=false` only for this intentionally anonymous, application-authenticated endpoint). Database switch remains false; live closed-intake rejection verified.
-3. Configure the production Turnstile widget for `tauterlion.github.io`. Supply only the public sitekey to the static config; store the secret as `TURNSTILE_SECRET_KEY` in Edge secrets. Defaults: `SUBMISSIONS_ORIGIN=https://tauterlion.github.io`, `TURNSTILE_HOSTNAME=tauterlion.github.io`; Supabase injects `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. No secrets in Git or chat.
-4. Use an isolated staging project for positive hosted tests while production remains off: genuine CAPTCHA/replay/expiry; signed-token TUS compatibility; overwrite/cross-path attempts; real 50 MiB and oversize files; interruption/cancel/retry; quota/concurrency; memory/CPU/egress; late-token cleanup and deletion confirmation; anonymous read/list/preview denial. Establish automated cleanup, capacity alarms and operator monitoring.
+3. Production and localhost Turnstile widgets are configured; the public production sitekey is in the disabled static config. The owner manages `TURNSTILE_SECRET_KEY` in Edge secrets. Correctness of the production secret is not yet verified by a positive production challenge. Defaults: `SUBMISSIONS_ORIGIN=https://tauterlion.github.io`, `TURNSTILE_HOSTNAME=tauterlion.github.io`; Supabase injects `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. No secrets in Git or chat.
+4. Continue isolated Docker staging while production remains off. Real local CAPTCHA and signed-token TUS finalization passed. Remaining coverage: replay/expiry; overwrite/cross-path attempts; real 50 MiB and oversize files; interruption/cancel/retry; quota/concurrency; memory/CPU/egress; late-token cleanup and deletion confirmation; anonymous read/list/preview denial. Establish automated cleanup, capacity alarms and operator monitoring.
 5. Finish automatic queue rollover and the remaining cancellation race/long-queue browser tests. A cancelled transfer remains private and reserved until cleanup, but live TUS cancellation behavior is not yet proven.
 6. Complete Alejandro-only authentication/moderation, signed private previews, verified takedown intake, metadata normalization and the explicit GitHub PR publishing/reconciliation pipeline. Operator-managed moderator enrollment is still required. Approval alone must never mark an item published.
 7. Complete privacy/consent review, retention/incident runbook and all release acceptance tests. GitHub Pages cannot serve Git LFS objects; the proposed public derivative limit is 25 MiB even though private intake allows 50 MiB. Larger accepted files require processing/hold, not automatic git publication.

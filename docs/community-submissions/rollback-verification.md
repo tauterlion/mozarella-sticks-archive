@@ -1,3 +1,5 @@
+> Historical foundation test rollback report. This is not a deployment rollback guide; see [operations.md](operations.md) for restoring code without deleting submissions.
+
 # Rollback-only database security verification
 
 Date: October 30, 2026. Project: `kvyrbtooynofijdtmqup`.
