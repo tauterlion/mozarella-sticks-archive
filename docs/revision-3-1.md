@@ -12,6 +12,14 @@ Owner-requested refinements:
 - Slow 950–1080ms upward entrance fades for headings, thumbnails and event text, excluding the cinematic background photograph.
 - Small capped scroll-direction lag on titles, stronger when scrolling upward. Disabled by reduced-motion preference.
 
+## Final layout polish — 3.1.3
+
+- Make hero kicker, headline and subtitle somewhat smaller and closer to the top of the viewport.
+- Lift the unchanged photograph slightly higher, with responsive framing that leaves faces unobstructed by lettering.
+- Remove the repeated “THE”: “THE ARCHIVE OF” / “THE” / “MOZARELLA STICKS”.
+- Restrict inertial scrolling to the hero headline alone. All other headlines, thumbnails and event text retain only entrance fades.
+- Remove the redundant archive-range micro-section immediately after the statistics while preserving the counters.
+
 ## Scope
 
 Revise **only the homepage** to open like a film title sequence. The desktop first view uses a full-viewport photograph, prominent *MOZARELLA STICKS* title, film-style navigation, a tagline, and an **Explore the Archive** scroll entry. Continue the existing archive home sections unchanged below the fold.
