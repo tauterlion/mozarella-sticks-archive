@@ -49,7 +49,7 @@
   }
   root.querySelectorAll(revealTargets).forEach(el => {
    if(seen.has(el)||watched.has(el)||skipReveal(el))return;
-   if(el.matches('h1,h2,h3,.event-date,.event-summary,.profile-event-title,.media-caption'))
+   if(el.id === 'home-title')
     el.classList.add('aoms-motion-drift');
    observer.observe(el);watched.add(el);
   });
@@ -93,7 +93,7 @@
   document.documentElement.style.setProperty('--aoms-scroll-drift',drift.toFixed(2)+'px');
   driftFrame=requestAnimationFrame(driftTick);
  };
- window.addEventListener('scroll',()=>{
+ if(document.getElementById('home-title'))window.addEventListener('scroll',()=>{
   const y=window.scrollY, change=y-previousY;
   previousY=y;
   if(reduced.matches||!change||document.hidden)return;
