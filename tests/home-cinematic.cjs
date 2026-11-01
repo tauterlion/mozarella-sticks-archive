@@ -57,4 +57,19 @@ assert.match(css,/Revision 3\.1\.2: let the hero fade/);
 assert.match(css,/\.home-hero::before\{/);
 assert.match(css,/mask-image:linear-gradient\(180deg,#000 0%,#000 54%,transparent 100%\)/);
 
-console.log('PASS: cinematic homepage, unified headers, motion, reduced-motion and safe data mounts');
+
+// Final user-approved direction: compact title, one "THE", no range micro-section.
+assert.match(html, /<p class="cinema-kicker">THE ARCHIVE OF<\/p>/);
+assert.match(html, /<div class="cinema-rule" aria-hidden="true"><span><\/span>THE<span><\/span><\/div>/);
+assert.ok(!html.includes('THE ARCHIVE OF THE'), 'No doubled THE in opening');
+assert.ok(!html.includes('id="archive-range"'), 'Remove redundant under-stats mini-section');
+assert.ok(!script.includes("querySelector('#archive-range')"), 'No abandoned range mount');
+assert.match(css, /Revision 3\.1\.3/);
+assert.match(css, /font-size:clamp\(2\.8rem,5\.85vw,7\.1rem\)/);
+assert.match(css, /top:clamp\(-270px,-12\.8vw,-78px\)/);
+assert.match(shared, /\.home-hero #home-title\.aoms-motion-drift/);
+assert.ok(!shared.includes('main .aoms-motion-drift'), 'No drift on other page titles');
+assert.match(motion, /if\(el\.id === 'home-title'\)/);
+assert.match(motion, /if\(document\.getElementById\('home-title'\)\)window\.addEventListener\('scroll'/);
+
+console.log('PASS: cinematic 3.1.3 layout, single THE, hero-only momentum, data and nav safeguards');
