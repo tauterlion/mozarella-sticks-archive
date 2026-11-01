@@ -37,7 +37,7 @@
     if(seen.has(target))continue;seen.add(target);
     const image=target.matches('img,video');
     animate(target,[
-     {opacity:image?.32:.18,transform:'translateY(-22px)'},
+     {opacity:image ? .32 : .18,transform:'translateY(-22px)'},
      {opacity:1,transform:'translateY(0px)'}
     ], image?950:1080);
    }
@@ -56,7 +56,7 @@
  };
  reduced.addEventListener('change',()=>{
   if(reduced.matches){
-   observer?.disconnect();running.forEach(a=>a.cancel());
+   observer?.disconnect();watched.clear();running.forEach(a=>a.cancel());
    document.documentElement.style.removeProperty('--aoms-scroll-drift');
   }else MS.reveal();
  });
