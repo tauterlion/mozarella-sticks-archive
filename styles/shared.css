@@ -96,7 +96,7 @@ body:not([data-page="home"]) .site-header.film-header{
   border-bottom:1px solid var(--line)
 }
 body:not([data-page="home"]) .film-header .film-nav a{text-shadow:none}
-main .aoms-motion-drift{translate:0 var(--aoms-scroll-drift,0px)}
+.home-hero #home-title.aoms-motion-drift{translate:0 var(--aoms-scroll-drift,0px)}
 @media(max-width:1000px){
   .film-header .film-header-rule{display:none}
   .film-header .film-nav{margin-left:auto}
@@ -115,5 +115,5 @@ main .aoms-motion-drift{translate:0 var(--aoms-scroll-drift,0px)}
   .film-header .film-nav a{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){
-  main .aoms-motion-drift{translate:none!important}
+  .home-hero #home-title.aoms-motion-drift{translate:none!important}
 }
