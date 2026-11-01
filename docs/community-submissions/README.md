@@ -20,7 +20,7 @@ Original `data/people.json`, `data/timeline.json`, `data/media.json`, assets, ro
 
 ## Moderator work started
 
-See [moderation.md](moderation.md) for the branch-only, read-only moderator slice and owner account setup. No moderator migration/function is deployed; the review configuration remains disabled. Production inventory above is unchanged.
+See [moderation.md](moderation.md) for the branch-only, read-only moderator slice and owner account setup. The moderator read functions and endpoint are now installed only in the local Docker stack, with real Auth/MFA tests passing. Production moderation configuration remains disabled; production inventory above is unchanged.
 
 ## Implemented
 

@@ -40,7 +40,7 @@
     $('queue').replaceChildren(); $('pending-count').textContent = `${data.pendingCount} pending`;
     for (const item of data.items) {
       const li = document.createElement('li'), button = document.createElement('button');
-      button.type = 'button'; button.textContent = `${item.caption} — ${item.original_filename}`;
+      button.type = 'button'; button.textContent = `${item.caption} â€” ${item.original_filename}`;
       button.addEventListener('click', () => run(button, () => detail(item.id)));
       li.append(button); $('queue').append(li);
     }
@@ -92,7 +92,7 @@
         const { error } = await client.auth.mfa.unenroll({ factorId: factor.id }); if (error) throw error;
       }
       const { data, error } = await client.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'AoMS moderator' }); if (error) throw error;
-      factorId = data.id; clearQR(); qrURL = URL.createObjectURL(new Blob([data.totp.qr_code], { type: 'image/svg+xml' }));
+      factorId = data.id; clearQR(); qrURL = URL.createObjectURL(new Blob([data.totp.qr_code.replace(/^data:image\/svg\+xml;utf-8,/, '')], { type: 'image/svg+xml' }));
       $('qr').src = qrURL; $('qr-panel').hidden = false; $('mfa-form').hidden = false; $('enroll').hidden = true;
     }));
     $('mfa-form').addEventListener('submit', event => {

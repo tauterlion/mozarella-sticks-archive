@@ -2,7 +2,7 @@
 
 ## Implemented scope (2026-11-01)
 
-Branch-only first slice: `tools/submission-review.html`, a disabled public configuration, a dedicated `community-review` Edge Function, and additive migration `20261101215947_moderator_read_access.sql`. Not deployed to production or the persistent Docker stack. Tested with isolated database fixtures and mocked browser/API dependencies; real Auth/MFA and Storage preview integration is still required.
+Branch-only first slice: `tools/submission-review.html`, a disabled public configuration, a dedicated `community-review` Edge Function, and additive migration `20261101215947_moderator_read_access.sql`. Installed in the isolated Docker stack for live authentication tests; not deployed to production. Real local Auth/MFA testing now passes. Real Storage preview integration remains to be verified with the moderation workflow.
 
 The page supports email/password login, TOTP authenticator enrollment/verification, sign-out, newest-first status queues with 25-item pages and pending counts, plain-text metadata, and on-demand one-minute private previews. No signup UI. Sessions and private data stay in memory. Refreshing the page requires sign-in again. No contributor data is embedded in static HTML.
 
@@ -20,7 +20,7 @@ Exact-origin CORS is additional protection, not authentication. Moderator access
 
 ## Alejandro account setup (owner action; do not send credentials)
 
-The owner chose email/password plus an authenticator app and has no AoMS Auth user yet. The Supabase dashboard account is separate.
+The owner chose email/password plus an authenticator app. Disposable local Auth tests passed; personal local enrollment is awaiting the owner’s exact UUID confirmation. The Supabase dashboard account is separate.
 
 1. First test with a disposable user in local Studio, not production. The new local migration/function and a local-only enabled moderation config must be installed before that test; keep committed config disabled. Use the same separate local project and origin as the intake tests.
 2. Before production enrollment, disable new-user signup and anonymous sign-ins in the AoMS project's Auth settings. Confirm email/password and TOTP support. Set recovery/redirect URLs deliberately; a password recovery UI and tested recovery procedure are still launch gates.
@@ -44,8 +44,28 @@ Browser runtime variables are documented in operations.md. Screenshots use synth
 
 Verification on November 1: 24 gateway security tests, 22 database checks and 17 mocked browser checks passed, including both themes and mobile/desktop. Deno type-check passed. The new migration also passed a real local PostgreSQL rollback-only check: both browser roles denied, service execution permitted, unknown identity denied; ROLLBACK removed both new functions and preserved all three existing local submissions and the private bucket.
 
-Before deployment, inspect advisors and test actual Auth/MFA/session revocation and signed previews, then recheck preservation counts. The migration is additive: it creates two functions only; rollback of this code requires no submission or Storage deletion. Keep the review config disabled and revert the Edge Function/page if needed, leaving the unused functions intact pending a reviewed forward fix.
+Before production deployment, test signed previews and the full moderation workflow, then recheck preservation counts. Live local Auth/MFA/session-revocation tests and local security advisors now pass. The migration is additive: it creates two functions only; rollback of this code requires no submission or Storage deletion. Keep the review config disabled and revert the Edge Function/page if needed, leaving the unused functions intact pending a reviewed forward fix.
 
 References: [Auth getUser](https://supabase.com/docs/reference/javascript/auth-getuser), [session revocation](https://supabase.com/docs/guides/auth/sessions), [MFA](https://supabase.com/docs/guides/auth/auth-mfa).
 
 Existing regression rerun November 1: 45 foundation SQL checks, 25 intake DB checks, 37 upload tests, 23 submission browser checks, 15 Python tests, nine live production closed-intake checks, and archive validator passed. Full browser regression passed on rerun: 112 event pages, 121 available Gallery records, 20 video playback checks, Media Manager guards and 60 responsive/theme layouts. The first run timed out on one event page; an isolated check and complete rerun passed without archive code changes. Original people/timeline/media manifests and assets have no diff against main. Production read-only snapshot confirmed intake false, bucket private and zero submissions/objects/moderators.
+
+## Phase 1 live verification — November 1
+
+The read-access migration was installed only in local PostgreSQL, without resetting the database. Both local functions are served from the copied branch code. Local Auth has global `enable_signup=false`, anonymous sign-in disabled, password minimum 12, and TOTP enrollment/verification enabled. Keep `[auth.email].enable_signup=true`: the CLI maps that setting to email provider availability; disabling it also breaks password login even for operator-created accounts. The global Auth signup switch still rejects public signup.
+
+The local form server overrides moderation config in memory with the local URL and public publishable key. The committed moderation config remains disabled and contains no credentials. The SDK's QR response is a data URL, so the UI removes its prefix before creating the SVG image blob; this fixes real authenticator setup rendering.
+
+21 live local Auth/browser checks passed: incorrect/correct password, password-only denial, real QR rendering, wrong/correct TOTP, returning-user MFA, anonymous/forged/expired token denial, live allowlist deactivation, non-moderator AAL2 denial, direct table denial, logout revocation, database session expiry and UI clearing, and disabled self-signup. Disposable accounts and allowlist entries were removed; all three pre-existing local submissions, Storage objects and intake setting remained unchanged. No human password, QR secret or verification code was read or recorded. The automated test generates credentials only for its own disposable users.
+
+Run this opt-in test **before personal enrollment**, or in another isolated local stack with an empty moderator allowlist:
+
+```powershell
+$env:AOMS_LOCAL_AUTH_TEST='1'
+node supabase/tests/moderation-live.cjs
+Remove-Item Env:AOMS_LOCAL_AUTH_TEST
+```
+
+It uses the existing browser runtime variables, local `work/aoms-local/status.json`, and the explicitly named Docker database. It refuses nonlocal API configuration or an occupied moderator allowlist. It never replaces an existing moderator. Local-only signed expiry fixtures use the development signing key in memory; these are test fixtures, not an authentication bypass in the application.
+
+22 isolated DB checks, 24 gateway tests and Deno checks also passed. `supabase db advisors --local --type security --level warn` reported no issues. Account creation in local Studio and explicit owner confirmation of its UUID are the next enrollment gate. Production enrollment/deployment and recovery procedures remain outstanding; no account is auto-enrolled by email.

@@ -81,3 +81,32 @@ Stop the form and function terminals with Ctrl+C, then:
 ```
 
 The CLI preserves local volumes by default. Never add `--no-backup`, run `db reset`, delete volumes, or use `--all` for routine stopping. If a server was started in the background, identify the process by its exact command/port before stopping only that process. Resume with the start sequence above; check private bucket and intake state rather than assuming defaults.
+
+## Moderator authentication added locally — November 1
+
+`community-review` and the additive read-access functions are now installed locally. The local-only form config also enables `http://localhost:8766/tools/submission-review.html`; committed production config stays disabled. `functions serve` serves both copied functions. Preserve both function directories when restarting.
+
+Local `supabase/config.toml` changes required for the tested sign-in flow:
+
+```toml
+[auth]
+enable_signup = false
+enable_anonymous_sign_ins = false
+minimum_password_length = 12
+site_url = "http://localhost:8766"
+additional_redirect_urls = []
+
+[auth.email]
+enable_signup = true
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[functions.community-review]
+verify_jwt = false
+```
+
+Edit the existing sections, do not duplicate them or replace the rest of the config. The email section keeps the provider available; global signup remains disabled. Restart the stack with the data-preserving stop/start commands after Auth configuration changes, then reapply local Functions CORS and restart the function/form servers. Run those servers in separate terminals so stopping one does not stop both. Never print `status.json`, `edge.env` or generated `kong.yml`.
+
+Live Auth tests use disposable accounts and leave existing submissions intact. See moderation.md for results and personal local enrollment steps. The new local read functions were installed directly for iteration; they are not in hosted migration history. Do not reset the stack to reconcile local history.
