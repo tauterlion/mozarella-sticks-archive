@@ -306,3 +306,11 @@ html[data-theme="light"] .home-hero .hero-corner-note{color:var(--text)}
 
 /* Revision 3.1.5 — remove the redundant CTA: statistics start directly after the hero. */
 #inside-archive{scroll-margin-top:20px}
+
+/* Match the shared accessibility-sized mobile navigation on the opening screen. */
+@media(max-width:760px){
+ body[data-page="home"] .film-nav a{font-size:11px;letter-spacing:.055em}
+}
+@media(max-width:380px){
+ body[data-page="home"] .film-nav a{font-size:10px;letter-spacing:.025em}
+}
