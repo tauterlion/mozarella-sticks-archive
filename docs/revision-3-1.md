@@ -23,10 +23,17 @@ Owner-requested refinements:
 ## Final atmospheric pass — 3.1.4
 
 - Remove the upper “THE ARCHIVE OF” eyebrow and reposition “THE / MOZARELLA STICKS / EST. 2024” to occupy the space with generous breathing room.
-- Place the pill-shaped Explore CTA **after** the full-screen hero, never outside a clipped container. Keep only a small in-frame scroll arrow for discoverability.
+- Previously planned below-the-fold Explore CTA has been removed in 3.1.5. The in-frame scroll arrow links to the statistics.
 - Lower the photo fade into the last quarter of the hero, clipping it to the photo/hero boundary so it does not create a seam or overshoot.
 - Add three ambient animated arcs and faint radial highlights behind the statistics, selected memories, photos, and latest entry. They use the archive theme's gold token and have reduced-motion fallbacks.
 - Keep all original archive data and community-submissions work untouched.
+
+## Motion and simplified entry — 3.1.5
+
+- Removed the **Explore the Archive** button and its standalone section entirely; the unobtrusive down arrow now links straight to the archive statistics.
+- The arc outlines now drift across the background every 12–18 seconds instead of 31–46 seconds, and each receives a slowly sweeping golden highlight for an observable sense of movement.
+- Highlight sweeps are CSS-only, noninteractive, behind real content, and disabled by `prefers-reduced-motion: reduce`.
+- Both light and dark palettes remain grounded in `var(--gold)`; images and historic archive data remain unchanged.
 
 ## Scope
 
@@ -51,7 +58,7 @@ Use the existing authentic `assets/media/beach-party-everyone.jpg` asset. Avoid 
 ## Interaction
 
 - Branding links to the homepage; Timeline, Gallery and People retain their regular routes.
-- The CTA and scroll arrow use native `#inside-archive` links; no JavaScript required.
+- The in-hero scroll arrow uses a native `#inside-archive` link; no JavaScript required.
 - The shared theme toggle remains functional; both themes use an intentionally dark cinematic opening.
 - The shared skip link, headings, text alternative, keyboard focus and reduced-motion rules remain available.
 - The archive's existing cards, stats and latest entry still render from the source data.
@@ -61,7 +68,7 @@ Use the existing authentic `assets/media/beach-party-everyone.jpg` asset. Avoid 
 1. Compare 16:9 desktop (1440×810 / 1600×900 / 1920×1080) against the approved visual direction.
 2. Check mobile widths (390 and 320 px), tablet, and short landscape viewports.
 3. Confirm every person remains visible as practical at desktop width; no AI changes to faces.
-4. Click CTA, scroll arrow, navigation and theme control; check keyboard focus.
+4. Click scroll arrow, navigation and theme control; check keyboard focus.
 5. Run `node tests/home-cinematic.cjs`, `python tools/validate_archive.py --check-files` and the existing browser regression suite.
 6. Verify no console errors, blocked images, horizontal overflow, changed events, altered people, or missing Gallery media.
 7. Verify the animation runs when new Gallery/Timeline items are rendered after data loading, that captions remain readable while scrolling up/down, and that `prefers-reduced-motion` suppresses it.
