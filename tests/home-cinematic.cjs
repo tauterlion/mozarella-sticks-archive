@@ -74,4 +74,22 @@ assert.ok(!shared.includes('main .aoms-motion-drift'), 'No drift on other page t
 assert.match(motion, /if\(el\.id === 'home-title'\)/);
 assert.match(motion, /if\(document\.getElementById\('home-title'\)\)window\.addEventListener\('scroll'/);
 
-console.log('PASS: cinematic 3.1.3 layout, single THE, hero-only momentum, data and nav safeguards');
+
+/* 3.1.4: opening is quieter and the CTA starts below the hero viewport. */
+assert.ok(!html.includes('cinema-kicker'), 'Upper THE ARCHIVE OF line is removed');
+const heroAt = html.indexOf('<section class="home-hero"');
+const heroEnd = html.indexOf('</section>',heroAt);
+const entryAt = html.indexOf('<div class="archive-entry"');
+assert.ok(entryAt > heroEnd, 'The Explore button is below the hero, not inside it');
+assert.match(html,/href="#archive-entry"/);
+assert.match(html,/class="archive-depth"/);
+assert.match(html,/class="archive-orbits" aria-hidden="true"/);
+for(const arc of ['archive-arc-one','archive-arc-two','archive-arc-three'])
+  assert.ok(html.includes(arc), 'Missing background arc: '+arc);
+assert.match(css,/Revision 3\.1\.4/);
+assert.match(css,/height:min\(25svh,27%\)/);
+assert.match(css,/@keyframes aoms-orbit-breathe/);
+assert.match(css,/\.archive-entry \.cinema-entry-button/);
+assert.match(css,/\.home-hero \.hero-image\{top:auto;bottom:0;height:91%\}/);
+
+console.log('PASS: cinematic 3.1.4 below-fold entry, arcs, photo fade and archive safeguards');
