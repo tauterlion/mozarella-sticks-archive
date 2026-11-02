@@ -57,7 +57,7 @@ const cases = [
               labels,
               theme:document.documentElement.dataset.theme,
               navFont:parseFloat(getComputedStyle(links[0]).fontSize),
-              imgBroken:[...document.querySelectorAll('main img')].filter(x=>x.complete && !x.naturalWidth).slice(0,3).map(x=>x.src)
+              imgBroken:[...document.querySelectorAll('main img')].filter(x=>x.getAttribute('src') && x.complete && !x.naturalWidth).slice(0,3).map(x=>x.src)
             };
           });
           assert.ok(result.header,setup.name+' '+name+': cinematic nav missing');
