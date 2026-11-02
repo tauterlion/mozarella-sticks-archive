@@ -35,12 +35,12 @@ Owner-requested refinements:
 - Highlight sweeps are CSS-only, noninteractive, behind real content, and disabled by `prefers-reduced-motion: reduce`.
 - Both light and dark palettes remain grounded in `var(--gold)`; images and historic archive data remain unchanged.
 
-## Release candidate audit — November 1, 2026
+## Release candidate image approval — November 1, 2026
 
-- **Automated validation:** GitHub archive validation passed; Chromium smoke passed **316 checks across 48 page / viewport / theme combinations** (desktop, tablet, phone, small phone) with readable navigation, no overflow, successful images and working motion preferences.
-- **Source photo mismatch (release blocker):** The branch still references `assets/media/beach-party-everyone.jpg`, but Chromium measured a **39/64 Hamming distance** from the exact approved 1024×1024 PNG embedded in the standalone preview. The closest of the other available archive photos still scored 22/64, so no existing image is a reliable substitute.
-- **Required owner upload:** Add the web-optimized `AoMS_3_1_approved_hero.jpg` prepared in the ChatGPT conversation (244,243 bytes, 1024×1024 JPEG) as `assets/media/aoms-3-1-hero.jpg` on the **`feat/revision-3-1-cinematic-home` branch**, not main. It preserves the owner's photograph and contains no synthesized faces.
-- **After upload:** Change the hero's `src`, image-path assertion, fingerprint check and alt as needed; rerun Chromium and archive workflows. Only then mark PR #19 ready and merge, without modifying PR #18.
+- **Final selected image:** The owner selected a higher-quality, authentic, unedited 2048×1365 landscape photo of the bonfire group. The original was optimized into a progressive JPEG without changing faces, and the owner uploaded it to the feature branch as `assets/media/aoms-3-1-hero-wide.jpg` (721,242 bytes).
+- **Image integrity:** SHA-256 `83db66393591cbd42fab79dff62b4ff7eaf88b211e6019ae3bfa7a84709c5d70` identifies the exact approved file. The structural homepage test verifies this digest; Chromium checks its natural dimensions and desktop/mobile framing.
+- **Photo framing:** The new landscape image moves slightly lower behind the cinematic title on desktop/tablet to leave faces unobstructed. Mobile uses a less aggressive 78% hero-height photograph, revealing more of the group.
+- **Release checks:** GitHub archive validation, structural test and dedicated Chromium smoke testing must all pass on the exact merge head. Community Submissions PR #18 must remain untouched and unmerged.
 
 ## Scope
 
@@ -48,7 +48,7 @@ Give the homepage a film-title opening. The first view uses a full-viewport auth
 
 ## Source photo
 
-Use the existing authentic `assets/media/beach-party-everyone.jpg` asset. Avoid generated or substituted faces. The separate downloadable interactive preview uses the user-supplied original beach bonfire edit. Confirm the exact image matches the intended final edit before release.
+The canonical homepage hero is now `assets/media/aoms-3-1-hero-wide.jpg`, an owner-provided 2048×1365 unedited group photograph. It supersedes the earlier square edit used in interactive prototypes. Do not substitute synthetic faces or edit the original archive media.
 
 ## Safe file boundaries
 
