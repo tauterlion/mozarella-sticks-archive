@@ -51,7 +51,7 @@ assert.match(motion,/\], image\?950:1080\);/);
 assert.match(motion,/change<0\?\.30:\.13/);
 assert.match(motion,/MutationObserver/);
 assert.match(motion,/reduced\.matches/);
-assert.match(css,/\.cinema-entry-button\{[\s\S]*?border-radius:999px/);
+assert.ok(!css.includes('.cinema-entry-button'), 'No dead Explore button styling');
 assert.match(css,/var\(--bg\) 100%/);
 assert.match(css,/Revision 3\.1\.2: let the hero fade/);
 assert.match(css,/\.home-hero::before\{/);
