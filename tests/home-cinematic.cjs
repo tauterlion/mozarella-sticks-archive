@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* Static assertions for the cinematic homepage. Run: node tests/home-cinematic.cjs */
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.join(__dirname, '..');
@@ -12,8 +13,13 @@ assert.match(html, /<h1 id="home-title">MOZARELLA STICKS<\/h1>/);
 assert.match(html, /href="#inside-archive"/);
 assert.match(html, /id="inside-archive"/);
 assert.match(html, /assets\/media\/beach-party-everyone\.jpg/);
-assert.ok(fs.existsSync(path.join(root, 'assets/media/beach-party-everyone.jpg')),
+assert.ok(fs.existsSync(path.join(root, 'assets/media/aoms-3-1-hero-wide.jpg')),
   'Hero image must be checked into the archive');
+const approvedHero = fs.readFileSync(path.join(root,'assets/media/aoms-3-1-hero-wide.jpg'));
+assert.equal(crypto.createHash('sha256').update(approvedHero).digest('hex'),
+  '83db66393591cbd42fab79dff62b4ff7eaf88b211e6019ae3bfa7a84709c5d70',
+  'Homepage must use the owner-approved, unmodified high-quality bonfire edit');
+
 for (const target of ['timeline.html', 'gallery.html', 'people.html']) {
   assert.match(html, new RegExp('href="' + target.replace('.', '\\.') + '"'));
 }
@@ -95,4 +101,7 @@ assert.ok(!css.includes('.archive-entry'), 'No unused entry section CSS');
 assert.match(css,/\.home-hero \.hero-image\{top:auto;bottom:0;height:91%\}/);
 assert.match(css,/\.home-hero \.hero-image\{[\s\S]*?object-fit:cover;object-position:center top/);
 
-console.log('PASS: cinematic 3.1.5 no CTA, animated tracing arcs and archive safeguards');
+assert.match(css,/Revision 3\.1\.7/);
+assert.match(css,/\.home-hero \.hero-image\{top:clamp\(95px,8vw,155px\)\}/);
+assert.match(css,/\.home-hero \.hero-image\{top:auto;bottom:0;height:78%\}/);
+console.log('PASS: cinematic 3.1.7 approved hero, responsive framing, navigation and accessible motion');
