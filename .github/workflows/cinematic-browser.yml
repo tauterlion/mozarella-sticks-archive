@@ -1,0 +1,69 @@
+name: Cinematic archive browser smoke
+
+on:
+  pull_request:
+    paths:
+      - "index.html"
+      - "timeline.html"
+      - "gallery.html"
+      - "people.html"
+      - "person.html"
+      - "event.html"
+      - "styles/**"
+      - "scripts/**"
+      - "tests/cinematic-browser.cjs"
+      - "tests/home-cinematic.cjs"
+      - ".github/workflows/cinematic-browser.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "timeline.html"
+      - "gallery.html"
+      - "people.html"
+      - "person.html"
+      - "event.html"
+      - "styles/**"
+      - "scripts/**"
+      - "tests/cinematic-browser.cjs"
+      - "tests/home-cinematic.cjs"
+      - ".github/workflows/cinematic-browser.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    name: Chromium — public archive smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run homepage structural checks
+        run: node tests/home-cinematic.cjs
+
+      - name: Install isolated Playwright browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.58.2
+          npx playwright install --with-deps chromium
+
+      - name: Exercise the actual website in Chromium
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/aoms-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8765/index.html >/dev/null; then break; fi
+            sleep 1
+          done
+          BASE_URL=http://127.0.0.1:8765/ node tests/cinematic-browser.cjs

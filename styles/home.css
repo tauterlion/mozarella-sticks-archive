@@ -1,13 +1,100 @@
+/* AoMS Revision 3.1 — cinematic opening. Home page only; other pages keep their shared system. */
+body[data-page="home"] .film-header{
+  position:absolute;inset:0 0 auto;z-index:40;min-height:88px;
+  padding:18px clamp(22px,4.5vw,78px);gap:30px;
+  background:transparent;border:0;color:#f5eee5;
+}
+body[data-page="home"] .film-brand{flex:none;min-height:46px}
+.film-wordmark{font:400 30px/1 Georgia,"Times New Roman",serif;letter-spacing:-.07em}
+.film-header-rule{height:1px;flex:1;background:rgba(242,232,216,.43);align-self:center}
+body[data-page="home"] .film-nav{margin-left:0;gap:clamp(18px,2.8vw,45px);align-self:center}
+body[data-page="home"] .film-nav a{
+  color:#f4eee5;font-size:11px;letter-spacing:.28em;font-weight:600;
+  text-transform:uppercase;text-shadow:0 1px 14px #000;white-space:nowrap
+}
+body[data-page="home"] .film-nav a:hover{color:#f3ce9b}
+body[data-page="home"] .film-nav a[aria-current=page]:after{background:#f3ce9b}
+body[data-page="home"] .film-theme-toggle{
+  width:39px;height:39px;color:#f5eee5;border-color:rgba(244,238,229,.36);
+  background:rgba(0,0,0,.25);font-size:17px
+}
+.home-hero{
+  position:relative;isolation:isolate;height:100svh;min-height:620px;
+  width:100%;overflow:hidden;background:#0d0909;color:#f6eee4;
+  text-align:center
+}
+.home-hero #hero-photo{position:absolute;inset:0;margin:0;overflow:hidden;z-index:-3;background:#0b0909}
+.home-hero .hero-image{
+  position:absolute;left:50%;top:clamp(-175px,-8vw,-38px);
+  width:100%;min-width:900px;max-width:none;height:auto;
+  transform:translateX(-50%);object-fit:contain;filter:saturate(.88) contrast(1.05)
+}
+.home-hero .hero-vignette{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,5,6,.62) 0%,rgba(8,7,7,.43) 20%,rgba(9,7,6,.06) 51%,rgba(8,6,6,.12) 67%,rgba(8,6,5,.81) 100%),
+    linear-gradient(90deg,rgba(4,4,4,.31),transparent 14%,transparent 86%,rgba(4,4,4,.32));
+}
+.home-hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.25;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+}
+.cinema-intro{
+  position:relative;z-index:2;width:min(96%,1500px);
+  margin:clamp(112px,12vh,154px) auto 0;text-shadow:0 4px 35px #060505a8
+}
+.cinema-kicker,.cinema-rule,.cinema-tagline,.hero-corner-note{
+  font-family:"Segoe UI",system-ui,sans-serif;text-transform:uppercase
+}
+.cinema-kicker{font-size:clamp(10px,.9vw,13px);font-weight:550;letter-spacing:.62em;padding-left:.62em}
+.cinema-rule{display:flex;align-items:center;justify-content:center;gap:23px;margin:8px auto 11px;font-size:12px;letter-spacing:.55em;padding-left:.55em}
+.cinema-rule span{width:clamp(47px,7.5vw,128px);height:1px;background:rgba(245,233,215,.45)}
+.cinema-intro h1{
+  margin:0 auto;font-family:Georgia,"Times New Roman",serif;font-weight:400;
+  font-size:clamp(3rem,6.75vw,8.35rem);line-height:1.04;letter-spacing:-.065em;
+  white-space:nowrap;color:#f9efe2;text-wrap:nowrap
+}
+.cinema-tagline{margin:19px 0 0;font-size:clamp(9px,.85vw,12px);letter-spacing:.57em;padding-left:.57em;font-weight:550}
+.cinema-tagline span{margin-inline:.5em}
 
-.home-hero{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;padding-block:65px 55px}
-.hero-copy h1{margin:20px 0;max-width:11ch}
-.hero-copy h1 em{font-weight:400;color:var(--gold)}
-.hero-lede{max-width:43ch;color:var(--muted);font-size:17px;line-height:1.8}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:29px}
-.hero-photo{position:relative;background:var(--surface);border:1px solid var(--line);padding:13px 13px 0;border-radius:3px}
-.hero-photo:before{content:"";position:absolute;width:70px;height:24px;top:-12px;left:calc(50% - 35px);background:var(--gold-fill);opacity:.85;transform:rotate(-3deg);z-index:1}
-.hero-photo img{width:100%;height:390px;object-fit:cover}
-.hero-photo figcaption{padding:16px 3px;font-size:12px;color:var(--muted)}
+
+
+.hero-scroll-hint{font-size:34px;line-height:.8;color:#f6eadb;text-decoration:none;font-family:Georgia,serif}
+.hero-scroll-hint:hover{transform:translateY(4px)}
+.hero-corner-note{
+  position:absolute;bottom:28px;left:clamp(20px,4.5vw,78px);z-index:3;
+  margin:0;color:rgba(243,233,220,.68);font-size:9px;letter-spacing:.29em;text-align:left
+}
+.hero-corner-note span{padding-inline:7px}
+.archive-overview{padding-top:47px}
+body[data-page="home"] main{min-height:0}
+@media(max-width:1000px){
+  .film-header-rule{display:none}
+  body[data-page="home"] .film-nav{margin-left:auto}
+  .hero-corner-note{display:none}
+}
+@media(max-width:760px){
+  body[data-page="home"] .film-header{min-height:74px;padding:15px 18px;gap:12px}
+  .film-wordmark{font-size:26px}
+  body[data-page="home"] .film-nav{gap:clamp(11px,3vw,21px)}
+  body[data-page="home"] .film-nav a{font-size:10px;letter-spacing:.08em}
+  body[data-page="home"] .film-nav .nav-discover{display:none}
+  body[data-page="home"] .film-theme-toggle{width:34px;height:34px;font-size:15px}
+  .home-hero{min-height:620px;max-height:950px}
+  .home-hero .hero-image{width:auto;min-width:0;height:85%;left:50%;top:auto;bottom:0;max-width:none;transform:translateX(-50%)}
+  .cinema-intro{margin-top:clamp(136px,17vh,180px);width:calc(100% - 24px)}
+  .cinema-kicker{font-size:9px;letter-spacing:.44em;padding-left:.44em}
+  .cinema-rule{margin:7px auto 14px}
+  .cinema-intro h1{font-size:clamp(2rem,8.3vw,3.8rem);letter-spacing:-.055em}
+  .cinema-tagline{font-size:8px;letter-spacing:.18em;padding-left:.18em;margin-top:15px}
+  
+  
+}
+@media(max-width:380px){
+  body[data-page="home"] .film-nav{gap:9px}
+  body[data-page="home"] .film-nav a{font-size:9px}
+  .film-wordmark{font-size:23px}
+  .cinema-intro h1{font-size:7.9vw}
+}
+
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);padding-block:25px;border-block:1px solid var(--line)}
 .stat-grid>div{padding-inline:26px;border-right:1px solid var(--line);display:flex;align-items:baseline;gap:15px}
 .stat-grid>div:first-child{padding-left:0}.stat-grid>div:last-child{border:0}
@@ -31,5 +118,213 @@
 .scrapbook-photo span{font-size:12px;color:var(--muted);padding:12px 3px}
 .latest-event{display:flex;align-items:center;gap:30px;padding:26px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
 .latest-date{font-size:12px;color:var(--gold);flex:none}.latest-event h3{margin-bottom:9px}.latest-event p{color:var(--muted);font-size:14px}.latest-event .button{flex:none}
-@media(max-width:1000px){.home-hero{gap:35px}.hero-photo img{height:310px}.stat-grid>div{display:block;padding-inline:20px}.stat-grid span{display:block;margin-top:6px}.home-photographs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:760px){.home-hero{grid-template-columns:1fr;padding-top:30px;gap:39px}.hero-copy h1{max-width:15ch;font-size:clamp(2.5rem,9vw,3.6rem)}.hero-photo img{height:auto;aspect-ratio:4/3}.stat-grid{grid-template-columns:repeat(2,1fr);gap:20px 0}.stat-grid>div{padding:0 15px}.stat-grid>div:nth-child(2){border:0}.stat-grid>div:nth-child(3){padding-left:0}.home-section{padding-block:42px}.section-heading{align-items:start;flex-direction:column;gap:12px}.featured-grid{grid-template-columns:1fr;gap:35px}.latest-event{flex-direction:column;align-items:start}.hero-actions .button{font-size:12px;padding-inline:13px}}
+@media(max-width:1000px){.stat-grid>div{display:block;padding-inline:20px}.stat-grid span{display:block;margin-top:6px}.home-photographs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.stat-grid{grid-template-columns:repeat(2,1fr);gap:20px 0}.stat-grid>div{padding:0 15px}.stat-grid>div:nth-child(2){border:0}.stat-grid>div:nth-child(3){padding-left:0}.home-section{padding-block:42px}.section-heading{align-items:start;flex-direction:column;gap:12px}.featured-grid{grid-template-columns:1fr;gap:35px}.latest-event{flex-direction:column;align-items:start}.hero-actions .button{font-size:12px;padding-inline:13px}}
+
+@media(prefers-reduced-motion:reduce){.home-hero *,.home-hero *::before,.home-hero *::after{animation:none!important;transition:none!important}}
+
+/* Cinematic cut 3.1.1 — image framing, seamless theme fade, oval glass entry. */
+.home-hero .hero-image{top:clamp(-230px,-11vw,-68px)}
+.home-hero .hero-vignette{
+  background:
+    linear-gradient(180deg,
+      rgba(5,5,6,.68) 0%,
+      rgba(8,7,7,.49) 19%,
+      rgba(9,7,6,.06) 46%,
+      rgba(9,7,6,.20) 62%,
+      rgba(9,7,6,.73) 79%,
+      color-mix(in srgb,var(--bg) 78%,rgba(9,7,6,.9)) 91%,
+      var(--bg) 100%),
+    linear-gradient(90deg,rgba(4,4,4,.33),transparent 14%,transparent 86%,rgba(4,4,4,.33));
+}
+
+html[data-theme="light"] .home-hero .hero-entry .hero-scroll-hint{
+  color:var(--text);text-shadow:0 1px 2px #fff8
+}
+@media(max-width:760px){
+  .home-hero .hero-image{top:auto;bottom:2.5%}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-hero .hero-scroll-hint{transition:none!important}
+}
+
+/* Revision 3.1.2: let the hero fade into the actual page color without a grain seam.
+   Keep the translucent overlay below the CTA/title, and fade grain away before the boundary. */
+.home-hero::before{
+  content:"";position:absolute;inset:auto 0 0;height:34%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 0%,
+    color-mix(in srgb,var(--bg) 22%,transparent) 30%,
+    color-mix(in srgb,var(--bg) 74%,transparent) 72%,
+    var(--bg) 98%);
+}
+.home-hero::after{
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 54%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 54%,transparent 100%);
+}
+html[data-theme="light"] .home-hero .hero-corner-note{color:var(--text)}
+
+/* Revision 3.1.3 — quieter film typography, higher group framing, one grammatical "THE". */
+.cinema-intro{
+  margin-top:clamp(86px,9.4vh,118px);
+}
+.cinema-kicker{
+  font-size:clamp(9px,.78vw,11px);
+  letter-spacing:.51em;padding-left:.51em
+}
+.cinema-rule{
+  font-size:11px;letter-spacing:.46em;padding-left:.46em;
+  margin:6px auto 8px
+}
+.cinema-intro h1{
+  font-size:clamp(2.8rem,5.85vw,7.1rem);
+}
+.cinema-tagline{
+  margin-top:13px;font-size:clamp(9px,.73vw,11px);
+  letter-spacing:.45em;padding-left:.45em
+}
+/* Raise the authentic photograph; keep the title sufficiently above every face. */
+.home-hero .hero-image{top:clamp(-270px,-12.8vw,-78px)}
+@media(max-width:760px){
+  .cinema-intro{margin-top:clamp(114px,15vh,155px)}
+  .cinema-kicker{font-size:9px;letter-spacing:.38em;padding-left:.38em}
+  .cinema-rule{margin:5px auto 10px}
+  .cinema-intro h1{font-size:clamp(1.9rem,7.7vw,3.25rem)}
+  .cinema-tagline{font-size:8px;letter-spacing:.16em;padding-left:.16em;margin-top:12px}
+  .home-hero .hero-image{top:auto;bottom:5%}
+}
+@media(max-width:380px){
+  .cinema-intro h1{font-size:7.5vw}
+}
+/* Intermediate widths otherwise bring the first row of faces too close to the subtitle. */
+@media(min-width:761px) and (max-width:1200px){
+  .home-hero .hero-image{top:calc(290px - 34vw)}
+}
+/* No date-range micro-section beneath the counter grid. */
+.archive-overview{padding-bottom:23px}
+
+/* Revision 3.1.4 — stripped film opening, below-the-fold entry and atmospheric archive. */
+.cinema-intro{margin-top:clamp(106px,11vh,144px)}
+.cinema-rule{margin:0 auto 10px}
+.cinema-intro h1{font-size:clamp(2.75rem,5.85vw,7.1rem)}
+/* The arrow stays in-frame; the full Explore CTA belongs to the next scroll beat. */
+.home-hero>.hero-scroll-hint{
+  position:absolute;z-index:4;left:50%;bottom:clamp(22px,4.5vh,49px);
+  transform:translateX(-50%);display:grid;place-items:center;
+  min-width:44px;min-height:44px
+}
+.home-hero>.hero-scroll-hint:hover{transform:translate(-50%,4px)}
+/* Later fade; the whole gradient remains clipped to the photograph's hero viewport. */
+.home-hero .hero-vignette{
+  background:
+    linear-gradient(180deg,
+      rgba(5,5,6,.67) 0%,
+      rgba(8,7,7,.42) 18%,
+      rgba(8,7,7,.04) 52%,
+      rgba(8,7,7,.025) 72%,
+      color-mix(in srgb,var(--bg) 25%,rgba(8,7,7,.2)) 90%,
+      var(--bg) 100%),
+    linear-gradient(90deg,rgba(4,4,4,.31),transparent 14%,transparent 86%,rgba(4,4,4,.32))
+}
+.home-hero::before{
+  height:min(25svh,27%);
+  background:linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb,var(--bg) 15%,transparent) 30%,
+    color-mix(in srgb,var(--bg) 57%,transparent) 72%,
+    var(--bg) 100%);
+}
+.home-hero::after{
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 83%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 83%);
+}
+.archive-depth{
+  position:relative;isolation:isolate;overflow:hidden;
+  background:
+    radial-gradient(ellipse 46% 22% at 83% 20%,color-mix(in srgb,var(--gold) 6%,transparent),transparent 76%),
+    radial-gradient(ellipse 43% 21% at 8% 60%,color-mix(in srgb,var(--gold) 4%,transparent),transparent 78%);
+}
+.archive-depth>section{position:relative;z-index:1}
+
+
+
+.archive-orbits{
+  position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  color:var(--gold)
+}
+.archive-arc{
+  display:block;position:absolute;aspect-ratio:1;border-radius:50%;
+  border:1px solid color-mix(in srgb,currentColor 28%,transparent);
+  box-shadow:0 0 0 55px color-mix(in srgb,currentColor 2.7%,transparent),
+    0 0 0 152px color-mix(in srgb,currentColor 1.3%,transparent);
+  animation:aoms-orbit-breathe 12s ease-in-out infinite alternate;
+}
+/* A moving highlight makes the travel legible without flashing or covering media. */
+.archive-arc::after{
+  content:"";position:absolute;inset:-2px;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,
+    transparent 0deg 53deg,
+    color-mix(in srgb,currentColor 12%,transparent) 66deg,
+    color-mix(in srgb,currentColor 67%,transparent) 92deg,
+    color-mix(in srgb,currentColor 27%,transparent) 112deg,
+    transparent 135deg 360deg);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 2px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 2px));
+  animation:aoms-arc-trace 11s linear infinite;
+}
+.archive-arc-one{width:clamp(650px,91vw,1450px);top:-180px;right:-32%}
+.archive-arc-two{width:clamp(520px,83vw,1130px);top:44%;left:-38%;animation-duration:15s;animation-direction:alternate-reverse}
+.archive-arc-two::after{animation-duration:14s;animation-direction:reverse;animation-delay:-5s}
+.archive-arc-three{width:clamp(420px,55vw,850px);bottom:-360px;right:-18%;animation-duration:18s}
+.archive-arc-three::after{animation-duration:17s;animation-delay:-9s}
+@keyframes aoms-orbit-breathe{
+  from{transform:translate3d(-28px,17px,0) scale(.975)}
+  to{transform:translate3d(33px,-23px,0) scale(1.025)}
+}
+@keyframes aoms-arc-trace{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+  .cinema-intro{margin-top:clamp(115px,15vh,151px)}
+  /* Mobile photo reaches the bottom edge, so the lowered fade never outlasts the image. */
+  .home-hero .hero-image{top:auto;bottom:0;height:91%}
+  
+  .archive-arc-one{right:-115%;top:-110px}
+  .archive-arc-two{left:-145%}
+  .archive-arc-three{right:-100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .archive-arc,.archive-arc::after{animation:none!important}
+}
+
+/* Tall tablets and intermediate widths: let the real photo cover the hero
+   instead of ending above the fade. The crop preserves the image's proportions. */
+@media(min-width:761px) and (max-width:1200px){
+  .home-hero .hero-image{
+    top:0;left:0;width:100%;height:100%;min-width:0;
+    transform:none;object-fit:cover;object-position:center top
+  }
+}
+
+/* Revision 3.1.5 — remove the redundant CTA: statistics start directly after the hero. */
+#inside-archive{scroll-margin-top:20px}
+
+/* Match the shared accessibility-sized mobile navigation on the opening screen. */
+@media(max-width:760px){
+ body[data-page="home"] .film-nav a{font-size:11px;letter-spacing:.055em}
+}
+@media(max-width:380px){
+ body[data-page="home"] .film-nav a{font-size:10px;letter-spacing:.025em}
+}
+
+/* Revision 3.1.7 — framing of the owner-approved 3:2 landscape photograph.
+   Its subjects sit higher in the source than in the old square image.
+   Offset the image down so the opening title stays in clear night sky. */
+@media(min-width:1201px){
+  .home-hero .hero-image{top:clamp(95px,8vw,155px)}
+}
+@media(min-width:761px) and (max-width:1200px){
+  .home-hero .hero-image{top:clamp(92px,10vw,130px)}
+}
+@media(max-width:760px){
+  /* Show a wider slice of the group than the former square-image crop. */
+  .home-hero .hero-image{top:auto;bottom:0;height:78%}
+}
