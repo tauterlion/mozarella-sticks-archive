@@ -20,6 +20,14 @@ Owner-requested refinements:
 - Restrict inertial scrolling to the hero headline alone. All other headlines, thumbnails and event text retain only entrance fades.
 - Remove the redundant archive-range micro-section immediately after the statistics while preserving the counters.
 
+## Final atmospheric pass — 3.1.4
+
+- Remove the upper “THE ARCHIVE OF” eyebrow and reposition “THE / MOZARELLA STICKS / EST. 2024” to occupy the space with generous breathing room.
+- Place the pill-shaped Explore CTA **after** the full-screen hero, never outside a clipped container. Keep only a small in-frame scroll arrow for discoverability.
+- Lower the photo fade into the last quarter of the hero, clipping it to the photo/hero boundary so it does not create a seam or overshoot.
+- Add three ambient animated arcs and faint radial highlights behind the statistics, selected memories, photos, and latest entry. They use the archive theme's gold token and have reduced-motion fallbacks.
+- Keep all original archive data and community-submissions work untouched.
+
 ## Scope
 
 Revise **only the homepage** to open like a film title sequence. The desktop first view uses a full-viewport photograph, prominent *MOZARELLA STICKS* title, film-style navigation, a tagline, and an **Explore the Archive** scroll entry. Continue the existing archive home sections unchanged below the fold.
