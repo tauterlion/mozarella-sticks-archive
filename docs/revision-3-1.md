@@ -37,7 +37,7 @@ Owner-requested refinements:
 
 ## Scope
 
-Revise **only the homepage** to open like a film title sequence. The desktop first view uses a full-viewport photograph, prominent *MOZARELLA STICKS* title, film-style navigation, a tagline, and an **Explore the Archive** scroll entry. Continue the existing archive home sections unchanged below the fold.
+Give the homepage a film-title opening. The first view uses a full-viewport authentic group photograph, prominent *MOZARELLA STICKS* title, consistent cinematic navigation, a tagline, and a small scroll arrow. The full CTA button has been removed. Existing archive content continues directly below the fold.
 
 ## Source photo
 
@@ -46,7 +46,7 @@ Use the existing authentic `assets/media/beach-party-everyone.jpg` asset. Avoid 
 ## Safe file boundaries
 
 - `index.html`: home-only markup, header treatment and persistent section anchors.
-- `styles/home.css`: cinematic hero, bottom fade, oval glass CTA and responsive presentation, retaining existing feature/gallery/section styles.
+- `styles/home.css`: cinematic hero, bottom fade, responsive presentation, and motion-visible background arcs behind archive sections; no Explore button.
 - `styles/shared.css`: shared film navigation and text-motion style.
 - `scripts/interactions.js`: progressive enhancement for accessible entrance reveals and capped scroll drift.
 - `timeline.html`, `gallery.html`, `people.html`, `person.html`, `event.html`: unify top navigation without modifying data or page-specific functional markup.
