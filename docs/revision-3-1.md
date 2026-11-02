@@ -10,7 +10,7 @@ Owner-requested refinements:
 - Rounded, blurred glass Explore button.
 - A unified AoMS film-style header on all six main public pages (index, Timeline, Gallery, People, profile and event).
 - Slow 950–1080ms upward entrance fades for headings, thumbnails and event text, excluding the cinematic background photograph.
-- Small capped scroll-direction lag on titles, stronger when scrolling upward. Disabled by reduced-motion preference.
+- Small capped scroll-direction lag exclusively on the hero headline, stronger when scrolling upward. Other headings retain entrance fades only; reduced-motion preference disables both.
 
 ## Final layout polish — 3.1.3
 
