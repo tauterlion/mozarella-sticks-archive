@@ -34,7 +34,27 @@
     </div>
     <section id="detail" class="tool-card" hidden aria-labelledby="detail-heading"><h2 id="detail-heading" tabindex="-1">Submission details</h2>
       <dl id="metadata"></dl><button id="preview-button" type="button">Load private preview</button><div id="preview"></div>
-      <p>Editing and review decisions are not available yet. Nothing here publishes files to the archive.</p>
+      <p>Approval keeps this file private. Publication is a separate step.</p>
+      <form id="edit-form"><fieldset id="edit-fields" class="review-editor">
+        <legend>Edit submission</legend>
+        <label>Caption<textarea id="edit-caption" maxlength="500" required></textarea></label>
+        <label>Event<select id="edit-event" required></select></label>
+        <div id="proposal-fields" hidden>
+          <label>Proposed event title<input id="edit-title" maxlength="160"></label>
+          <label>Proposed date<input id="edit-date" type="date"></label>
+          <label>Proposal details<textarea id="edit-details" maxlength="2000"></textarea></label>
+        </div>
+        <fieldset><legend>People</legend><label><input id="edit-none" type="checkbox"> No people to tag</label><div id="edit-people" class="review-people"></div></fieldset>
+        <button id="save-metadata" type="submit">Save metadata</button>
+      </fieldset></form>
+      <button id="reload-detail" type="button">Reload saved details</button>
+      <div id="decision-controls">
+        <button id="approve" type="button">Approve for later publication</button>
+        <label>Internal rejection reason (optional)<textarea id="reject-reason" maxlength="2000"></textarea></label>
+        <button id="reject" type="button">Reject submission</button>
+      </div>
+      <p id="edit-status" role="status" aria-live="polite"></p>
+      <h3>Moderator activity</h3><ul id="history"></ul>
     </section>
   </section>
 </main>

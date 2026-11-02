@@ -1,12 +1,12 @@
 # Milestone 3: moderator authentication and private review
 
-## Implemented scope (2026-11-01)
+## Implemented scope (2026-11-02)
 
-Branch-only first slice: `tools/submission-review.html`, a disabled public configuration, a dedicated `community-review` Edge Function, and additive migration `20261101215947_moderator_read_access.sql`. Installed in the isolated Docker stack for live authentication tests; not deployed to production. Real local Auth/MFA testing now passes. Real Storage preview integration remains to be verified with the moderation workflow.
+Local implementation: `tools/submission-review.html`, a disabled public configuration, a dedicated `community-review` Edge Function, read-access migration `20261101215947_moderator_read_access.sql`, and controls migration `20261102111947_moderator_controls.sql`. Installed in the isolated Docker stack for live authentication tests; not deployed to production. Real local Auth/MFA testing now passes. Real Storage preview integration remains to be verified with the moderation workflow.
 
 The page supports email/password login, TOTP authenticator enrollment/verification, sign-out, newest-first status queues with 25-item pages and pending counts, plain-text metadata, and on-demand one-minute private previews. No signup UI. Sessions and private data stay in memory. Refreshing the page requires sign-in again. No contributor data is embedded in static HTML.
 
-**Read-only:** editing, approve/reject, audit attribution for edits, idempotent mutations/conflict handling, and removal are not implemented yet. Approval will only change review state; GitHub publication is Milestone 4. Existing archive pages and intake are unaffected.
+**Local controls implemented:** edit pending captions, event/proposal metadata and canonical people tags; approve pending items; reject pending or approved items. Every write verifies MFA/session/allowlist, checks the expected record version, and records an immutable moderator action. Approval only changes review state; GitHub publication and removal are separate later work. Existing archive pages and intake are unaffected.
 
 ## Authorization boundaries
 
@@ -20,7 +20,7 @@ Exact-origin CORS is additional protection, not authentication. Moderator access
 
 ## Alejandro account setup (owner action; do not send credentials)
 
-The owner chose email/password plus an authenticator app. Disposable local Auth tests passed; personal local enrollment is awaiting the owner’s exact UUID confirmation. The Supabase dashboard account is separate.
+The owner chose email/password plus an authenticator app. Disposable local Auth tests passed; personal local enrollment and authenticator setup are complete, confirmed by the owner reaching the private queue. The Supabase dashboard account is separate.
 
 1. First test with a disposable user in local Studio, not production. The new local migration/function and a local-only enabled moderation config must be installed before that test; keep committed config disabled. Use the same separate local project and origin as the intake tests.
 2. Before production enrollment, disable new-user signup and anonymous sign-ins in the AoMS project's Auth settings. Confirm email/password and TOTP support. Set recovery/redirect URLs deliberately; a password recovery UI and tested recovery procedure are still launch gates.
@@ -69,3 +69,19 @@ Remove-Item Env:AOMS_LOCAL_AUTH_TEST
 It uses the existing browser runtime variables, local `work/aoms-local/status.json`, and the explicitly named Docker database. It refuses nonlocal API configuration or an occupied moderator allowlist. It never replaces an existing moderator. Local-only signed expiry fixtures use the development signing key in memory; these are test fixtures, not an authentication bypass in the application.
 
 22 isolated DB checks, 24 gateway tests and Deno checks also passed. `supabase db advisors --local --type security --level warn` reported no issues. Account creation in local Studio and explicit owner confirmation of its UUID are the next enrollment gate. Production enrollment/deployment and recovery procedures remain outstanding; no account is auto-enrolled by email.
+
+## Phase 2 controls and Phase 3 verification — November 2
+
+Owner enrollment completed privately; no password, QR secret or TOTP code was requested. The controls migration is installed **only locally**. It creates one deny-all RLS action table, a service-only SECURITY INVOKER write RPC, and replaces the existing read RPC to add history/rejection notes. It does not delete data, change Storage policies or enable intake. Pre/post installation checks confirmed original submission rows, objects and moderator enrollment unchanged.
+
+`submission_moderation_actions` is both the immutable moderator audit and retry ledger. Each action records actor UUID, request UUID, submission, validated request, result/version and timestamp. Backend access is SELECT/INSERT only; no browser grants/policies. The existing generic audit trigger continues to record row changes. The action ledger supplies explicit actor attribution for metadata edits without changing the generic trigger or rewriting older audit records.
+
+Writes lock the target row and compare its version. A stale write returns HTTP 409 and preserves the browser draft. The same request UUID and payload returns the original result without applying twice; reusing an ID for different input is rejected. Edits are limited to pending items. Approving a proposal requires mapping it to a canonical event first; no timeline event is created here. Approvals cannot set publication mappings. Rejected/approved/published metadata cannot be edited through this interface. Rejecting does not immediately delete objects or release reservations; retention cleanup is separate.
+
+The UI provides unsaved-change warnings, save-before-decision guards, explicit approve/reject confirmations, optional internal rejection reasons, and the latest 100 moderator actions. It uses the full 112-event/37-person selectors and renders captions/reasons as plain text. Retrying a failed save reuses its operation ID. The garbled queue separator was corrected only in interface code; historical/submitted captions were not rewritten.
+
+Tests completed: 46 isolated moderation database checks, 39 gateway security tests, 27 mocked browser checks covering edit/retry/conflict/approve/reject/history plus mobile/light/dark layouts. A real local PostgreSQL transaction exercised edit, retry, stale conflict, approve, reject and actor audit, then ended with ROLLBACK; its temporary fixture and sequence changes were rolled back. Local security advisors reported no WARN/ERROR findings. Existing 45 foundation checks, 25 intake DB checks, 37 upload security tests, 23 submission browser checks, 15 Python tests, archive validator and nine production closed-intake checks passed.
+
+A separate retained local fixture, captioned **AoMS disposable moderation test - do not publish**, contains a synthetic gold PNG. It is operator-created for the owner's signed-in end-to-end preview/edit/approve/reject check, not a CAPTCHA acceptance test. Existing submissions were not repurposed. The operator fixture uses private Storage and the same binary checks/finalization states. At this checkpoint the owner-browser check is pending; do not claim live HTTP write/preview completion from mocked tests or direct SQL tests alone.
+
+Remaining before production: owner-browser end-to-end confirmation; controlled hosted migration/deployment and production account enrollment; password recovery verification; remaining intake abuse/interruption/quota/cleanup gates; publication/normalization and verified removals. No public Gallery publication route exists. Reopening a rejected item is not included in this slice.

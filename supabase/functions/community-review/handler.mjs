@@ -1,7 +1,8 @@
+import { validMutation } from './validation.mjs';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const statuses = ['pending', 'approved', 'rejected', 'published', 'removed'];
 
-export function createReviewHandler({ origin, authenticate, read, sign }) {
+export function createReviewHandler({ origin, authenticate, read, write, sign }) {
   return async request => {
     const headers = { 'Cache-Control': 'no-store', 'Content-Type': 'application/json', 'Vary': 'Origin' };
     const reply = (body, status = 200) => new Response(JSON.stringify(body), { status, headers });
@@ -27,7 +28,7 @@ export function createReviewHandler({ origin, authenticate, read, sign }) {
           const { value, done } = await reader.read();
           if (done) break;
           bytes += value.byteLength;
-          if (bytes > 2048) { await reader.cancel(); return reply({ error: 'invalid_request' }, 400); }
+          if (bytes > 16384) { await reader.cancel(); return reply({ error: 'invalid_request' }, 400); }
           chunks.push(value);
         }
       } finally { reader.releaseLock(); }
@@ -36,13 +37,15 @@ export function createReviewHandler({ origin, authenticate, read, sign }) {
       catch { return reply({ error: 'invalid_request' }, 400); }
       if (!body || Array.isArray(body) || typeof body !== 'object') return reply({ error: 'invalid_request' }, 400);
       const { action } = body;
-      const allowed = { session: ['action'], list: ['action','status','page'], detail: ['action','id'], preview: ['action','id'] };
+      const allowed = { session: ['action'], list: ['action','status','page'], detail: ['action','id'], preview: ['action','id'], history: ['action','id'], approve: ['action','id','version','requestId'], reject: ['action','id','version','requestId','reason'], edit: ['action','id','version','requestId','caption','eventId','people','noPeople','proposedTitle','proposedDate','proposedDetails'] };
       if (!Object.hasOwn(allowed, action) || Object.keys(body).some(k => !allowed[action].includes(k))) return reply({ error: 'invalid_request' }, 400);
       if (action === 'list' && (!statuses.includes(body.status) || !Number.isInteger(body.page) || body.page < 0 || body.page > 10000)) return reply({ error: 'invalid_request' }, 400);
-      if (['detail','preview'].includes(action) && (typeof body.id !== 'string' || !UUID.test(body.id))) return reply({ error: 'invalid_request' }, 400);
+      if (['detail','preview','history'].includes(action) && (typeof body.id !== 'string' || !UUID.test(body.id))) return reply({ error: 'invalid_request' }, 400);
+      const mutation = ['edit','approve','reject'].includes(action);
+      if (mutation && !validMutation(body)) return reply({ error: 'invalid_request' }, 400);
       const { action: unused, ...payload } = body;
-      const result = await read(identity, action, payload);
-      if (result.error) return reply({ error: result.error }, result.error === 'forbidden' ? 403 : result.error === 'not_found' ? 404 : 400);
+      const result = await (mutation ? write : read)(identity, action, payload);
+      if (result.error) return reply({ error: result.error }, result.error === 'forbidden' ? 403 : result.error === 'not_found' ? 404 : ['conflict','request_reused','invalid_state','unavailable'].includes(result.error) ? 409 : 400);
       if (action === 'preview') return reply({ url: await sign(result.path), expiresIn: 60 });
       return reply(result);
     } catch { return reply({ error: 'review_unavailable' }, 503); }

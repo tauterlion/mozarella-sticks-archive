@@ -27,6 +27,14 @@ Deno.serve(createReviewHandler({
     if (!response.ok) throw new Error('database_unavailable');
     return response.json();
   },
+  async write(identity: { userId: string; sessionId: string }, action: string, payload: object) {
+    const response = await fetch(`${url}/rest/v1/rpc/submission_review_write`, {
+      method: 'POST', headers, body: JSON.stringify({ actor: identity.userId, session: identity.sessionId, action, payload }),
+      signal: AbortSignal.timeout(10000)
+    });
+    if (!response.ok) throw new Error('database_unavailable');
+    return response.json();
+  },
   async sign(path: string) {
     const response = await fetch(`${url}/storage/v1/object/sign/aoms-submissions/${path.split('/').map(encodeURIComponent).join('/')}`, {
       method: 'POST', headers, body: JSON.stringify({ expiresIn: 60 }), signal: AbortSignal.timeout(10000)

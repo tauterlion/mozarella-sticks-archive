@@ -110,3 +110,9 @@ verify_jwt = false
 Edit the existing sections, do not duplicate them or replace the rest of the config. The email section keeps the provider available; global signup remains disabled. Restart the stack with the data-preserving stop/start commands after Auth configuration changes, then reapply local Functions CORS and restart the function/form servers. Run those servers in separate terminals so stopping one does not stop both. Never print `status.json`, `edge.env` or generated `kong.yml`.
 
 Live Auth tests use disposable accounts and leave existing submissions intact. See moderation.md for results and personal local enrollment steps. The new local read functions were installed directly for iteration; they are not in hosted migration history. Do not reset the stack to reconcile local history.
+
+## November 2 recovery and controls
+
+Docker Desktop and the host form server were stopped after the prior session. Starting Docker restored the original database/Storage volumes. The same moderator account and allowlist row were preserved; the owner subsequently completed MFA. The Windows-hosted dashboard was verified in Chrome (HTTP 200, visible login, no script errors); both Edge Functions responded correctly. The original private object was downloaded with backend credentials in memory and its SHA-256 matched; public reading was denied.
+
+Controls migration `20261102111947_moderator_controls.sql` is now installed locally without resetting the database. A separate gold-image disposable submission was added for live moderator testing. The original three submissions and original private object remain intact. The logging/vector sidecar still restarts; core Auth, DB, Storage, gateway and dashboard services are working. Production remains unchanged and disabled.

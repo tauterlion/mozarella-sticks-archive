@@ -2,11 +2,12 @@
 (async () => {
   const $ = id => document.getElementById(id);
   let client, config, factorId, page = 0, selected, epoch = 0, previewTimer, sessionTimer, qrURL;
+  let dirty = false, mutating = false, retryOperation = null, catalog;
   const say = text => { $('review-message').textContent = text; };
   const clearPreview = () => { clearTimeout(previewTimer); $('preview').replaceChildren(); };
   const clearQR = () => { if (qrURL) URL.revokeObjectURL(qrURL); qrURL = null; $('qr').removeAttribute('src'); $('qr-panel').hidden = true; };
   function clearPrivate() {
-    epoch++; selected = null; clearPreview(); clearQR(); clearInterval(sessionTimer);
+    epoch++; selected = null; dirty = false; retryOperation = null; $('history').replaceChildren(); $('edit-form').reset(); $('reject-reason').value = '';  clearPreview(); clearQR(); clearInterval(sessionTimer);
     $('queue').replaceChildren(); $('metadata').replaceChildren(); $('pending-count').textContent = '';
     $('review-panel').hidden = $('detail').hidden = $('mfa-panel').hidden = true;
     $('password').value = $('code').value = '';
@@ -26,7 +27,11 @@
       clearPrivate(); await client.auth.signOut({ scope: 'local' }).catch(() => {});
       $('login-panel').hidden = false; $('sign-out').hidden = true;
       say('Access ended or is not authorized. Sign in with the enrolled moderator account.');
-    } else say('Unable to complete that request. Please try again.');
+    } else {
+      const messages = { conflict: 'This submission changed in another tab. Your edits remain here; reload saved details before trying again.', request_reused: 'This retry no longer matches the original action. Reload saved details.', invalid_state: 'This submission is no longer editable in its current state.', unavailable: 'This file is being removed or is unavailable.', event_required: 'Map the proposal to an existing archive event before approval.', invalid_metadata: 'Check the caption, event and people tags. The server did not save these changes.', invalid_request: 'Check all required fields and your people selection.' };
+      const message = messages[error.message] || 'Unable to complete that request. Please try again.';
+      say(message); $('edit-status').textContent = message;
+    }
   }
   async function run(button, task) {
     button.disabled = true;
@@ -40,8 +45,8 @@
     $('queue').replaceChildren(); $('pending-count').textContent = `${data.pendingCount} pending`;
     for (const item of data.items) {
       const li = document.createElement('li'), button = document.createElement('button');
-      button.type = 'button'; button.textContent = `${item.caption} â€” ${item.original_filename}`;
-      button.addEventListener('click', () => run(button, () => detail(item.id)));
+      button.type = 'button'; button.textContent = `${item.caption} — ${item.original_filename}`;
+      button.addEventListener('click', () => { if (canLeave()) run(button, () => detail(item.id)); });
       li.append(button); $('queue').append(li);
     }
     if (!data.items.length) { const li = document.createElement('li'); li.textContent = 'No submissions in this queue.'; $('queue').append(li); }
@@ -52,7 +57,7 @@
   async function detail(id) {
     const generation = ++epoch; clearPreview(); $('detail').hidden = true;
     const { item } = await api('detail', { id }); if (generation !== epoch) return;
-    selected = item; $('metadata').replaceChildren();
+    selected = item; dirty = false; retryOperation = null; $('edit-status').textContent = ''; $('metadata').replaceChildren();
     for (const [label, value] of Object.entries({ Caption: item.caption, Status: item.status, File: item.original_filename,
       Type: item.mime_type, Bytes: item.file_size, Event: item.event_id || item.proposed_event_title,
       'Proposed date': item.proposed_event_date, 'Proposal details': item.proposed_event_details,
@@ -60,7 +65,71 @@
       if (value == null) continue;
       const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = label; dd.textContent = String(value); $('metadata').append(dt, dd);
     }
+    await fillEditor(item, generation); if (generation !== epoch) return;
     $('detail').hidden = false; $('preview-button').hidden = item.status === 'removed'; $('detail-heading').focus();
+  }
+  function canLeave() {
+    if (mutating) return false;
+    if (dirty && !window.confirm('Discard your unsaved changes?')) return false;
+    dirty = false; retryOperation = null; return true;
+  }
+  async function fillEditor(item, generation) {
+    if (!catalog) {
+      const [timeline, people] = await Promise.all(['timeline','people'].map(async name => {
+        const response = await fetch(`../data/${name}.json`); if (!response.ok) throw new Error('catalog_unavailable'); return response.json();
+      }));
+      if (generation !== epoch) return;
+      catalog = { events: timeline.events, people: people.people };
+      const proposal = new Option('Propose an event', '__proposal'); $('edit-event').append(proposal);
+      for (const event of catalog.events) $('edit-event').append(new Option(event.title, event.id));
+      for (const person of catalog.people) {
+        const label = document.createElement('label'), input = document.createElement('input');
+        input.type = 'checkbox'; input.value = person.id; label.append(input, document.createTextNode(' ' + person.displayName)); $('edit-people').append(label);
+      }
+    }
+    $('edit-caption').value = item.caption; $('edit-event').value = item.event_id || '__proposal';
+    $('edit-title').value = item.proposed_event_title || ''; $('edit-date').value = item.proposed_event_date || ''; $('edit-details').value = item.proposed_event_details || '';
+    $('edit-none').checked = item.no_people_to_tag;
+    for (const input of $('edit-people').querySelectorAll('input')) input.checked = item.people_ids.includes(input.value);
+    $('reject-reason').value = item.review_notes || '';
+    toggleProposal(); $('edit-fields').disabled = item.status !== 'pending';
+    $('approve').disabled = item.status !== 'pending'; $('reject').disabled = !['pending','approved'].includes(item.status);
+    $('reject-reason').disabled = $('reject').disabled;
+    const { actions } = await api('history', { id: item.id });
+    if (generation !== epoch) return;
+    $('history').replaceChildren();
+    for (const action of actions) {
+      const li = document.createElement('li'); li.textContent = `${action.action} · ${new Date(action.created_at).toLocaleString()} · version ${action.version} · moderator ${action.actor_id}`; $('history').append(li);
+    }
+    if (!actions.length) { const li = document.createElement('li'); li.textContent = 'No moderator actions yet.'; $('history').append(li); }
+  }
+  function toggleProposal() {
+    const proposal = $('edit-event').value === '__proposal'; $('proposal-fields').hidden = !proposal;
+    $('edit-title').required = $('edit-details').required = proposal;
+  }
+  function editedMetadata() {
+    const proposal = $('edit-event').value === '__proposal';
+    return { caption: $('edit-caption').value.trim(), eventId: proposal ? null : $('edit-event').value,
+      people: [...$('edit-people').querySelectorAll('input:checked')].map(input => input.value), noPeople: $('edit-none').checked,
+      proposedTitle: proposal ? $('edit-title').value.trim() : null, proposedDate: proposal ? $('edit-date').value || null : null,
+      proposedDetails: proposal ? $('edit-details').value.trim() : null };
+  }
+  async function mutate(action, extra = {}) {
+    if (!selected || mutating) return;
+    const generation = epoch, id = selected.id, payload = { id, version: selected.version, ...extra };
+    const fingerprint = JSON.stringify({ action, ...payload });
+    if (!retryOperation || retryOperation.fingerprint !== fingerprint) retryOperation = { fingerprint, requestId: crypto.randomUUID() };
+    payload.requestId = retryOperation.requestId; mutating = true;
+    $('edit-fields').disabled = true; $('approve').disabled = $('reject').disabled = true;
+    try {
+      await api(action, payload); if (generation !== epoch) return;
+      dirty = false; retryOperation = null; await queue(); await detail(id);
+      const message = action === 'edit' ? 'Metadata saved.' : action === 'approve' ? 'Approved. The file remains private and is not published.' : 'Rejected. The file remains private.';
+      say(message); $('edit-status').textContent = message;
+    } finally {
+      mutating = false;
+      if (selected) { $('edit-fields').disabled = selected.status !== 'pending'; $('approve').disabled = selected.status !== 'pending'; $('reject').disabled = !['pending','approved'].includes(selected.status); }
+    }
   }
   async function enter() {
     await api('session'); clearQR(); $('mfa-panel').hidden = true; $('review-panel').hidden = false;
@@ -107,10 +176,10 @@
       if (error) { say('Private view cleared. Session revocation failed; reconnect and sign out again.'); return; }
       $('login-panel').hidden = false; $('sign-out').hidden = true; say('Signed out.');
     }));
-    $('queue-status').addEventListener('change', () => { page = 0; queue().catch(fail); });
-    $('refresh').addEventListener('click', () => run($('refresh'), queue));
-    $('previous').addEventListener('click', () => { page = Math.max(0, page - 1); queue().catch(fail); });
-    $('next').addEventListener('click', () => { page++; queue().catch(fail); });
+    $('queue-status').addEventListener('change', () => { if (canLeave()) { page = 0; queue().catch(fail); } });
+    $('refresh').addEventListener('click', () => canLeave() && run($('refresh'), queue));
+    $('previous').addEventListener('click', () => { if (canLeave()) { page = Math.max(0, page - 1); queue().catch(fail); } });
+    $('next').addEventListener('click', () => { if (canLeave()) { page++; queue().catch(fail); } });
     $('preview-button').addEventListener('click', () => run($('preview-button'), async () => {
       if (!selected) return; const generation = epoch, item = selected;
       const { url } = await api('preview', { id: item.id }); if (generation !== epoch) return;
@@ -119,6 +188,21 @@
       media.src = url; media.referrerPolicy = 'no-referrer'; $('preview').append(media);
       previewTimer = setTimeout(clearPreview, 60000); say('Private preview available for one minute. Reload it if needed.');
     }));
+    $('edit-form').addEventListener('input', () => { dirty = true; });
+    $('edit-event').addEventListener('change', toggleProposal);
+    $('edit-none').addEventListener('change', () => { if ($('edit-none').checked) for (const input of $('edit-people').querySelectorAll('input')) input.checked = false; });
+    $('edit-people').addEventListener('change', () => { if ($('edit-people').querySelector('input:checked')) $('edit-none').checked = false; });
+    $('edit-form').addEventListener('submit', event => { event.preventDefault(); if (!mutating && $('edit-form').reportValidity()) mutate('edit', editedMetadata()).catch(fail); });
+    $('reload-detail').addEventListener('click', () => { if (selected && canLeave()) detail(selected.id).catch(fail); });
+    $('approve').addEventListener('click', () => {
+      if (dirty) { say('Save your metadata changes before approving.'); return; }
+      if (window.confirm('Approve this submission? It will remain private until a separate publication step.')) mutate('approve').catch(fail);
+    });
+    $('reject').addEventListener('click', () => {
+      if (dirty) { say('Save or discard metadata changes before rejecting.'); return; }
+      if (window.confirm('Reject this submission? It will remain private and follow the rejection retention policy.')) mutate('reject', { reason: $('reject-reason').value.trim() }).catch(fail);
+    });
+    window.addEventListener('beforeunload', event => { if (dirty || mutating) { event.preventDefault(); event.returnValue = ''; } });
     window.addEventListener('pagehide', clearPrivate);
   } catch { say('Moderator review configuration is unavailable.'); }
 })();

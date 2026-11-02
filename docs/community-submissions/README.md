@@ -20,7 +20,7 @@ Original `data/people.json`, `data/timeline.json`, `data/media.json`, assets, ro
 
 ## Moderator work started
 
-See [moderation.md](moderation.md) for the branch-only, read-only moderator slice and owner account setup. The moderator read functions and endpoint are now installed only in the local Docker stack, with real Auth/MFA tests passing. Production moderation configuration remains disabled; production inventory above is unchanged.
+See [moderation.md](moderation.md) for the local moderator interface and controls and owner account setup. The moderator read/write functions and endpoint are installed only in the local Docker stack, with real Auth/MFA tests passing and owner enrollment complete. Edits, approve/reject, audit and conflict protection are locally implemented; see the dated verification section for live-test boundaries. Production moderation configuration remains disabled; production inventory above is unchanged.
 
 ## Implemented
 

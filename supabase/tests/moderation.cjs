@@ -4,6 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const db=new PGlite(); let checks=0;
  const check=(name,actual,expected)=>{assert.deepEqual(actual,expected,name);checks++;console.log('PASS '+name);};
  const actor='11111111-1111-4111-8111-111111111111',session='22222222-2222-4222-8222-222222222222',other='33333333-3333-4333-8333-333333333333';
+ const write=async(action,payload,who=actor,sid=session)=>(await db.query('select public.submission_review_write($1,$2,$3,$4::jsonb) result',[who,sid,action,JSON.stringify(payload)])).rows[0].result;
  const read=async(action='session',payload={},who=actor,sid=session)=>(await db.query('select public.submission_review_read($1,$2,$3,$4::jsonb) result',[who,sid,action,JSON.stringify(payload)])).rows[0].result;
  try {
   await db.exec(fs.readFileSync(path.join(__dirname,'audited-baseline.sql'),'utf8'));
@@ -36,9 +37,39 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   check('detail preserves literal caption',(await read('detail',{id:upload.id})).item.caption,'<script>private</script>');
   check('preview path only returned to trusted gateway',(await read('preview',{id:upload.id})).path,upload.path);
   check('pagination bounded', (await read('list',{status:'pending',page:1})).items.length,0);
+  const {randomUUID}=require('node:crypto');
+  for(const role of ['anon','authenticated']) {
+    await db.exec('reset role; savepoint denied_write; set role '+role);await assert.rejects(write('approve',{}),/permission denied/);await db.exec('rollback to denied_write; set role service_role');checks++;
+  }
+  let version=(await read('detail',{id:upload.id})).item.version;
+  const edit={id:upload.id,version,requestId:randomUUID(),caption:'Reviewed caption',eventId:'closeup-departure',people:['maria'],noPeople:false,proposedTitle:null,proposedDate:null,proposedDetails:null};
+  check('nonmoderator cannot write',(await write('edit',edit,other)).error,'forbidden');
+  check('unknown tags rejected',(await write('edit',{...edit,requestId:randomUUID(),people:['invented']})).error,'invalid_metadata');
+  check('unknown events rejected',(await write('edit',{...edit,requestId:randomUUID(),eventId:'invented'})).error,'invalid_metadata');
+  check('client cannot inject publication fields',(await write('edit',{...edit,status:'published'})).error,'invalid_request');
+  const saved=await write('edit',edit);check('metadata edit succeeds',saved.ok,true);
+  check('lost-response retry idempotent',await write('edit',edit),saved);
+  check('request ID cannot change meaning',(await write('edit',{...edit,caption:'different'})).error,'request_reused');
+  check('stale tab cannot overwrite',(await write('edit',{...edit,requestId:randomUUID(),caption:'stale'})).error,'conflict');
+  check('metadata persisted',(await read('detail',{id:upload.id})).item.people_ids,['maria']);
+  check('one immutable action for retried save',Number((await db.query('select count(*) n from public.submission_moderation_actions')).rows[0].n),1);
+  check('audit attributes editor',(await read('history',{id:upload.id})).actions[0].actor_id,actor);
+  const proposal={...edit,version:saved.version,requestId:randomUUID(),eventId:null,proposedTitle:'Unpublished proposal',proposedDate:'2026-11-02',proposedDetails:'Requires a canonical event'};
+  const proposed=await write('edit',proposal);check('proposal metadata editable',proposed.ok,true);
+  check('proposal cannot be approved',(await write('approve',{id:upload.id,version:proposed.version,requestId:randomUUID()})).error,'event_required');
+  const mapped=await write('edit',{...edit,version:proposed.version,requestId:randomUUID()});
+  const approval={id:upload.id,version:mapped.version,requestId:randomUUID()};const approved=await write('approve',approval);
+  check('approval only reaches approved',approved.status,'approved');check('approval retry idempotent',await write('approve',approval),approved);
+  check('approved metadata locked',(await write('edit',{...edit,version:approved.version,requestId:randomUUID()})).error,'invalid_state');
+  check('no publication mapping created',(await db.query('select published_at,github_commit_sha,public_media_id from public.media_submissions where id=$1',[upload.id])).rows[0],{published_at:null,github_commit_sha:null,public_media_id:null});
+  const rejection={id:upload.id,version:approved.version,requestId:randomUUID(),reason:'Disposable test only'};
+  const rejected=await write('reject',rejection);check('approved submission can be rejected',rejected.status,'rejected');check('reject retry idempotent',await write('reject',rejection),rejected);
+  check('reason private and preserved',(await read('detail',{id:upload.id})).item.review_notes,'Disposable test only');
+  await db.exec('savepoint immutable_audit');await assert.rejects(db.exec('delete from public.submission_moderation_actions'),/permission denied/);await db.exec('rollback to immutable_audit');checks++;
   await db.exec(`update public.media_submissions set storage_purge_started_at=now() where id='${upload.id}'`);
   check('purging object cannot get preview',(await read('preview',{id:upload.id})).error,'not_found');
   await db.exec("reset role; update auth.sessions set aal='aal1'; set role service_role");
+  check('password-only session cannot mutate',(await write('approve',{id:upload.id,version:1,requestId:other})).error,'forbidden');
   check('database also requires MFA',(await read()).error,'forbidden');
   await db.exec("reset role; update auth.sessions set aal='aal2',not_after=now()-interval '1 second'; set role service_role");
   check('expired session denied',(await read()).error,'forbidden');
