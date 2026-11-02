@@ -42,7 +42,7 @@ for(const page of pages){
 }
 const shared=read('styles/shared.css');
 const motion=read('scripts/interactions.js');
-assert.match(shared,/main \.aoms-motion-drift/);
+assert.match(shared,/\.home-hero #home-title\.aoms-motion-drift/);
 assert.match(shared,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(motion,/main img:not\(\.hero-image\)/);
 assert.match(motion,/main \.event-summary/);
