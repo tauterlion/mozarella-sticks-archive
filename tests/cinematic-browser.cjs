@@ -71,12 +71,38 @@ const cases = [
       }
       // Verify native scroll target and the original hero image.
       await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
-      const hero = await page.locator('.hero-image').evaluate(el => ({
-        complete:el.complete,naturalWidth:el.naturalWidth,
-        source:el.getAttribute('src')
-      }));
+      const hero = await page.locator('.hero-image').evaluate(async el => {
+        if (!el.complete) await new Promise(resolve => {
+          el.addEventListener('load',resolve,{once:true});
+          el.addEventListener('error',resolve,{once:true});
+        });
+        const canvas=document.createElement('canvas');
+        canvas.width=9;canvas.height=8;
+        const ctx=canvas.getContext('2d',{willReadFrequently:true});
+        if (!el.naturalWidth) return {complete:el.complete,naturalWidth:0,source:el.getAttribute('src')};
+        ctx.drawImage(el,0,0,9,8);
+        const image=ctx.getImageData(0,0,9,8).data;
+        const gray=(x,y)=>{
+          const i=(y*9+x)*4;
+          return image[i]*.299+image[i+1]*.587+image[i+2]*.114;
+        };
+        let bits=0n,bit=0n;
+        for(let y=0;y<8;y++)for(let x=0;x<8;x++){
+          if(gray(x,y)>gray(x+1,y))bits |= 1n<<bit;
+          bit++;
+        }
+        return {complete:el.complete,naturalWidth:el.naturalWidth,
+          source:el.getAttribute('src'),dhash:bits.toString(16).padStart(16,'0')};
+      });
       assert.ok(hero.complete && hero.naturalWidth>0,'Hero photo must decode');
       assert.equal(hero.source,'assets/media/beach-party-everyone.jpg');
+      if(setup.name==='desktop'){
+        const approved=0xaaf9b1b358146b0fn;
+        const difference=BigInt('0x'+hero.dhash)^approved;
+        const hamming=[...difference.toString(2)].filter(b=>b==='1').length;
+        console.log('Hero visual fingerprint: '+hero.dhash+
+          '; distance from owner-approved PNG: '+hamming+'/64 (lower is closer)');
+      }
       assert.equal(await page.locator('.cinema-entry-button').count(),0,'Explore button is gone');
       await page.locator('.hero-scroll-hint').click();
       await page.waitForFunction(()=>location.hash==='#inside-archive',{timeout:3000});
