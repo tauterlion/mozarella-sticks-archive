@@ -55,11 +55,11 @@ assert.match(css,/\.cinema-entry-button\{[\s\S]*?border-radius:999px/);
 assert.match(css,/var\(--bg\) 100%/);
 assert.match(css,/Revision 3\.1\.2: let the hero fade/);
 assert.match(css,/\.home-hero::before\{/);
-assert.match(css,/mask-image:linear-gradient\(180deg,#000 0%,#000 54%,transparent 100%\)/);
+assert.match(css,/mask-image:linear-gradient\(180deg,#000 0%,#000 60%,transparent 83%\)/);
 
 
-// Final user-approved direction: compact title, one "THE", no range micro-section.
-assert.match(html, /<p class="cinema-kicker">THE ARCHIVE OF<\/p>/);
+// Compact title, one "THE", no range micro-section and responsive photo crop.
+assert.ok(!html.includes('cinema-kicker'), 'No upper archive eyebrow');
 assert.match(html, /<div class="cinema-rule" aria-hidden="true"><span><\/span>THE<span><\/span><\/div>/);
 assert.ok(!html.includes('THE ARCHIVE OF THE'), 'No doubled THE in opening');
 assert.ok(!html.includes('id="archive-range"'), 'Remove redundant under-stats mini-section');
@@ -68,7 +68,7 @@ assert.match(css, /Revision 3\.1\.3/);
 assert.match(css, /font-size:clamp\(2\.8rem,5\.85vw,7\.1rem\)/);
 assert.match(css, /top:clamp\(-270px,-12\.8vw,-78px\)/);
 assert.match(css, /@media\(min-width:761px\) and \(max-width:1200px\)/);
-assert.match(css, /top:calc\(290px - 34vw\)/);
+assert.match(css, /object-fit:cover;object-position:center top/);
 assert.match(shared, /\.home-hero #home-title\.aoms-motion-drift/);
 assert.ok(!shared.includes('main .aoms-motion-drift'), 'No drift on other page titles');
 assert.match(motion, /if\(el\.id === 'home-title'\)/);
@@ -91,5 +91,6 @@ assert.match(css,/height:min\(25svh,27%\)/);
 assert.match(css,/@keyframes aoms-orbit-breathe/);
 assert.match(css,/\.archive-entry \.cinema-entry-button/);
 assert.match(css,/\.home-hero \.hero-image\{top:auto;bottom:0;height:91%\}/);
+assert.match(css,/\.home-hero \.hero-image\{[\s\S]*?object-fit:cover;object-position:center top/);
 
 console.log('PASS: cinematic 3.1.4 below-fold entry, arcs, photo fade and archive safeguards');
