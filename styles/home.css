@@ -314,3 +314,17 @@ html[data-theme="light"] .home-hero .hero-corner-note{color:var(--text)}
 @media(max-width:380px){
  body[data-page="home"] .film-nav a{font-size:10px;letter-spacing:.025em}
 }
+
+/* Revision 3.1.7 — framing of the owner-approved 3:2 landscape photograph.
+   Its subjects sit higher in the source than in the old square image.
+   Offset the image down so the opening title stays in clear night sky. */
+@media(min-width:1201px){
+  .home-hero .hero-image{top:clamp(95px,8vw,155px)}
+}
+@media(min-width:761px) and (max-width:1200px){
+  .home-hero .hero-image{top:clamp(92px,10vw,130px)}
+}
+@media(max-width:760px){
+  /* Show a wider slice of the group than the former square-image crop. */
+  .home-hero .hero-image{top:auto;bottom:0;height:78%}
+}
