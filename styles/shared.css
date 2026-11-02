@@ -117,3 +117,13 @@ body:not([data-page="home"]) .film-header .film-nav a{text-shadow:none}
 @media(prefers-reduced-motion:reduce){
   .home-hero #home-title.aoms-motion-drift{translate:none!important}
 }
+
+/* Release readability pass: avoid 9px navigation labels on compact phones. */
+@media(max-width:760px){
+  .film-header .film-nav a{font-size:11px;letter-spacing:.055em}
+}
+@media(max-width:380px){
+  .film-header .film-nav{gap:7px}
+  .film-header .film-nav a{font-size:10px;letter-spacing:.025em}
+  .film-wordmark{font-size:21px}
+}
