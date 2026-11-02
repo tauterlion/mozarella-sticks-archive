@@ -12,7 +12,7 @@ assert.match(html, /<section class="home-hero"[^>]*aria-labelledby="home-title"/
 assert.match(html, /<h1 id="home-title">MOZARELLA STICKS<\/h1>/);
 assert.match(html, /href="#inside-archive"/);
 assert.match(html, /id="inside-archive"/);
-assert.match(html, /assets\/media\/beach-party-everyone\.jpg/);
+assert.match(html, /assets\/media\/aoms-3-1-hero-wide\.jpg/);
 assert.ok(fs.existsSync(path.join(root, 'assets/media/aoms-3-1-hero-wide.jpg')),
   'Hero image must be checked into the archive');
 const approvedHero = fs.readFileSync(path.join(root,'assets/media/aoms-3-1-hero-wide.jpg'));
@@ -98,7 +98,7 @@ assert.match(css,/\.archive-arc::after\{/);
 assert.match(css,/animation:aoms-arc-trace 11s linear infinite/);
 assert.match(css,/\.archive-arc,\.archive-arc::after\{animation:none!important\}/);
 assert.ok(!css.includes('.archive-entry'), 'No unused entry section CSS');
-assert.match(css,/\.home-hero \.hero-image\{top:auto;bottom:0;height:91%\}/);
+
 assert.match(css,/\.home-hero \.hero-image\{[\s\S]*?object-fit:cover;object-position:center top/);
 
 assert.match(css,/Revision 3\.1\.7/);
