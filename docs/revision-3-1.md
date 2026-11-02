@@ -35,6 +35,13 @@ Owner-requested refinements:
 - Highlight sweeps are CSS-only, noninteractive, behind real content, and disabled by `prefers-reduced-motion: reduce`.
 - Both light and dark palettes remain grounded in `var(--gold)`; images and historic archive data remain unchanged.
 
+## Release candidate audit — November 1, 2026
+
+- **Automated validation:** GitHub archive validation passed; Chromium smoke passed **316 checks across 48 page / viewport / theme combinations** (desktop, tablet, phone, small phone) with readable navigation, no overflow, successful images and working motion preferences.
+- **Source photo mismatch (release blocker):** The branch still references `assets/media/beach-party-everyone.jpg`, but Chromium measured a **39/64 Hamming distance** from the exact approved 1024×1024 PNG embedded in the standalone preview. The closest of the other available archive photos still scored 22/64, so no existing image is a reliable substitute.
+- **Required owner upload:** Add the web-optimized `AoMS_3_1_approved_hero.jpg` prepared in the ChatGPT conversation (244,243 bytes, 1024×1024 JPEG) as `assets/media/aoms-3-1-hero.jpg` on the **`feat/revision-3-1-cinematic-home` branch**, not main. It preserves the owner's photograph and contains no synthesized faces.
+- **After upload:** Change the hero's `src`, image-path assertion, fingerprint check and alt as needed; rerun Chromium and archive workflows. Only then mark PR #19 ready and merge, without modifying PR #18.
+
 ## Scope
 
 Give the homepage a film-title opening. The first view uses a full-viewport authentic group photograph, prominent *MOZARELLA STICKS* title, consistent cinematic navigation, a tagline, and a small scroll arrow. The full CTA button has been removed. Existing archive content continues directly below the fold.
