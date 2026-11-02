@@ -75,13 +75,11 @@ assert.match(motion, /if\(el\.id === 'home-title'\)/);
 assert.match(motion, /if\(document\.getElementById\('home-title'\)\)window\.addEventListener\('scroll'/);
 
 
-/* 3.1.4: opening is quieter and the CTA starts below the hero viewport. */
+/* 3.1.5: a scroll arrow, no redundant Explore button; visible animated arcs. */
 assert.ok(!html.includes('cinema-kicker'), 'Upper THE ARCHIVE OF line is removed');
-const heroAt = html.indexOf('<section class="home-hero"');
-const heroEnd = html.indexOf('</section>',heroAt);
-const entryAt = html.indexOf('<div class="archive-entry"');
-assert.ok(entryAt > heroEnd, 'The Explore button is below the hero, not inside it');
-assert.match(html,/href="#archive-entry"/);
+assert.ok(!html.includes('archive-entry'), 'Explore button and spacer are removed');
+assert.ok(!html.includes('EXPLORE THE ARCHIVE'), 'No CTA copy remains');
+assert.match(html,/class="hero-scroll-hint" href="#inside-archive"/);
 assert.match(html,/class="archive-depth"/);
 assert.match(html,/class="archive-orbits" aria-hidden="true"/);
 for(const arc of ['archive-arc-one','archive-arc-two','archive-arc-three'])
@@ -89,8 +87,12 @@ for(const arc of ['archive-arc-one','archive-arc-two','archive-arc-three'])
 assert.match(css,/Revision 3\.1\.4/);
 assert.match(css,/height:min\(25svh,27%\)/);
 assert.match(css,/@keyframes aoms-orbit-breathe/);
-assert.match(css,/\.archive-entry \.cinema-entry-button/);
+assert.match(css,/@keyframes aoms-arc-trace/);
+assert.match(css,/\.archive-arc::after\{/);
+assert.match(css,/animation:aoms-arc-trace 11s linear infinite/);
+assert.match(css,/\.archive-arc,\.archive-arc::after\{animation:none!important\}/);
+assert.ok(!css.includes('.archive-entry'), 'No unused entry section CSS');
 assert.match(css,/\.home-hero \.hero-image\{top:auto;bottom:0;height:91%\}/);
 assert.match(css,/\.home-hero \.hero-image\{[\s\S]*?object-fit:cover;object-position:center top/);
 
-console.log('PASS: cinematic 3.1.4 below-fold entry, arcs, photo fade and archive safeguards');
+console.log('PASS: cinematic 3.1.5 no CTA, animated tracing arcs and archive safeguards');
