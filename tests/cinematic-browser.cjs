@@ -72,69 +72,34 @@ const cases = [
       // Verify native scroll target and the original hero image.
       await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
       const hero = await page.locator('.hero-image').evaluate(async el => {
-        if (!el.complete) await new Promise(resolve => {
-          el.addEventListener('load',resolve,{once:true});
-          el.addEventListener('error',resolve,{once:true});
-        });
-        const canvas=document.createElement('canvas');
-        canvas.width=9;canvas.height=8;
-        const ctx=canvas.getContext('2d',{willReadFrequently:true});
-        if (!el.naturalWidth) return {complete:el.complete,naturalWidth:0,source:el.getAttribute('src')};
-        ctx.drawImage(el,0,0,9,8);
-        const image=ctx.getImageData(0,0,9,8).data;
-        const gray=(x,y)=>{
-          const i=(y*9+x)*4;
-          return image[i]*.299+image[i+1]*.587+image[i+2]*.114;
+        try { await el.decode(); } catch {}
+        const photo=getComputedStyle(el);
+        const parent=el.closest('.home-hero').getBoundingClientRect();
+        const box=el.getBoundingClientRect();
+        return {
+          complete:el.complete,naturalWidth:el.naturalWidth,
+          naturalHeight:el.naturalHeight,source:el.getAttribute('src'),
+          relativeTop:box.top-parent.top,
+          renderedHeight:box.height,heroHeight:parent.height
         };
-        let bits=0n,bit=0n;
-        for(let y=0;y<8;y++)for(let x=0;x<8;x++){
-          if(gray(x,y)>gray(x+1,y))bits |= 1n<<bit;
-          bit++;
-        }
-        return {complete:el.complete,naturalWidth:el.naturalWidth,
-          source:el.getAttribute('src'),dhash:bits.toString(16).padStart(16,'0')};
       });
       assert.ok(hero.complete && hero.naturalWidth>0,'Hero photo must decode');
-      assert.equal(hero.source,'assets/media/beach-party-everyone.jpg');
-      if(setup.name==='desktop'){
-        const approved=0xaaf9b1b358146b0fn;
-        const difference=BigInt('0x'+hero.dhash)^approved;
-        const hamming=[...difference.toString(2)].filter(b=>b==='1').length;
-        console.log('Hero visual fingerprint: '+hero.dhash+
-          '; distance from owner-approved PNG: '+hamming+'/64 (lower is closer)');
+      assert.equal(hero.source,'assets/media/aoms-3-1-hero-wide.jpg');
+      assert.equal(hero.naturalWidth,2048,'Approved landscape photo width');
+      assert.equal(hero.naturalHeight,1365,'Approved landscape photo height');
+      if(setup.size.width<=760) {
+        assert.ok(hero.renderedHeight/hero.heroHeight>.76 &&
+          hero.renderedHeight/hero.heroHeight<.80,
+          'Mobile displays wider group framing rather than square-image zoom');
+      } else {
+        assert.ok(hero.relativeTop>=85,
+          'Wide photograph must stay below cinematic title area');
       }
+      console.log('Hero source verified, '+setup.name+
+        ': '+hero.naturalWidth+'x'+hero.naturalHeight+
+        ', top='+hero.relativeTop.toFixed(1)+
+        ', renderHeight='+hero.renderedHeight.toFixed(1));
       assert.equal(await page.locator('.cinema-entry-button').count(),0,'Explore button is gone');
-
-      if(setup.name==='desktop'){
-        // Release photo audit: find the closest existing archive image to the
-        // owner-approved square PNG, without modifying or uploading media.
-        const fs=require('node:fs'),path=require('node:path');
-        const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data/media.json')));
-        const sources=manifest.media.filter(m=>m.type==='image'&&m.available!==false)
-          .map(m=>({id:m.id,source:m.path || ('assets/media/'+m.file)}));
-        const nearest=await page.evaluate(async sources=>{
-          const approved=0xaaf9b1b358146b0fn;
-          const canvas=document.createElement('canvas');canvas.width=9;canvas.height=8;
-          const ctx=canvas.getContext('2d',{willReadFrequently:true});
-          const results=[];
-          for(const item of sources){
-            const img=new Image();img.src=item.source;
-            try{await img.decode()}catch{continue}
-            ctx.clearRect(0,0,9,8);ctx.drawImage(img,0,0,9,8);
-            const d=ctx.getImageData(0,0,9,8).data;
-            const gray=(x,y)=>{const p=(y*9+x)*4;return d[p]*.299+d[p+1]*.587+d[p+2]*.114};
-            let hash=0n,bit=0n;
-            for(let y=0;y<8;y++)for(let x=0;x<8;x++){
-              if(gray(x,y)>gray(x+1,y))hash|=1n<<bit;
-              bit++;
-            }
-            const dist=[...(hash^approved).toString(2)].filter(b=>b==='1').length;
-            results.push({id:item.id,path:item.source,distance:dist});
-          }
-          return results.sort((a,b)=>a.distance-b.distance).slice(0,8);
-        },sources);
-        console.log('Closest existing archive images to approved bonfire edit: '+JSON.stringify(nearest));
-      }
 
       await page.locator('.hero-scroll-hint').click();
       await page.waitForFunction(()=>location.hash==='#inside-archive',{timeout:3000});
