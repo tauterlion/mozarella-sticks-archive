@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Lightweight cross-page Chromium smoke test for Revision 3.1.
+/* Lightweight cross-page Chromium smoke test for Revision 3.1 and Event Galleries 2.0.
    Run with a local server and Playwright: BASE_URL=http://127.0.0.1:8765/ node tests/cinematic-browser.cjs */
 const assert = require('node:assert/strict');
 const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
@@ -46,7 +46,10 @@ const cases = [
           if(name==='gallery') await page.waitForSelector('.media-card',{timeout:15000});
           if(name==='people') await page.waitForSelector('.person-card',{timeout:15000});
           if(name==='profile') await page.waitForSelector('.profile-hero',{timeout:15000});
-          if(name==='event') await page.waitForSelector('.event-header',{timeout:15000});
+          if(name==='event') {
+            await page.waitForSelector('.event-hero h1',{timeout:15000});
+            await page.waitForSelector('.event-story .event-prose p',{timeout:15000});
+          }
           const result = await page.evaluate(() => {
             const header = document.querySelector('header.film-header');
             const links = [...header.querySelectorAll('.film-nav a')];
@@ -69,6 +72,39 @@ const cases = [
           checks+=6;
         }
       }
+      // The redesigned event page must remain functional beyond its hero:
+      // the story precedes the gallery, and the large gallery can be explored.
+      await page.goto(base+'event.html?id=josie-birthday',{waitUntil:'domcontentloaded'});
+      await page.waitForSelector('.event-media-preview .event-memory-card',{timeout:15000});
+      const eventLayout = await page.evaluate(() => {
+        const story = document.querySelector('.event-story');
+        const media = document.querySelector('.event-media-section');
+        return {
+          hero: Boolean(document.querySelector('.event-hero h1')),
+          storyBeforeGallery: Boolean(story && media && (story.compareDocumentPosition(media) & Node.DOCUMENT_POSITION_FOLLOWING))
+        };
+      });
+      assert.ok(eventLayout.hero,setup.name+': event title missing');
+      assert.ok(eventLayout.storyBeforeGallery,setup.name+': story should precede event media');
+      assert.equal(await page.locator('.event-media-preview .event-memory-card').count(),5,
+        setup.name+': large events should show five highlights first');
+      await page.locator('[data-media-expand]').click();
+      await page.waitForSelector('.event-media-grid .event-memory-card',{timeout:10000});
+      assert.equal(await page.locator('.event-media-grid .event-memory-card').count(),11,
+        setup.name+': all available birthday memories should be accessible');
+      await page.locator('[data-media-filter="videos"]').click();
+      assert.equal(await page.locator('.event-media-grid .event-memory-card').count(),0,
+        setup.name+': image-only event should have no video results');
+      await page.locator('[data-media-filter="photos"]').click();
+      assert.equal(await page.locator('.event-media-grid .event-memory-card').count(),11,
+        setup.name+': photo filter should restore all available images');
+      await page.locator('.event-media-grid .event-memory-card').first().click();
+      await page.waitForSelector('.event-media-viewer[open]',{timeout:5000});
+      assert.equal(await page.locator('.event-viewer-stage img').count(),1,
+        setup.name+': image viewer did not open');
+      await page.keyboard.press('Escape');
+      await page.waitForFunction(() => !document.querySelector('.event-media-viewer')?.open,{timeout:5000});
+      checks+=8;
       // Verify native scroll target and the original hero image.
       await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
       const hero = await page.locator('.hero-image').evaluate(async el => {
