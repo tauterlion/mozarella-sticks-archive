@@ -103,7 +103,7 @@
   assert.ok(css.includes('background:linear-gradient(transparent,var(--event-photo-fade))'), 'Thumbnail fade must use theme token');
   assert.ok(css.includes('linear-gradient(90deg,var(--event-hero-edge)'), 'Hero fade must use theme tokens');
   assert.ok(css.includes('linear-gradient(0deg,var(--event-hero-edge)'), 'Mobile hero fade must use theme tokens');
-  assert.ok(html.includes('styles/event.css?v=4.0.1'), 'Updated theme styles must have fresh asset version');
+  assert.ok(html.includes('styles/event.css?v=4.0.2'), 'Updated theme styles must have fresh asset version');
 
   assert.ok(html.indexOf('event-gallery.js') < html.indexOf('scripts/event.js'), 'Gallery module must load first');
   assert.ok(page.indexOf('class="event-story"') < page.indexOf('${gallery}'), 'Story must precede media');
