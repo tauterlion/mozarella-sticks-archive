@@ -2,7 +2,7 @@
   'use strict';
   const MS = window.MSArchive;
   const escape = MS.escapeHtml;
-  const FEATURE_LIMIT = 6;
+  const FEATURE_LIMIT = 5;
   const EXPAND_AFTER = 8;
   const BATCH_SIZE = 24;
 
@@ -57,7 +57,7 @@
         </div>
         <span class="event-media-total">${countLabel}</span>
       </header>
-      <div class="event-media-preview${featured.length === 1 ? ' is-single' : ''}" data-media-preview>
+      <div class="event-media-preview${media.length <= EXPAND_AFTER ? ' is-compact' : ''}${featured.length === 1 ? ' is-single' : ''}" data-media-preview>
         ${featured.map(item => cardMarkup(item, true)).join('')}
       </div>
       <div class="event-media-expand" data-media-expand-wrap${media.length <= EXPAND_AFTER ? ' hidden' : ''}>
