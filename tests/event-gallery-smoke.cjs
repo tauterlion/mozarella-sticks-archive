@@ -88,6 +88,23 @@
     people: []
   }));
 
+  const css = fs.readFileSync(path.join(__dirname, '../styles/event.css'), 'utf8');
+  const darkTokens = css.match(/body\[data-page=event\]\{([\s\S]*?)\}/)?.[1] || '';
+  const lightTokens = css.match(/html\[data-theme=light\] body\[data-page=event\]\{([\s\S]*?)\}/)?.[1] || '';
+  for (const token of ['--event-hero-ink', '--event-hero-edge', '--event-hero-middle', '--event-hero-bottom', '--event-hero-date', '--event-hero-subtext', '--event-photo-fade', '--event-photo-ink', '--event-badge-bg']) {
+    assert.ok(darkTokens.includes(token + ':'), 'Missing dark theme token: ' + token);
+    assert.ok(lightTokens.includes(token + ':'), 'Missing light theme token: ' + token);
+  }
+  assert.ok(darkTokens.includes('--event-hero-ink:#fffaf1'), 'Dark hero needs light text');
+  assert.ok(lightTokens.includes('--event-hero-ink:#1d241c'), 'Light hero needs dark text');
+  assert.ok(darkTokens.includes('--event-photo-ink:#fffaf1'), 'Dark captions need light text');
+  assert.ok(lightTokens.includes('--event-photo-ink:#1d241c'), 'Light captions need dark text');
+  assert.ok(css.includes('color:var(--event-hero-ink)') && css.includes('color:var(--event-photo-ink)'), 'Foreground should use theme tokens');
+  assert.ok(css.includes('background:linear-gradient(transparent,var(--event-photo-fade))'), 'Thumbnail fade must use theme token');
+  assert.ok(css.includes('linear-gradient(90deg,var(--event-hero-edge)'), 'Hero fade must use theme tokens');
+  assert.ok(css.includes('linear-gradient(0deg,var(--event-hero-edge)'), 'Mobile hero fade must use theme tokens');
+  assert.ok(html.includes('styles/event.css?v=4.0.1'), 'Updated theme styles must have fresh asset version');
+
   assert.ok(html.indexOf('event-gallery.js') < html.indexOf('scripts/event.js'), 'Gallery module must load first');
   assert.ok(page.indexOf('class="event-story"') < page.indexOf('${gallery}'), 'Story must precede media');
   assert.ok(page.includes('event.coverMediaId'), 'Cover override must remain supported');
