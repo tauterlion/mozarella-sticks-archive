@@ -3187,6 +3187,46 @@
         "valentina"
       ],
       "storylines": []
+    },
+    {
+      "id": "lorena-surprise-sweet-sixteen-2026",
+      "date": "2026-11-07",
+      "dateLabel": "November 7, 2026",
+      "sort": "2026-11-07T12:00:00",
+      "title": "Lorena’s Surprise Sweet Sixteen",
+      "summary": "Friends surprise Lorena with a Sweet Sixteen celebration on a hotel rooftop.",
+      "details": "On November 7, a group of guests gathered on a hotel rooftop for a surprise Sweet Sixteen party for Lorena. The celebration came as a genuine surprise to her: Lorena had not believed she would ever have a Sweet Sixteen of her own. Friends welcomed her to the rooftop celebration and shared the special occasion together.",
+      "era": "10th Grade – Fall 2026",
+      "certainty": "confirmed",
+      "importance": "supporting",
+      "categories": [
+        "Birthday",
+        "Party"
+      ],
+      "people": [
+        "alejandro",
+        "lucas",
+        "lorena",
+        "alexander",
+        "lydia",
+        "dash",
+        "serafina",
+        "jeidenne",
+        "josie",
+        "kamilo",
+        "nicholas",
+        "maria",
+        "aedan",
+        "marife",
+        "sebastian",
+        "libby",
+        "marco",
+        "todd",
+        "valentina",
+        "samantha",
+        "kateryna"
+      ],
+      "storylines": []
     }
   ]
 }
