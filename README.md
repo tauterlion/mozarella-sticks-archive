@@ -204,6 +204,8 @@ Curators can optionally select a photographic cover without adding a new asset: 
 
 **Performance note:** only a few initial images render; the expanded grid progressively appends batches, with native image lazy-loading. This prevents embedding dozens of video players at once, **but gallery images currently reference the original files**. For 50+ high-resolution uploads, resized thumbnail derivatives and optimized video posters are still advisable. GitHub Pages does not transcode at request time; use `tools/prepare_media.py` to produce web-friendly video assets.
 
+Regression smoke test (requires Node.js, no packages): run `node tests/event-gallery-smoke.cjs` from the repository root. It simulates a 56-item mixed-media event, filters, progressive loading, viewer focus return, and small/empty event behavior.
+
 **Integration:** This change is built from `main` independently of the new Fall 2026 events in PR #20 and the submissions work in PR #18. Once both timeline and galleries PRs are merged, new event records automatically use the gallery layout if they have linked, available media.
 
 ## Media Manager
