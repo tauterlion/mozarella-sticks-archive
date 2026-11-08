@@ -107,8 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const hint = hasProfile ? 'View profile' : 'View timeline';
         const name = MSArchive.personName(pid, data);
         return `<a class="chip person-chip" href="${MSArchive.escapeHtml(href)}" data-hint="${hint}" aria-label="${MSArchive.escapeHtml(name)} — ${hint}">${MSArchive.escapeHtml(name)}</a>`;
-      })
-      ;
+      });
 
     const peopleMarkup = personLinks.length ? `<section class="event-detail-group">
       <h2>People in this memory <span>${personLinks.length}</span></h2>
