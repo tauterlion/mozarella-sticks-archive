@@ -1,0 +1,58 @@
+const {PGlite}=require('../tooling/node_modules/@electric-sql/pglite');
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {randomUUID}=require('node:crypto');
+(async()=>{
+ const db=new PGlite();let count=0;
+ const check=(label,actual,expected)=>{assert.deepEqual(actual,expected,label);count++;console.log('PASS '+label);};
+ const rpc=async(action,payload={})=>(await db.query('select public.submission_intake($1,$2::jsonb) as result',[action,JSON.stringify(payload)])).rows[0].result;
+ const asService=()=>db.exec('set role service_role');
+ const owner=()=>db.exec('reset role');
+ const hash='a'.repeat(64),hash2='b'.repeat(64);
+ try{
+  await db.exec(fs.readFileSync(path.join(__dirname,'audited-baseline.sql'),'utf8'));
+  for(const f of fs.readdirSync(path.join(__dirname,'../migrations')).filter(f=>f.endsWith('.sql')).sort())await db.exec(fs.readFileSync(path.join(__dirname,'../migrations',f),'utf8'));
+  await db.exec('begin; alter sequence public.submission_audit_id_seq restart with 1');
+  for(const role of ['anon','authenticated']){await db.exec('savepoint denied; set role '+role);await assert.rejects(rpc('batch'),/permission denied/);await db.exec('rollback to denied');count++;}
+  await asService();check('disabled switch blocks gateway',(await rpc('tick')).error,'intake_disabled');
+  await owner();await db.exec('update public.submission_settings set intake_enabled=true');await asService();
+  for(let i=0;i<60;i++)assert.equal((await rpc('tick')).ok,true);
+  check('durable global rate denies request 61',(await rpc('tick')).error,'rate_limited');
+  check('denial remains counted',(await rpc('tick')).error,'rate_limited');
+  const batch=await rpc('batch',{capabilityHash:hash,captchaHash:'1'.repeat(64),captchaVerifiedAt:new Date().toISOString()});
+  assert.ok(batch.receipt);check('resume requires secret capability',(await rpc('resume',{capabilityHash:hash2})).error,'batch_expired');
+  check('resume recovers lost response',(await rpc('resume',{capabilityHash:hash})).receipt,batch.receipt);
+  await db.exec('savepoint replay');await assert.rejects(rpc('batch',{capabilityHash:hash2,captchaHash:'1'.repeat(64),captchaVerifiedAt:new Date().toISOString()}),/unique/);await db.exec('rollback to replay');count++;
+  const metadata={capabilityHash:hash,clientFileId:randomUUID(),filename:'photo.jpg',mime:'image/jpeg',size:100,caption:'Private memory',eventId:'closeup-departure',people:['alejandro'],noPeople:false,proposedTitle:null,proposedDate:null,proposedDetails:null,consent:true};
+  const first=await rpc('authorize',metadata);assert.ok(first.id);check('opaque server generated private path',/^incoming\/[a-f0-9-]+\/[a-f0-9-]+$/.test(first.path),true);
+  check('authorization retry does not duplicate',(await rpc('authorize',metadata)).id,first.id);
+  check('full 50 MiB reserved for tiny claim',Number((await db.query('select sum(reserved_bytes) as n from public.media_submissions')).rows[0].n),52428800);
+  const second=await rpc('authorize',{...metadata,clientFileId:randomUUID()}),third=await rpc('authorize',{...metadata,clientFileId:randomUUID()});
+  check('per batch in-flight limit',(await rpc('authorize',{...metadata,clientFileId:randomUUID()})).error,'busy');
+  const lease=await rpc('claim',{capabilityHash:hash,id:first.id});assert.ok(lease.lease);
+  check('global verification concurrency bound',(await rpc('claim',{capabilityHash:hash,id:second.id})).error,'busy');
+  check('wrong lease cannot finalize',(await rpc('finish',{capabilityHash:hash,id:first.id,lease:randomUUID()})).error,'busy');
+  await rpc('release',{capabilityHash:hash,id:first.id,lease:lease.lease});
+  const retry=await rpc('claim',{capabilityHash:hash,id:first.id});
+  const finished=await rpc('finish',{capabilityHash:hash,id:first.id,lease:retry.lease,sha256:'c'.repeat(64),mime:'image/jpeg',size:100});
+  check('validated completion only reaches pending',finished.status,'pending');
+  check('completion retry is idempotent',(await rpc('claim',{capabilityHash:hash,id:first.id})).receipt,batch.receipt);
+  check('completed upload cannot be cancelled',(await rpc('cancel',{capabilityHash:hash,id:first.id})).error,'upload_unavailable');
+  await rpc('cancel',{capabilityHash:hash,id:second.id});
+  check('cancelled reservation is not released',Number((await db.query('select sum(reserved_bytes) as n from public.media_submissions where storage_purged_at is null')).rows[0].n),3*52428800);
+  check('cleanup cannot delete while token can be used',(await rpc('cleanup_candidates')).items.length,0);
+  await rpc('authorize',{...metadata,clientFileId:randomUUID()});
+  await rpc('cancel',{capabilityHash:hash,id:third.id});
+  await rpc('authorize',{...metadata,clientFileId:randomUUID()});
+  check('global budget cannot be bypassed with cancellation',(await rpc('authorize',{...metadata,clientFileId:randomUUID()})).error,'quota_exhausted');
+  await owner();await db.exec("update public.submission_batches set created_at=now()-interval '3 hours',expires_at=now()-interval '1 hour',captcha_verified_at=now()-interval '3 hours'");await asService();
+  check('expired batch cannot issue another token',(await rpc('authorize',metadata)).error,'batch_expired');
+  check('expired batch cannot finalize',(await rpc('claim',{capabilityHash:hash,id:third.id})).error,'batch_expired');
+  await owner();await db.exec('rollback');
+  const timeline=JSON.parse(fs.readFileSync(path.join(__dirname,'../../data/timeline.json'),'utf8'));
+  const canonical=(await db.query('select id,era from public.submission_canonical_events')).rows;
+  check('canonical cache preserves all event IDs and eras',canonical.every(row=>timeline.events.some(event=>event.id===row.id&&event.era===row.era))&&canonical.length===timeline.events.length,true);
+  check('all test rows rolled back',Number((await db.query('select count(*) as n from public.media_submissions')).rows[0].n),0);
+  check('intake remains off',(await db.query('select intake_enabled from public.submission_settings')).rows[0].intake_enabled,false);
+  console.log(`${count} intake database checks passed`);
+ }finally{await db.close();}
+})().catch(e=>{console.error(e);process.exit(1);});

@@ -1,0 +1,27 @@
+[hidden] { display: none !important; }
+.review-form { display: grid; gap: 16px; max-width: 440px; }
+.review-form label { display: grid; gap: 6px; }
+.review-form input, #queue-status { color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-width: 100%; }
+.review-form input { width: 100%; box-sizing: border-box; }
+.review-queue { list-style: none; padding: 0; display: grid; gap: 10px; }
+.review-queue button { width: 100%; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.review-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+#metadata { display: grid; grid-template-columns: minmax(90px, 1fr) minmax(0, 3fr); gap: 10px; }
+#metadata dt { font-weight: 700; } #metadata dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+#preview img, #preview video { display: block; width: auto; max-width: 100%; max-height: 65vh; margin-top: 16px; }
+#qr { width: 240px; max-width: 100%; background: white; padding: 12px; }
+#sign-out { margin-top: 18px; }
+@media (max-width: 500px) { #metadata { grid-template-columns: 1fr; } #metadata dd { margin-bottom: 10px; } }
+
+.tool-shell button { padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+.tool-shell button:hover:not(:disabled) { border-color: var(--gold, #b7954c); }
+.tool-shell button:disabled { opacity: .5; cursor: default; }
+.tool-shell button:focus-visible, .review-form input:focus-visible, #queue-status:focus-visible { outline: 2px solid var(--gold, #b7954c); outline-offset: 3px; }
+
+.review-editor { border: 1px solid var(--line); border-radius: 8px; display: grid; gap: 14px; margin: 20px 0; }
+.review-editor>label, #proposal-fields label, #decision-controls>label { display: grid; gap: 6px; }
+.review-editor textarea, .review-editor select, .review-editor input:not([type=checkbox]), #reject-reason { width: 100%; max-width: 100%; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: 10px; }
+.review-editor textarea, #reject-reason { min-height: 100px; }
+.review-people { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 6px; max-height: 260px; overflow: auto; }
+.review-people label { overflow-wrap: anywhere; } #decision-controls { display: grid; gap: 12px; margin-top: 18px; }
+#history { overflow-wrap: anywhere; }
