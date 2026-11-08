@@ -194,6 +194,20 @@ MP4 with H.264 video and AAC audio is the recommended video format.
 
 See `IMAGE_FILENAMES.md` for naming and placement guidance.
 
+## Event Galleries 2.0 (review branch)
+
+The Full Event page now follows a **story-first** layout: compact photographic cover, date/title/summary, author-approved event narrative, participants/categories, then a unified photo/video section. Events without available photos use a simple text header. Events without media have no empty gallery.
+
+For events with **1–8 available media items**, the page displays the entire compact gallery. For events with **9+ available items**, five featured thumbnails appear first; **Explore all memories** opens a filterable gallery (All, Photos, Videos) showing 24 items at a time, with **Load more memories** to append further batches. The full-screen viewer supports keyboard arrow navigation, Escape to close, swipe navigation on touch, captions, and media-tagged people. Videos are represented by poster images or placeholders until a visitor opens them; they do not preload in the gallery grid.
+
+Curators can optionally select a photographic cover without adding a new asset: set `"coverMediaId": "existing-media-id"` on the timeline event. By default the page chooses the first available image marked `"featured": true` in `data/media.json`, or else the first available image in manifest order. For the large-event preview, optional `"featured": true` media records appear first, up to five; the full collection always follows manifest `order`. No new required fields and no new media files are introduced by this feature.
+
+**Performance note:** only a few initial images render; the expanded grid progressively appends batches, with native image lazy-loading. This prevents embedding dozens of video players at once, **but gallery images currently reference the original files**. For 50+ high-resolution uploads, resized thumbnail derivatives and optimized video posters are still advisable. GitHub Pages does not transcode at request time; use `tools/prepare_media.py` to produce web-friendly video assets.
+
+Regression smoke test (requires Node.js, no packages): run `node tests/event-gallery-smoke.cjs` from the repository root. It simulates a 56-item mixed-media event, filters, progressive loading, viewer focus return, and small/empty event behavior.
+
+**Integration:** This change is built from `main` independently of the new Fall 2026 events in PR #20 and the submissions work in PR #18. Once both timeline and galleries PRs are merged, new event records automatically use the gallery layout if they have linked, available media.
+
 ## Media Manager
 
 Start the local server and open:

@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       .slice(0, 6)
       .map(item => item.candidate);
 
-    const people = event.people
+    const personLinks = event.people
       .map(pid => {
         const person = data.peopleById[pid];
         // Every indexed person with a valid profile identity gets a dedicated page.
@@ -107,8 +107,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         const hint = hasProfile ? 'View profile' : 'View timeline';
         const name = MSArchive.personName(pid, data);
         return `<a class="chip person-chip" href="${MSArchive.escapeHtml(href)}" data-hint="${hint}" aria-label="${MSArchive.escapeHtml(name)} — ${hint}">${MSArchive.escapeHtml(name)}</a>`;
-      })
-      .join('');
+      });
+
+    const peopleMarkup = personLinks.length ? `<section class="event-detail-group">
+      <h2>People in this memory <span>${personLinks.length}</span></h2>
+      <div class="chip-list">${personLinks.slice(0, 8).join('')}</div>
+      ${personLinks.length > 8 ? `<details class="event-people-more">
+        <summary>Show ${personLinks.length - 8} more people</summary>
+        <div class="chip-list">${personLinks.slice(8).join('')}</div>
+      </details>` : ''}
+    </section>` : '';
     const categories = event.categories
       .map(category => `<a class="chip" href="timeline.html?category=${encodeURIComponent(category)}">${MSArchive.escapeHtml(category)}</a>`)
       .join('');
@@ -128,19 +136,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `<p>${formatted}</p>`;
       }).join('');
 
+
+    // A cover can be explicitly pinned using event.coverMediaId.
+    // When no cover is specified, prefer featured photography, then archive order.
+    const cover = available.find(item => item.type === 'image' && item.id === event.coverMediaId)
+      || available.find(item => item.type === 'image' && item.featured === true)
+      || available.find(item => item.type === 'image');
     const gallery = available.length
-      ? `<section class="event-gallery">${available.map(item => {
-          if (item.type === 'video') {
-            return `<figure class="video-figure">
-              ${MSArchive.mediaPreviewMarkup(item, {controls: true})}
-              <figcaption>${MSArchive.escapeHtml(item.caption)}</figcaption>
-            </figure>`;
-          }
-          return `<figure>
-            <a href="${MSArchive.escapeHtml(item.url)}" target="_blank" rel="noopener">${MSArchive.mediaPreviewMarkup(item)}</a>
-            <figcaption>${MSArchive.escapeHtml(item.caption)}</figcaption>
-          </figure>`;
-        }).join('')}</section>`
+      ? '<section class="event-media-section" id="event-media" aria-labelledby="event-media-title"></section>'
       : '';
 
     const relatedMarkup = related.length
@@ -176,27 +179,38 @@ document.addEventListener('DOMContentLoaded', async () => {
       ${nextMarkup}
     </nav>`;
 
+
     root.innerHTML = `<a class="event-back" href="${MSArchive.escapeHtml(returnUrl)}">← Back to ${returnHasFilters ? 'filtered timeline' : 'timeline'}</a>
       <article class="event-article">
-        <header class="event-header">
-          <p class="event-date">${MSArchive.escapeHtml(event.dateLabel)} · ${MSArchive.escapeHtml(event.era)}</p>
-          <h1>${MSArchive.escapeHtml(event.title)}</h1>
-          <p class="event-lede">${MSArchive.escapeHtml(event.summary)}</p>
-          <div class="event-header-meta">
-            <span class="badge ${event.importance}">${MSArchive.importanceLabel(event.importance)}</span>
-            <span class="badge ${event.certainty}">${MSArchive.certaintyLabel(event.certainty)}</span>
+        <header class="event-hero${cover ? ' has-cover' : ' no-cover'}">
+          ${cover ? `<img class="event-cover-image" src="${MSArchive.escapeHtml(cover.url)}" alt="" decoding="async" fetchpriority="high">` : ''}
+          <div class="event-hero-content">
+            <p class="event-date">${MSArchive.escapeHtml(event.dateLabel)} · ${MSArchive.escapeHtml(event.era)}</p>
+            <h1>${MSArchive.escapeHtml(event.title)}</h1>
+            <p class="event-lede">${MSArchive.escapeHtml(event.summary)}</p>
+            <div class="event-header-meta">
+              <span class="badge ${event.importance}">${MSArchive.importanceLabel(event.importance)}</span>
+              <span class="badge ${event.certainty}">${MSArchive.certaintyLabel(event.certainty)}</span>
+            </div>
           </div>
         </header>
-        <section class="event-prose">${renderEventProse(event.fullDetails || event.details || event.summary)}</section>
-        <aside class="event-sidebar">
-          ${people ? `<h2>People</h2><div class="chip-list">${people}</div>` : ''}
-          <h2>Categories</h2><div class="chip-list">${categories}</div>
-          ${storylines ? `<h2>Storylines</h2><div class="chip-list">${storylines}</div>` : ''}
-        </aside>
+        <section class="event-story" aria-labelledby="event-story-title">
+          <div class="event-story-heading">
+            <p class="eyebrow">The story</p>
+            <h2 id="event-story-title">What happened</h2>
+          </div>
+          <div class="event-prose">${renderEventProse(event.fullDetails || event.details || event.summary)}</div>
+        </section>
+        <div class="event-details">
+          ${peopleMarkup}
+          ${categories ? `<section class="event-detail-group"><h2>Categories</h2><div class="chip-list">${categories}</div></section>` : ''}
+          ${storylines ? `<section class="event-detail-group"><h2>Storylines</h2><div class="chip-list">${storylines}</div></section>` : ''}
+        </div>
         ${gallery}
         ${relatedMarkup}
         ${pagination}
       </article>`;
+    if (available.length) MSArchive.mountEventGallery(root.querySelector('#event-media'), available, data);
     MSArchive.reveal(root);
   } catch (error) {
     root.innerHTML = MSArchive.errorMarkup(error);
