@@ -23,11 +23,11 @@ html[data-theme=light] body[data-page=event]{
   --event-hero-ink:#1d241c;
   --event-hero-subtext:#283126;
   --event-hero-date:#513b13;
-  --event-hero-edge:rgba(255,253,246,.95);
-  --event-hero-middle:rgba(255,253,246,.81);
-  --event-hero-clear:rgba(255,253,246,.12);
-  --event-hero-bottom:rgba(255,253,246,.72);
-  --event-photo-fade:rgba(255,253,246,.94);
+  --event-hero-edge:rgba(255,253,246,.78);
+  --event-hero-middle:rgba(255,253,246,.43);
+  --event-hero-clear:rgba(255,253,246,.01);
+  --event-hero-bottom:rgba(255,253,246,.23);
+  --event-photo-fade:rgba(255,253,246,.75);
   --event-photo-ink:#1d241c;
   --event-photo-shadow:rgba(255,253,246,.55);
   --event-badge-bg:rgba(255,253,246,.57);
