@@ -1,16 +1,14 @@
 # Community Submissions — continuation checkpoint (2026-11-19)
 
-This is a **handoff and verification plan**, not a release approval or a claim that the local environment was accessed. Preserve PR #18 as a draft; do not merge, publish, enable intake, recreate the moderator, delete records, or reset local Docker volumes.
+Draft PR #18 tracks the completed local moderation workflow and the remaining release work.
 
-## Last owner-observed workflow
+## Verified local moderation workflow
 
-On November 2, the owner used the existing isolated local moderator dashboard and reported successful interaction with a **disposable synthetic submission**: private image preview; edit and save metadata; approve; then reject. The screenshots show the event/people controls and the expected edit → approve → reject interface history. The reported edit included a selected canonical event and people. The assistant in that prior session said it would verify the immutable audit records and confirm that the original file remained private.
+On November 2, the owner previewed the private synthetic image, edited its event and people tags, approved the submission, then rejected it in the local moderator dashboard. On November 19, the preserved `aoms-local` Docker stack was brought back up and the read-only check in `supabase/tests/moderator-owner-readonly.sql` confirmed exactly one edit, approval and rejection in version order, all by the same moderator. The fixture ended rejected at version 6 with all publication fields empty.
 
-**Still unverified by the present handoff:** independent read-back of the saved audit rows and private Storage file after those owner actions, including the file's byte/hash integrity. Do not re-label the browser observation as a complete verified backend audit.
+The local database retained four submissions (three original records and the disposable fixture), two private Storage objects and one active moderator. Authenticated Storage downloads matched the stored verified byte counts and SHA-256 hashes for both files. Anonymous public Storage reads were denied for both objects, and unauthenticated moderator list and preview calls returned HTTP 401. Verification used the existing volumes, account, submission records and files.
 
-The last local branch documentation (Nov 2) describes the preserved `aoms-local` Docker volumes, original submissions/private objects, one owner moderator with MFA, and a separate disposable gold-image fixture. The preserved local Windows/Docker environment is **not connected to this session**. No commands have been run there during this handoff.
-
-A non-destructive read-only SQL check now exists at `supabase/tests/moderator-owner-readonly.sql`. Run it **only against the same preserved isolated local database**. It reports aggregate state and action ordering without printing contributor data, UUIDs, captions or storage paths. Confirm the private object's original hash via the already-preserved local verification workflow, and independently test that anonymous HTTP reads remain denied. Do not reset the database or recreate the fixture to make a test pass.
+The isolated foundation, intake and moderation database suites passed again, along with 76 gateway/upload security tests, 29 mocked moderation browser checks, 23 submission browser checks, 15 Python tests and archive validation with zero errors or warnings. The live owner MFA flow was completed earlier. The disposable MFA suite requires an empty allowlist, so it was not rerun against the enrolled owner account.
 
 ## Current hosted boundary and drift
 
@@ -26,11 +24,8 @@ PR #18 currently changes only submissions/moderation/config/docs/tooling files a
 
 ## Recommended continuation, in order
 
-1. **Preserve and validate local state.** Reconnect to the existing `aoms-local` Windows/Docker stack; check original volumes, moderator enrollment/MFA, three preexisting submissions, original private object, and the disposable fixture before any service changes. Use the documented data-preserving restart procedure only; do not use `db reset`, `--no-backup` or delete volumes.
-2. **Close the owner workflow evidence gap.** Run `supabase/tests/moderator-owner-readonly.sql` locally using read-only `psql`, verify ordered immutable edit/approve/reject actions, final rejected state, absence of publication, private bucket/object presence, and independent original-file hash match. Verify anonymous preview/list denial. Record sanitized counts and checks in this doc or PR, **not** credentials, UUIDs or private captions.
-3. **Re-run applicable isolated tests** (intake/security, MFA, moderation, browser, archive). Do not run the disposable enrollment test against the occupied moderator allowlist; it explicitly refuses that state. Capture failures without altering original user data.
-4. **Reconcile pending implementation gates:** interruption/replay/expiry/cancellation and quotas; automatic cleanup/retention with auditing; resource limits/monitoring; owner password/MFA recovery; canonical ID cache sync; normalized approved-media publication through reviewable GitHub PRs; verified removals and reconciliation. Approval and publication remain distinct.
-5. **Only after review and explicit owner approval**, perform staged hosted DB/function deployment with backups and preservation comparisons; verify closed intake and no public access. Recheck the hosted project status and current function source first. Production intake remains disabled through this step.
-6. **Public release is a separate decision** after tests, privacy/consent review, operational readiness, and an explicit go/no-go. PR merge or a function deployment is not equivalent to public intake authorization.
+1. **Reconcile pending implementation gates:** interruption/replay/expiry/cancellation and quotas; automatic cleanup/retention with auditing; resource limits/monitoring; owner password/MFA recovery; canonical ID cache sync; normalized approved-media publication through reviewable GitHub PRs; verified removals and reconciliation. Approval and publication remain distinct.
+2. **Only after review and explicit owner approval**, perform staged hosted DB/function deployment with backups and preservation comparisons; verify closed intake and no public access. Recheck the hosted project status and current function source first. Production intake remains disabled through this step.
+3. **Public release is a separate decision** after tests, privacy/consent review, operational readiness, and an explicit go/no-go. PR merge or a function deployment is not equivalent to public intake authorization.
 
 This document intentionally contains no account credentials, recovery secrets, service keys, media content, or person-specific submission data.
