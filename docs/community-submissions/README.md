@@ -2,9 +2,9 @@
 
 Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
-**Continuation update (Nov 19):** See [resume-checkpoint-2026-11-19.md](resume-checkpoint-2026-11-19.md) for the owner-observed edit → approve → reject browser workflow, the still-unverified immutable audit/private-file read-back, the inactive hosted project status, and revised release gates. Earlier sections below are dated historical snapshots, not current deployment inventories.
+**November 19 update.** The [continuation checkpoint](resume-checkpoint-2026-11-19.md) records completed local moderation verification, the 115-event local database sync, and the hosted pause investigation. Hosted management lists `community-submit` v2 and the retrieved files match the original deployment source. The currently paused project's migration history and database intake switch could not be read.
 
-## Current state (2026-11-01)
+## Historical deployment snapshot (2026-11-01)
 
 See [operations.md](operations.md) for deployment, verification and non-destructive rollback commands; [local-staging.md](local-staging.md) for local start/stop. Historical test reports are dated evidence, not current deployment inventories.
 
@@ -22,7 +22,7 @@ Original `data/people.json`, `data/timeline.json`, `data/media.json`, assets, ro
 
 ## Moderator work started
 
-See [moderation.md](moderation.md) for the local moderator interface and controls and owner account setup. The moderator read/write functions and endpoint are installed only in the local Docker stack, with real Auth/MFA tests passing and owner enrollment complete. Edits, approve/reject, audit and conflict protection are locally implemented; see the dated verification section for live-test boundaries. Production moderation configuration remains disabled; production inventory above is unchanged.
+See [moderation.md](moderation.md) for the local moderator interface and controls and owner account setup. The moderator read/write functions and endpoint are installed only in the local Docker stack, with real Auth/MFA tests passing and owner enrollment complete. Edits, approve/reject, audit and conflict protection are locally implemented; see the dated verification section for live-test boundaries. The committed production moderation configuration remains disabled.
 
 ## Implemented
 

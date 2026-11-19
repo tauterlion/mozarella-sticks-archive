@@ -1,6 +1,6 @@
 # Isolated local staging
 
-## Current state (2026-11-01)
+## Services and configuration
 
 Docker project `aoms-local` is independent of hosted project `kvyrbtooynofijdtmqup`; never link it to production. Workspace `../work/aoms-local` is outside this repository and has an ignore-all `.gitignore`. Its secrets, generated gateway config and CLI status output must not be committed or printed.
 
@@ -12,7 +12,7 @@ Docker project `aoms-local` is independent of hosted project `kvyrbtooynofijdtmq
 | Studio | http://localhost:54323 |
 | PostgreSQL | localhost:54322 |
 
-Local intake was enabled for authorized tests and test submissions/objects remain. Production intake remains disabled. The three original migrations and 112-event/37-person cache are installed locally. Branch code includes the signed-TUS `/storage/v1/upload/resumable/sign` correction and Send-adjacent feedback; production v1 does not.
+Local intake is enabled for authorized tests. The database contains 115 canonical events and 37 people. The [November 19 checkpoint](resume-checkpoint-2026-11-19.md) records the additive event sync and hosted inventory. The local branch code includes the signed-TUS `/storage/v1/upload/resumable/sign` correction and Send-adjacent feedback.
 
 Verified October 31: real localhost Turnstile → batch → signed TUS transfer → server binary verification → pending receipt. A read-only lookup confirmed matching size/MIME, SHA-256, finalization timestamp and private object. No approval or publication occurred. A separate synthetic signed-TUS test confirmed exact bytes and denied public reads; that diagnostic object was removed via Storage API.
 
