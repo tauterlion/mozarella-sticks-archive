@@ -2,6 +2,8 @@
 
 Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
+**Continuation update (Nov 19):** See [resume-checkpoint-2026-11-19.md](resume-checkpoint-2026-11-19.md) for the owner-observed edit → approve → reject browser workflow, the still-unverified immutable audit/private-file read-back, the inactive hosted project status, and revised release gates. Earlier sections below are dated historical snapshots, not current deployment inventories.
+
 ## Current state (2026-11-01)
 
 See [operations.md](operations.md) for deployment, verification and non-destructive rollback commands; [local-staging.md](local-staging.md) for local start/stop. Historical test reports are dated evidence, not current deployment inventories.
