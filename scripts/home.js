@@ -8,17 +8,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const available = await MSArchive.availableMedia(data.media);
     document.querySelector('#media-stat').textContent = available.length;
     const ordered = MSArchive.orderedEvents(data.events);
-    const first = ordered[0];
     const last = ordered.at(-1);
-    document.querySelector('#archive-range').textContent = `${first.dateLabel} → ${last.dateLabel}`;
     document.querySelector('#latest-event').classList.remove('skeleton');
     document.querySelector('#latest-event').innerHTML = `
       <div class="latest-date">${MSArchive.escapeHtml(last.dateLabel)}</div>
       <div><h3>${MSArchive.escapeHtml(last.title)}</h3><p>${MSArchive.escapeHtml(last.summary)}</p></div>
       <a class="button secondary" href="event.html?id=${encodeURIComponent(last.id)}">Open event</a>`;
     const escape = MSArchive.escapeHtml;
-    const hero = available.find(item => item.id === 'statue-groupphoto') || available.find(item => item.type === 'image');
-    if(hero) document.querySelector('#hero-photo').innerHTML = '<a href="event.html?id='+encodeURIComponent(hero.eventId)+'"><img src="'+escape(hero.url)+'" alt="'+escape(hero.caption)+'" fetchpriority="high"></a><figcaption>'+escape(hero.caption)+'</figcaption>';
+    // The Revision 3.1 hero uses a fixed, authentic archive photo in index.html.
     document.querySelector('#featured-events').innerHTML = ['cheddar-becomes-mascot','graduation','nico-todd-peru-trip'].map(id => data.eventsById[id]).filter(Boolean).map(event => {
       const image = available.find(item => item.eventId === event.id && item.type === 'image');
       const href = 'event.html?id='+encodeURIComponent(event.id);

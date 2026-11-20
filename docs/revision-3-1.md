@@ -1,0 +1,86 @@
+# AoMS Revision 3.1 — Cinematic Homepage (first iteration)
+
+## Second iteration — 3.1.1
+
+Owner-requested refinements:
+
+- Seamless cross-theme photo-to-page transition (3.1.2): fade to the actual page background and mask film grain before the last pixel of the hero, eliminating the visible horizontal color seam.
+
+- Stronger, theme-aware fade across the bottom of the hero, with the unchanged original group photograph raised slightly.
+- Rounded, blurred glass Explore button.
+- A unified AoMS film-style header on all six main public pages (index, Timeline, Gallery, People, profile and event).
+- Slow 950–1080ms upward entrance fades for headings, thumbnails and event text, excluding the cinematic background photograph.
+- Small capped scroll-direction lag exclusively on the hero headline, stronger when scrolling upward. Other headings retain entrance fades only; reduced-motion preference disables both.
+
+## Final layout polish — 3.1.3
+
+- Make hero kicker, headline and subtitle somewhat smaller and closer to the top of the viewport.
+- Lift the unchanged photograph slightly higher, with responsive framing that leaves faces unobstructed by lettering.
+- Remove the repeated “THE”: “THE ARCHIVE OF” / “THE” / “MOZARELLA STICKS”.
+- Restrict inertial scrolling to the hero headline alone. All other headlines, thumbnails and event text retain only entrance fades.
+- Remove the redundant archive-range micro-section immediately after the statistics while preserving the counters.
+
+## Final atmospheric pass — 3.1.4
+
+- Remove the upper “THE ARCHIVE OF” eyebrow and reposition “THE / MOZARELLA STICKS / EST. 2024” to occupy the space with generous breathing room.
+- Previously planned below-the-fold Explore CTA has been removed in 3.1.5. The in-frame scroll arrow links to the statistics.
+- Lower the photo fade into the last quarter of the hero, clipping it to the photo/hero boundary so it does not create a seam or overshoot.
+- Add three ambient animated arcs and faint radial highlights behind the statistics, selected memories, photos, and latest entry. They use the archive theme's gold token and have reduced-motion fallbacks.
+- Keep all original archive data and community-submissions work untouched.
+
+## Motion and simplified entry — 3.1.5
+
+- Removed the **Explore the Archive** button and its standalone section entirely; the unobtrusive down arrow now links straight to the archive statistics.
+- The arc outlines now drift across the background every 12–18 seconds instead of 31–46 seconds, and each receives a slowly sweeping golden highlight for an observable sense of movement.
+- Highlight sweeps are CSS-only, noninteractive, behind real content, and disabled by `prefers-reduced-motion: reduce`.
+- Both light and dark palettes remain grounded in `var(--gold)`; images and historic archive data remain unchanged.
+
+## Release candidate image approval — November 1, 2026
+
+- **Final selected image:** The owner selected a higher-quality, authentic, unedited 2048×1365 landscape photo of the bonfire group. The original was optimized into a progressive JPEG without changing faces, and the owner uploaded it to the feature branch as `assets/media/aoms-3-1-hero-wide.jpg` (721,242 bytes).
+- **Image integrity:** SHA-256 `83db66393591cbd42fab79dff62b4ff7eaf88b211e6019ae3bfa7a84709c5d70` identifies the exact approved file. The structural homepage test verifies this digest; Chromium checks its natural dimensions and desktop/mobile framing.
+- **Photo framing:** The new landscape image moves slightly lower behind the cinematic title on desktop/tablet to leave faces unobstructed. Mobile uses a less aggressive 78% hero-height photograph, revealing more of the group.
+- **Release checks:** GitHub archive validation, structural test and dedicated Chromium smoke testing must all pass on the exact merge head. Community Submissions PR #18 must remain untouched and unmerged.
+
+## Scope
+
+Give the homepage a film-title opening. The first view uses a full-viewport authentic group photograph, prominent *MOZARELLA STICKS* title, consistent cinematic navigation, a tagline, and a small scroll arrow. The full CTA button has been removed. Existing archive content continues directly below the fold.
+
+## Source photo
+
+The canonical homepage hero is now `assets/media/aoms-3-1-hero-wide.jpg`, an owner-provided 2048×1365 unedited group photograph. It supersedes the earlier square edit used in interactive prototypes. Do not substitute synthetic faces or edit the original archive media.
+
+## Safe file boundaries
+
+- `index.html`: home-only markup, header treatment and persistent section anchors.
+- `styles/home.css`: cinematic hero, bottom fade, responsive presentation, and motion-visible background arcs behind archive sections; no Explore button.
+- `styles/shared.css`: shared film navigation and text-motion style.
+- `scripts/interactions.js`: progressive enhancement for accessible entrance reveals and capped scroll drift.
+- `timeline.html`, `gallery.html`, `people.html`, `person.html`, `event.html`: unify top navigation without modifying data or page-specific functional markup.
+- `scripts/home.js`: remove only the old dynamic hero selection; preserve all home data loads.
+- `tests/home-cinematic.cjs`: static integration guards.
+
+**Do not edit:** `data/*.json`, Supabase, files belonging to the Community Submissions feature branch, or PR #18. Developer-only `tools/` pages retain their existing utility layout.
+
+## Interaction
+
+- Branding links to the homepage; Timeline, Gallery and People retain their regular routes.
+- The in-hero scroll arrow uses a native `#inside-archive` link; no JavaScript required.
+- The shared theme toggle remains functional; both themes use an intentionally dark cinematic opening.
+- The shared skip link, headings, text alternative, keyboard focus and reduced-motion rules remain available.
+- The archive's existing cards, stats and latest entry still render from the source data.
+
+## Preview and acceptance checks
+
+1. Compare 16:9 desktop (1440×810 / 1600×900 / 1920×1080) against the approved visual direction.
+2. Check mobile widths (390 and 320 px), tablet, and short landscape viewports.
+3. Confirm every person remains visible as practical at desktop width; no AI changes to faces.
+4. Click scroll arrow, navigation and theme control; check keyboard focus.
+5. Run `node tests/home-cinematic.cjs`, `python tools/validate_archive.py --check-files` and the existing browser regression suite.
+6. Verify no console errors, blocked images, horizontal overflow, changed events, altered people, or missing Gallery media.
+7. Verify the animation runs when new Gallery/Timeline items are rendered after data loading, that captions remain readable while scrolling up/down, and that `prefers-reduced-motion` suppresses it.
+8. Merge only after owner approval and preview review. Do not merge PR #18 together with this redesign.
+
+## Future iterations (not yet included)
+
+Potential improvements to consider after review: more exact image positioning, photo-specific dark/light color grading, scroll reveal between opening and stats, mobile framing controls. Avoid automatic autoplay or slow unskippable intros.
