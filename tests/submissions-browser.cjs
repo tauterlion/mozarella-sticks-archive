@@ -46,7 +46,7 @@ const fixture=(name='memory.png')=>({name,mimeType:'image/png',buffer:png});
   check('original MP4 passes structural checks',inspectMedia(mp4,'video/mp4',mp4.length)==='video/mp4');
   // Explicit test-only network stubs: the repository config remains disabled.
   await page.route('**/data/submissions-config.json',r=>r.fulfill({json:{enabled:true,turnstileSitekey:'test-only',endpoint:base+'mock-intake'}}));
-  await page.route('https://challenges.cloudflare.com/**',r=>r.fulfill({contentType:'text/javascript',body:'window.turnstile={render:(s,o)=>{window.issueChallenge=()=>o.callback("test-token");setTimeout(window.issueChallenge,0);return 1;},reset:()=>window.issueChallenge?.()};'}));
+  await page.route('https://challenges.cloudflare.com/**',r=>r.fulfill({contentType:'text/javascript',body:'let index=0;window.turnstile={render:(s,o)=>{window.issueChallenge=()=>o.callback("test-token-"+(++index));setTimeout(window.issueChallenge,0);return 1;},reset:()=>window.issueChallenge?.()};'}));
   await page.route('**/scripts/vendor/tus-4.3.1.min.js',r=>r.fulfill({contentType:'text/javascript',body:'window.tus={Upload:class {constructor(f,o){this.options=o;}start(){window.transferAttempts=(window.transferAttempts||0)+1;setTimeout(()=>{if(window.transferAttempts===1)this.options.onError();else {this.options.onProgress(1,1);window.transferred=true;this.options.onSuccess();}},10);}abort(){return Promise.resolve();}}};'}));
   let authorized=0,completeCalls=0,receiptSent=false;const clientIDs=new Set();
   await page.route('**/mock-intake',async r=>{

@@ -18,6 +18,14 @@ To test the real widget locally, open `http://localhost:8766/submit.html`, fill 
 
 Run the browser harness with `AOMS_BROWSER_STORAGE_TEST=1` plus the existing `PLAYWRIGHT_MODULE` and `CHROME_BIN` settings. Invoke `node tests/submissions-transport-live.cjs` from the repository root. Unset the opt-in afterward. The harness requires the local Docker API on port 54321 and refuses nonlocal configuration.
 
+### Turnstile expiry follow-up
+
+A genuine local browser observation showed the expiry message after about ten minutes while the widget still appeared successful. The old callback path cleared its saved token, but the success callback did not clear the previous expiry message. That observation established expiry notification, while leaving automatic renewal unconfirmed.
+
+The UI now gives the challenge its own status and an accessible **Refresh security check** button. Cloudflare may renew automatically. The fallback resets the widget without touching the queued files or metadata. Token use is gated by provider expiry, a conservative 295-second client deadline, and a second check immediately before the batch request. Server-side Siteverify still rejects expired or invalid tokens. A valid new callback replaces the old warning with **Security check complete**.
+
+Fresh Chromium loaded the actual provider and observed the manual reset call return with no intake requests. An independent simulated-clock Chromium test advanced past expiry without the provider callback, verified no batch creation, then refreshed and confirmed the queue was preserved. The live 50 MiB transport and mocked browser suites were rerun. Full elapsed-time automatic renewal of the corrected build still needs a human observation. Existing tabs keep their in-memory file queues and their already loaded code. Leave such tabs open until ready to move the draft manually.
+
 ## Retention worker
 
 `20261120005042_submission_cleanup_leases` adds a service-only report/claim/complete RPC. It shares the intake transaction lock and locks eligible rows before claiming. A claim advances at most 200 expired open batches and removes at most 500 expired rate windows per run. It claims up to 10 exact-path objects for 10 minutes. A batch enters cleanup eligibility only after expiry plus 26 hours and the applicable abandoned or rejected retention period. Pending, approved, and published records are outside the cleanup set. Batches and submission/audit records are preserved, including cancelled and purged submissions. The older unleased cleanup path cannot update purge markers.

@@ -83,8 +83,8 @@ async function main(){
   const page=await browser.newPage();
   await page.route('https://challenges.cloudflare.com/**',r=>r.fulfill({contentType:'text/javascript',body:`
    let challenge,index=0;
-   window.turnstile={render:(s,o)=>{challenge=o;queueMicrotask(()=>o.callback('fixture-token-'+Date.now()+'-'+(++index)));return 0;},
-    reset:()=>setTimeout(()=>challenge.callback('fixture-token-'+Date.now()+'-'+(++index)),100)};
+   window.turnstile={render:(s,o)=>{challenge=o;queueMicrotask(()=>o.callback('fixture-token-'+crypto.randomUUID()+'-'+(++index)));return 0;},
+    reset:()=>setTimeout(()=>challenge.callback('fixture-token-'+crypto.randomUUID()+'-'+(++index)),100)};
    window.expireFixtureChallenge=()=>challenge['expired-callback']();`}));
   const resource=()=>execFile('docker',['stats','--no-stream','--format','{{.CPUPerc}}|{{.MemUsage}}|{{.NetIO}}|{{.BlockIO}}','supabase_storage_aoms-local'],{timeout:6000},(e,stdout)=>{if(!e)stats.push(stdout.trim());});
   resource();stopStats=setInterval(resource,2000);
@@ -115,8 +115,21 @@ async function main(){
   const data=fixture(limit);
   await prepare('browser-limit.png',data);
   await page.evaluate(()=>window.expireFixtureChallenge());
-  await page.getByText('The security check expired. Complete the refreshed check before sending.',{exact:true}).first().waitFor();
+  await page.getByText('The security check expired. Complete the new check or select Refresh security check.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#send-files').isDisabled(),true);
+  await page.getByRole('button',{name:'Refresh security check',exact:true}).click();
   await page.waitForFunction(()=>!document.querySelector('#send-files').disabled);
+  const heldSubmit=page.locator('#send-files');
+  const deadline=new Date(Date.now()+301000);
+  await page.clock.setFixedTime(deadline);
+  await page.evaluate(()=>document.querySelector('#submission-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
+  assert.equal(await heldSubmit.isDisabled(),true);
+  assert.equal((await db.query('select count(*)::int n from public.submission_batches')).rows[0].n,0);
+  assert.equal(await page.locator('.submission-file textarea').first().inputValue(),'Disposable transport integration');
+  await page.getByRole('button',{name:'Refresh security check',exact:true}).click();
+  await page.getByText('Security check complete.',{exact:true}).waitFor();
+  await page.waitForFunction(()=>!document.querySelector('#send-files').disabled);
+  console.log('PASS expired token cannot create a batch without the widget callback; manual renewal preserves the queue');
   console.log('PASS real browser refreshes fixture challenge after simulated expiry');
   const start=performance.now();
   await page.locator('#send-files').click();

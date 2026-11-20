@@ -2,7 +2,10 @@
 const $ = selector => document.querySelector(selector);
 const MAX = 52428800, TYPES = ['image/jpeg','image/png','image/webp','video/mp4','video/webm'];
 const files = [], references = new Set();
-let config, events, people, token = '', widget, capability, batch, busy = false;
+let config, events, people, challenge, widget, capability, batch, busy = false;
+let expiryTimer, previousToken;
+const challengeMaxAge = 295_000;
+const challengeStatus = text => { $('#challenge-status').textContent = text; };
 const message = text => { $('#selection-message').textContent = text; $('#send-status').textContent = text; };
 const errors = {
   intake_disabled:'Submissions are not open yet. Your files have not been sent.',
@@ -27,7 +30,39 @@ function node(tag, text, attrs = {}) { const el = document.createElement(tag); i
 function field(parent, title, tag, attrs = {}) { const label = node('label',title), input = node(tag,'',{'aria-label':title,...attrs}); label.append(input); parent.append(label); return input; }
 function checkbox(parent, title) { const label = node('label','',{class:'people-choice'}), input = node('input','',{type:'checkbox'}); label.append(input,node('span',title)); parent.append(label); return input; }
 function setStatus(item, text) { item.status.textContent = text; $('#send-status').textContent = `${item.file.name}: ${text}`; }
-function updateButton() { $('#send-files').disabled = !config?.enabled || !config.turnstileSitekey || !token && !batch || busy || !files.some(i=>!i.done && !i.terminal); }
+function freshToken() {
+  if (!challenge || Date.now() >= challenge.deadline || performance.now() >= challenge.monotonicDeadline) return '';
+  try { return window.turnstile?.isExpired?.(widget) ? '' : challenge.value; }
+  catch { return ''; }
+}
+function updateButton() {
+  $('#send-files').disabled = !config?.enabled || !config.turnstileSitekey || (!batch && !freshToken()) || busy || !files.some(i=>!i.done && !i.terminal);
+  $('#refresh-challenge').hidden = !config?.enabled || widget == null || Boolean(batch);
+  $('#refresh-challenge').disabled = busy;
+}
+function invalidateChallenge() {
+  clearTimeout(expiryTimer);
+  if (challenge) previousToken=challenge.value;
+  challenge=null;
+}
+function expireChallenge() {
+  invalidateChallenge();
+  if (!batch) challengeStatus('The security check expired. Complete the new check or select Refresh security check.');
+  updateButton();
+}
+function refreshChallenge() {
+  invalidateChallenge();updateButton();
+  if (widget == null) return;
+  challengeStatus('Refreshing the security check…');
+  try { window.turnstile.reset(widget); }
+  catch { challengeStatus('The check could not refresh. Select Refresh security check to try again.'); }
+}
+$('#refresh-challenge').addEventListener('click',refreshChallenge);
+function checkChallengeAge() {
+  if (challenge && !freshToken()) expireChallenge();
+}
+window.addEventListener('focus',checkChallengeAge);
+document.addEventListener('visibilitychange',checkChallengeAge);
 function metadata(item) {
   const proposed = item.event.value === '__propose';
   return { clientFileId:item.clientId,filename:item.file.name,mime:item.file.type,size:item.file.size,
@@ -175,7 +210,7 @@ async function rollover() {
     } else throw new Error(errors.recovery_unavailable);
   }
   // A fresh challenge is required for a fresh batch. Keep the queue and receipts.
-  batch=null;capability=null;token='';window.turnstile?.reset(widget);
+  batch=null;capability=null;refreshChallenge();
   message(files.some(i=>!i.done&&!i.terminal)
     ? 'Complete a new security check, then use Send for review to continue the remaining files.'
     : 'All remaining files have been checked.');
@@ -189,7 +224,8 @@ for(const name of ['dragenter','dragover'])$('#drop-zone').addEventListener(name
 $('#drop-zone').addEventListener('dragleave',()=>$('#drop-zone').classList.remove('dragging'));
 $('#drop-zone').addEventListener('drop',e=>{e.preventDefault();$('#drop-zone').classList.remove('dragging');if(events)choose(e.dataTransfer.files);});
 $('#submission-form').addEventListener('submit',async e=>{
-  e.preventDefault();if(busy || !config.enabled || !$('#consent').checked)return;
+  e.preventDefault();if(busy || !config?.enabled || !$('#consent').checked)return;
+  if(!batch && !freshToken()){ expireChallenge(); return; }
   const queue=files.filter(i=>!i.done&&!i.terminal);
   if(!queue.length)return;
   for(const item of queue)if(!item.none.checked&&!item.tags.some(t=>t.input.checked)){message(`Select people or “No people to tag” for ${item.file.name}.`);item.none.focus();return;}
@@ -201,8 +237,14 @@ $('#submission-form').addEventListener('submit',async e=>{
       capability ||= Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
       // Resume recovers a lost batch response without consuming a second token.
       try {batch=await api('resume');} catch(e){if(e.code!=='batch_expired')throw e;}
-      if(!batch)batch=await api('batch',{token,consent:true});
-      token='';
+      if(!batch) {
+        // The lookup above can outlast token expiry. Recheck just before sending.
+        const token=freshToken();
+        if(!token){expireChallenge();message('Complete a fresh security check before sending.');return;}
+        invalidateChallenge();
+        batch=await api('batch',{token,consent:true});
+      }
+      invalidateChallenge();challengeStatus('');
     }
     // Sequential transfer is intentional: minimal mobile bandwidth/memory and
     // one server-side validation at a time. The database permits up to three.
@@ -216,7 +258,7 @@ $('#submission-form').addEventListener('submit',async e=>{
       try { await rollover(); } catch(recoveryError) {message(recoveryError.message);}
     } else {
       message(e.message);
-      if(e.code==='captcha_failed') { token='';window.turnstile?.reset(widget); }
+      if(e.code==='captcha_failed' || (!batch && !freshToken())) refreshChallenge();
     }
   }
   finally {busy=false;updateButton();}
@@ -230,10 +272,25 @@ try {
   if(config.enabled&&config.turnstileSitekey) {
     $('#intake-notice').textContent='Files are sent to a private inbox. Nothing appears in the Gallery without review.';
     const script=document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;
-    script.onload=()=>{widget=window.turnstile.render('#turnstile',{sitekey:config.turnstileSitekey,action:'aoms_submission',theme:'auto','refresh-expired':'manual',callback:value=>{token=value;updateButton();},'expired-callback':()=>{
-      token='';updateButton();
-      if(!batch && !busy){message('The security check expired. Complete the refreshed check before sending.');window.turnstile.reset(widget);}
-    },'error-callback':()=>{token='';message('The security check could not load. Please retry later.');updateButton();}});};
+    script.onload=()=>{
+      widget=window.turnstile.render('#turnstile',{
+        sitekey:config.turnstileSitekey,action:'aoms_submission',theme:'auto','refresh-expired':'auto',
+        callback:value=>{
+          if(batch || !value || value===previousToken || value===challenge?.value)return;
+          invalidateChallenge();
+          challenge={value,deadline:Date.now()+challengeMaxAge,monotonicDeadline:performance.now()+challengeMaxAge};
+          expiryTimer=setTimeout(expireChallenge,challengeMaxAge);
+          challengeStatus('Security check complete.');updateButton();
+        },
+        'expired-callback':expireChallenge,
+        'error-callback':()=>{
+          invalidateChallenge();
+          if(!batch) challengeStatus('The security check could not load. Select Refresh security check to retry.');
+          updateButton();
+        }
+      });
+      updateButton();
+    };
     script.onerror=()=>message('The security check could not load. Submissions remain unavailable.');document.head.append(script);
   }
 } catch {message('The archive details could not load. Refresh to try again.');$('#files').disabled=true;}

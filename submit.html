@@ -42,6 +42,8 @@
         <label class="consent-check"><input id="consent" type="checkbox" required><span>I am allowed to share these files, have considered the people shown, and understand that Alejandro will review them for possible public publication.</span></label>
         <p class="submission-small">Files stay private during review. Technical anti-abuse checks are processed by Cloudflare and our storage provider. The form does not collect names, emails or IP addresses in archive records. Service providers may process connection information.</p>
         <div id="turnstile"></div>
+        <p id="challenge-status" role="status" aria-live="polite"></p>
+        <button id="refresh-challenge" class="button" type="button" hidden>Refresh security check</button>
         <button id="send-files" class="button" type="submit" disabled>Send for review</button>
         <p id="send-status" role="status" aria-live="polite"></p>
         <p class="submission-small">Keep this page open until you see your reference. Reloading clears the queue and cannot resume an unfinished upload. If a response was lost, retry from this page before selecting the same file again.</p>
@@ -54,6 +56,6 @@
   <script src="scripts/shared.js?v=2.1" defer></script>
   <script src="scripts/interactions.js" defer></script>
   <script src="scripts/vendor/tus-4.3.1.min.js" defer></script>
-  <script src="scripts/submissions.js?v=20261119.5" type="module"></script>
+  <script src="scripts/submissions.js?v=20261119.6" type="module"></script>
 </body>
 </html>
