@@ -43,7 +43,7 @@ const root=path.resolve(__dirname,'..'),output=path.resolve(root,'../outputs/com
   check('preview can load after authorization',await page.locator('#preview img').count()===1);
   check('no publication button',await page.getByRole('button',{name:/^Publish/}).count()===0);
   check('all canonical people editable',await page.locator('#edit-people input').count()===37);
-  check('all canonical events editable',await page.locator('#edit-event option').count()===113);
+  check('all canonical events editable',await page.locator('#edit-event option').count()===116);
   fs.mkdirSync(output,{recursive:true});
   for(const theme of ['dark','light'])for(const mobile of [false,true]) {
    await page.setViewportSize(mobile?{width:390,height:844}:{width:1440,height:1000});await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.waitForTimeout(350);
