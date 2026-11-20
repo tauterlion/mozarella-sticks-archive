@@ -2,7 +2,7 @@
 
 Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
-**November 19 update.** The [continuation checkpoint](resume-checkpoint-2026-11-19.md) records completed local moderation verification, the 115-event local database sync, and the hosted pause investigation. Hosted management lists `community-submit` v2 and the retrieved files match the original deployment source. The currently paused project's migration history and database intake switch could not be read.
+**November 19 update.** The [continuation checkpoint](resume-checkpoint-2026-11-19.md) records completed local moderation verification, the 115-event local catalog sync, and the approved hosted resume. The hosted project is healthy, its database intake is disabled, and its private bucket and three migrations match the recorded baseline. Hosted `community-submit` is version 3 with the historical source. The signed-TUS correction and moderation remain local.
 
 ## Historical deployment snapshot (2026-11-01)
 
