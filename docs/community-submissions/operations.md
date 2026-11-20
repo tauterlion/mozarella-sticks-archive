@@ -34,7 +34,7 @@ Last completed baseline: 45 SQL security checks, 25 intake database checks, 37 r
 node supabase/tests/closed-intake.mjs
 ```
 
-`verify_jwt=false` is intentional for anonymous intake; the handler enforces CAPTCHA and capabilities. Do not use `--prune`. Defaults in the closed-intake test target production and require intake to be OFF. Verify all nine checks, run security advisors, and compare preservation snapshots. A successful deploy does not enable intake or authorize merging.
+`verify_jwt=false` is intentional for anonymous intake; the handler enforces CAPTCHA and capabilities. Do not use `--prune`. Defaults in the closed-intake test target production and require intake to be OFF. Verify all ten checks, run security advisors, and compare preservation snapshots. A successful deploy does not enable intake or authorize merging.
 
 Read-only snapshot SQL (run as operator in the selected project):
 

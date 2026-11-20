@@ -4,6 +4,8 @@ Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
 **November 19 update.** The [continuation checkpoint](resume-checkpoint-2026-11-19.md) records completed local moderation verification, the 115-event local catalog sync, and the approved hosted resume. The hosted project is healthy, its database intake is disabled, and its private bucket and three migrations match the recorded baseline. Hosted `community-submit` is version 3 with the historical source. The signed-TUS correction and moderation remain local.
 
+The [Milestone 4 controlled rollout review](controlled-rollout.md) records local lifecycle tests, migration order, partial-failure handling, and remaining checks before any hosted change.
+
 ## Historical deployment snapshot (2026-11-01)
 
 See [operations.md](operations.md) for deployment, verification and non-destructive rollback commands; [local-staging.md](local-staging.md) for local start/stop. Historical test reports are dated evidence, not current deployment inventories.
@@ -45,7 +47,7 @@ Signed tokens last up to two hours and TUS upload URLs can last 24 hours. Reissu
 
 Structural checks are not full media decoding, malware detection or content moderation. All five formats are inspected; animated WebP/APNG and malformed containers are rejected. Supported MP4 visual sample entries are AVC, HEVC, VP9 and AV1. Some valid but unusual encodings may require conversion. Never publish originals directly: the later publishing worker must fully decode/normalize, remove GPS and unnecessary metadata, and revalidate after moderator approval. Heavy video conversion does not belong in the constrained Edge runtime.
 
-No lifetime file-count limit is imposed in the picker, but capacity is finite. The current form asks the visitor to reload and choose only unfinished files after a 2-hour session expires. Automatic challenge renewal and queue rollover remain unfinished; do not advertise seamless unattended multi-hour queues.
+No lifetime file-count limit is imposed in the picker, but capacity is finite. The form keeps its queue in memory across batch expiry. It reconciles the previous receipt before retrying unfinished files and requires a fresh challenge before a new batch. Reloading still discards the in-memory queue, and unattended multi-hour queues are unsupported.
 
 ## Verification
 
@@ -76,8 +78,8 @@ Screenshots are generated outside the repository under `outputs/community-submis
 1. Completed: approved migration applied, filename reconciled to hosted history, hosted SQL security checks/advisors rerun. Do not modify already-applied migrations.
 2. Completed: `community-submit` deployed using the checked-in config (`verify_jwt=false` only for this intentionally anonymous, application-authenticated endpoint). Database switch remains false; live closed-intake rejection verified.
 3. Production and localhost Turnstile widgets are configured; the public production sitekey is in the disabled static config. The owner manages `TURNSTILE_SECRET_KEY` in Edge secrets. Correctness of the production secret is not yet verified by a positive production challenge. Defaults: `SUBMISSIONS_ORIGIN=https://tauterlion.github.io`, `TURNSTILE_HOSTNAME=tauterlion.github.io`; Supabase injects `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. No secrets in Git or chat.
-4. Continue isolated Docker staging while production remains off. Real local CAPTCHA and signed-token TUS finalization passed. Remaining coverage: replay/expiry; overwrite/cross-path attempts; real 50 MiB and oversize files; interruption/cancel/retry; quota/concurrency; memory/CPU/egress; late-token cleanup and deletion confirmation; anonymous read/list/preview denial. Establish automated cleanup, capacity alarms and operator monitoring.
-5. Finish automatic queue rollover and the remaining cancellation race/long-queue browser tests. A cancelled transfer remains private and reserved until cleanup, but live TUS cancellation behavior is not yet proven.
+4. Continue isolated Docker staging while production remains off. Real local CAPTCHA and signed-token TUS finalization passed. See the Milestone 4 rollout review for the completed 50 MiB, concurrency, scope and privacy tests. Remaining live gates include wall-clock token expiry, cancellation/rollover with a real browser transfer, sustained memory/CPU/egress, and a scheduled cleanup test across the late-token and retention windows. Establish capacity alarms and operator monitoring.
+5. Exercise the implemented queue rollover and cancellation handling with real challenges and interrupted transfers in isolated staging. A cancelled transfer remains private and reserved until cleanup, but live TUS cancellation behavior is not yet proven.
 6. Complete Alejandro-only authentication/moderation, signed private previews, verified takedown intake, metadata normalization and the explicit GitHub PR publishing/reconciliation pipeline. Operator-managed moderator enrollment is still required. Approval alone must never mark an item published.
 7. Complete privacy/consent review, retention/incident runbook and all release acceptance tests. GitHub Pages cannot serve Git LFS objects; the proposed public derivative limit is 25 MiB even though private intake allows 50 MiB. Larger accepted files require processing/hold, not automatic git publication.
 8. Only after all gates pass, request release approval before merging. Then enable the database switch and static config and add the Gallery CTA. No friends-only beta is required.
