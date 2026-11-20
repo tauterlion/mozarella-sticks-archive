@@ -66,7 +66,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   const rejected=await write('reject',rejection);check('approved submission can be rejected',rejected.status,'rejected');check('reject retry idempotent',await write('reject',rejection),rejected);
   check('reason private and preserved',(await read('detail',{id:upload.id})).item.review_notes,'Disposable test only');
   await db.exec('savepoint immutable_audit');await assert.rejects(db.exec('delete from public.submission_moderation_actions'),/permission denied/);await db.exec('rollback to immutable_audit');checks++;
-  await db.exec(`update public.media_submissions set storage_purge_started_at=now() where id='${upload.id}'`);
+  await db.exec(`update public.media_submissions set storage_purge_started_at=now(),storage_purge_lease=gen_random_uuid(),storage_purge_lease_until=now()+interval '10 minutes' where id='${upload.id}'`);
   check('purging object cannot get preview',(await read('preview',{id:upload.id})).error,'not_found');
   await db.exec("reset role; update auth.sessions set aal='aal1'; set role service_role");
   check('password-only session cannot mutate',(await write('approve',{id:upload.id,version:1,requestId:other})).error,'forbidden');

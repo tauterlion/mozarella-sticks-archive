@@ -13,6 +13,7 @@ create table storage.objects (id uuid primary key default gen_random_uuid(),buck
 alter table storage.objects enable row level security;
 grant usage on schema public,storage to anon,authenticated,service_role;
 grant select,insert,update,delete on storage.objects to anon,authenticated;
+grant select on storage.objects to service_role;
 create table public.media_submissions (
  id uuid primary key default gen_random_uuid(),created_at timestamptz not null default now(),
  submitted_by uuid references auth.users(id) on delete set null,
