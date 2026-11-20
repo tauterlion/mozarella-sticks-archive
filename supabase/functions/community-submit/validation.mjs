@@ -16,13 +16,14 @@ export function validateRequest(body) {
   const fields = {
     batch: ['token', 'consent'], resume: [],
     authorize: ['clientFileId', 'filename', 'mime', 'size', 'caption', 'eventId', 'people', 'noPeople', 'proposedTitle', 'proposedDate', 'proposedDetails', 'consent'],
-    complete: ['id'], cancel: ['id']
+    recover: ['clientFileId'], complete: ['id'], cancel: ['id']
   };
   requireThat(Object.hasOwn(fields, body.action));
   requireThat(Object.keys(body).every(k => [...common, ...fields[body.action]].includes(k)));
   requireThat(typeof body.capability === 'string' && /^[0-9a-f]{64}$/.test(body.capability));
   if (body.action === 'batch') requireThat(string(body.token, 2048) && body.consent === true);
   if (['complete', 'cancel'].includes(body.action)) requireThat(uuid(body.id));
+  if (body.action === 'recover') requireThat(uuid(body.clientFileId));
   if (body.action !== 'authorize') return body;
   requireThat(uuid(body.clientFileId) && body.consent === true);
   requireThat(string(body.filename, 200) && !/[\\/\r\n]/.test(body.filename));

@@ -15,7 +15,7 @@ export function createHandler({ origin, hostname, turnstileSecret, rpc, sign, do
       // This committed call gates every operation and counts malformed requests too.
       const call = async (action, payload = {}) => {
         const data = await rpc(action, payload);
-        if (data.error) throw new IntakeError(data.error, ({intake_disabled:503, rate_limited:429, quota_exhausted:429, busy:409, batch_expired:401, upload_unavailable:404})[data.error] || 400);
+        if (data.error) throw new IntakeError(data.error, ({intake_disabled:503, rate_limited:429, quota_exhausted:429, busy:409, batch_expired:401, upload_unavailable:404, recovery_unavailable:409})[data.error] || 400);
         return data;
       };
       await call('tick');
@@ -34,6 +34,7 @@ export function createHandler({ origin, hostname, turnstileSecret, rpc, sign, do
         return reply(await call('batch', { capabilityHash, captchaHash: await sha256(body.token) }));
       }
       if (body.action === 'resume') return reply(await call('resume', { capabilityHash }));
+      if (body.action === 'recover') return reply(await call('recover', { capabilityHash, clientFileId: body.clientFileId }));
       if (body.action === 'authorize') {
         const { action: _action, capability: _capability, ...metadata } = body;
         const item = await call('authorize', { ...metadata, capabilityHash });

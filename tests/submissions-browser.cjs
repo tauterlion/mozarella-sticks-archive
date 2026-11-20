@@ -15,7 +15,7 @@ const fixture=(name='memory.png')=>({name,mimeType:'image/png',buffer:png});
   await page.goto(base+'submit.html');await page.waitForFunction(()=>document.querySelector('#files')&&!document.querySelector('#files').disabled);
   await page.waitForTimeout(200);
   await page.locator('#files').setInputFiles(fixturePath);await page.locator('.submission-file').waitFor();
-  check('all 112 events and proposal are available',await page.locator('.submission-file select option').count()===114);
+  check('all 115 events and proposal are available',await page.locator('.submission-file select option').count()===117);
   check('all 37 canonical people are available',await page.locator('.submission-people input').count()===37);
   await page.locator('#files').setInputFiles(fixturePath);check('duplicate selection rejected',await page.locator('.submission-file').count()===1);
   await page.locator('#files').setInputFiles([fixture('second.png')]);
@@ -46,7 +46,7 @@ const fixture=(name='memory.png')=>({name,mimeType:'image/png',buffer:png});
   check('original MP4 passes structural checks',inspectMedia(mp4,'video/mp4',mp4.length)==='video/mp4');
   // Explicit test-only network stubs: the repository config remains disabled.
   await page.route('**/data/submissions-config.json',r=>r.fulfill({json:{enabled:true,turnstileSitekey:'test-only',endpoint:base+'mock-intake'}}));
-  await page.route('https://challenges.cloudflare.com/**',r=>r.fulfill({contentType:'text/javascript',body:'window.turnstile={render:(s,o)=>{setTimeout(()=>o.callback("test-token"),0);return 1;},reset:()=>{}};'}));
+  await page.route('https://challenges.cloudflare.com/**',r=>r.fulfill({contentType:'text/javascript',body:'window.turnstile={render:(s,o)=>{window.issueChallenge=()=>o.callback("test-token");setTimeout(window.issueChallenge,0);return 1;},reset:()=>window.issueChallenge?.()};'}));
   await page.route('**/scripts/vendor/tus-4.3.1.min.js',r=>r.fulfill({contentType:'text/javascript',body:'window.tus={Upload:class {constructor(f,o){this.options=o;}start(){window.transferAttempts=(window.transferAttempts||0)+1;setTimeout(()=>{if(window.transferAttempts===1)this.options.onError();else {this.options.onProgress(1,1);window.transferred=true;this.options.onSuccess();}},10);}abort(){return Promise.resolve();}}};'}));
   let authorized=0,completeCalls=0,receiptSent=false;const clientIDs=new Set();
   await page.route('**/mock-intake',async r=>{
@@ -71,6 +71,53 @@ const fixture=(name='memory.png')=>({name,mimeType:'image/png',buffer:png});
   await page.locator('.submission-file').getByLabel('Caption',{exact:true}).fill('A memory');await page.locator('.submission-file').getByLabel('Event',{exact:true}).selectOption('closeup-departure');await page.locator('.submission-file').getByLabel('No people to tag').check();await page.locator('#consent').check();
   await page.locator('#send-files').click();await page.getByText('This upload session expired.',{exact:false}).first().waitFor();
   check('expired permission shows recovery without transferring',await page.evaluate(()=>!window.transferAttempts));
+  const queueCalls=[];
+  let batches=0, firstFile;
+  await page.route('**/mock-intake',async r=>{
+    const body=r.request().postDataJSON();queueCalls.push(body);
+    if (body.action==='resume') return r.fulfill({status:401,json:{error:'batch_expired'}});
+    if (body.action==='batch') { batches++;return r.fulfill({json:{receipt:'queue-'+batches,expiresAt:new Date(Date.now()+7200000).toISOString()}}); }
+    if (body.action==='authorize' && batches===1) {
+      firstFile=body.clientFileId;
+      return r.fulfill({json:{id:'11111111-1111-4111-8111-111111111111'}});
+    }
+    if (body.action==='complete') return r.fulfill({status:401,json:{error:'batch_expired'}});
+    if (body.action==='recover') return r.fulfill({json:{status:'received',receipt:'queue-1'}});
+    return r.fulfill({json:{status:'pending',receipt:'queue-2'}});
+  });
+  await page.reload();await page.locator('#files').setInputFiles([fixture('old-batch.png'),fixture('remaining.png')]);
+  for (const item of await page.locator('.submission-file').all()) {
+    await item.getByLabel('Caption',{exact:true}).fill('Queue fixture');
+    await item.getByLabel('Event',{exact:true}).selectOption('halloween-sleepovers-2026');
+    await item.getByLabel('No people to tag').check();
+  }
+  await page.locator('#consent').check();await page.locator('#send-files').click();
+  await page.getByText('Complete a new security check, then use Send for review to continue the remaining files.',{exact:true}).first().waitFor();
+  check('rollover recovers the old receipt before offering a new batch',queueCalls.some(x=>x.action==='recover'&&x.clientFileId===firstFile)&&await page.locator('#receipt-reference').textContent()==='Reference: queue-1');
+  await page.locator('#send-files').click();await page.getByText('References: queue-1, queue-2',{exact:true}).waitFor();
+  const issued=queueCalls.filter(x=>x.action==='batch');
+  check('long queue continues under a fresh capability without resending received file',issued.length===2&&issued[0].capability!==issued[1].capability&&queueCalls.filter(x=>x.action==='authorize'&&x.clientFileId===firstFile).length===1);
+
+  let releaseAuthorization, waitForAuthorization;
+  const authorizedGate=new Promise(resolve=>{releaseAuthorization=resolve;});
+  const started=new Promise(resolve=>{waitForAuthorization=resolve;});
+  const cancelActions=[];
+  await page.route('**/mock-intake',async r=>{
+    const body=r.request().postDataJSON();cancelActions.push(body.action);
+    if (body.action==='resume')return r.fulfill({status:401,json:{error:'batch_expired'}});
+    if (body.action==='batch')return r.fulfill({json:{expiresAt:new Date(Date.now()+7200000).toISOString()}});
+    if (body.action==='authorize') { waitForAuthorization();await authorizedGate;return r.fulfill({json:{id:'11111111-1111-4111-8111-111111111111'}}); }
+    return r.fulfill({json:{status:'failed'}});
+  });
+  await page.reload();await page.locator('#files').setInputFiles(fixture('cancel.png'));
+  const cancellation=page.locator('.submission-file');
+  await cancellation.getByLabel('Caption',{exact:true}).fill('Cancel fixture');
+  await cancellation.getByLabel('Event',{exact:true}).selectOption('closeup-departure');
+  await cancellation.getByLabel('No people to tag').check();await page.locator('#consent').check();
+  await page.locator('#send-files').click();await started;
+  await cancellation.getByRole('button',{name:'Cancel',exact:true}).click();releaseAuthorization();
+  await cancellation.getByText('Cancelled. The private upload will be cleaned up.').waitFor();
+  check('cancel during authorization sends one cancellation and never transfers',cancelActions.filter(x=>x==='cancel').length===1&&!cancelActions.includes('complete')&&await page.evaluate(()=>!window.transferAttempts));
   check('no browser exceptions',errors.length===0);
   fs.writeFileSync(path.join(output,'browser-results.json'),JSON.stringify({checks,errors,mode:'local browser; mocked Turnstile, gateway and TUS transport'},null,2));
   console.log(`${checks} submission browser checks passed; screenshots: ${output}`);

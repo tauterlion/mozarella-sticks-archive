@@ -1,9 +1,10 @@
-// Read-only closed-intake smoke test. Never enables intake or uploads files.
+// Verify the database switch is off before running. POST checks can exercise
+// the rate counter if intake is unexpectedly enabled.
 import assert from 'node:assert/strict';
 const endpoint=process.env.INTAKE_TEST_ENDPOINT || 'https://kvyrbtooynofijdtmqup.supabase.co/functions/v1/community-submit';
 const origin=process.env.INTAKE_TEST_ORIGIN || 'https://tauterlion.github.io';
 const capability='0'.repeat(64);
-for(const action of ['batch','resume','authorize','complete','cancel']) {
+for(const action of ['batch','resume','authorize','complete','cancel','recover']) {
  const response=await fetch(endpoint,{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify({action,capability}),signal:AbortSignal.timeout(30000)});
  assert.equal(response.status,503,action);assert.deepEqual(await response.json(),{error:'intake_disabled'});
  assert.equal(response.headers.get('access-control-allow-origin'),origin);
@@ -20,4 +21,4 @@ const preflight=await fetch(endpoint,{method:'OPTIONS',headers:{origin,'Access-C
 assert.equal(preflight.status,204);console.log('PASS allowed preflight');
 const get=await fetch(endpoint,{headers:{origin},signal:AbortSignal.timeout(30000)});
 assert.equal(get.status,405);console.log('PASS GET denied');
-console.log('9 live closed-intake checks passed; no upload capabilities issued');
+console.log('10 live closed-intake checks passed; no upload capabilities issued');

@@ -13,8 +13,13 @@ Deno.serve(createHandler({
   hostname: Deno.env.get('TURNSTILE_HOSTNAME') || 'tauterlion.github.io',
   turnstileSecret: Deno.env.get('TURNSTILE_SECRET_KEY'),
   async rpc(action: string, payload: object) {
-    const response = await fetch(`${url}/rest/v1/rpc/submission_intake`, {
-      method: 'POST', headers, body: JSON.stringify({ action, payload }), signal: AbortSignal.timeout(10000)
+    const recovery = payload as { capabilityHash?: string; clientFileId?: string };
+    const rpc = action === 'recover' ? 'submission_expired_outcome' : 'submission_intake';
+    const args = action === 'recover'
+      ? { capability_hash: recovery.capabilityHash, client_file_id: recovery.clientFileId }
+      : { action, payload };
+    const response = await fetch(`${url}/rest/v1/rpc/${rpc}`, {
+      method: 'POST', headers, body: JSON.stringify(args), signal: AbortSignal.timeout(10000)
     });
     if (!response.ok) {
       if (response.status === 400 || response.status === 409) throw new IntakeError('invalid_request');

@@ -9,7 +9,8 @@ const errors = {
   quota_exhausted:'The private inbox is at capacity. Please try again later.',
   rate_limited:'The archive is receiving too many requests. Please wait a minute and retry.',
   busy:'Another file is being checked. Please wait a moment and retry.',
-  batch_expired:'This upload session expired. Completed files remain submitted. Reload and choose only the files that were not completed.',
+  batch_expired:'This upload session expired. Checking which files can continue…',
+  recovery_unavailable:'An earlier file could not be confirmed. Keep this page open and retry the check before resending it.',
   captcha_failed:'The security check expired or failed. Please complete it again.',
   invalid_media:'This file did not pass the media checks. It has not been submitted for review.',
   invalid_request:'Please check the caption, event and people selections. The request was not accepted.',
@@ -26,7 +27,7 @@ function node(tag, text, attrs = {}) { const el = document.createElement(tag); i
 function field(parent, title, tag, attrs = {}) { const label = node('label',title), input = node(tag,'',{'aria-label':title,...attrs}); label.append(input); parent.append(label); return input; }
 function checkbox(parent, title) { const label = node('label','',{class:'people-choice'}), input = node('input','',{type:'checkbox'}); label.append(input,node('span',title)); parent.append(label); return input; }
 function setStatus(item, text) { item.status.textContent = text; $('#send-status').textContent = `${item.file.name}: ${text}`; }
-function updateButton() { $('#send-files').disabled = !config?.enabled || !config.turnstileSitekey || !token && !batch || busy || !files.some(i=>!i.done && !i.cancelled); }
+function updateButton() { $('#send-files').disabled = !config?.enabled || !config.turnstileSitekey || !token && !batch || busy || !files.some(i=>!i.done && !i.terminal); }
 function metadata(item) {
   const proposed = item.event.value === '__propose';
   return { clientFileId:item.clientId,filename:item.file.name,mime:item.file.type,size:item.file.size,
@@ -72,11 +73,22 @@ function addFile(file) {
   } message('Details copied to all files that have not started uploading.');});
   const remove = node('button','Remove',{type:'button'});
   remove.addEventListener('click',async()=>{
-    item.cancelled=true;
-    if(item.running) {item.cancelled=true; await item.upload?.abort();item.abortTransfer?.();}
-    if(item.id && !item.done) {try {await api('cancel',{id:item.id});item.cancelled=true;} catch(e){setStatus(item,e.message);item.cancelled=false;return;}}
-    if(item.running) {setStatus(item,'Cancelled. The private upload will be cleaned up.');return;}
-    URL.revokeObjectURL(item.objectURL);files.splice(files.indexOf(item),1);card.remove();updateButton();
+    if (item.done || item.terminal || !item.attempted && !item.running) {
+      URL.revokeObjectURL(item.objectURL); files.splice(files.indexOf(item),1); card.remove(); updateButton();
+      return;
+    }
+    if (item.finalizing || item.cancelRequested) return;
+    item.cancelRequested = true;
+    remove.disabled = true;
+    setStatus(item,'Cancelling…');
+    if (item.running) {
+      await item.upload?.abort().catch(()=>{});
+      item.abortTransfer?.();
+      return;
+    }
+    try { await cancelItem(item); }
+    catch(e) { setStatus(item,e.message); }
+    finally { updateButton(); }
   });
   item.remove = remove; item.apply = apply;
   actions.append(apply,remove);card.append(item.progress,item.status,actions);$('#submission-files').append(card);files.push(item);updateButton();return '';
@@ -89,36 +101,81 @@ function transfer(item, upload) {
       metadata:{bucketName:upload.bucket,objectName:upload.path,contentType:upload.mime,cacheControl:'3600'},
       onProgress:(sent,total)=>{item.progress.value=sent/total*100;setStatus(item,`Uploading · ${Math.round(sent/total*100)}%`);},
       onError:()=>reject(new Error('Transfer interrupted. Retry to continue this file.')),onSuccess:resolve};
-    if (item.upload) {item.upload.options.onSuccess=resolve;item.upload.options.onError=options.onError;}
+    if (item.upload) Object.assign(item.upload.options, { headers: options.headers, onSuccess: resolve, onError: options.onError });
     else item.upload=new tus.Upload(item.file,options);
     item.abortTransfer=()=>reject(new Error('Upload cancelled.'));
     item.upload.start();
   });
 }
+async function cancelItem(item) {
+  if (!item.id) {
+    setStatus(item,'Cancellation requested. Use Send for review to reconcile the earlier request first.');
+    return;
+  }
+  await api('cancel',{id:item.id});
+  markStopped(item,'Cancelled. The private upload will be cleaned up.');
+}
+function markStopped(item,status) {
+  item.terminal=true;item.remove.disabled=false;item.remove.textContent='Remove from this page';
+  setStatus(item,status);
+}
+async function finalize(item) {
+  item.finalizing=true;item.remove.disabled=true;
+  try { return await api('complete',{id:item.id}); }
+  finally { item.finalizing=false;item.remove.disabled=Boolean(item.cancelRequested); }
+}
 async function sendItem(item) {
-  item.running=true;item.locked=true;item.fields.disabled=true;item.apply.disabled=true;item.remove.textContent='Cancel';
+  item.running=true;item.locked=true;item.fields.disabled=true;item.apply.disabled=true;
+  item.remove.textContent='Cancel';item.remove.disabled=Boolean(item.cancelRequested);
   try {
+    if (item.cancelRequested && item.id) return await cancelItem(item);
     setStatus(item,'Preparing private upload…');
+    item.attempted=true;
     const authorized = await api('authorize',item.savedMetadata ||= metadata(item));
     if(authorized.status==='pending') return complete(item,authorized.receipt);
     item.id=authorized.id;
-    if(item.cancelled){await api('cancel',{id:item.id});return;}
-    // Completion retry first: a lost response after transfer must not upload twice.
+    if(item.cancelRequested) return await cancelItem(item);
+    // Reconcile a lost completion response before sending any more bytes.
     let receipt;
-    try { receipt=await api('complete',{id:item.id}); }
+    try { receipt=await finalize(item); }
     catch(e) {if(e.code!=='upload_not_ready')throw e;}
     if(!receipt) {
-      if(item.cancelled)return;
-      await transfer(item,authorized.upload);if(item.cancelled)return;
+      try { await transfer(item,authorized.upload); }
+      catch(e) { if (!item.cancelRequested) throw e; }
+      if(item.cancelRequested) return await cancelItem(item);
       setStatus(item,'Checking the stored file…');
-      receipt=await api('complete',{id:item.id});
+      receipt=await finalize(item);
     }
     complete(item,receipt.receipt);
-  } catch(e) {if(!item.cancelled)setStatus(item,e.message);}
-  finally {item.running=false;item.remove.textContent=item.done?'Remove from this page':'Remove';item.abortTransfer=null;}
+  } catch(e) {
+    if (e.code === 'invalid_media') { markStopped(item,e.message); return; }
+    setStatus(item,e.message);
+    throw e;
+  } finally {
+    item.running=false;item.abortTransfer=null;
+    item.remove.disabled=Boolean(item.cancelRequested && !item.done && !item.terminal);
+    item.remove.textContent=item.done||item.terminal?'Remove from this page':'Cancel';
+  }
+}
+async function rollover() {
+  for (const item of files.filter(i=>i.attempted&&!i.done&&!i.terminal)) {
+    const result=await api('recover',{clientFileId:item.clientId});
+    if (result.status==='received') complete(item,result.receipt);
+    else if (item.cancelRequested) markStopped(item,'Cancelled. The private upload will be cleaned up.');
+    else if (result.status==='failed') markStopped(item,'The previous upload failed. Remove it and choose a valid file to try again.');
+    else if (result.status==='retry') {
+      item.attempted=false;item.id=null;item.upload=null;item.progress.value=0;
+      setStatus(item,'Ready for the next upload session.');
+    } else throw new Error(errors.recovery_unavailable);
+  }
+  // A fresh challenge is required for a fresh batch. Keep the queue and receipts.
+  batch=null;capability=null;token='';window.turnstile?.reset(widget);
+  message(files.some(i=>!i.done&&!i.terminal)
+    ? 'Complete a new security check, then use Send for review to continue the remaining files.'
+    : 'All remaining files have been checked.');
 }
 function complete(item,reference) {
-  item.done=true;item.progress.value=100;setStatus(item,'Received privately · awaiting review');
+  item.done=true;item.remove.disabled=false;item.progress.value=100;setStatus(item,'Received privately · awaiting review');
   references.add(reference);$('#receipt').hidden=false;$('#receipt-reference').textContent=`Reference${references.size>1?'s':''}: ${[...references].join(', ')}`;
 }
 $('#files').addEventListener('change',e=>{if(events)choose(e.target.files);e.target.value='';});
@@ -127,23 +184,35 @@ $('#drop-zone').addEventListener('dragleave',()=>$('#drop-zone').classList.remov
 $('#drop-zone').addEventListener('drop',e=>{e.preventDefault();$('#drop-zone').classList.remove('dragging');if(events)choose(e.dataTransfer.files);});
 $('#submission-form').addEventListener('submit',async e=>{
   e.preventDefault();if(busy || !config.enabled || !$('#consent').checked)return;
-  const queue=files.filter(i=>!i.done&&!i.cancelled);
+  const queue=files.filter(i=>!i.done&&!i.terminal);
   if(!queue.length)return;
   for(const item of queue)if(!item.none.checked&&!item.tags.some(t=>t.input.checked)){message(`Select people or “No people to tag” for ${item.file.name}.`);item.none.focus();return;}
   busy=true;updateButton();
   message('Verifying your submission…');
   try {
+    if(batch && Date.parse(batch.expiresAt)<=Date.now()) { await rollover(); return; }
     if(!batch) {
       capability ||= Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
       // Resume recovers a lost batch response without consuming a second token.
       try {batch=await api('resume');} catch(e){if(e.code!=='batch_expired')throw e;}
       if(!batch)batch=await api('batch',{token,consent:true});
+      token='';
     }
     // Sequential transfer is intentional: minimal mobile bandwidth/memory and
     // one server-side validation at a time. The database permits up to three.
-    for(const item of queue)if(!item.cancelled)await sendItem(item);
-    message('Check each file above. Use Send for review again to retry unfinished files.');
-  } catch(e) {message(e.message);if(e.code==='captcha_failed'){token='';window.turnstile?.reset(widget);}}
+    for(const item of queue) {
+      if(Date.parse(batch.expiresAt)<=Date.now()) { await rollover(); return; }
+      if(!item.terminal && files.includes(item)) await sendItem(item);
+    }
+    message(files.some(i=>!i.done&&!i.terminal)?'Check each file above and retry unfinished files.':'Finished checking the selected files.');
+  } catch(e) {
+    if(e.code==='batch_expired' && batch) {
+      try { await rollover(); } catch(recoveryError) {message(recoveryError.message);}
+    } else {
+      message(e.message);
+      if(e.code==='captcha_failed') { token='';window.turnstile?.reset(widget); }
+    }
+  }
   finally {busy=false;updateButton();}
 });
 window.addEventListener('beforeunload',e=>{if(busy){e.preventDefault();e.returnValue='';}});

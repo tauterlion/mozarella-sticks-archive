@@ -43,6 +43,18 @@ test('disabled database switch blocks even valid requests before captcha or stor
  let contacted=false;const {handler}=setup({rpc:async()=>({error:'intake_disabled'}),sign:async()=>{contacted=true;}});
  assert.equal((await handler(request(valid))).status,503);assert.equal(contacted,false);
 });
+test('expiry recovery passes only hashed capability and file identity and never touches Storage',async()=>{
+ const {handler,calls}=setup({sign:async()=>assert.fail('recovery must not sign'),download:async()=>assert.fail('recovery must not download')});
+ const r=await handler(request({action:'recover',capability,clientFileId:id}));
+ assert.equal(r.status,200);
+ assert.deepEqual(calls.map(x=>x.action),['tick','recover']);
+ assert.deepEqual(Object.keys(calls[1].payload).sort(),['capabilityHash','clientFileId']);
+ assert.notEqual(calls[1].payload.capabilityHash,capability);
+});
+test('closed intake gates expiry recovery before access',async()=>{
+ const {handler}=setup({rpc:async action=>{assert.equal(action,'tick');return {error:'intake_disabled'};}});
+ assert.equal((await handler(request({action:'recover',capability,clientFileId:id}))).status,503);
+});
 test('unknown origin denied before any database access',async()=>{const {handler,calls}=setup();assert.equal((await handler(request(valid,'https://evil.test'))).status,403);assert.equal(calls.length,0);});
 test('missing Turnstile secret fails closed',async()=>{const {handler}=setup({turnstileSecret:''});assert.equal((await handler(request(valid))).status,503);});
 test('invalid captcha never creates batch',async()=>{
