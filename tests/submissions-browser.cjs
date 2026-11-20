@@ -54,7 +54,7 @@ const fixture=(name='memory.png')=>({name,mimeType:'image/png',buffer:png});
    if(b.action==='resume'){status=401;json={error:'batch_expired'};}
    if(b.action==='batch')json={receipt:'anonymous-test-reference',expiresAt:new Date(Date.now()+7200000).toISOString()};
    if(b.action==='authorize'){authorized++;clientIDs.add(b.clientFileId);json=receiptSent?{status:'pending',receipt:'anonymous-test-reference'}:{id:'11111111-1111-4111-8111-111111111111',upload:{endpoint:base+'tus',token:'scoped-token',bucket:'aoms-submissions',path:'incoming/test/test',mime:'image/png'}};}
-   if(b.action==='complete'){completeCalls++;if(await page.evaluate(()=>!!window.transferred)){receiptSent=true;status=503;json={error:'temporarily_unavailable'};}else{status=409;json={error:'upload_not_ready'};}}
+   if(b.action==='complete'){completeCalls++;if(receiptSent){json={status:'pending',receipt:'anonymous-test-reference'};}else if(await page.evaluate(()=>!!window.transferred)){receiptSent=true;status=503;json={error:'temporarily_unavailable'};}else{status=409;json={error:'upload_not_ready'};}}
    await r.fulfill({status,json});
   });
   await page.reload();await page.waitForTimeout(200);await page.locator('#files').setInputFiles(fixture());
@@ -63,7 +63,7 @@ const fixture=(name='memory.png')=>({name,mimeType:'image/png',buffer:png});
   check('interrupted transfer offers retry',await page.locator('#send-files').isEnabled());
   await page.locator('#send-files').click();await page.getByText('The connection was interrupted. Please retry.').first().waitFor();
   await page.locator('#send-files').click();await page.getByText('Received privately · awaiting review').waitFor();
-  check('lost completion response recovers without duplicate upload',clientIDs.size===1&&authorized===3&&await page.evaluate(()=>window.transferAttempts===2));
+  check('lost completion response recovers without duplicate upload',clientIDs.size===1&&authorized===2&&await page.evaluate(()=>window.transferAttempts===2));
   check('anonymous receipt shown',await page.locator('#receipt-reference').textContent()==='Reference: anonymous-test-reference');
   check('caption treated as text',await page.locator('.submission-file img[src=x]').count()===0);
   await page.route('**/mock-intake',r=>r.fulfill({status:401,json:{error:'batch_expired'}}));

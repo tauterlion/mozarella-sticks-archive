@@ -99,7 +99,7 @@ function transfer(item, upload) {
     const options = {endpoint:upload.endpoint,headers:{'x-signature':upload.token},chunkSize:6*1024*1024,
       retryDelays:[0,1000,3000,5000],storeFingerprintForResuming:false,removeFingerprintOnSuccess:true,
       metadata:{bucketName:upload.bucket,objectName:upload.path,contentType:upload.mime,cacheControl:'3600'},
-      onProgress:(sent,total)=>{item.progress.value=sent/total*100;setStatus(item,`Uploading · ${Math.round(sent/total*100)}%`);},
+      onProgress:(sent,total)=>{if(item.cancelRequested)return;item.progress.value=sent/total*100;setStatus(item,`Uploading · ${Math.round(sent/total*100)}%`);},
       onError:()=>reject(new Error('Transfer interrupted. Retry to continue this file.')),onSuccess:resolve};
     if (item.upload) Object.assign(item.upload.options, { headers: options.headers, onSuccess: resolve, onError: options.onError });
     else item.upload=new tus.Upload(item.file,options);
@@ -124,21 +124,27 @@ async function finalize(item) {
   try { return await api('complete',{id:item.id}); }
   finally { item.finalizing=false;item.remove.disabled=Boolean(item.cancelRequested); }
 }
+async function checkStored(item) {
+  try { return await finalize(item); }
+  catch(e) { if(e.code==='upload_not_ready')return null; throw e; }
+}
 async function sendItem(item) {
   item.running=true;item.locked=true;item.fields.disabled=true;item.apply.disabled=true;
   item.remove.textContent='Cancel';item.remove.disabled=Boolean(item.cancelRequested);
   try {
     if (item.cancelRequested && item.id) return await cancelItem(item);
+    // Once Storage has the bytes, signing that same object again can fail.
+    // Recover its receipt or retry verification BEFORE requesting a new signature.
+    const alreadyAssigned=Boolean(item.id);
+    let receipt=alreadyAssigned ? await checkStored(item) : null;
+    if(receipt) return complete(item,receipt.receipt);
     setStatus(item,'Preparing private upload…');
     item.attempted=true;
     const authorized = await api('authorize',item.savedMetadata ||= metadata(item));
     if(authorized.status==='pending') return complete(item,authorized.receipt);
     item.id=authorized.id;
     if(item.cancelRequested) return await cancelItem(item);
-    // Reconcile a lost completion response before sending any more bytes.
-    let receipt;
-    try { receipt=await finalize(item); }
-    catch(e) {if(e.code!=='upload_not_ready')throw e;}
+    if(!alreadyAssigned) receipt=await checkStored(item);
     if(!receipt) {
       try { await transfer(item,authorized.upload); }
       catch(e) { if (!item.cancelRequested) throw e; }
@@ -215,14 +221,19 @@ $('#submission-form').addEventListener('submit',async e=>{
   }
   finally {busy=false;updateButton();}
 });
-window.addEventListener('beforeunload',e=>{if(busy){e.preventDefault();e.returnValue='';}});
+window.addEventListener('beforeunload',e=>{
+  if(busy || files.some(item=>item.attempted&&!item.done&&!item.terminal)){e.preventDefault();e.returnValue='';}
+});
 try {
   const results=await Promise.all(['data/submissions-config.json','data/timeline.json','data/people.json'].map(async path=>{const r=await fetch(path);if(!r.ok)throw Error();return r.json();}));
   [config]=results;events=results[1].events;people=results[2].people;
   if(config.enabled&&config.turnstileSitekey) {
     $('#intake-notice').textContent='Files are sent to a private inbox. Nothing appears in the Gallery without review.';
     const script=document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;
-    script.onload=()=>{widget=window.turnstile.render('#turnstile',{sitekey:config.turnstileSitekey,action:'aoms_submission',theme:'auto',callback:value=>{token=value;updateButton();},'expired-callback':()=>{token='';updateButton();},'error-callback':()=>{token='';message('The security check could not load. Please retry later.');updateButton();}});};
+    script.onload=()=>{widget=window.turnstile.render('#turnstile',{sitekey:config.turnstileSitekey,action:'aoms_submission',theme:'auto','refresh-expired':'manual',callback:value=>{token=value;updateButton();},'expired-callback':()=>{
+      token='';updateButton();
+      if(!batch && !busy){message('The security check expired. Complete the refreshed check before sending.');window.turnstile.reset(widget);}
+    },'error-callback':()=>{token='';message('The security check could not load. Please retry later.');updateButton();}});};
     script.onerror=()=>message('The security check could not load. Submissions remain unavailable.');document.head.append(script);
   }
 } catch {message('The archive details could not load. Refresh to try again.');$('#files').disabled=true;}

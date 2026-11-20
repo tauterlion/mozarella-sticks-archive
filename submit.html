@@ -44,7 +44,7 @@
         <div id="turnstile"></div>
         <button id="send-files" class="button" type="submit" disabled>Send for review</button>
         <p id="send-status" role="status" aria-live="polite"></p>
-        <p class="submission-small">Keep this page open while sending. You will receive an anonymous reference, with no email or status notification. Availability depends on archive capacity.</p>
+        <p class="submission-small">Keep this page open until you see your reference. Reloading clears the queue and cannot resume an unfinished upload. If a response was lost, retry from this page before selecting the same file again.</p>
       </section>
     </form>
     <section id="receipt" class="submission-notice" hidden aria-live="polite"><h2>Thank you for sharing.</h2><p>Your completed files are private and awaiting review. They are not published.</p><p id="receipt-reference"></p><p>Save this reference. There is no email or status notification.</p></section>
@@ -54,6 +54,6 @@
   <script src="scripts/shared.js?v=2.1" defer></script>
   <script src="scripts/interactions.js" defer></script>
   <script src="scripts/vendor/tus-4.3.1.min.js" defer></script>
-  <script src="scripts/submissions.js?v=20261119.4" type="module"></script>
+  <script src="scripts/submissions.js?v=20261119.5" type="module"></script>
 </body>
 </html>
