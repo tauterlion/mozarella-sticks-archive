@@ -21,7 +21,7 @@ const cases = [
 ];
 
 (async () => {
-  const browser = await chromium.launch({headless:true});
+  const browser = await chromium.launch({headless:true,...(process.env.CHROME_BIN ? {executablePath:process.env.CHROME_BIN} : {})});
   let checks = 0;
   try {
     for (const setup of cases) {

@@ -61,7 +61,7 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
  const lastChapter=page.locator('#era-nav a').last();const chapter=await lastChapter.getAttribute('data-era-target');
  await lastChapter.click();await page.waitForTimeout(1000);assert.equal(new URL(page.url()).search,query);assert.equal(new URL(page.url()).hash,'#'+chapter);
  check('Chapter jumps preserve filter state');
- await page.locator('.event-actions a').first().click();await page.waitForSelector('.event-header');
+ await page.locator('.event-actions a').first().click();await page.waitForSelector('.event-hero');
  assert.equal(new URL(await page.locator('.event-page-link.next').getAttribute('href'),base).searchParams.get('id'),matches[1].id);
  await page.locator('.event-page-link.next').click();
  assert.equal(new URL(await page.locator('.event-page-link.previous').getAttribute('href'),base).searchParams.get('id'),matches[0].id);
@@ -74,20 +74,28 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
  check('Expand/collapse all and direct filter URLs');
  for(const e of events){
   await go('event.html?id='+encodeURIComponent(e.id));
-  assert.equal(await page.locator('.event-header h1').textContent(),e.title);
+  assert.equal(await page.locator('.event-hero h1').textContent(),e.title);
   assert.equal(await page.locator('.event-lede').textContent(),e.summary);
   const renderedParagraphs=await page.locator('.event-prose p').allTextContents();
   const plainProse=(e.fullDetails||e.details||e.summary).replace(/\*\*([^*\n]+)\*\*|\*([^*\n]+)\*/g,(_,bold,italic)=>bold??italic);
   assert.equal(renderedParagraphs.join('\n\n'),plainProse);
   if(e.id==='gage-confession')assert.equal(await page.locator('.event-prose em').first().textContent(),'The Wiz');
-  const captions=await page.locator('.event-gallery figcaption').allTextContents();
-  assert.deepEqual(captions,available.filter(m=>m.eventId===e.id).sort((a,b)=>a.order-b.order).map(m=>m.caption));
-  if(e.people.length){
-   const personHrefs=await page.locator('.event-sidebar .chip-list').first().locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
-   assert.deepEqual(personHrefs,e.people.map(pid=>'person.html?id='+encodeURIComponent(pid)),e.id+' person chips must open profiles');
-   assert.deepEqual(await page.locator('.event-sidebar .person-chip').evaluateAll(links=>links.map(a=>a.dataset.hint)),e.people.map(()=>'View profile'),e.id+' profile hints');
+  const expectedMedia=available.filter(m=>m.eventId===e.id).sort((a,b)=>a.order-b.order);
+  const expand=page.locator('#event-media [data-media-expand]');
+  let memoryCards=page.locator('#event-media [data-media-preview] .event-memory-caption');
+  if(await expand.isVisible()){
+   await expand.click();
+   const load=page.locator('#event-media [data-media-load]');
+   while(await load.isVisible())await load.click();
+   memoryCards=page.locator('#event-media [data-media-grid] .event-memory-caption');
   }
-  const categoryHrefs=await page.locator('.event-sidebar .chip-list').nth(e.people.length?1:0).locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
+  assert.deepEqual((await memoryCards.allTextContents()).sort(),expectedMedia.map(m=>m.caption).sort(),e.id+' event gallery retains every associated caption');
+  if(e.people.length){
+   const personHrefs=await page.locator('.event-article > .event-details .person-chip').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
+   assert.deepEqual(personHrefs,e.people.map(pid=>'person.html?id='+encodeURIComponent(pid)),e.id+' person chips must open profiles');
+   assert.deepEqual(await page.locator('.event-article > .event-details .person-chip').evaluateAll(links=>links.map(a=>a.dataset.hint)),e.people.map(()=>'View profile'),e.id+' profile hints');
+  }
+  const categoryHrefs=await page.locator('.event-article > .event-details .event-detail-group').filter({has:page.getByRole('heading',{name:'Categories',exact:true})}).locator('a').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
   assert.deepEqual(categoryHrefs,e.categories.map(category=>'timeline.html?category='+encodeURIComponent(category)),e.id+' category links must stay filtered');
  }
  check('All '+events.length+' full-event pages retain original narratives, person links, and associated available media');
@@ -99,13 +107,13 @@ const searchable=e=>normalize([e.title,e.summary,e.details,e.fullDetails||'',e.d
   body:JSON.stringify({people:people.filter(p=>p.id!=='nicholas')})
  }));
  await go('event.html?id=nico-todd-peru-trip');
- assert.equal(await page.locator('.event-sidebar a[href="timeline.html?person=nicholas"]').count(),1);
- assert.equal(await page.locator('.event-sidebar a[href="person.html?id=todd"]').count(),1);
- assert.equal(await page.locator('.event-sidebar a[href="timeline.html?person=nicholas"]').getAttribute('data-hint'),'View timeline');
- assert.equal(await page.locator('.event-sidebar a[href="person.html?id=todd"]').getAttribute('data-hint'),'View profile');
+ assert.equal(await page.locator('.event-article > .event-details a[href="timeline.html?person=nicholas"]').count(),1);
+ assert.equal(await page.locator('.event-article > .event-details a[href="person.html?id=todd"]').count(),1);
+ assert.equal(await page.locator('.event-article > .event-details a[href="timeline.html?person=nicholas"]').getAttribute('data-hint'),'View timeline');
+ assert.equal(await page.locator('.event-article > .event-details a[href="person.html?id=todd"]').getAttribute('data-hint'),'View profile');
  await page.unroute('**/data/people.json');
  await go('event.html?id=nico-todd-peru-trip');
- await page.locator('.event-sidebar a[href="person.html?id=todd"]').click();
+ await page.locator('.event-article > .event-details a[href="person.html?id=todd"]').click();
  await page.waitForURL('**/person.html?id=todd');
  assert.equal(await page.locator('#person-name').textContent(),'Todd Andersen');
  check('Event person links open profiles; missing-profile fallback retains filtered Timeline');

@@ -2,3 +2,10 @@ __pycache__/
 *.pyc
 data/media-backup-*.json
 data/.media-*.json
+
+# Submission backend development tooling and local secrets
+/supabase/tooling/node_modules/
+/supabase/.temp/
+.env
+.env.*
+!.env.example
