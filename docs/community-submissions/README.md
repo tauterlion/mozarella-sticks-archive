@@ -4,7 +4,7 @@ Work branch: `feat/community-submissions-foundation`. Nothing is merged to main.
 
 **November 19 update.** The [continuation checkpoint](resume-checkpoint-2026-11-19.md) records completed local moderation verification, the 115-event local catalog sync, and the approved hosted resume. The hosted project is healthy, its database intake is disabled, and its private bucket and three migrations match the recorded baseline. Hosted `community-submit` is version 3 with the historical source. The signed-TUS correction and moderation remain local.
 
-The [Milestone 4 controlled rollout review](controlled-rollout.md) records local lifecycle tests, migration order, partial-failure handling, and remaining checks before any hosted change.
+The [Milestone 5 reliability record](operational-reliability.md) records browser transfer, leased retention, and resource test evidence. The [Milestone 4 controlled rollout review](controlled-rollout.md) records local lifecycle tests, migration order, partial-failure handling, and remaining checks before any hosted change.
 
 ## Historical deployment snapshot (2026-11-01)
 
